@@ -35,7 +35,7 @@ public class FlyA extends Check {
 
             /*final*/double predictedDeltaY = (lastDeltaY - 0.08) * 0.98F;
 
-            Bukkit.broadcastMessage("deltY=" + deltaY);
+
 
             if(Math.abs(predictedDeltaY) <= 0.005) {
                 predictedDeltaY = 0;
@@ -53,6 +53,8 @@ public class FlyA extends Check {
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
                     || airTicks < 9;
+
+            debug("result=" + result + " exempt=" + exempt + " deltaY=" + deltaY + " lastDeltaY=" + lastDeltaY + " airTicks=" + airTicks);
 
 
 
