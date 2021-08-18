@@ -1,0 +1,10 @@
+name: HoneyBadger
+main: honeybadger.ac.HoneyBadger
+version: 0.0.1
+author: Salers
+load: STARTUP
+commands:
+  honeybadger:
+    permission: honeybadger.command
+  alerts:
+    permission: alerts.command
