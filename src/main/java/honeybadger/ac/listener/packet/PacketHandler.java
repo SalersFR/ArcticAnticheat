@@ -45,19 +45,21 @@ public class PacketHandler {
             final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
 
             for (Check checks : data.getChecks()) {
-                checks.handle(new MoveEvent(data, wrapper.getX(), wrapper.getY(),wrapper.getZ()));
+                if (checks.isEnabled())
+                    checks.handle(new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ()));
             }
-        } else if(event.getPacketType() == PacketType.Play.Client.POSITION) {
+        } else if (event.getPacketType() == PacketType.Play.Client.POSITION) {
             final WrapperPlayClientPosition wrapper = new WrapperPlayClientPosition(event.getPacket());
 
             for (Check checks : data.getChecks()) {
-                checks.handle(new MoveEvent(data, wrapper.getX(),wrapper.getY(),wrapper.getZ()));
+                if (checks.isEnabled())
+                    checks.handle(new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ()));
             }
-        }
-        else if (event.getPacketType() == PacketType.Play.Client.USE_ENTITY) {
+        } else if (event.getPacketType() == PacketType.Play.Client.USE_ENTITY) {
             final WrapperPlayClientUseEntity wrapper = new WrapperPlayClientUseEntity(event.getPacket());
             for (Check checks : data.getChecks()) {
-                checks.handle(new UseEntityEvent(wrapper, data.getBukkitPlayerFromUUID().getWorld()));
+                if (checks.isEnabled())
+                    checks.handle(new UseEntityEvent(wrapper, data.getBukkitPlayerFromUUID().getWorld()));
             }
         }
 
@@ -67,7 +69,8 @@ public class PacketHandler {
         if (event.getPacketType() == PacketType.Play.Server.ENTITY_VELOCITY) {
             final WrapperPlayServerEntityVelocity wrapper = new WrapperPlayServerEntityVelocity(event.getPacket());
             for (Check checks : data.getChecks()) {
-                checks.handle(new ServerVelocityEvent(wrapper));
+                if (checks.isEnabled())
+                    checks.handle(new ServerVelocityEvent(wrapper));
             }
 
         }

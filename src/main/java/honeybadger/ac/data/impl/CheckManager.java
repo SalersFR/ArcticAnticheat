@@ -20,6 +20,7 @@ public class CheckManager {
 
                 //MOVEMENT
                 new FlyA(data)
+
         );
     }
 

@@ -1,5 +1,6 @@
 package honeybadger.ac.check.checks.movement.fly;
 
+import honeybadger.ac.HoneyBadger;
 import honeybadger.ac.check.Check;
 import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.Event;
@@ -47,6 +48,7 @@ public class FlyA extends Check {
 
 
             final Player player = data.getBukkitPlayerFromUUID();
+
             final boolean exempt = worldUtils.isInLiquid(player)
                     || worldUtils.isCollidingWithClimbable(player)
                     || worldUtils.isNearBoat(player)
@@ -72,4 +74,6 @@ public class FlyA extends Check {
 
         }
     }
+
+
 }

@@ -41,6 +41,21 @@ public abstract class Check {
                         replace("%vl%","" + vl).
                         replace("%type%",type).
                         replace("%check%",name);
+                if(vl > getBanVL()) {
+                    if(isPunish()) {
+
+                        final String toDispatch = HoneyBadger.INSTANCE.getConfig().getString("ban-command").
+                                replace("%player%",data.getBukkitPlayerFromUUID().getName()).
+                                replace("%vl%","" + vl).
+                                replace("%type%",type).
+                                replace("%check%",name);
+
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),ChatColor.translateAlternateColorCodes('&',toDispatch));
+                        for(Check checks : data.getChecks()) {
+                            checks.vl = 0;
+                        }
+                    }
+                }
 
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',fromConfig));
             }
@@ -71,5 +86,17 @@ public abstract class Check {
 
     public boolean isExperimental() {
         return experimental;
+    }
+
+    public int getBanVL() {
+        return HoneyBadger.INSTANCE.getConfig().getInt("checks." + this.getConfigName() + ".ban-vl");
+    }
+
+    public boolean isEnabled() {
+        return HoneyBadger.INSTANCE.getConfig().getBoolean("checks." + this.getConfigName() + ".enabled");
+    }
+
+    public boolean isPunish() {
+        return HoneyBadger.INSTANCE.getConfig().getBoolean("checks." + this.getConfigName() + ".punish");
     }
 }
