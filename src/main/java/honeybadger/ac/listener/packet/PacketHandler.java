@@ -45,13 +45,13 @@ public class PacketHandler {
             final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
 
             for (Check checks : data.getChecks()) {
-                checks.handle(new MoveEvent(wrapper.getX(), wrapper.getY(),wrapper.getZ()));
+                checks.handle(new MoveEvent(data, wrapper.getX(), wrapper.getY(),wrapper.getZ()));
             }
         } else if(event.getPacketType() == PacketType.Play.Client.POSITION) {
             final WrapperPlayClientPosition wrapper = new WrapperPlayClientPosition(event.getPacket());
 
             for (Check checks : data.getChecks()) {
-                checks.handle(new MoveEvent(wrapper.getX(),wrapper.getY(),wrapper.getZ()));
+                checks.handle(new MoveEvent(data, wrapper.getX(),wrapper.getY(),wrapper.getZ()));
             }
         }
         else if (event.getPacketType() == PacketType.Play.Client.USE_ENTITY) {

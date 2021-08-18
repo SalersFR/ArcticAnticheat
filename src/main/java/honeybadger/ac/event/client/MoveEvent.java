@@ -1,6 +1,8 @@
 package honeybadger.ac.event.client;
+import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.Event;
 import honeybadger.ac.utils.HLocation;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 public class MoveEvent extends Event {
@@ -8,22 +10,21 @@ public class MoveEvent extends Event {
     private HLocation to, from;
     private double deltaX, deltaY, deltaZ, deltaXZ;
 
-    public MoveEvent(double x,double y,double z) {
+    public MoveEvent(PlayerData data, double x, double y, double z) {
 
-        this.from = this.to == null ? null : this.to.clone();
+        this.from = data.getLocation();
         this.to = new HLocation(x, y, z);
+        data.setLocation(this.to);
 
         if(to == null || from == null) return;
-
 
 
         this.deltaX = to.getX() - from.getX();
         this.deltaZ = to.getZ() - from.getZ();
 
-        this.deltaXZ = (deltaX * deltaX) + (deltaZ * deltaZ);
+        this.deltaXZ = Math.sqrt((deltaX * deltaX) + (deltaZ * deltaZ));
 
         this.deltaY = to.getY() - from.getY();
-
     }
 
     public HLocation getTo() {
