@@ -11,3 +11,5 @@ commands:
     permission: honeybadger.command
   alerts:
     permission: alerts.command
+  debug:
+    permission: debug.command

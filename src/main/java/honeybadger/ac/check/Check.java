@@ -52,8 +52,24 @@ public abstract class Check {
     protected void debug(String debug) {
         for (Player players : Bukkit.getOnlinePlayers()) {
             if (players.hasMetadata(name + type)) {
-                players.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cDEBUG &r" + debug));
+                players.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&c&lDEBUG&8] &7" + debug));
             }
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getConfigName() {
+        return configName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public boolean isExperimental() {
+        return experimental;
     }
 }

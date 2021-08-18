@@ -1,6 +1,7 @@
 package honeybadger.ac;
 
 import honeybadger.ac.commands.AlertsCommand;
+import honeybadger.ac.commands.DebugCommand;
 import honeybadger.ac.commands.HoneyBadgerCommand;
 import honeybadger.ac.data.PlayerDataManager;
 import honeybadger.ac.listener.bukkit.JoinLeaveListener;
@@ -42,6 +43,7 @@ public class HoneyBadger extends JavaPlugin {
     private void registerCommands() {
         getCommand("honeybadger").setExecutor(new HoneyBadgerCommand());
         getCommand("alerts").setExecutor(new AlertsCommand());
+        getCommand("debug").setExecutor(new DebugCommand());
     }
 
 
