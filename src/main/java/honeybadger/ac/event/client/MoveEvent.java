@@ -1,9 +1,8 @@
 package honeybadger.ac.event.client;
+
 import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.Event;
 import honeybadger.ac.utils.HLocation;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 
 public class MoveEvent extends Event {
 

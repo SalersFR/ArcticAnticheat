@@ -9,3 +9,9 @@ checks:
         ban-vl: 10
         enabled: true
         punish: false
+  combat:
+    autoclicker:
+      a:
+        ban-vl: 50
+        enabled: true
+        punish: false

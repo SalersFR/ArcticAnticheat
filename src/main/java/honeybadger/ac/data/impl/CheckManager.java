@@ -1,6 +1,7 @@
 package honeybadger.ac.data.impl;
 
 import honeybadger.ac.check.Check;
+import honeybadger.ac.check.checks.combat.autoclicker.AutoclickerA;
 import honeybadger.ac.check.checks.movement.fly.FlyA;
 import honeybadger.ac.data.PlayerData;
 
@@ -19,8 +20,10 @@ public class CheckManager {
         this.checks = Arrays.asList(
 
                 //MOVEMENT
-                new FlyA(data)
+                new FlyA(data),
 
+                // COMBAT
+                new AutoclickerA(data)
         );
     }
 
