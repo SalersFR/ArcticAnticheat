@@ -36,7 +36,7 @@ public class FlyA extends Check {
 
 
 
-            if(Math.abs(predictedDeltaY) <= 0.005) {
+            if(Math.abs(predictedDeltaY) < 0.005) {
                 predictedDeltaY = 0;
             }
 

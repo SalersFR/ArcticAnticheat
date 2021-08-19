@@ -1,10 +1,15 @@
 package honeybadger.ac.utils;
 
+import lombok.Getter;
+
+@Getter
 public class HLocation {
 
-    private double x, y, z, yaw, pitch;
+    private double x, y, z;
 
-    public HLocation(double x, double y, double z, double yaw, double pitch) {
+    private float yaw, pitch;
+
+    public HLocation(double x, double y, double z, float yaw, float pitch) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -18,29 +23,7 @@ public class HLocation {
         this.z = z;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
-    }
-
-    public double getYaw() {
-        return yaw;
-    }
-
-    public double getPitch() {
-        return pitch;
-    }
-
     public HLocation clone() {
         return new HLocation(x,y,z);
     }
-
-
 }

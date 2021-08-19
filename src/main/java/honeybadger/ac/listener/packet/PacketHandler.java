@@ -43,28 +43,38 @@ public class PacketHandler {
         if (event.getPacketType() == PacketType.Play.Client.POSITION_LOOK) {
             final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
 
+            MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ());
+
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
-                    checks.handle(new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ()));
+                    checks.handle(moveEvent);
             }
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION) {
             final WrapperPlayClientPosition wrapper = new WrapperPlayClientPosition(event.getPacket());
 
+            MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ());
+
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
-                    checks.handle(new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ()));
+                    checks.handle(moveEvent);
             }
         } else if (event.getPacketType() == PacketType.Play.Client.USE_ENTITY) {
             final WrapperPlayClientUseEntity wrapper = new WrapperPlayClientUseEntity(event.getPacket());
+
+            UseEntityEvent useEntityEvent = new UseEntityEvent(wrapper, data.getBukkitPlayerFromUUID().getWorld());
+
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
-                    checks.handle(new UseEntityEvent(wrapper, data.getBukkitPlayerFromUUID().getWorld()));
+                    checks.handle(useEntityEvent);
             }
         } else if (event.getPacketType() == PacketType.Play.Client.ARM_ANIMATION) {
             final WrapperPlayClientArmAnimation wrapper = new WrapperPlayClientArmAnimation(event.getPacket());
+
+            ArmAnimationEvent armAnimationEvent = new ArmAnimationEvent(data, wrapper);
+
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
-                    checks.handle(new ArmAnimationEvent(data, wrapper));
+                    checks.handle(armAnimationEvent);
             }
 
 
@@ -86,9 +96,12 @@ public class PacketHandler {
     public void handleSending(PlayerData data, PacketEvent event) {
         if (event.getPacketType() == PacketType.Play.Server.ENTITY_VELOCITY) {
             final WrapperPlayServerEntityVelocity wrapper = new WrapperPlayServerEntityVelocity(event.getPacket());
+
+            ServerVelocityEvent serverVelocityEvent = new ServerVelocityEvent(wrapper);
+
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
-                    checks.handle(new ServerVelocityEvent(wrapper));
+                    checks.handle(serverVelocityEvent);
             }
 
         }
