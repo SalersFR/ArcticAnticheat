@@ -54,7 +54,8 @@ public class FlyA extends Check {
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
-                    || airTicks < 9;
+                    || airTicks < 9
+                    || player.getFallDistance() > 1.0F;
 
             debug("result=" + result + " exempt=" + exempt + " deltaY=" + deltaY + " lastDeltaY=" + lastDeltaY + " airTicks=" + airTicks);
 

@@ -2,6 +2,7 @@ package honeybadger.ac.data.impl;
 
 import honeybadger.ac.check.Check;
 import honeybadger.ac.check.checks.movement.fly.FlyA;
+import honeybadger.ac.check.checks.movement.speed.SpeedA;
 import honeybadger.ac.data.PlayerData;
 
 import java.util.Arrays;
@@ -19,7 +20,8 @@ public class CheckManager {
         this.checks = Arrays.asList(
 
                 //MOVEMENT
-                new FlyA(data)
+                new FlyA(data),
+                new SpeedA(data)
 
         );
     }

@@ -1,4 +1,5 @@
 package honeybadger.ac.event.client;
+import com.comphenix.protocol.PacketType;
 import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.Event;
 import honeybadger.ac.utils.HLocation;
@@ -19,12 +20,14 @@ public class MoveEvent extends Event {
         if(to == null || from == null) return;
 
 
+
+        this.deltaY = to.getY() - from.getY();
+
         this.deltaX = to.getX() - from.getX();
         this.deltaZ = to.getZ() - from.getZ();
 
-        this.deltaXZ = Math.sqrt((deltaX * deltaX) + (deltaZ * deltaZ));
+        this.deltaXZ = (deltaX * deltaX) + (deltaZ * deltaZ);
 
-        this.deltaY = to.getY() - from.getY();
     }
 
     public HLocation getTo() {
@@ -42,6 +45,7 @@ public class MoveEvent extends Event {
     public double getDeltaY() {
         return deltaY;
     }
+   
 
     public double getDeltaZ() {
         return deltaZ;

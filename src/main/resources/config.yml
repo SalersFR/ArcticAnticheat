@@ -9,3 +9,8 @@ checks:
         ban-vl: 10
         enabled: true
         punish: false
+    speed:
+      a:
+        ban-vl: 10
+        enabled: true
+        punish: false
