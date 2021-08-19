@@ -1,12 +1,10 @@
 package honeybadger.ac.check.checks.movement.fly;
 
-import honeybadger.ac.HoneyBadger;
 import honeybadger.ac.check.Check;
 import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.Event;
 import honeybadger.ac.event.client.MoveEvent;
 import honeybadger.ac.utils.WorldUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class FlyA extends Check {

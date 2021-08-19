@@ -1,6 +1,7 @@
 package honeybadger.ac.data.impl;
 
 import honeybadger.ac.check.Check;
+import honeybadger.ac.check.checks.combat.autoclicker.AutoclickerA;
 import honeybadger.ac.check.checks.movement.fly.FlyA;
 import honeybadger.ac.check.checks.movement.speed.SpeedA;
 import honeybadger.ac.data.PlayerData;
@@ -21,8 +22,11 @@ public class CheckManager {
 
                 //MOVEMENT
                 new FlyA(data),
-                new SpeedA(data)
+                new SpeedA(data),
 
+
+                // COMBAT
+                new AutoclickerA(data)
         );
     }
 

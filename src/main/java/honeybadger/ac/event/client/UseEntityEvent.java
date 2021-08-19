@@ -17,6 +17,5 @@ public class UseEntityEvent extends Event {
         this.wrapper = wrapper;
         this.action = wrapper.getType();
         this.target = wrapper.getTarget(world);
-
     }
 }

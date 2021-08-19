@@ -3,7 +3,6 @@ package honeybadger.ac.commands;
 import honeybadger.ac.HoneyBadger;
 import honeybadger.ac.check.Check;
 import honeybadger.ac.data.PlayerData;
-import io.netty.channel.ChannelDuplexHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

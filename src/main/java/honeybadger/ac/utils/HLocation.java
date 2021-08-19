@@ -1,7 +1,5 @@
 package honeybadger.ac.utils;
 
-import org.bukkit.Location;
-
 public class HLocation {
 
     private double x, y, z, yaw, pitch;
