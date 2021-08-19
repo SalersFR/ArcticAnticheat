@@ -4,7 +4,6 @@ import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.Event;
 import honeybadger.ac.utils.HLocation;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 
 @Getter
 public class MoveEvent extends Event {
@@ -23,7 +22,5 @@ public class MoveEvent extends Event {
         this.deltaXZ = Math.sqrt((deltaX * deltaX) + (deltaZ * deltaZ));
 
         this.deltaY = to.getY() - from.getY();
-
-        Bukkit.broadcastMessage("dxz=" + deltaXZ);
     }
 }
