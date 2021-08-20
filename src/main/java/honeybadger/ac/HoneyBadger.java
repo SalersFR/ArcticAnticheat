@@ -22,6 +22,7 @@ public class HoneyBadger extends JavaPlugin {
         registerCommands();
         saveDefaultConfig();
 
+        // Changes
     }
 
 
