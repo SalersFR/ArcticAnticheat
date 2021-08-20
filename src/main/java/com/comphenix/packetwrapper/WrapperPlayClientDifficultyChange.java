@@ -39,6 +39,7 @@ public class WrapperPlayClientDifficultyChange extends AbstractPacket {
      * Retrieve New difficulty.
      * <p>
      * Notes: 0: peaceful, 1: easy, 2: normal, 3: hard
+     *
      * @return The current New difficulty
      */
     public Difficulty getNewDifficulty() {
@@ -47,6 +48,7 @@ public class WrapperPlayClientDifficultyChange extends AbstractPacket {
 
     /**
      * Set New difficulty.
+     *
      * @param value - new value.
      */
     public void setNewDifficulty(Difficulty value) {

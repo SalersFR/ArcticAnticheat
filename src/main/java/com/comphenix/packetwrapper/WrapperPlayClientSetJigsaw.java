@@ -40,6 +40,7 @@ public class WrapperPlayClientSetJigsaw extends AbstractPacket {
      * Retrieve Location.
      * <p>
      * Notes: block entity location
+     *
      * @return The current Location
      */
     public BlockPosition getLocation() {
@@ -48,6 +49,7 @@ public class WrapperPlayClientSetJigsaw extends AbstractPacket {
 
     /**
      * Set Location.
+     *
      * @param value - new value.
      */
     public void setLocation(BlockPosition value) {
@@ -56,6 +58,7 @@ public class WrapperPlayClientSetJigsaw extends AbstractPacket {
 
     /**
      * Retrieve Attachment type.
+     *
      * @return The current Attachment type
      */
     public MinecraftKey getAttachmentType() {
@@ -64,6 +67,7 @@ public class WrapperPlayClientSetJigsaw extends AbstractPacket {
 
     /**
      * Set Attachment type.
+     *
      * @param value - new value.
      */
     public void setAttachmentType(MinecraftKey value) {
@@ -72,6 +76,7 @@ public class WrapperPlayClientSetJigsaw extends AbstractPacket {
 
     /**
      * Retrieve Target pool.
+     *
      * @return The current Target pool
      */
     public MinecraftKey getTargetPool() {
@@ -80,6 +85,7 @@ public class WrapperPlayClientSetJigsaw extends AbstractPacket {
 
     /**
      * Set Target pool.
+     *
      * @param value - new value.
      */
     public void setTargetPool(MinecraftKey value) {
@@ -90,6 +96,7 @@ public class WrapperPlayClientSetJigsaw extends AbstractPacket {
      * Retrieve Final state.
      * <p>
      * Notes: "Turns into" on the GUI, final_state in NBT
+     *
      * @return The current Final state
      */
     public String getFinalState() {
@@ -98,6 +105,7 @@ public class WrapperPlayClientSetJigsaw extends AbstractPacket {
 
     /**
      * Set Final state.
+     *
      * @param value - new value.
      */
     public void setFinalState(String value) {

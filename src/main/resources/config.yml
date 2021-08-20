@@ -1,4 +1,3 @@
-
 flag-message: "&c&lHoneyBadger &f| &c%player% &7flagged &c%check% &7(%type%&7) &fx%vl%"
 ban-command: "kick %player% &c&lHoneyBadger &f| &cDetected for cheating%"
 

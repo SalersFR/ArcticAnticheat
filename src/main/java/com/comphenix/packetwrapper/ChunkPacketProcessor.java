@@ -31,13 +31,17 @@ import org.bukkit.World.Environment;
  * @author Kristian
  */
 public class ChunkPacketProcessor {
-    /**Misspelled.
+    /**
+     * Misspelled.
+     *
      * @see #BLOCK_ID_LENGTH
      */
     @Deprecated
     public static final int BLOCK_ID_LENGHT = 4096;
     public static final int BLOCK_ID_LENGTH = 4096;
-    /**Misspelled.
+    /**
+     * Misspelled.
+     *
      * @see #DATA_LENGTH
      */
     @Deprecated
@@ -202,7 +206,6 @@ public class ChunkPacketProcessor {
      * return processors;
      * }
      */
-
     private int getOffset(int nibbles) {
         return startIndex
                 + (nibbles * chunkSectionNumber * ChunkPacketProcessor.BYTES_PER_NIBBLE_PART);
@@ -250,9 +253,9 @@ public class ChunkPacketProcessor {
         /**
          * Process a given chunklet (16x16x16).
          *
-         * @param origin - the block with the lowest x, y and z coordinate in
-         *        the chunklet.
-         * @param data - the data array.
+         * @param origin  - the block with the lowest x, y and z coordinate in
+         *                the chunklet.
+         * @param data    - the data array.
          * @param offsets - the offsets with the data for the given chunklet.
          */
         public void processChunklet(Location origin, byte[] data,
@@ -264,11 +267,11 @@ public class ChunkPacketProcessor {
          * This method will not be called if the chunk is missing biome
          * information.
          *
-         * @param origin - the block with the lowest x, y and z coordinate in
-         *        the chunk.
-         * @param data - the data array.
+         * @param origin     - the block with the lowest x, y and z coordinate in
+         *                   the chunk.
+         * @param data       - the data array.
          * @param biomeIndex - the starting index of the biome data (256 bytes
-         *        in lenght).
+         *                   in lenght).
          */
         public void processBiomeArray(Location origin, byte[] data,
                                       int biomeIndex);

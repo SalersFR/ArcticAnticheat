@@ -4,7 +4,6 @@ import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.Event;
 import honeybadger.ac.utils.HRotation;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 
 @Getter
 public class RotationEvent extends Event {

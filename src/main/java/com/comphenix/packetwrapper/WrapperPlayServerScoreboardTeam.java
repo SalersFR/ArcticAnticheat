@@ -167,6 +167,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
     /**
      * Get the collision rule.
      * Notes: only if Mode = 0 or 2. always, pushOtherTeams, pushOwnTeam, never.
+     *
      * @return The current collision rule
      */
     public String getCollisionRule() {
@@ -175,6 +176,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 
     /**
      * Sets the collision rule.
+     *
      * @param value - new value.
      */
     public void setCollisionRule(String value) {

@@ -38,6 +38,7 @@ public class WrapperPlayClientPickItem extends AbstractPacket {
      * Retrieve Slot to use.
      * <p>
      * Notes: see Inventory
+     *
      * @return The current Slot to use
      */
     public int getSlotToUse() {
@@ -46,6 +47,7 @@ public class WrapperPlayClientPickItem extends AbstractPacket {
 
     /**
      * Set Slot to use.
+     *
      * @param value - new value.
      */
     public void setSlotToUse(int value) {

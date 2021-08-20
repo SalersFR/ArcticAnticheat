@@ -27,18 +27,18 @@ public class KillAuraB extends Check {
 
             final double xzAcceleration = Math.abs(deltaXZ - lastDeltaXZ);
 
-            debug("ticksSinceLastAttack=" + this.ticksSinceLastAttack + "xzAccel="+ xzAcceleration +
-                    " deltaXZ="+ deltaXZ + " lastDeltaXZ=" + lastDeltaXZ + " sprint=" + data.getInteractData().isSprinting());
+            debug("ticksSinceLastAttack=" + this.ticksSinceLastAttack + "xzAccel=" + xzAcceleration +
+                    " deltaXZ=" + deltaXZ + " lastDeltaXZ=" + lastDeltaXZ + " sprint=" + data.getInteractData().isSprinting());
 
             if (ticksSinceLastAttack <= 2
                     && xzAcceleration < 0.0001D
                     && deltaXZ > 0.17
                     && data.getInteractData().isSprinting()) {
-                if(++this.buffer > 4.5) {
+                if (++this.buffer > 4.5) {
                     fail("xzAccel=" + xzAcceleration);
                 }
 
-            }else this.buffer *= 0.8;
+            } else this.buffer *= 0.8;
 
 
             this.ticksSinceLastAttack++;

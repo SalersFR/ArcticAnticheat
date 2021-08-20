@@ -39,6 +39,7 @@ public class WrapperPlayServerOpenWindowHorse extends AbstractPacket {
 
     /**
      * Retrieve Window ID?.
+     *
      * @return The current Window ID?
      */
     public int getWindowId() {
@@ -47,6 +48,7 @@ public class WrapperPlayServerOpenWindowHorse extends AbstractPacket {
 
     /**
      * Set Window ID?.
+     *
      * @param value - new value.
      */
     public void setWindowId(int value) {
@@ -55,6 +57,7 @@ public class WrapperPlayServerOpenWindowHorse extends AbstractPacket {
 
     /**
      * Retrieve Number of slots?.
+     *
      * @return The current Number of slots?
      */
     public int getNumberOfSlots() {
@@ -63,6 +66,7 @@ public class WrapperPlayServerOpenWindowHorse extends AbstractPacket {
 
     /**
      * Set Number of slots?.
+     *
      * @param value - new value.
      */
     public void setNumberOfSlots(int value) {
@@ -71,6 +75,7 @@ public class WrapperPlayServerOpenWindowHorse extends AbstractPacket {
 
     /**
      * Retrieve Entity ID?.
+     *
      * @return The current Entity ID?
      */
     public int getEntityID() {
@@ -79,6 +84,7 @@ public class WrapperPlayServerOpenWindowHorse extends AbstractPacket {
 
     /**
      * Set Entity ID?.
+     *
      * @param value - new value.
      */
     public void setEntityID(int value) {
@@ -87,6 +93,7 @@ public class WrapperPlayServerOpenWindowHorse extends AbstractPacket {
 
     /**
      * Retrieve the entity involved in this event.
+     *
      * @param world - the current world of the entity.
      * @return The involved entity.
      */
@@ -96,6 +103,7 @@ public class WrapperPlayServerOpenWindowHorse extends AbstractPacket {
 
     /**
      * Retrieve the entity involved in this event.
+     *
      * @param event - the packet event.
      * @return The involved entity.
      */

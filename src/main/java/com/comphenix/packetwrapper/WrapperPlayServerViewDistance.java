@@ -38,6 +38,7 @@ public class WrapperPlayServerViewDistance extends AbstractPacket {
      * Retrieve View Distance.
      * <p>
      * Notes: render distance (2-32)
+     *
      * @return The current View Distance
      */
     public int getViewDistance() {
@@ -46,6 +47,7 @@ public class WrapperPlayServerViewDistance extends AbstractPacket {
 
     /**
      * Set View Distance.
+     *
      * @param value - new value.
      */
     public void setViewDistance(int value) {

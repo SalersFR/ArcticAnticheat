@@ -41,7 +41,9 @@ public class WrapperPlayClientAbilities extends AbstractPacket {
         handle.getBooleans().write(0, value);
     }
 
-    /**Misspelled.
+    /**
+     * Misspelled.
+     *
      * @see #isInvulnerable()
      */
     @Deprecated
@@ -49,7 +51,9 @@ public class WrapperPlayClientAbilities extends AbstractPacket {
         return handle.getBooleans().read(0);
     }
 
-    /**Misspelled.
+    /**
+     * Misspelled.
+     *
      * @see #setInvulnerable(boolean)
      */
     @Deprecated

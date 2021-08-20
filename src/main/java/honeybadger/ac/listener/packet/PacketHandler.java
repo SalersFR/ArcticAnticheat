@@ -57,8 +57,8 @@ public class PacketHandler {
 
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
-            for(Check checks : data.getChecks()) {
-                if(checks.isEnabled()) {
+            for (Check checks : data.getChecks()) {
+                if (checks.isEnabled()) {
                     checks.handle(flyingEvent);
                 }
             }
@@ -115,7 +115,7 @@ public class PacketHandler {
                     || event.getPacket().getPlayerDigTypes().read(0).equals(EnumWrappers.PlayerDigType.STOP_DESTROY_BLOCK)) {
                 data.getInteractionData().setDigging(false);
             }
-        } else if(event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
+        } else if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
 
             final WrapperPlayClientEntityAction wrapper = new WrapperPlayClientEntityAction(event.getPacket());
 

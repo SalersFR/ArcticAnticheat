@@ -18,19 +18,19 @@ public class DebugCommand implements CommandExecutor {
             final Player player = (Player) commandSender;
             final PlayerData data = HoneyBadger.INSTANCE.getDataManager().getPlayerData(player);
             if (player.hasPermission("debug.command")) {
-                if(args.length <= 1) {
+                if (args.length <= 1) {
                     final HoneyBadger instance = HoneyBadger.INSTANCE;
                     final String toDebug = args[0];
 
-                    for(Check checks : data.getChecks()) {
-                        if(toDebug.equalsIgnoreCase(checks.getName() + checks.getType())) {
-                            if(!player.hasMetadata(toDebug)) {
+                    for (Check checks : data.getChecks()) {
+                        if (toDebug.equalsIgnoreCase(checks.getName() + checks.getType())) {
+                            if (!player.hasMetadata(toDebug)) {
                                 player.setMetadata(checks.getName() + checks.getType(), new FixedMetadataValue(instance, true));
-                                player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&c&lHoneyBadger&f | " +
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lHoneyBadger&f | " +
                                         "&aNow debugging &7" + toDebug));
-                            }else {
-                                player.removeMetadata(toDebug,instance);
-                                player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&c&lHoneyBadger&f | " +
+                            } else {
+                                player.removeMetadata(toDebug, instance);
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lHoneyBadger&f | " +
                                         "&cNo longer debugging &7" + toDebug));
                             }
 

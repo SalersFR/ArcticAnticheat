@@ -39,6 +39,7 @@ public class WrapperPlayServerNbtQuery extends AbstractPacket {
      * Retrieve Transaction ID.
      * <p>
      * Notes: can be compared to the one sent in the original query packet.
+     *
      * @return The current Transaction ID
      */
     public int getTransactionId() {
@@ -47,6 +48,7 @@ public class WrapperPlayServerNbtQuery extends AbstractPacket {
 
     /**
      * Set Transaction ID.
+     *
      * @param value - new value.
      */
     public void setTransactionId(int value) {
@@ -57,6 +59,7 @@ public class WrapperPlayServerNbtQuery extends AbstractPacket {
      * Retrieve NBT.
      * <p>
      * Notes: the NBT of the block or entity. May be a TAG_END (0) in which case no NBT is present.
+     *
      * @return The current NBT
      */
     public NbtBase<?> getNbt() {
@@ -65,6 +68,7 @@ public class WrapperPlayServerNbtQuery extends AbstractPacket {
 
     /**
      * Set NBT.
+     *
      * @param value - new value.
      */
     public void setNbt(NbtBase<?> value) {

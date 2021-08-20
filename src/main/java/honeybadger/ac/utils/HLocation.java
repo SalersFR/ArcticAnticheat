@@ -24,6 +24,6 @@ public class HLocation {
     }
 
     public HLocation clone() {
-        return new HLocation(x,y,z);
+        return new HLocation(x, y, z);
     }
 }

@@ -41,6 +41,7 @@ public class WrapperPlayServerBlockBreak extends AbstractPacket {
      * Retrieve Location.
      * <p>
      * Notes: position where the digging was happening
+     *
      * @return The current Location
      */
     public BlockPosition getLocation() {
@@ -49,6 +50,7 @@ public class WrapperPlayServerBlockBreak extends AbstractPacket {
 
     /**
      * Set Location.
+     *
      * @param value - new value.
      */
     public void setLocation(BlockPosition value) {
@@ -59,6 +61,7 @@ public class WrapperPlayServerBlockBreak extends AbstractPacket {
      * Retrieve Block.
      * <p>
      * Notes: block state ID of the block that should be at that position now.
+     *
      * @return The current Block
      */
     public WrappedBlockData getBlock() {
@@ -67,6 +70,7 @@ public class WrapperPlayServerBlockBreak extends AbstractPacket {
 
     /**
      * Set Block.
+     *
      * @param value - new value.
      */
     public void setBlock(WrappedBlockData value) {
@@ -77,6 +81,7 @@ public class WrapperPlayServerBlockBreak extends AbstractPacket {
      * Retrieve Status.
      * <p>
      * Notes: same as Player Digging. Only Started digging (0), Cancelled digging (1), and Finished digging (2) are used.
+     *
      * @return The current Status
      */
     public PlayerDigType getStatus() {
@@ -85,6 +90,7 @@ public class WrapperPlayServerBlockBreak extends AbstractPacket {
 
     /**
      * Set Status.
+     *
      * @param value - new value.
      */
     public void setStatus(PlayerDigType value) {
@@ -95,6 +101,7 @@ public class WrapperPlayServerBlockBreak extends AbstractPacket {
      * Retrieve Successful.
      * <p>
      * Notes: true if the digging succeeded; false if the client should undo any changes it made locally. (How does this work?)
+     *
      * @return The current Successful
      */
     public boolean getSuccessful() {
@@ -103,6 +110,7 @@ public class WrapperPlayServerBlockBreak extends AbstractPacket {
 
     /**
      * Set Successful.
+     *
      * @param value - new value.
      */
     public void setSuccessful(boolean value) {

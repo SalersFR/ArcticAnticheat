@@ -39,6 +39,7 @@ public class WrapperPlayClientSetCommandMinecart extends AbstractPacket {
 
     /**
      * Retrieve Entity ID.
+     *
      * @return The current Entity ID
      */
     public int getEntityID() {
@@ -47,6 +48,7 @@ public class WrapperPlayClientSetCommandMinecart extends AbstractPacket {
 
     /**
      * Set Entity ID.
+     *
      * @param value - new value.
      */
     public void setEntityID(int value) {
@@ -55,6 +57,7 @@ public class WrapperPlayClientSetCommandMinecart extends AbstractPacket {
 
     /**
      * Retrieve the entity involved in this event.
+     *
      * @param world - the current world of the entity.
      * @return The involved entity.
      */
@@ -64,6 +67,7 @@ public class WrapperPlayClientSetCommandMinecart extends AbstractPacket {
 
     /**
      * Retrieve the entity involved in this event.
+     *
      * @param event - the packet event.
      * @return The involved entity.
      */
@@ -73,6 +77,7 @@ public class WrapperPlayClientSetCommandMinecart extends AbstractPacket {
 
     /**
      * Retrieve Command.
+     *
      * @return The current Command
      */
     public String getCommand() {
@@ -81,6 +86,7 @@ public class WrapperPlayClientSetCommandMinecart extends AbstractPacket {
 
     /**
      * Set Command.
+     *
      * @param value - new value.
      */
     public void setCommand(String value) {
@@ -91,6 +97,7 @@ public class WrapperPlayClientSetCommandMinecart extends AbstractPacket {
      * Retrieve Track Output.
      * <p>
      * Notes: if false, the output of the previous command will not be stored within the command block.
+     *
      * @return The current Track Output
      */
     public boolean getTrackOutput() {
@@ -99,6 +106,7 @@ public class WrapperPlayClientSetCommandMinecart extends AbstractPacket {
 
     /**
      * Set Track Output.
+     *
      * @param value - new value.
      */
     public void setTrackOutput(boolean value) {

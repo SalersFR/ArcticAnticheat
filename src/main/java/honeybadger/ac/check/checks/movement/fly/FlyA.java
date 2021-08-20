@@ -32,17 +32,15 @@ public class FlyA extends Check {
                 this.airTicks = 0;
             } else this.airTicks++;
 
-            /*final*/double predictedDeltaY = (lastDeltaY - 0.08) * 0.98F;
+            /*final*/
+            double predictedDeltaY = (lastDeltaY - 0.08) * 0.98F;
 
 
-
-            if(Math.abs(predictedDeltaY) < 0.005) {
+            if (Math.abs(predictedDeltaY) < 0.005) {
                 predictedDeltaY = 0;
             }
 
             final double result = Math.abs(deltaY - predictedDeltaY);
-
-
 
 
             final Player player = data.getBukkitPlayerFromUUID();
@@ -58,7 +56,6 @@ public class FlyA extends Check {
             debug("result=" + result + " exempt=" + exempt + " deltaY=" + deltaY + " lastDeltaY=" + lastDeltaY + " airTicks=" + airTicks);
 
 
-
             if (result > 0.01 && !exempt && !worldUtils.isCloseToGround(player.getLocation())) {
                 if (++buffer > 3) {
                     fail("result=" + result);
@@ -66,9 +63,6 @@ public class FlyA extends Check {
                 }
 
             } else if (buffer > 0) buffer -= 0.05D;
-
-
-
 
 
         }

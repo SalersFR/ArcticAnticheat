@@ -43,6 +43,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
      * Retrieve Sound ID.
      * <p>
      * Notes: iD of hardcoded sound event (events as of 1.15.2)
+     *
      * @return The current Sound ID
      */
     public Sound getSound() {
@@ -51,6 +52,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
 
     /**
      * Set Sound ID.
+     *
      * @param value - new value.
      */
     public void setSound(Sound value) {
@@ -61,6 +63,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
      * Retrieve Sound Category.
      * <p>
      * Notes: the category that this sound will be played from (current categories)
+     *
      * @return The current Sound Category
      */
     public SoundCategory getSoundCategory() {
@@ -69,6 +72,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
 
     /**
      * Set Sound Category.
+     *
      * @param value - new value.
      */
     public void setSoundCategory(SoundCategory value) {
@@ -77,6 +81,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
 
     /**
      * Retrieve Entity ID.
+     *
      * @return The current Entity ID
      */
     public int getEntityID() {
@@ -85,6 +90,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
 
     /**
      * Set Entity ID.
+     *
      * @param value - new value.
      */
     public void setEntityID(int value) {
@@ -93,6 +99,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
 
     /**
      * Retrieve the entity involved in this event.
+     *
      * @param world - the current world of the entity.
      * @return The involved entity.
      */
@@ -102,6 +109,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
 
     /**
      * Retrieve the entity involved in this event.
+     *
      * @param event - the packet event.
      * @return The involved entity.
      */
@@ -113,6 +121,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
      * Retrieve Volume.
      * <p>
      * Notes: 1.0 is 100%, capped between 0.0 and 1.0 by Notchian clients
+     *
      * @return The current Volume
      */
     public float getVolume() {
@@ -121,6 +130,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
 
     /**
      * Set Volume.
+     *
      * @param value - new value.
      */
     public void setVolume(float value) {
@@ -131,6 +141,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
      * Retrieve Pitch.
      * <p>
      * Notes: float between 0.5 and 2.0 by Notchian clients
+     *
      * @return The current Pitch
      */
     public float getPitch() {
@@ -139,6 +150,7 @@ public class WrapperPlayServerEntitySound extends AbstractPacket {
 
     /**
      * Set Pitch.
+     *
      * @param value - new value.
      */
     public void setPitch(float value) {

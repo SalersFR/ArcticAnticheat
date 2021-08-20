@@ -38,6 +38,7 @@ public class WrapperPlayServerViewCentre extends AbstractPacket {
      * Retrieve Chunk X.
      * <p>
      * Notes: chunk X coordinate of the player's position
+     *
      * @return The current Chunk X
      */
     public int getChunkX() {
@@ -46,6 +47,7 @@ public class WrapperPlayServerViewCentre extends AbstractPacket {
 
     /**
      * Set Chunk X.
+     *
      * @param value - new value.
      */
     public void setChunkX(int value) {
@@ -56,6 +58,7 @@ public class WrapperPlayServerViewCentre extends AbstractPacket {
      * Retrieve Chunk Z.
      * <p>
      * Notes: chunk Z coordinate of the player's position
+     *
      * @return The current Chunk Z
      */
     public int getChunkZ() {
@@ -64,6 +67,7 @@ public class WrapperPlayServerViewCentre extends AbstractPacket {
 
     /**
      * Set Chunk Z.
+     *
      * @param value - new value.
      */
     public void setChunkZ(int value) {
