@@ -10,10 +10,7 @@ import com.comphenix.protocol.wrappers.EnumWrappers;
 import honeybadger.ac.HoneyBadger;
 import honeybadger.ac.check.Check;
 import honeybadger.ac.data.PlayerData;
-import honeybadger.ac.event.client.ArmAnimationEvent;
-import honeybadger.ac.event.client.MoveEvent;
-import honeybadger.ac.event.client.RotationEvent;
-import honeybadger.ac.event.client.UseEntityEvent;
+import honeybadger.ac.event.client.*;
 import honeybadger.ac.event.server.ServerVelocityEvent;
 
 public class PacketHandler {
@@ -44,18 +41,33 @@ public class PacketHandler {
         if (event.getPacketType() == PacketType.Play.Client.LOOK) {
             final WrapperPlayClientLook wrapper = new WrapperPlayClientLook(event.getPacket());
 
-            RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
+            final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled()) {
                     checks.handle(rotationEvent);
                 }
             }
+        } else if (event.getPacketType() == PacketType.Play.Client.FLYING
+                || event.getPacketType() == PacketType.Play.Client.LOOK
+                || event.getPacketType() == PacketType.Play.Client.POSITION_LOOK
+                || event.getPacketType() == PacketType.Play.Client.POSITION) {
+
+            final WrapperPlayClientFlying wrapper = new WrapperPlayClientFlying(event.getPacket());
+
+            final FlyingEvent flyingEvent = new FlyingEvent(wrapper);
+
+            for(Check checks : data.getChecks()) {
+                if(checks.isEnabled()) {
+                    checks.handle(flyingEvent);
+                }
+            }
+
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION_LOOK) {
             final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
 
-            MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ());
-            RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
+            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ());
+            final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled()) {
@@ -66,7 +78,8 @@ public class PacketHandler {
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION) {
             final WrapperPlayClientPosition wrapper = new WrapperPlayClientPosition(event.getPacket());
 
-            MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ());
+            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ());
+
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
@@ -75,7 +88,7 @@ public class PacketHandler {
         } else if (event.getPacketType() == PacketType.Play.Client.USE_ENTITY) {
             final WrapperPlayClientUseEntity wrapper = new WrapperPlayClientUseEntity(event.getPacket());
 
-            UseEntityEvent useEntityEvent = new UseEntityEvent(wrapper, data.getBukkitPlayerFromUUID().getWorld());
+            final UseEntityEvent useEntityEvent = new UseEntityEvent(wrapper, data.getBukkitPlayerFromUUID().getWorld());
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
@@ -84,7 +97,7 @@ public class PacketHandler {
         } else if (event.getPacketType() == PacketType.Play.Client.ARM_ANIMATION) {
             final WrapperPlayClientArmAnimation wrapper = new WrapperPlayClientArmAnimation(event.getPacket());
 
-            ArmAnimationEvent armAnimationEvent = new ArmAnimationEvent(data, wrapper);
+            final ArmAnimationEvent armAnimationEvent = new ArmAnimationEvent(data, wrapper);
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
@@ -92,17 +105,23 @@ public class PacketHandler {
             }
 
 
-
             // PLAYER DATA
         } else if (event.getPacketType() == PacketType.Play.Client.BLOCK_DIG) {
-            WrapperPlayClientBlockDig wrapper = new WrapperPlayClientBlockDig(event.getPacket());
-            boolean isSolid = wrapper.getLocation().toLocation(event.getPlayer().getWorld()).getBlock().getType().isSolid();
+            final WrapperPlayClientBlockDig wrapper = new WrapperPlayClientBlockDig(event.getPacket());
+            final boolean isSolid = wrapper.getLocation().toLocation(event.getPlayer().getWorld()).getBlock().getType().isSolid();
             if (isSolid && event.getPacket().getPlayerDigTypes().read(0).equals(EnumWrappers.PlayerDigType.START_DESTROY_BLOCK)) {
                 data.getInteractionData().setDigging(true);
             } else if (event.getPacket().getPlayerDigTypes().read(0).equals(EnumWrappers.PlayerDigType.ABORT_DESTROY_BLOCK)
-             || event.getPacket().getPlayerDigTypes().read(0).equals(EnumWrappers.PlayerDigType.STOP_DESTROY_BLOCK)) {
+                    || event.getPacket().getPlayerDigTypes().read(0).equals(EnumWrappers.PlayerDigType.STOP_DESTROY_BLOCK)) {
                 data.getInteractionData().setDigging(false);
             }
+        } else if(event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
+
+            final WrapperPlayClientEntityAction wrapper = new WrapperPlayClientEntityAction(event.getPacket());
+
+            data.getInteractData().handleActionPacket(wrapper);
+
+
         }
 
     }

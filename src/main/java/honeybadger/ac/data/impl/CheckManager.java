@@ -2,6 +2,8 @@ package honeybadger.ac.data.impl;
 
 import honeybadger.ac.check.Check;
 import honeybadger.ac.check.checks.combat.autoclicker.AutoclickerA;
+import honeybadger.ac.check.checks.combat.killaura.KillAuraA;
+import honeybadger.ac.check.checks.combat.killaura.KillAuraB;
 import honeybadger.ac.check.checks.movement.fly.FlyA;
 import honeybadger.ac.check.checks.movement.speed.SpeedA;
 import honeybadger.ac.data.PlayerData;
@@ -26,7 +28,9 @@ public class CheckManager {
 
 
                 // COMBAT
-                new AutoclickerA(data)
+                new AutoclickerA(data),
+                new KillAuraA(data),
+                new KillAuraB(data)
         );
     }
 
