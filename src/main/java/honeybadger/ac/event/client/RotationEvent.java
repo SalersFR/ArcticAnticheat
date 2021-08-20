@@ -16,6 +16,8 @@ public class RotationEvent extends Event {
         this.to = new HRotation(yaw % 360, pitch);
         data.setRotation(this.to);
 
+        if(to == null || from == null) return;
+
         this.deltaYaw = Math.abs(from.getYaw() % 360 - to.getYaw() % 360) % 360;
         this.deltaPitch = Math.abs(from.getPitch() - to.getPitch());
     }

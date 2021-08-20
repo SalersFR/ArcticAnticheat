@@ -38,6 +38,7 @@ public class PacketHandler {
     }
 
     public void handleReceive(PlayerData data, PacketEvent event) {
+        if(data == null) return;
         if (event.getPacketType() == PacketType.Play.Client.LOOK) {
             final WrapperPlayClientLook wrapper = new WrapperPlayClientLook(event.getPacket());
 
@@ -53,7 +54,6 @@ public class PacketHandler {
                 || event.getPacketType() == PacketType.Play.Client.POSITION_LOOK
                 || event.getPacketType() == PacketType.Play.Client.POSITION) {
 
-            final WrapperPlayClientFlying wrapper = new WrapperPlayClientFlying(event.getPacket());
 
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
