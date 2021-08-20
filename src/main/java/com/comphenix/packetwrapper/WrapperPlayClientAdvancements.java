@@ -39,6 +39,7 @@ public class WrapperPlayClientAdvancements extends AbstractPacket {
      * Retrieve Action.
      * <p>
      * Notes: 0: Opened tab, 1: Closed screen
+     *
      * @return The current Action
      */
     public Status getAction() {
@@ -47,6 +48,7 @@ public class WrapperPlayClientAdvancements extends AbstractPacket {
 
     /**
      * Set Action.
+     *
      * @param value - new value.
      */
     public void setAction(Status value) {
@@ -57,6 +59,7 @@ public class WrapperPlayClientAdvancements extends AbstractPacket {
      * Retrieve Tab ID.
      * <p>
      * Notes: only present if action is Opened tab
+     *
      * @return The current Tab ID
      */
     public MinecraftKey getTabId() {
@@ -65,6 +68,7 @@ public class WrapperPlayClientAdvancements extends AbstractPacket {
 
     /**
      * Set Tab ID.
+     *
      * @param value - new value.
      */
     public void setTabId(MinecraftKey value) {

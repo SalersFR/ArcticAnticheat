@@ -12,7 +12,7 @@ public abstract class Check {
     public final PlayerData data;
     private final String name, configName, type;
     private final boolean experimental;
-    public double buffer = 0,vl = 0;
+    public double buffer = 0, vl = 0;
 
     public Check(PlayerData data, String name, String type, String configName, boolean experimental) {
 
@@ -32,32 +32,32 @@ public abstract class Check {
     }
 
     protected void fail(String info) {
-        for(Player player : Bukkit.getOnlinePlayers()) {
-            if(player.hasPermission("alerts.see") && !player.hasMetadata("ALERTS_OFF")) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.hasPermission("alerts.see") && !player.hasMetadata("ALERTS_OFF")) {
 
                 vl++;
                 final String fromConfig = HoneyBadger.INSTANCE.getConfig().getString("flag-message").
-                        replace("%player%",data.getBukkitPlayerFromUUID().getName()).
-                        replace("%vl%","" + vl).
-                        replace("%type%",type).
-                        replace("%check%",name);
-                if(vl > getBanVL()) {
-                    if(isPunish()) {
+                        replace("%player%", data.getBukkitPlayerFromUUID().getName()).
+                        replace("%vl%", "" + vl).
+                        replace("%type%", type).
+                        replace("%check%", name);
+                if (vl > getBanVL()) {
+                    if (isPunish()) {
 
                         final String toDispatch = HoneyBadger.INSTANCE.getConfig().getString("ban-command").
-                                replace("%player%",data.getBukkitPlayerFromUUID().getName()).
-                                replace("%vl%","" + vl).
-                                replace("%type%",type).
-                                replace("%check%",name);
+                                replace("%player%", data.getBukkitPlayerFromUUID().getName()).
+                                replace("%vl%", "" + vl).
+                                replace("%type%", type).
+                                replace("%check%", name);
 
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),ChatColor.translateAlternateColorCodes('&',toDispatch));
-                        for(Check checks : data.getChecks()) {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', toDispatch));
+                        for (Check checks : data.getChecks()) {
                             checks.vl = 0;
                         }
                     }
                 }
 
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&',fromConfig));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', fromConfig));
             }
         }
 

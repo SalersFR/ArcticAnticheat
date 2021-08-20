@@ -41,6 +41,7 @@ public class WrapperPlayClientEntityNbtQuery extends AbstractPacket {
      * Retrieve Transaction ID.
      * <p>
      * Notes: an incremental ID so that the client can verify that the response matches.
+     *
      * @return The current Transaction ID
      */
     public int getTransactionId() {
@@ -49,6 +50,7 @@ public class WrapperPlayClientEntityNbtQuery extends AbstractPacket {
 
     /**
      * Set Transaction ID.
+     *
      * @param value - new value.
      */
     public void setTransactionId(int value) {
@@ -59,6 +61,7 @@ public class WrapperPlayClientEntityNbtQuery extends AbstractPacket {
      * Retrieve Entity ID.
      * <p>
      * Notes: the ID of the entity to query.
+     *
      * @return The current Entity ID
      */
     public int getEntityID() {
@@ -67,6 +70,7 @@ public class WrapperPlayClientEntityNbtQuery extends AbstractPacket {
 
     /**
      * Set Entity ID.
+     *
      * @param value - new value.
      */
     public void setEntityID(int value) {
@@ -75,6 +79,7 @@ public class WrapperPlayClientEntityNbtQuery extends AbstractPacket {
 
     /**
      * Retrieve the entity involved in this event.
+     *
      * @param world - the current world of the entity.
      * @return The involved entity.
      */
@@ -84,6 +89,7 @@ public class WrapperPlayClientEntityNbtQuery extends AbstractPacket {
 
     /**
      * Retrieve the entity involved in this event.
+     *
      * @param event - the packet event.
      * @return The involved entity.
      */

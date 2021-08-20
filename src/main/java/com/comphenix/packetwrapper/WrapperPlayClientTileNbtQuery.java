@@ -39,6 +39,7 @@ public class WrapperPlayClientTileNbtQuery extends AbstractPacket {
      * Retrieve Transaction ID.
      * <p>
      * Notes: an incremental ID so that the client can verify that the response matches.
+     *
      * @return The current Transaction ID
      */
     public int getTransactionId() {
@@ -47,6 +48,7 @@ public class WrapperPlayClientTileNbtQuery extends AbstractPacket {
 
     /**
      * Set Transaction ID.
+     *
      * @param value - new value.
      */
     public void setTransactionId(int value) {
@@ -57,6 +59,7 @@ public class WrapperPlayClientTileNbtQuery extends AbstractPacket {
      * Retrieve Location.
      * <p>
      * Notes: the location of the block to check.
+     *
      * @return The current Location
      */
     public BlockPosition getLocation() {
@@ -65,6 +68,7 @@ public class WrapperPlayClientTileNbtQuery extends AbstractPacket {
 
     /**
      * Set Location.
+     *
      * @param value - new value.
      */
     public void setLocation(BlockPosition value) {

@@ -102,6 +102,7 @@ public class WrapperPlayServerMapChunk extends AbstractPacket {
      * Bitmask with bits set to 1 for every 16×16×16 chunk section whose data is
      * included in Data. The least significant bit represents the chunk section at
      * the bottom of the chunk column (from y=0 to y=15).
+     *
      * @return the bitmask
      */
     public int getBitmask() {
@@ -114,6 +115,7 @@ public class WrapperPlayServerMapChunk extends AbstractPacket {
 
     /**
      * See <a href="http://wiki.vg/Chunk_Format#Data_structure">the wiki</a>
+     *
      * @return the data array
      */
     public byte[] getData() {

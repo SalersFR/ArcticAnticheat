@@ -10,7 +10,7 @@ public class MathUtils {
         return var0 < var2 ? var2 - 1 : var2;
     }
 
-    public double hypot(double x,double z) {
-        return Math.sqrt((x*x) + (z*z));
+    public double hypot(double x, double z) {
+        return Math.sqrt((x * x) + (z * z));
     }
 }

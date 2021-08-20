@@ -7,13 +7,10 @@ import honeybadger.ac.event.client.MoveEvent;
 import honeybadger.ac.utils.PlayerUtils;
 import net.minecraft.server.v1_8_R3.BlockPosition;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.NumberConversions;
-
-import java.text.DecimalFormat;
 
 public class SpeedA extends Check {
 
@@ -82,9 +79,9 @@ public class SpeedA extends Check {
 
             // flag
             if (deltaXZ > prediction) {
-                if(this.vl++ > 3)
+                if (this.vl++ > 3)
                     fail("deltaXZ=" + deltaXZ + " max=" + prediction);
-            }else this.buffer -= this.buffer > 0 ? 0.025 : 0;
+            } else this.buffer -= this.buffer > 0 ? 0.025 : 0;
 
         }
     }

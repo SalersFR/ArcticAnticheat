@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class InteractData {
 
 
-    private boolean isDigging,isPlacing,isSprinting,isSneaking;
+    private boolean isDigging, isPlacing, isSprinting, isSneaking;
 
     private Player player;
 
@@ -26,7 +26,7 @@ public class InteractData {
     }
 
     public void handleActionPacket(WrapperPlayClientEntityAction wrapper) {
-        switch(wrapper.getAction()) {
+        switch (wrapper.getAction()) {
             case START_SPRINTING:
                 this.isSprinting = true;
                 break;

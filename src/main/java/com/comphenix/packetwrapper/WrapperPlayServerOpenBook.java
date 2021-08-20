@@ -39,6 +39,7 @@ public class WrapperPlayServerOpenBook extends AbstractPacket {
      * Retrieve Hand.
      * <p>
      * Notes: 0: Main hand, 1: Off hand
+     *
      * @return The current Hand
      */
     public Hand getHand() {
@@ -47,6 +48,7 @@ public class WrapperPlayServerOpenBook extends AbstractPacket {
 
     /**
      * Set Hand.
+     *
      * @param value - new value.
      */
     public void setHand(Hand value) {

@@ -36,6 +36,7 @@ public class WrapperPlayClientDifficultyLock extends AbstractPacket {
 
     /**
      * Retrieve Locked.
+     *
      * @return The current Locked
      */
     public boolean getLocked() {
@@ -44,6 +45,7 @@ public class WrapperPlayClientDifficultyLock extends AbstractPacket {
 
     /**
      * Set Locked.
+     *
      * @param value - new value.
      */
     public void setLocked(boolean value) {

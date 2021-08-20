@@ -37,6 +37,7 @@ public class WrapperPlayClientBookEdit extends AbstractPacket {
 
     /**
      * Retrieve New book.
+     *
      * @return The current New book
      */
     public ItemStack getNewBook() {
@@ -45,6 +46,7 @@ public class WrapperPlayClientBookEdit extends AbstractPacket {
 
     /**
      * Set New book.
+     *
      * @param value - new value.
      */
     public void setNewBook(ItemStack value) {
@@ -55,6 +57,7 @@ public class WrapperPlayClientBookEdit extends AbstractPacket {
      * Retrieve Is signing.
      * <p>
      * Notes: true if the player is signing the book; false if the player is saving a draft.
+     *
      * @return The current Is signing
      */
     public boolean getIsSigning() {
@@ -63,6 +66,7 @@ public class WrapperPlayClientBookEdit extends AbstractPacket {
 
     /**
      * Set Is signing.
+     *
      * @param value - new value.
      */
     public void setIsSigning(boolean value) {

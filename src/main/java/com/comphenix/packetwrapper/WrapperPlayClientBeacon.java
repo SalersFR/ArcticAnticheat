@@ -38,6 +38,7 @@ public class WrapperPlayClientBeacon extends AbstractPacket {
      * Retrieve Primary Effect.
      * <p>
      * Notes: a Potion ID. (Was a full Integer for the plugin message)
+     *
      * @return The current Primary Effect
      */
     public int getPrimaryEffect() {
@@ -46,6 +47,7 @@ public class WrapperPlayClientBeacon extends AbstractPacket {
 
     /**
      * Set Primary Effect.
+     *
      * @param value - new value.
      */
     public void setPrimaryEffect(int value) {
@@ -56,6 +58,7 @@ public class WrapperPlayClientBeacon extends AbstractPacket {
      * Retrieve Secondary Effect.
      * <p>
      * Notes: a Potion ID. (Was a full Integer for the plugin message)
+     *
      * @return The current Secondary Effect
      */
     public int getSecondaryEffect() {
@@ -64,6 +67,7 @@ public class WrapperPlayClientBeacon extends AbstractPacket {
 
     /**
      * Set Secondary Effect.
+     *
      * @param value - new value.
      */
     public void setSecondaryEffect(int value) {

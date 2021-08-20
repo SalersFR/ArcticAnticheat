@@ -38,6 +38,7 @@ public class WrapperPlayServerRecipes extends AbstractPacket {
      * Retrieve Action.
      * <p>
      * Notes: 0: init, 1: add, 2: remove
+     *
      * @return The current Action
      */
     public Action getAction() {
@@ -46,6 +47,7 @@ public class WrapperPlayServerRecipes extends AbstractPacket {
 
     /**
      * Set Action.
+     *
      * @param value - new value.
      */
     public void setAction(Action value) {
@@ -56,6 +58,7 @@ public class WrapperPlayServerRecipes extends AbstractPacket {
      * Retrieve Crafting Book Open.
      * <p>
      * Notes: if true, then the crafting book will be open when the player opens its inventory.
+     *
      * @return The current Crafting Book Open
      */
     public boolean getCraftingBookOpen() {
@@ -64,6 +67,7 @@ public class WrapperPlayServerRecipes extends AbstractPacket {
 
     /**
      * Set Crafting Book Open.
+     *
      * @param value - new value.
      */
     public void setCraftingBookOpen(boolean value) {
@@ -74,6 +78,7 @@ public class WrapperPlayServerRecipes extends AbstractPacket {
      * Retrieve Filtering Craftable.
      * <p>
      * Notes: if true, then the filtering option is active when the players opens its inventory.
+     *
      * @return The current Filtering Craftable
      */
     public boolean getFilteringCraftable() {
@@ -82,6 +87,7 @@ public class WrapperPlayServerRecipes extends AbstractPacket {
 
     /**
      * Set Filtering Craftable.
+     *
      * @param value - new value.
      */
     public void setFilteringCraftable(boolean value) {

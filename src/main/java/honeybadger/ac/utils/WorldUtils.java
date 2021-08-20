@@ -119,7 +119,7 @@ public class WorldUtils {
 
     }
 
-    public boolean isOnACertainBlock(final Player player,String contains) {
+    public boolean isOnACertainBlock(final Player player, String contains) {
         final Location location = player.getLocation();
         double distanceToGround = 0.3;
         for (double locX = -distanceToGround; locX <= distanceToGround; locX += distanceToGround) {

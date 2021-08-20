@@ -38,6 +38,7 @@ public class WrapperLoginClientCustomPayload extends AbstractPacket {
      * Retrieve Message ID.
      * <p>
      * Notes: should match ID from server.
+     *
      * @return The current Message ID
      */
     public int getMessageId() {
@@ -46,6 +47,7 @@ public class WrapperLoginClientCustomPayload extends AbstractPacket {
 
     /**
      * Set Message ID.
+     *
      * @param value - new value.
      */
     public void setMessageId(int value) {

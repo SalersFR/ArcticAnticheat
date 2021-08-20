@@ -38,6 +38,7 @@ public class WrapperPlayClientAutoRecipe extends AbstractPacket {
      * Retrieve Window ID.
      * <p>
      * Notes: the window id.
+     *
      * @return The current Window ID
      */
     public int getWindowId() {
@@ -46,6 +47,7 @@ public class WrapperPlayClientAutoRecipe extends AbstractPacket {
 
     /**
      * Set Window ID.
+     *
      * @param value - new value.
      */
     public void setWindowId(int value) {

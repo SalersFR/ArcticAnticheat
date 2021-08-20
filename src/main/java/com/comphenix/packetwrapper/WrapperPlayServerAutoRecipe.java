@@ -36,6 +36,7 @@ public class WrapperPlayServerAutoRecipe extends AbstractPacket {
 
     /**
      * Retrieve Window ID.
+     *
      * @return The current Window ID
      */
     public int getWindowId() {
@@ -44,6 +45,7 @@ public class WrapperPlayServerAutoRecipe extends AbstractPacket {
 
     /**
      * Set Window ID.
+     *
      * @param value - new value.
      */
     public void setWindowId(int value) {

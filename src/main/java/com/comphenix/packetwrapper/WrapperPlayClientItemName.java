@@ -38,6 +38,7 @@ public class WrapperPlayClientItemName extends AbstractPacket {
      * Retrieve Item name.
      * <p>
      * Notes: the new name of the item
+     *
      * @return The current Item name
      */
     public String getItemName() {
@@ -46,6 +47,7 @@ public class WrapperPlayClientItemName extends AbstractPacket {
 
     /**
      * Set Item name.
+     *
      * @param value - new value.
      */
     public void setItemName(String value) {

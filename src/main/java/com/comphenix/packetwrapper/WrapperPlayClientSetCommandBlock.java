@@ -38,6 +38,7 @@ public class WrapperPlayClientSetCommandBlock extends AbstractPacket {
 
     /**
      * Retrieve Location.
+     *
      * @return The current Location
      */
     public BlockPosition getLocation() {
@@ -46,6 +47,7 @@ public class WrapperPlayClientSetCommandBlock extends AbstractPacket {
 
     /**
      * Set Location.
+     *
      * @param value - new value.
      */
     public void setLocation(BlockPosition value) {
@@ -54,6 +56,7 @@ public class WrapperPlayClientSetCommandBlock extends AbstractPacket {
 
     /**
      * Retrieve Command.
+     *
      * @return The current Command
      */
     public String getCommand() {
@@ -62,6 +65,7 @@ public class WrapperPlayClientSetCommandBlock extends AbstractPacket {
 
     /**
      * Set Command.
+     *
      * @param value - new value.
      */
     public void setCommand(String value) {
