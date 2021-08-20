@@ -9,14 +9,13 @@ import lombok.Getter;
 @Getter
 public class FlyingEvent extends Event {
 
-    private final WrapperPlayClientFlying wrapper;
-    private final boolean onGround;
+
+
     private final long time;
 
-    public FlyingEvent(WrapperPlayClientFlying wrapper) {
-        this.wrapper = wrapper;
-        this.onGround = wrapper.getOnGround();
-        this.time = System.currentTimeMillis();
+    public FlyingEvent(long time) {
+
+        this.time = time;
 
     }
 }

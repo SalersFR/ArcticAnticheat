@@ -55,7 +55,7 @@ public class PacketHandler {
 
             final WrapperPlayClientFlying wrapper = new WrapperPlayClientFlying(event.getPacket());
 
-            final FlyingEvent flyingEvent = new FlyingEvent(wrapper);
+            final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             for(Check checks : data.getChecks()) {
                 if(checks.isEnabled()) {
