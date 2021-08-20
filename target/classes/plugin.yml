@@ -1,0 +1,15 @@
+name: HoneyBadger
+main: honeybadger.ac.HoneyBadger
+version: 0.0.1
+author: Salers
+load: STARTUP
+depend:
+  - ProtocolLib
+
+commands:
+  honeybadger:
+    permission: honeybadger.command
+  alerts:
+    permission: alerts.command
+  debug:
+    permission: debug.command
