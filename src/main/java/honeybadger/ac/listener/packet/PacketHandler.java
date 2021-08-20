@@ -12,6 +12,7 @@ import honeybadger.ac.check.Check;
 import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.client.ArmAnimationEvent;
 import honeybadger.ac.event.client.MoveEvent;
+import honeybadger.ac.event.client.RotationEvent;
 import honeybadger.ac.event.client.UseEntityEvent;
 import honeybadger.ac.event.server.ServerVelocityEvent;
 
@@ -40,14 +41,27 @@ public class PacketHandler {
     }
 
     public void handleReceive(PlayerData data, PacketEvent event) {
-        if (event.getPacketType() == PacketType.Play.Client.POSITION_LOOK) {
+        if (event.getPacketType() == PacketType.Play.Client.LOOK) {
+            final WrapperPlayClientLook wrapper = new WrapperPlayClientLook(event.getPacket());
+
+            RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
+
+            for (Check checks : data.getChecks()) {
+                if (checks.isEnabled()) {
+                    checks.handle(rotationEvent);
+                }
+            }
+        } else if (event.getPacketType() == PacketType.Play.Client.POSITION_LOOK) {
             final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
 
             MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ());
+            RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
 
             for (Check checks : data.getChecks()) {
-                if (checks.isEnabled())
+                if (checks.isEnabled()) {
                     checks.handle(moveEvent);
+                    checks.handle(rotationEvent);
+                }
             }
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION) {
             final WrapperPlayClientPosition wrapper = new WrapperPlayClientPosition(event.getPacket());

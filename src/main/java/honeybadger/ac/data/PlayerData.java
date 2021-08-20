@@ -4,6 +4,7 @@ import honeybadger.ac.check.Check;
 import honeybadger.ac.data.impl.CheckManager;
 import honeybadger.ac.data.impl.InteractData;
 import honeybadger.ac.utils.HLocation;
+import honeybadger.ac.utils.HRotation;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
@@ -19,6 +20,9 @@ public class PlayerData {
 
     @Setter
     private HLocation location;
+
+    @Setter
+    private HRotation rotation;
 
     public PlayerData(Player player) {
         this.checkManager = new CheckManager(this);
