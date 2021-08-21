@@ -3,20 +3,16 @@ package honeybadger.ac.data.impl;
 import com.comphenix.packetwrapper.*;
 import honeybadger.ac.data.PlayerData;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 
 @Getter
 public class TargetTracker {
 
     private final PlayerData data;
-
+    private double x, y, z;
 
     public TargetTracker(PlayerData data) {
         this.data = data;
     }
-
-    private double x, y, z;
-
 
     public void handleRelMove(WrapperPlayServerRelEntityMove wrapper) {
 

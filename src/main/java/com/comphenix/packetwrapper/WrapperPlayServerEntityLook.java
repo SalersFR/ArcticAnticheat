@@ -21,7 +21,6 @@ package com.comphenix.packetwrapper;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntity;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 

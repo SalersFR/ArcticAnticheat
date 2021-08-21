@@ -12,12 +12,12 @@ public class MoveEvent extends Event {
     private double deltaX, deltaY, deltaZ, deltaXZ;
     private boolean ground;
 
-    public MoveEvent(PlayerData data, double x, double y, double z,boolean ground) {
+    public MoveEvent(PlayerData data, double x, double y, double z, boolean ground) {
         this.from = data.getLocation();
         this.to = new HLocation(x, y, z);
         data.setLocation(this.to);
 
-        if(to == null || from == null) return;
+        if (to == null || from == null) return;
 
         this.deltaX = to.getX() - from.getX();
         this.deltaZ = to.getZ() - from.getZ();

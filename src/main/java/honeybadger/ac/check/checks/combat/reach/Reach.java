@@ -7,7 +7,6 @@ import honeybadger.ac.data.impl.TargetTracker;
 import honeybadger.ac.event.Event;
 import honeybadger.ac.event.client.UseEntityEvent;
 import honeybadger.ac.utils.HBox;
-import honeybadger.ac.utils.HLocation;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
@@ -44,12 +43,9 @@ public class Reach extends Check {
                 final Location eyePos = getEyeLocation();
 
 
-
-                final double distance = eyePos.toVector().clone().setY(0).distance(new Vector(tracker.getX(),0,tracker.getZ()));
+                final double distance = eyePos.toVector().clone().setY(0).distance(new Vector(tracker.getX(), 0, tracker.getZ()));
 
                 debug("distance=" + distance);
-
-
 
 
             }

@@ -22,6 +22,28 @@ public class HBox {
         this(x, x, y, y, z, z);
     }
 
+    public HBox(final HLocation HLocation, final HLocation HLocation2) {
+        this(Math.min(HLocation.getX(), HLocation2.getX()), Math.max(HLocation.getX(), HLocation2.getX()), Math.min(HLocation.getY(), HLocation2.getY()), Math.max(HLocation.getY(), HLocation2.getY()), Math.min(HLocation.getZ(), HLocation2.getZ()), Math.max(HLocation.getZ(), HLocation2.getZ()));
+    }
+
+    public HBox(final double x1, final double x2, final double y1, final double y2, final double z1, final double z2) {
+        this.x1 = x1;
+        this.x2 = x2;
+        this.y1 = y1;
+        this.y2 = y2;
+        this.z1 = z1;
+        this.z2 = z2;
+    }
+
+    public static boolean checkBlocks(final Collection<Block> blocks, final Predicate<Material> predicate) {
+        final Iterator<Block> var2 = blocks.iterator();
+        do {
+            if (var2.hasNext()) continue;
+            return true;
+        } while (predicate.test((var2.next()).getType()));
+        return false;
+    }
+
     public HBox add(final HBox other) {
         this.x1 += other.x1;
         this.x2 += other.x2;
@@ -71,10 +93,6 @@ public class HBox {
         return blocks;
     }
 
-    public HBox(final HLocation HLocation, final HLocation HLocation2) {
-        this(Math.min(HLocation.getX(), HLocation2.getX()), Math.max(HLocation.getX(), HLocation2.getX()), Math.min(HLocation.getY(), HLocation2.getY()), Math.max(HLocation.getY(), HLocation2.getY()), Math.min(HLocation.getZ(), HLocation2.getZ()), Math.max(HLocation.getZ(), HLocation2.getZ()));
-    }
-
     public boolean contains(final HLocation location) {
         return this.x1 <= location.getX() && this.x2 >= location.getX() && this.y1 <= location.getY() && this.y2 >= location.getY() && this.z1 <= location.getZ() && this.z2 >= location.getZ();
     }
@@ -83,15 +101,6 @@ public class HBox {
         final double dx = Math.min(Math.pow(x - this.x1, 2.0), Math.pow(x - this.x2, 2.0));
         final double dz = Math.min(Math.pow(z - this.z1, 2.0), Math.pow(z - this.z2, 2.0));
         return Math.sqrt(dx + dz);
-    }
-
-    public static boolean checkBlocks(final Collection<Block> blocks, final Predicate<Material> predicate) {
-        final Iterator<Block> var2 = blocks.iterator();
-        do {
-            if (var2.hasNext()) continue;
-            return true;
-        } while (predicate.test((var2.next()).getType()));
-        return false;
     }
 
     public boolean checkBlocks(final World world, final Predicate<Material> predicate) {
@@ -108,15 +117,6 @@ public class HBox {
 
     public double cZ() {
         return (this.z1 + this.z2) * 0.5;
-    }
-
-    public HBox(final double x1, final double x2, final double y1, final double y2, final double z1, final double z2) {
-        this.x1 = x1;
-        this.x2 = x2;
-        this.y1 = y1;
-        this.y2 = y2;
-        this.z1 = z1;
-        this.z2 = z2;
     }
 
     public double distanceXZ(final HLocation loc) {

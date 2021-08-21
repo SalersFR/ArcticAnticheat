@@ -53,7 +53,7 @@ public class InteractData {
     }
 
     public void handleUseEntity(WrapperPlayClientUseEntity wrapper) {
-        if(wrapper.getType() == EnumWrappers.EntityUseAction.ATTACK) {
+        if (wrapper.getType() == EnumWrappers.EntityUseAction.ATTACK) {
             this.target = wrapper.getTarget(data.getPlayer().getWorld());
         }
     }
