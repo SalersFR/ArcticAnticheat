@@ -86,7 +86,7 @@ public class PacketHandler {
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
                     checks.handle(moveEvent);
-                    checks.handle(flyingEvent);
+                checks.handle(flyingEvent);
 
 
             }
@@ -94,6 +94,8 @@ public class PacketHandler {
             final WrapperPlayClientUseEntity wrapper = new WrapperPlayClientUseEntity(event.getPacket());
 
             final UseEntityEvent useEntityEvent = new UseEntityEvent(wrapper, data.getBukkitPlayerFromUUID().getWorld());
+
+            data.getInteractData().handleUseEntity(wrapper);
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
@@ -142,6 +144,32 @@ public class PacketHandler {
                     checks.handle(serverVelocityEvent);
             }
 
+        } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE) {
+
+            final WrapperPlayServerRelEntityMove wrapper = new WrapperPlayServerRelEntityMove(event.getPacket());
+
+            data.getTargetTracker().handleRelMove(wrapper);
+        } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE) {
+
+            final WrapperPlayServerRelEntityMoveLook wrapper = new WrapperPlayServerRelEntityMoveLook(event.getPacket());
+
+            data.getTargetTracker().handleRelMoveLook(wrapper);
+
+        } else if (event.getPacketType() == PacketType.Play.Server.SPAWN_ENTITY_LIVING) {
+
+            final WrapperPlayServerSpawnEntityLiving wrapper = new WrapperPlayServerSpawnEntityLiving(event.getPacket());
+
+            data.getTargetTracker().handleSpawn(wrapper);
+        } else if (event.getPacketType() == PacketType.Play.Server.ENTITY_TELEPORT) {
+
+            final WrapperPlayServerEntityTeleport wrapper = new WrapperPlayServerEntityTeleport(event.getPacket());
+
+            data.getTargetTracker().handleTeleport(wrapper);
+        } else if (event.getPacketType() == PacketType.Play.Server.NAMED_ENTITY_SPAWN) {
+
+            final WrapperPlayServerNamedEntitySpawn wrapper = new WrapperPlayServerNamedEntitySpawn(event.getPacket());
+
+            data.getTargetTracker().handleNamedEntitySpawn(wrapper);
         }
     }
 }

@@ -1,8 +1,10 @@
 package honeybadger.ac.utils;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class HLocation {
 
     private double x, y, z;

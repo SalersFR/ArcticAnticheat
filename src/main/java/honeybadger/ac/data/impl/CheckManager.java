@@ -5,6 +5,7 @@ import honeybadger.ac.check.checks.combat.autoclicker.AutoclickerA;
 import honeybadger.ac.check.checks.combat.killaura.KillAuraA;
 import honeybadger.ac.check.checks.combat.killaura.KillAuraB;
 import honeybadger.ac.check.checks.combat.killaura.KillAuraC;
+import honeybadger.ac.check.checks.combat.reach.Reach;
 import honeybadger.ac.check.checks.movement.fly.FlyA;
 import honeybadger.ac.check.checks.movement.speed.SpeedA;
 import honeybadger.ac.data.PlayerData;
@@ -32,7 +33,8 @@ public class CheckManager {
                 new AutoclickerA(data),
                 new KillAuraA(data),
                 new KillAuraB(data),
-                new KillAuraC(data)
+                new KillAuraC(data),
+                new Reach(data)
         );
     }
 

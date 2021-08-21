@@ -30,3 +30,4 @@ HoneyBadger.iml
 .idea/libraries/Maven__net_bytebuddy_byte_buddy_1_10_16.xml
 .idea/libraries/Maven__javax_persistence_persistence_api_1_0.xml
 .idea/workspace.xml
+.idea/uiDesigner.xml

@@ -3,6 +3,7 @@ package honeybadger.ac.data;
 import honeybadger.ac.check.Check;
 import honeybadger.ac.data.impl.CheckManager;
 import honeybadger.ac.data.impl.InteractData;
+import honeybadger.ac.data.impl.TargetTracker;
 import honeybadger.ac.utils.HLocation;
 import honeybadger.ac.utils.HRotation;
 import lombok.Getter;
@@ -16,7 +17,9 @@ public class PlayerData {
 
     private final CheckManager checkManager;
     private final InteractData interactData;
+    private final TargetTracker targetTracker;
     private final Player player;
+
 
     @Setter
     private HLocation location;
@@ -27,6 +30,7 @@ public class PlayerData {
     public PlayerData(Player player) {
         this.checkManager = new CheckManager(this);
         this.interactData = new InteractData(this);
+        this.targetTracker = new TargetTracker(this);
         this.player = player;
     }
 

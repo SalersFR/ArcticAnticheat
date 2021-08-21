@@ -113,7 +113,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The current X
      */
     public double getX() {
-        return handle.getDoubles().read(0);
+        return handle.getIntegers().read(0);
     }
 
     /**
@@ -133,7 +133,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The current y
      */
     public double getY() {
-        return handle.getDoubles().read(1);
+        return handle.getIntegers().read(1);
     }
 
     /**
@@ -153,7 +153,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The current z
      */
     public double getZ() {
-        return handle.getDoubles().read(2);
+        return handle.getIntegers().read(2);
     }
 
     /**

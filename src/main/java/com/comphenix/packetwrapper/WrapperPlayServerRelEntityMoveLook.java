@@ -21,6 +21,7 @@ package com.comphenix.packetwrapper;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import net.minecraft.server.v1_8_R3.PacketPlayOutEntity;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 
@@ -32,6 +33,8 @@ public class WrapperPlayServerRelEntityMoveLook extends AbstractPacket {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
+
+
 
     public WrapperPlayServerRelEntityMoveLook(PacketContainer packet) {
         super(packet, TYPE);
@@ -83,7 +86,7 @@ public class WrapperPlayServerRelEntityMoveLook extends AbstractPacket {
      * @return The current DX
      */
     public double getDx() {
-        return handle.getShorts().read(0) / 4096D;
+        return handle.getBytes().read(0);
     }
 
     /**
@@ -101,7 +104,7 @@ public class WrapperPlayServerRelEntityMoveLook extends AbstractPacket {
      * @return The current DY
      */
     public double getDy() {
-        return handle.getShorts().read(1) / 4096D;
+        return handle.getBytes().read(1);
     }
 
     /**
@@ -119,7 +122,7 @@ public class WrapperPlayServerRelEntityMoveLook extends AbstractPacket {
      * @return The current DZ
      */
     public double getDz() {
-        return handle.getShorts().read(2) / 4096D;
+        return handle.getBytes().read(2);
     }
 
     /**
