@@ -3,9 +3,15 @@ package honeybadger.ac.check;
 import honeybadger.ac.HoneyBadger;
 import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.Event;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+
 
 public abstract class Check {
 
@@ -41,6 +47,16 @@ public abstract class Check {
                         replace("%vl%", "" + vl).
                         replace("%type%", type).
                         replace("%check%", name);
+
+                final TextComponent alertMSG = new TextComponent(ChatColor.translateAlternateColorCodes('&',fromConfig));
+
+                alertMSG.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new ComponentBuilder(ChatColor.
+                        translateAlternateColorCodes('&',"&c&lHoneyBadger\n&7 \n&7Info: &c" + info +
+                                "\n &7\n&7Experimental: &c" + experimental + "\n &f\n&fClick to teleport !")).create()));
+
+                alertMSG.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,"/tp " + data.getPlayer().getName()));
+
+
                 if (vl > getBanVL()) {
                     if (isPunish()) {
 
@@ -50,14 +66,17 @@ public abstract class Check {
                                 replace("%type%", type).
                                 replace("%check%", name);
 
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', toDispatch));
-                        for (Check checks : data.getChecks()) {
-                            checks.vl = 0;
-                        }
+
+                        Bukkit.getScheduler().runTask(HoneyBadger.INSTANCE,() -> {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', toDispatch));
+                            for (Check checks : data.getChecks()) {
+                                checks.vl = 0;
+                            }
+                        });
                     }
                 }
 
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', fromConfig));
+                player.spigot().sendMessage(alertMSG);
             }
         }
 
