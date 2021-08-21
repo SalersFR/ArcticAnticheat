@@ -78,9 +78,9 @@ public class TargetTracker {
         if (data.getInteractData().getTarget() != null) {
             if (data.getInteractData().getTarget().getEntityId() == wrapper.getEntityID()) {
 
-                this.x = wrapper.getX();
-                this.y = wrapper.getY();
-                this.z = wrapper.getZ();
+                this.x = wrapper.getX() / 32D;
+                this.y = wrapper.getY() / 32D;
+                this.z = wrapper.getZ() / 32D;
 
             }
         }

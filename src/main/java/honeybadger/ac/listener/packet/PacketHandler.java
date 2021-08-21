@@ -12,6 +12,7 @@ import honeybadger.ac.check.Check;
 import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.client.*;
 import honeybadger.ac.event.server.ServerVelocityEvent;
+import org.bukkit.GameMode;
 
 public class PacketHandler {
 
@@ -39,6 +40,9 @@ public class PacketHandler {
 
     public void handleReceive(PlayerData data, PacketEvent event) {
         if (data == null) return;
+        final boolean exempt = data.getPlayer().getGameMode() == GameMode.CREATIVE
+                || data.getPlayer().getAllowFlight()
+                || data.getPlayer().getGameMode() == GameMode.SPECTATOR;
         if (event.getPacketType() == PacketType.Play.Client.LOOK) {
             final WrapperPlayClientLook wrapper = new WrapperPlayClientLook(event.getPacket());
 
@@ -46,7 +50,7 @@ public class PacketHandler {
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             for (Check checks : data.getChecks()) {
-                if (checks.isEnabled()) {
+                if (checks.isEnabled() && !exempt) {
                     checks.handle(rotationEvent);
                     checks.handle(flyingEvent);
                 }
@@ -56,7 +60,7 @@ public class PacketHandler {
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             for (Check checks : data.getChecks()) {
-                if (checks.isEnabled()) {
+                if (checks.isEnabled() && !exempt) {
                     checks.handle(flyingEvent);
                 }
             }
@@ -70,7 +74,7 @@ public class PacketHandler {
 
 
             for (Check checks : data.getChecks()) {
-                if (checks.isEnabled()) {
+                if (checks.isEnabled() && !exempt) {
                     checks.handle(moveEvent);
                     checks.handle(rotationEvent);
                     checks.handle(flyingEvent);
@@ -84,7 +88,7 @@ public class PacketHandler {
 
 
             for (Check checks : data.getChecks()) {
-                if (checks.isEnabled())
+                if (checks.isEnabled() && !exempt)
                     checks.handle(moveEvent);
                 checks.handle(flyingEvent);
 
@@ -98,7 +102,7 @@ public class PacketHandler {
             data.getInteractData().handleUseEntity(wrapper);
 
             for (Check checks : data.getChecks()) {
-                if (checks.isEnabled())
+                if (checks.isEnabled() && !exempt)
                     checks.handle(useEntityEvent);
             }
         } else if (event.getPacketType() == PacketType.Play.Client.ARM_ANIMATION) {
@@ -107,7 +111,7 @@ public class PacketHandler {
             final ArmAnimationEvent armAnimationEvent = new ArmAnimationEvent(data, wrapper);
 
             for (Check checks : data.getChecks()) {
-                if (checks.isEnabled())
+                if (checks.isEnabled() && !exempt)
                     checks.handle(armAnimationEvent);
             }
 

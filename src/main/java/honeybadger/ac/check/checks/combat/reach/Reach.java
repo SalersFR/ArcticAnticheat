@@ -45,7 +45,7 @@ public class Reach extends Check {
 
 
 
-                final double distance = eyePos.toVector().clone().setY(0).distance(new Vector(tracker.getX(),tracker.getY(),tracker.getZ()));
+                final double distance = eyePos.toVector().clone().setY(0).distance(new Vector(tracker.getX(),0,tracker.getZ()));
 
                 debug("distance=" + distance);
 
