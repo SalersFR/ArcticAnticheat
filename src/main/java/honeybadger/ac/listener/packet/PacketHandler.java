@@ -38,22 +38,20 @@ public class PacketHandler {
     }
 
     public void handleReceive(PlayerData data, PacketEvent event) {
-        if(data == null) return;
+        if (data == null) return;
         if (event.getPacketType() == PacketType.Play.Client.LOOK) {
             final WrapperPlayClientLook wrapper = new WrapperPlayClientLook(event.getPacket());
 
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
+            final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled()) {
                     checks.handle(rotationEvent);
+                    checks.handle(flyingEvent);
                 }
             }
-        } else if (event.getPacketType() == PacketType.Play.Client.FLYING
-                || event.getPacketType() == PacketType.Play.Client.LOOK
-                || event.getPacketType() == PacketType.Play.Client.POSITION_LOOK
-                || event.getPacketType() == PacketType.Play.Client.POSITION) {
-
+        } else if (event.getPacketType() == PacketType.Play.Client.FLYING) {
 
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
@@ -66,24 +64,31 @@ public class PacketHandler {
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION_LOOK) {
             final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
 
-            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ());
+            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getOnGround());
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
+            final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
+
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled()) {
                     checks.handle(moveEvent);
                     checks.handle(rotationEvent);
+                    checks.handle(flyingEvent);
                 }
             }
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION) {
             final WrapperPlayClientPosition wrapper = new WrapperPlayClientPosition(event.getPacket());
 
-            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ());
+            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getOnGround());
+            final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
                     checks.handle(moveEvent);
+                    checks.handle(flyingEvent);
+
+
             }
         } else if (event.getPacketType() == PacketType.Play.Client.USE_ENTITY) {
             final WrapperPlayClientUseEntity wrapper = new WrapperPlayClientUseEntity(event.getPacket());

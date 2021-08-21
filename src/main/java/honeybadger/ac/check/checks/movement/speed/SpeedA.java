@@ -5,12 +5,7 @@ import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.Event;
 import honeybadger.ac.event.client.MoveEvent;
 import honeybadger.ac.utils.PlayerUtils;
-import net.minecraft.server.v1_8_R3.BlockPosition;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.NumberConversions;
 
 public class SpeedA extends Check {
 
@@ -29,22 +24,21 @@ public class SpeedA extends Check {
 
             final MoveEvent event = (MoveEvent) e;
 
-            final EntityPlayer player = ((CraftPlayer) data.getPlayer()).getHandle();
-
-            final boolean onGround = data.getPlayer().isOnGround();
+            boolean onGround = event.isGround();
+            boolean wasOnGround = this.wasOnGround;
+            this.wasOnGround = onGround;
 
             air = onGround ? 0 : Math.min(air + 1, 20);
             ground = onGround ? Math.min(ground + 1, 20) : 0;
 
             // deltas
-            final double deltaXZ = event.getDeltaXZ();
-            final double lastDeltaXZ = this.lastDeltaXZ;
+            double deltaXZ = event.getDeltaXZ();
+            double lastDeltaXZ = this.lastDeltaXZ;
             this.lastDeltaXZ = deltaXZ;
 
-            // Roll
             // landMovementFactor
-            final float speed = PlayerUtils.getPotionLevel(data.getPlayer(), PotionEffectType.SPEED);
-            final float slow = PlayerUtils.getPotionLevel(data.getPlayer(), PotionEffectType.SLOW);
+            float speed = PlayerUtils.getPotionLevel(data.getBukkitPlayerFromUUID(), PotionEffectType.SPEED);
+            float slow = PlayerUtils.getPotionLevel(data.getBukkitPlayerFromUUID(), PotionEffectType.SLOW);
             double d = 0.10000000149011612;
             d += d * 0.20000000298023224 * speed;
             d += d * -0.15000000596046448 * slow;
@@ -52,12 +46,12 @@ public class SpeedA extends Check {
             // Sprint desync big gay just assume they are sprinting
             d += d * 0.30000001192092896;
 
-            final float landMovementFactor = (float) d;
+            float landMovementFactor = (float) d;
 
             // the check itself
             double prediction;
             if (ground > 2) {
-                prediction = lastDeltaXZ * 0.91f * getFriction(player, data.getPlayer().getLocation()) + landMovementFactor;
+                prediction = lastDeltaXZ * 0.91f * getBlockFriction(data) + landMovementFactor;
             } else if (air == 1) {
                 prediction = lastDeltaXZ * 0.91f + 0.2f + landMovementFactor;
             } else if (ground == 2) {
@@ -65,34 +59,32 @@ public class SpeedA extends Check {
             } else {
                 prediction = lastDeltaXZ * 0.91f + 0.026f;
             }
-            if (prediction < data.getPlayer().getWalkSpeed() + 0.02 * (speed + 1))
-                prediction = data.getPlayer().getWalkSpeed() + 0.02 * (speed + 1);
+            if (prediction < data.getBukkitPlayerFromUUID().getWalkSpeed() + 0.02 * (speed + 1))
+                prediction = data.getBukkitPlayerFromUUID().getWalkSpeed() + 0.02 * (speed + 1);
 
             // very lazy patch for a false flag
             if (ground > 1) {
                 this.lastFriction = this.friction;
-                this.friction = getFriction(player, data.getPlayer().getLocation()) * 0.91f;
+                this.friction = getBlockFriction(data) * 0.91f;
             }
 
             if (friction < lastFriction)
                 prediction += landMovementFactor * 1.25;
 
+            debug("pred=" + prediction + " deltaXZ=" + deltaXZ);
 
             // flag
             if (deltaXZ > prediction) {
-                if (this.vl++ > 3)
-                    fail("deltaXZ=" + deltaXZ + " max=" + prediction);
-            } else this.buffer -= this.buffer > 0 ? 0.025 : 0;
-
+                if (++this.buffer > 3)
+                    fail("p=" + prediction + " d=" + deltaXZ);
+            } else if (this.buffer > 0) buffer -= 0.025D;
         }
     }
 
-    private float getFriction(EntityPlayer player, Location location) {
-        return player.world.getType(
-                new BlockPosition(location.getX(),
-                        NumberConversions.floor(location.getY()) - 1,
-                        location.getZ())
-        ).getBlock().frictionFactor;
+    public float getBlockFriction(PlayerData data) {
+        String block = data.getBukkitPlayerFromUUID().getLocation().add(0, -1, 0).getBlock().getType().name().toLowerCase();
+        return block.equals("blue ice") ? 0.989f : block.contains("ice") ? 0.98f : block.equals("slime") ? 0.8f : 0.6f;
     }
+
 
 }

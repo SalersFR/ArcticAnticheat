@@ -31,7 +31,7 @@ public class KillAuraB extends Check {
                     " deltaXZ=" + deltaXZ + " lastDeltaXZ=" + lastDeltaXZ + " sprint=" + data.getInteractData().isSprinting());
 
             if (ticksSinceLastAttack <= 2
-                    && xzAcceleration < 0.0001D
+                    && xzAcceleration < 0.001D
                     && deltaXZ > 0.17
                     && data.getInteractData().isSprinting()) {
                 if (++this.buffer > 4.5) {
