@@ -12,6 +12,9 @@ public class InventoryClickSettings implements Listener {
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
+        if (event.getClickedInventory() == null) return;
+        if (event.getClickedInventory().getTitle() == null) return;
+        
         String invName = CustomUtils.strip(event.getClickedInventory().getTitle());
         String settingsName = "HoneyBadger";
 
