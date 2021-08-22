@@ -40,12 +40,11 @@ public class Reach extends Check {
 
                 final HBox targetBox = new HBox(tracker.getX(), tracker.getY(), tracker.getZ());
 
-                final Location eyePos = getEyeLocation();
-
+                final Location eyePos = data.getPlayer().getEyeLocation();
 
                 final double distance = eyePos.toVector().clone().setY(0).distance(new Vector(tracker.getX(), 0, tracker.getZ()));
 
-                debug("distance=" + distance);
+                debug("distance=" + distance + " eyePos=" + eyePos);
 
 
             }

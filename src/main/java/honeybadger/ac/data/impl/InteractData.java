@@ -13,8 +13,9 @@ import org.bukkit.entity.Player;
 @Setter
 public class InteractData {
 
-
+    private int auraNpcId;
     private boolean isDigging, isPlacing, isSprinting, isSneaking;
+    private long lastHitPacket;
 
     private Player player;
 
@@ -33,6 +34,14 @@ public class InteractData {
 
     public void setPlacing(boolean b) {
         this.isPlacing = b;
+    }
+
+    public void setLastHitPacket(long l) {
+        this.lastHitPacket = l;
+    }
+
+    public void setAuraNpcId(int id) {
+        this.auraNpcId = id;
     }
 
     public void handleActionPacket(WrapperPlayClientEntityAction wrapper) {
