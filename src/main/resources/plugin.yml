@@ -5,6 +5,7 @@ authors: [Salers,xWand,ExDiggers]
 load: STARTUP
 depend:
   - ProtocolLib
+softdepend: [Citizens]
 
 commands:
   polar:

@@ -106,6 +106,7 @@ public class PacketHandler {
             final UseEntityEvent useEntityEvent = new UseEntityEvent(wrapper, data.getBukkitPlayerFromUUID().getWorld());
 
             data.getInteractData().handleUseEntity(wrapper);
+            data.getInteractionData().setLastHitPacket(System.currentTimeMillis());
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt)

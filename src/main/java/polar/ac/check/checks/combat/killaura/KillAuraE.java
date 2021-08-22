@@ -30,7 +30,6 @@ public class KillAuraE extends Check {
         } else if (e instanceof ArmAnimationEvent) {
             this.swings++;
             if (swings >= 100) {
-
                 /**
                  * TODO CHECK IF TARGET IS AFK / NOT MOVING
                  */

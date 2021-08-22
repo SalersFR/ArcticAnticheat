@@ -5,6 +5,7 @@ import com.comphenix.packetwrapper.WrapperPlayClientUseEntity;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import lombok.Getter;
 import lombok.Setter;
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -16,7 +17,9 @@ import polar.ac.data.PlayerDataManager;
 @Setter
 public class InteractData {
 
-    private int auraNpcId,ticksSinceHurt;
+
+    private NPC entityANPC;
+    private int ticksSinceHurt;
     private boolean isDigging, isPlacing, isSprinting, isSneaking,isHurt;
     private long lastHitPacket;
 
@@ -39,12 +42,11 @@ public class InteractData {
         this.isPlacing = b;
     }
 
+    public void setEntityANPC(NPC npc) {
+        this.entityANPC = npc;
+    }
     public void setLastHitPacket(long l) {
         this.lastHitPacket = l;
-    }
-
-    public void setAuraNpcId(int id) {
-        this.auraNpcId = id;
     }
 
     public void handleActionPacket(WrapperPlayClientEntityAction wrapper) {

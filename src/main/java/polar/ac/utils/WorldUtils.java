@@ -1,15 +1,8 @@
 package polar.ac.utils;
 
-import com.mojang.authlib.GameProfile;
-import net.minecraft.server.v1_8_R3.*;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -25,30 +18,6 @@ public class WorldUtils {
         if (loc.getWorld().isChunkLoaded(loc.getBlockX() >> 4, loc.getBlockZ() >> 4))
             return loc.getBlock();
         return null;
-    }
-
-    public EntityPlayer spawnFakePlayer(Player player, String displayname) {
-        MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
-        WorldServer world = ((CraftWorld) Bukkit.getWorlds().get(0)).getHandle();
-
-        Player target = Bukkit.getServer().getPlayer(displayname);
-        EntityPlayer npc;
-        if (target != null) {
-            npc = new EntityPlayer(server, world, new GameProfile(target.getUniqueId(), target.getName()), new PlayerInteractManager(world));
-        } else {
-            OfflinePlayer op = Bukkit.getServer().getOfflinePlayer(displayname);
-            npc = new EntityPlayer(server, world, new GameProfile(op.getUniqueId(), displayname), new PlayerInteractManager(world));
-        }
-        Location loc = player.getLocation();
-        npc.setLocation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
-
-        for (Player all : Bukkit.getOnlinePlayers()) {
-            PlayerConnection connection = ((CraftPlayer) all).getHandle().playerConnection;
-            connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
-            connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
-        }
-
-        return npc;
     }
 
     public Location getBehindPlayer(Player player) {

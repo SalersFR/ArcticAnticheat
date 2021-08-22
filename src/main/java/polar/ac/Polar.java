@@ -17,6 +17,8 @@ public class Polar extends JavaPlugin {
     public static ArrayList<LivingEntity> entities = new ArrayList<>();
     private PlayerDataManager dataManager = new PlayerDataManager();
 
+    private boolean citizensEnabled;
+
     @Override
     public void onEnable() {
         INSTANCE = this;
@@ -25,6 +27,12 @@ public class Polar extends JavaPlugin {
         saveDefaultConfig();
 
         // Changes
+
+        if (Bukkit.getPluginManager().getPlugin("Citizens") == null) {
+            citizensEnabled = false;
+        } else {
+            citizensEnabled = true;
+        }
 
         for (LivingEntity entity : Bukkit.getWorlds().get(0).getLivingEntities()) {
             entities.add(entity);
@@ -56,5 +64,7 @@ public class Polar extends JavaPlugin {
         getCommand("psettings").setExecutor(new PolarSettingsCommand());
     }
 
-
+    public boolean isCitizensPresent() {
+        return citizensEnabled;
+    }
 }
