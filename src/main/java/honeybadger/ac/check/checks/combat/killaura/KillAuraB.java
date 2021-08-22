@@ -6,6 +6,7 @@ import honeybadger.ac.data.PlayerData;
 import honeybadger.ac.event.Event;
 import honeybadger.ac.event.client.MoveEvent;
 import honeybadger.ac.event.client.UseEntityEvent;
+import org.bukkit.entity.EntityType;
 
 public class KillAuraB extends Check {
 
@@ -33,7 +34,8 @@ public class KillAuraB extends Check {
             if (ticksSinceLastAttack <= 2
                     && xzAcceleration < 0.001D
                     && deltaXZ > 0.17
-                    && data.getInteractData().isSprinting()) {
+                    && data.getInteractData().isSprinting()
+                    && data.getInteractData().getTarget().getType() == EntityType.PLAYER) {
                 if (++this.buffer > 4.5) {
                     fail("xzAccel=" + xzAcceleration);
                 }

@@ -121,7 +121,7 @@ public class PacketHandler {
 
             final WrapperPlayClientBlockDig wrapper = new WrapperPlayClientBlockDig(event.getPacket());
             final boolean isSolid = wrapper.getLocation().toLocation(event.getPlayer().getWorld()).getBlock().getType().isSolid();
-            
+
             if (isSolid && event.getPacket().getPlayerDigTypes().read(0).equals(EnumWrappers.PlayerDigType.START_DESTROY_BLOCK)) {
                 data.getInteractionData().setDigging(true);
             } else if (event.getPacket().getPlayerDigTypes().read(0).equals(EnumWrappers.PlayerDigType.ABORT_DESTROY_BLOCK)
