@@ -1,19 +1,19 @@
-name: HoneyBadger
-main: honeybadger.ac.HoneyBadger
+name: Polar
+main: polar.ac.Polar
 version: 0.0.1
-author: Salers
+authors: [Salers,xWand,ExDiggers]
 load: STARTUP
 depend:
   - ProtocolLib
 
 commands:
-  honeybadger:
-    permission: honeybadger.command
+  polar:
+    permission: polar.command
   alerts:
     permission: alerts.command
   debug:
     permission: debug.command
   hbreload:
-    permission: hbreload.command
+    permission: preload.command
   hbsettings:
-    permission: hbsettings.command
+    permission: psettings.command

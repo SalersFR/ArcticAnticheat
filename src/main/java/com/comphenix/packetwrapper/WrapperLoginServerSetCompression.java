@@ -35,22 +35,22 @@ public class WrapperLoginServerSetCompression extends AbstractPacket {
     }
 
     /**
-     * Retrieve HoneyBadger.
+     * Retrieve polar.
      * <p>
-     * Notes: HoneyBadger is the max size of a packet before its compressed
+     * Notes: polar is the max size of a packet before its compressed
      *
-     * @return The current HoneyBadger
+     * @return The current polar
      */
-    public int getHoneyBadger() {
+    public int getpolar() {
         return handle.getIntegers().read(0);
     }
 
     /**
-     * Set HoneyBadger.
+     * Set polar.
      *
      * @param value - new value.
      */
-    public void setHoneyBadger(int value) {
+    public void setpolar(int value) {
         handle.getIntegers().write(0, value);
     }
 
