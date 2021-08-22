@@ -4,6 +4,7 @@ import honeybadger.ac.check.Check;
 import honeybadger.ac.check.checks.combat.aim.AimA;
 import honeybadger.ac.check.checks.combat.aim.AimB;
 import honeybadger.ac.check.checks.combat.aim.AimC;
+import honeybadger.ac.check.checks.combat.aim.AimD;
 import honeybadger.ac.check.checks.combat.autoclicker.AutoclickerA;
 import honeybadger.ac.check.checks.combat.entity.EntityA;
 import honeybadger.ac.check.checks.combat.killaura.KillAuraA;
@@ -38,6 +39,7 @@ public class CheckManager {
                 new AimA(data),
                 new AimB(data),
                 new AimC(data),
+                new AimD(data),
                 new EntityA(data),
                 new AutoclickerA(data),
                 new KillAuraA(data),

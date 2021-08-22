@@ -90,7 +90,7 @@ public class WorldUtils {
         final Location location = player.getLocation();
         for (double x = -expand; x <= expand; x += expand) {
             for (double z = -expand; z <= expand; z += expand) {
-                if (getBlockAsync(location.clone().add(x, -0.5001, z)).isLiquid()) {
+                if (getBlockAsync(location.clone().add(x, -0.5001, z)).isLiquid() || location.getBlock().isLiquid()) {
                     return true;
                 }
             }
