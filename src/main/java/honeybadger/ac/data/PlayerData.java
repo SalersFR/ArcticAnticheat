@@ -8,9 +8,12 @@ import honeybadger.ac.utils.HLocation;
 import honeybadger.ac.utils.HRotation;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 public class PlayerData {
