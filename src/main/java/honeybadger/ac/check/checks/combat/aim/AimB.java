@@ -8,7 +8,7 @@ import honeybadger.ac.utils.MathUtils;
 
 public class AimB extends Check {
 
-    private float lastDeltaYaw, lastDeltaPitch;
+    private float lastDeltaPitch;
 
     public AimB(PlayerData data) {
         super(data, "Aim", "B", "combat.aim.b", true);
@@ -20,19 +20,21 @@ public class AimB extends Check {
             RotationEvent event = (RotationEvent) e;
 
             float deltaYaw = event.getDeltaYaw();
-            float lastDeltaYaw = this.lastDeltaYaw;
-            this.lastDeltaYaw = deltaYaw;
+
 
             float deltaPitch = event.getDeltaPitch();
             float lastDeltaPitch = this.lastDeltaPitch;
             this.lastDeltaPitch = deltaPitch;
 
             final double gcd = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
+            final float pitch = event.getTo().getPitch();
 
-            debug("gcd=" + gcd + " deltaYaw=" + deltaYaw);
+            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || deltaYaw < 0.2D;
 
-            if (gcd <= 0.0 && deltaYaw > 1.2d) {
-                if (++buffer > 7.0) {
+            debug("gcd=" + gcd + " deltaYaw=" + deltaYaw + " exempt=" + exempt);
+
+            if (gcd <= 0.0 && !exempt) {
+                if (++buffer > 1.5) {
                     fail("gcd=" + gcd);
                 } else if (buffer > 0) buffer -= 0.25;
             }
