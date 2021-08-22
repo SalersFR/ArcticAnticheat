@@ -71,8 +71,11 @@ public class InteractData {
             this.target = wrapper.getTarget(data.getPlayer().getWorld());
         }
 
+        if(wrapper.getTarget(data.getPlayer().getWorld()) == null) return;
+
         if(target.getType() == EntityType.PLAYER) {
             PlayerData target = Polar.INSTANCE.getDataManager().getPlayerData((Player) wrapper.getTarget(data.getPlayer().getWorld()));
+            if(target == null) return;
             target.getInteractData().setTicksSinceHurt(0);
         }
     }

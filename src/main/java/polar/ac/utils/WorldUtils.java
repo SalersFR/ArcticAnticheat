@@ -21,7 +21,7 @@ public class WorldUtils {
     }
 
     public Location getBehindPlayer(Player player) {
-        Vector dirOpp = player.getLocation().getDirection().normalize().multiply(-1);
+        Vector dirOpp = player.getLocation().add(1.26,2.5D,1.26).getDirection().normalize().multiply(-1);
         return player.getLocation().add(dirOpp);
     }
 

@@ -7,6 +7,7 @@ import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import polar.ac.Polar;
 import polar.ac.check.Check;
@@ -40,6 +41,7 @@ public class PacketHandler {
 
     public void handleReceive(PlayerData data, PacketEvent event) {
         if (data == null) return;
+
         final boolean exempt = data.getPlayer().getGameMode() == GameMode.CREATIVE
                 || data.getPlayer().getAllowFlight()
                 || data.getPlayer().getGameMode() == GameMode.SPECTATOR;
@@ -105,7 +107,9 @@ public class PacketHandler {
 
             final UseEntityEvent useEntityEvent = new UseEntityEvent(wrapper, data.getBukkitPlayerFromUUID().getWorld());
 
-            data.getInteractData().handleUseEntity(wrapper);
+            if(wrapper.getTarget(event) != null) {
+                data.getInteractData().handleUseEntity(wrapper);
+            }
             data.getInteractionData().setLastHitPacket(System.currentTimeMillis());
 
             for (Check checks : data.getChecks()) {

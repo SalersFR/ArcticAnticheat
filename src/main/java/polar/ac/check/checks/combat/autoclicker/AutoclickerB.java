@@ -13,9 +13,6 @@ public class AutoclickerB extends Check {
 
     private PolarQueue samples = new PolarQueue<Integer>(120);
 
-    /**
-     * DO NOT TOUCH - Salers
-     */
 
     private int ticks;
     private double lastDiff;
