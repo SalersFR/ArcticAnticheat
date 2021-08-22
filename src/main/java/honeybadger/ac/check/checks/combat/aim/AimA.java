@@ -32,8 +32,14 @@ public class AimA extends Check {
 
                 if (MathUtils.floor(deltaYaw) > 185 && MathUtils.floor(lastDeltaYaw) > 185) {
                     if (MathUtils.getSensitivity(deltaPitch, lastDeltaPitch) > 200
-                            && !(MathUtils.getSensitivity(deltaPitch, lastDeltaPitch) < 10))
-                        fail("deltaYaw=" + MathUtils.floor(deltaYaw) + " lastDeltaYaw=" + MathUtils.floor(lastDeltaYaw) + " sens=" + MathUtils.getSensitivity(deltaPitch, lastDeltaPitch) + "%");
+                            && !(MathUtils.getSensitivity(deltaPitch, lastDeltaPitch) < 10)) {
+                        if (++buffer > 1.2D) {
+                            fail("deltaYaw=" + MathUtils.floor(deltaYaw) + " lastDeltaYaw=" + MathUtils.floor(lastDeltaYaw)
+                                    + " sens=" + MathUtils.getSensitivity(deltaPitch, lastDeltaPitch) + "%");
+
+                        }
+
+                    } else if (buffer > 0) buffer -= 0.12D;
                 }
             }
         }
