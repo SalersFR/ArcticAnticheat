@@ -63,4 +63,8 @@ checks:
         ban-vl: 50
         enabled: true
         punish: false
+      e:
+        ban-vl: 50
+        enabled: true
+        punish: false
 
