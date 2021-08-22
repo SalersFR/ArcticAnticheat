@@ -13,7 +13,7 @@ commands:
     permission: alerts.command
   debug:
     permission: debug.command
-  hbreload:
+  preload:
     permission: preload.command
-  hbsettings:
+  psettings:
     permission: psettings.command

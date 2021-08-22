@@ -13,7 +13,7 @@ public class SettingsGUI {
 
     public SettingsGUI createNewGUI() {
         Inventory inv = Bukkit.createInventory(null, 36, ChatColor.translateAlternateColorCodes('&',
-                "&b&lpolar"));
+                "&b&lPolar"));
 
         this.inventory = inv;
 
