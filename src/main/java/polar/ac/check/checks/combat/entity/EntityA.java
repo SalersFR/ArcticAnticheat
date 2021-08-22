@@ -4,6 +4,8 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 import polar.ac.Polar;
 import polar.ac.check.Check;
 import polar.ac.data.PlayerData;
@@ -18,7 +20,6 @@ public class EntityA extends Check {
     An NPC check (KillAura).
      */
 
-
     public EntityA(PlayerData data) {
         super(data, "Entity", "A", "combat.entity.a", true);
     }
@@ -29,11 +30,11 @@ public class EntityA extends Check {
             if (Polar.INSTANCE.isCitizensPresent()) {
                 UseEntityEvent event = (UseEntityEvent) e;
                 if (event.getTarget().hasMetadata("NPC")) { // Player attacked an NPC from Citizens
-                    buffer = 0;
-                } else {
-                    if (buffer++ >= 5) {
-                        fail("npcNotHit=" + buffer);
+                    if (buffer++ >= 15) {
+                        fail("buffer(hits)=" + buffer);
                     }
+                } else if (buffer > 0) {
+                    buffer -= 0.25;
                 }
             }
         } else if (e instanceof MoveEvent) {
@@ -42,10 +43,17 @@ public class EntityA extends Check {
             if (data.getInteractionData().getEntityANPC() == null
                     || !data.getInteractionData().getEntityANPC().isSpawned()) {
                 NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "BOT");
-                npc.teleport(data.getBukkitPlayerFromUUID().getLocation().subtract(0, -5, -3).clone(), PlayerTeleportEvent.TeleportCause.PLUGIN);
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        npc.spawn(new WorldUtils().getBehindPlayer(data.getBukkitPlayerFromUUID()));
+                    }
+                }.runTask(Polar.INSTANCE);
+                data.getInteractionData().setEntityANPC(npc);
             } else {
-                data.getInteractionData().getEntityANPC().teleport(new WorldUtils().getBehindPlayer(data.getBukkitPlayerFromUUID()
-                ), PlayerTeleportEvent.TeleportCause.PLUGIN);
+                data.getInteractionData().getEntityANPC()
+                        .teleport(new WorldUtils().getBehindPlayer(data.getBukkitPlayerFromUUID()).clone().add(0, 3, 0),
+                                PlayerTeleportEvent.TeleportCause.PLUGIN);
             }
         }
     }

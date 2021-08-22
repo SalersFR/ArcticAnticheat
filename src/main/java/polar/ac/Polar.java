@@ -2,6 +2,7 @@ package polar.ac;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import polar.ac.commands.*;
 import polar.ac.data.PlayerDataManager;
@@ -34,6 +35,10 @@ public class Polar extends JavaPlugin {
             citizensEnabled = true;
         }
 
+        Bukkit.broadcastMessage(citizensEnabled + "");
+        for (Plugin s : Bukkit.getPluginManager().getPlugins()) {
+            Bukkit.broadcastMessage(s.getName());
+        }
         for (LivingEntity entity : Bukkit.getWorlds().get(0).getLivingEntities()) {
             entities.add(entity);
         }
