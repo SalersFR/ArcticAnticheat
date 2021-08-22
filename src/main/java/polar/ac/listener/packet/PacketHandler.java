@@ -49,6 +49,8 @@ public class PacketHandler {
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
+            data.getInteractData().handleFlying();
+
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
                     checks.handle(rotationEvent);
@@ -72,6 +74,8 @@ public class PacketHandler {
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
+            data.getInteractData().handleFlying();
+
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
@@ -85,6 +89,8 @@ public class PacketHandler {
 
             final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getOnGround());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
+
+            data.getInteractData().handleFlying();
 
 
             for (Check checks : data.getChecks()) {

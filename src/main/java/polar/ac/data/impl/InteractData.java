@@ -6,15 +6,18 @@ import com.comphenix.protocol.wrappers.EnumWrappers;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import polar.ac.Polar;
 import polar.ac.data.PlayerData;
+import polar.ac.data.PlayerDataManager;
 
 @Getter
 @Setter
 public class InteractData {
 
-    private int auraNpcId;
-    private boolean isDigging, isPlacing, isSprinting, isSneaking;
+    private int auraNpcId,ticksSinceHurt;
+    private boolean isDigging, isPlacing, isSprinting, isSneaking,isHurt;
     private long lastHitPacket;
 
     private Player player;
@@ -65,5 +68,15 @@ public class InteractData {
         if (wrapper.getType() == EnumWrappers.EntityUseAction.ATTACK) {
             this.target = wrapper.getTarget(data.getPlayer().getWorld());
         }
+
+        if(target.getType() == EntityType.PLAYER) {
+            PlayerData target = Polar.INSTANCE.getDataManager().getPlayerData((Player) wrapper.getTarget(data.getPlayer().getWorld()));
+            target.getInteractData().setTicksSinceHurt(0);
+        }
+    }
+
+    public void handleFlying() {
+        this.ticksSinceHurt++;
+        this.isHurt = ticksSinceHurt < 70;
     }
 }

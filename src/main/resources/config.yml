@@ -8,6 +8,14 @@ checks:
         ban-vl: 10
         enabled: true
         punish: true
+      b:
+        ban-vl: 10
+        enabled: true
+        punish: true
+      c:
+        ban-vl: 10
+        enabled: true
+        punish: true
     speed:
       a:
         ban-vl: 10
@@ -20,6 +28,10 @@ checks:
   combat:
     autoclicker:
       a:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      c:
         ban-vl: 50
         enabled: true
         punish: true
@@ -37,6 +49,10 @@ checks:
         enabled: true
         punish: true
       d:
+        ban-vl: 10
+        enabled: true
+        punish: true
+      e:
         ban-vl: 10
         enabled: true
         punish: true

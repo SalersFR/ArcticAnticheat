@@ -6,10 +6,13 @@ import polar.ac.check.checks.combat.aim.AimB;
 import polar.ac.check.checks.combat.aim.AimC;
 import polar.ac.check.checks.combat.aim.AimD;
 import polar.ac.check.checks.combat.autoclicker.AutoclickerA;
+import polar.ac.check.checks.combat.autoclicker.AutoclickerB;
 import polar.ac.check.checks.combat.entity.EntityA;
 import polar.ac.check.checks.combat.killaura.*;
 import polar.ac.check.checks.combat.reach.Reach;
 import polar.ac.check.checks.movement.fly.FlyA;
+import polar.ac.check.checks.movement.fly.FlyB;
+import polar.ac.check.checks.movement.fly.FlyC;
 import polar.ac.check.checks.movement.speed.SpeedA;
 import polar.ac.check.checks.movement.step.StepA;
 import polar.ac.data.PlayerData;
@@ -30,6 +33,8 @@ public class CheckManager {
 
                 //MOVEMENT
                 new FlyA(data),
+                new FlyB(data),
+                new FlyC(data),
                 new SpeedA(data),
                 new StepA(data),
 
@@ -41,6 +46,7 @@ public class CheckManager {
                 new AimD(data),
                 new EntityA(data),
                 new AutoclickerA(data),
+                new AutoclickerB(data),
                 new KillAuraA(data),
                 new KillAuraB(data),
                 new KillAuraC(data),
