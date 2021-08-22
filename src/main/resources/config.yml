@@ -31,7 +31,7 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
-      c:
+      b:
         ban-vl: 50
         enabled: true
         punish: true
