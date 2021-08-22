@@ -16,25 +16,27 @@ public class AimD extends Check {
 
     @Override
     public void handle(Event e) {
-        RotationEvent event = (RotationEvent) e;
+        if (e instanceof RotationEvent) {
+            RotationEvent event = (RotationEvent) e;
 
-        float deltaYaw = event.getDeltaYaw();
-        float lastDeltaYaw = this.lastDeltaYaw;
+            float deltaYaw = event.getDeltaYaw();
+            float lastDeltaYaw = this.lastDeltaYaw;
 
-        float deltaPitch = event.getDeltaPitch();
-        float lastDeltaPitch = this.lastDeltaPitch;
+            float deltaPitch = event.getDeltaPitch();
+            float lastDeltaPitch = this.lastDeltaPitch;
 
-        this.lastDeltaPitch = deltaPitch;
-        this.lastDeltaYaw = deltaYaw;
+            this.lastDeltaPitch = deltaPitch;
+            this.lastDeltaYaw = deltaYaw;
 
-        debug("deltaPitch=" + deltaPitch + " lastDeltaPitch=" + lastDeltaPitch + " deltaYaw=" + deltaYaw + " lastDeltaYaw=" + lastDeltaYaw);
+            debug("deltaPitch=" + deltaPitch + " lastDeltaPitch=" + lastDeltaPitch + " deltaYaw=" + deltaYaw + " lastDeltaYaw=" + lastDeltaYaw);
 
-        if((deltaYaw == lastDeltaYaw && deltaPitch > 0.4) || (deltaPitch == lastDeltaPitch && deltaPitch > 0.4)) {
-            if(++buffer > 5) {
-                buffer -= 2.5D;
-                fail("deltaPitch=" + deltaPitch + " lastDeltaPitch=" + lastDeltaPitch + " deltaYaw=" + deltaYaw + " lastDeltaYaw=" + lastDeltaYaw);
-            }
-        }else if(buffer > 0) buffer--;
+            if ((deltaYaw == lastDeltaYaw && deltaPitch > 0.4) || (deltaPitch == lastDeltaPitch && deltaPitch > 0.4)) {
+                if (++buffer > 5) {
+                    buffer -= 2.5D;
+                    fail("deltaPitch=" + deltaPitch + " lastDeltaPitch=" + lastDeltaPitch + " deltaYaw=" + deltaYaw + " lastDeltaYaw=" + lastDeltaYaw);
+                }
+            } else if (buffer > 0) buffer--;
 
+        }
     }
 }

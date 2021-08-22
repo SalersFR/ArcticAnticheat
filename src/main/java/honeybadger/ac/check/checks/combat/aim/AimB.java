@@ -29,7 +29,7 @@ public class AimB extends Check {
             final double gcd = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
             final float pitch = event.getTo().getPitch();
 
-            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || deltaYaw < 0.2D;
+            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || deltaYaw < 1.2D;
 
             debug("gcd=" + gcd + " deltaYaw=" + deltaYaw + " exempt=" + exempt);
 
