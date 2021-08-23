@@ -22,9 +22,15 @@ checks:
         enabled: true
         punish: true
     step:
-      ban-vl: 10
-      enabled: true
-      punish: true
+      a:
+        ban-vl: 10
+        enabled: true
+        punish: true
+    nofall:
+      a:
+        ban-vl: 10
+        enabled: true
+        punish: true
   combat:
     autoclicker:
       a:

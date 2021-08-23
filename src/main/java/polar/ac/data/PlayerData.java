@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import polar.ac.check.Check;
 import polar.ac.data.impl.CheckManager;
 import polar.ac.data.impl.InteractData;
+import polar.ac.data.impl.PositionData;
 import polar.ac.data.impl.TargetTracker;
 import polar.ac.utils.PLocation;
 import polar.ac.utils.PRotation;
@@ -17,6 +18,7 @@ public class PlayerData {
 
     private final CheckManager checkManager;
     private final InteractData interactData;
+    private final PositionData posData;
     private final TargetTracker targetTracker;
     private final Player player;
 
@@ -30,6 +32,7 @@ public class PlayerData {
     public PlayerData(Player player) {
         this.checkManager = new CheckManager(this);
         this.interactData = new InteractData(this);
+        this.posData = new PositionData(this);
         this.targetTracker = new TargetTracker(this);
         this.player = player;
     }

@@ -45,6 +45,15 @@ public class PacketHandler {
         final boolean exempt = data.getPlayer().getGameMode() == GameMode.CREATIVE
                 || data.getPlayer().getAllowFlight()
                 || data.getPlayer().getGameMode() == GameMode.SPECTATOR;
+
+        for (Check checks : data.getChecks()) {
+            if (checks.isEnabled() && !exempt) {
+                checks.handle(new polar.ac.event.client.PacketEvent(event.getPacketType()));
+            }
+        }
+
+        data.getPosData().setLastPacket(event.getPacketType());
+
         if (event.getPacketType() == PacketType.Play.Client.LOOK) {
             final WrapperPlayClientLook wrapper = new WrapperPlayClientLook(event.getPacket());
 
