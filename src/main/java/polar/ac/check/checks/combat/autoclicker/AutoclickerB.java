@@ -58,7 +58,8 @@ public class AutoclickerB extends Check {
 
 
 
-            this.ticks = 0;
+
+                this.ticks = 0;
 
 
         } else if (e instanceof FlyingEvent) {

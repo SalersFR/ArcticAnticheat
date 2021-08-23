@@ -63,7 +63,8 @@ public class AutoclickerA extends Check {
             if (ticks < 5)
                 samples.add(ticks);
 
-            this.ticks = 0;
+
+                this.ticks = 0;
 
         } else if (e instanceof FlyingEvent) {
             this.ticks++;
