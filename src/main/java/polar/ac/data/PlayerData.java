@@ -2,6 +2,7 @@ package polar.ac.data;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.server.v1_8_R3.EntityPlayer;
 import org.bukkit.entity.Player;
 import polar.ac.check.Check;
 import polar.ac.data.impl.CheckManager;
@@ -23,6 +24,7 @@ public class PlayerData {
     private final Player player;
 
 
+
     @Setter
     private PLocation location;
 
@@ -35,6 +37,9 @@ public class PlayerData {
         this.posData = new PositionData(this);
         this.targetTracker = new TargetTracker(this);
         this.player = player;
+
+
+
     }
 
     public List<Check> getChecks() {

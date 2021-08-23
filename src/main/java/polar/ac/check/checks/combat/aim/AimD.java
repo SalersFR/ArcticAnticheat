@@ -31,7 +31,7 @@ public class AimD extends Check {
 
             if ((deltaYaw == lastDeltaYaw && deltaPitch > 0.4) || (deltaPitch == lastDeltaPitch && deltaPitch > 0.4)) {
                 if (++buffer > 5) {
-                    buffer -= 2.5D;
+                    buffer -= 3D;
                     fail("deltaPitch=" + deltaPitch + " lastDeltaPitch=" + lastDeltaPitch + " deltaYaw=" + deltaYaw + " lastDeltaYaw=" + lastDeltaYaw);
                 }
             } else if (buffer > 0) buffer--;

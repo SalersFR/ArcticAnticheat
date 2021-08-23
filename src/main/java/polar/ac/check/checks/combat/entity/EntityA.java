@@ -36,6 +36,7 @@ public class EntityA extends Check {
 
     @Override
     public void handle(Event e) {
+        if(data.getInteractData().getTicksSinceJoin() < 75) return;
         if (e instanceof UseEntityEvent) {
             UseEntityEvent event = (UseEntityEvent) e;
 

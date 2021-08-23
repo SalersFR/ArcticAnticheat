@@ -12,7 +12,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import polar.ac.Polar;
 import polar.ac.data.PlayerData;
-import polar.ac.data.PlayerDataManager;
 import polar.ac.utils.WorldUtils;
 
 @Getter
@@ -21,8 +20,8 @@ public class InteractData {
 
 
     private NPC entityANPC;
-    private int ticksSinceHurt,ticksSinceSlime,ticksSinceTeleport;
-    private boolean isDigging, isPlacing, isSprinting, isSneaking,isHurt,teleported;
+    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin;
+    private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported;
     private long lastHitPacket;
 
     private Player player;
@@ -47,6 +46,7 @@ public class InteractData {
     public void setEntityANPC(NPC npc) {
         this.entityANPC = npc;
     }
+
     public void setLastHitPacket(long l) {
         this.lastHitPacket = l;
     }
@@ -73,11 +73,11 @@ public class InteractData {
             this.target = wrapper.getTarget(data.getPlayer().getWorld());
         }
 
-        if(wrapper.getTarget(data.getPlayer().getWorld()) == null) return;
+        if (wrapper.getTarget(data.getPlayer().getWorld()) == null) return;
 
-        if(target.getType() == EntityType.PLAYER) {
+        if (target.getType() == EntityType.PLAYER) {
             PlayerData target = Polar.INSTANCE.getDataManager().getPlayerData((Player) wrapper.getTarget(data.getPlayer().getWorld()));
-            if(target == null) return;
+            if (target == null) return;
             target.getInteractData().setTicksSinceHurt(0);
         }
     }
@@ -86,16 +86,18 @@ public class InteractData {
         this.ticksSinceHurt++;
         this.ticksSinceSlime++;
         this.ticksSinceTeleport++;
+        if (ticksSinceJoin < 1000)
+            this.ticksSinceJoin++;
         this.isHurt = ticksSinceHurt < 70;
         this.teleported = ticksSinceTeleport < 80;
-        if(new WorldUtils().isOnACertainBlock(data.getPlayer(),"slime")) {
+        if (new WorldUtils().isOnACertainBlock(data.getPlayer(), "slime")) {
             this.ticksSinceSlime = 0;
         }
 
     }
 
     public void handleOutTeleport(WrapperPlayServerEntityTeleport wrapper) {
-        if(wrapper.getEntityID() == data.getPlayer().getEntityId()) {
+        if (wrapper.getEntityID() == data.getPlayer().getEntityId()) {
             this.ticksSinceTeleport = 0;
         }
     }

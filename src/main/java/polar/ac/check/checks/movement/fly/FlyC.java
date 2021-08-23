@@ -44,7 +44,8 @@ public class FlyC extends Check {
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
                     || airTicks < 9
-                    || player.getFallDistance() > 5.0F;
+                    || player.getFallDistance() > 5.0F
+                    || event.isGround();
 
             if(!exempt && deltaY > lastDeltaY) {
                 if(++buffer > 2.0D) {

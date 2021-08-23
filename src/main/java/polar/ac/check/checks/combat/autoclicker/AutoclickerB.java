@@ -59,6 +59,9 @@ public class AutoclickerB extends Check {
 
 
 
+
+
+
                 this.ticks = 0;
 
 

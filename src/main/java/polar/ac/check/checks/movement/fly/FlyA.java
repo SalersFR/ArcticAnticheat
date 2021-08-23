@@ -51,7 +51,8 @@ public class FlyA extends Check {
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
                     || airTicks < 9
-                    || player.getFallDistance() > 10.0F;
+                    || player.getFallDistance() > 10.0F
+                    || event.isGround();
 
             debug("result=" + result + " exempt=" + exempt + " deltaY=" + deltaY + " lastDeltaY=" + lastDeltaY + " airTicks=" + airTicks);
 

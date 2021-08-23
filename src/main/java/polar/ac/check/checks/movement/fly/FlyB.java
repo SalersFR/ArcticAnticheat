@@ -37,7 +37,9 @@ public class FlyB extends Check {
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
                     || airTicks < 9
-                    || player.getFallDistance() > 10.0F;
+                    || player.getFallDistance() > 10.0F
+                    || event.isGround();
+
 
             if (worldUtils.isCloseToGround(data.getBukkitPlayerFromUUID().getLocation())) {
                 this.airTicks = 0;

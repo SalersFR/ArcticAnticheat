@@ -23,7 +23,7 @@ public class MotionA extends Check {
 
             final double deltaY = event.getDeltaY();
 
-            double jumpLimit = 0.4199999;
+            double jumpLimit = 0.42F;
 
             final Player player = data.getPlayer();
 

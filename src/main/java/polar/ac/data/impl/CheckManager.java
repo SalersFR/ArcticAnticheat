@@ -1,10 +1,7 @@
 package polar.ac.data.impl;
 
 import polar.ac.check.Check;
-import polar.ac.check.checks.combat.aim.AimA;
-import polar.ac.check.checks.combat.aim.AimB;
-import polar.ac.check.checks.combat.aim.AimC;
-import polar.ac.check.checks.combat.aim.AimD;
+import polar.ac.check.checks.combat.aim.*;
 import polar.ac.check.checks.combat.autoclicker.AutoclickerA;
 import polar.ac.check.checks.combat.autoclicker.AutoclickerB;
 import polar.ac.check.checks.combat.autoclicker.AutoclickerC;
@@ -17,6 +14,7 @@ import polar.ac.check.checks.movement.fly.FlyB;
 import polar.ac.check.checks.movement.fly.FlyC;
 import polar.ac.check.checks.movement.motion.MotionB;
 import polar.ac.check.checks.movement.nofall.NoFallA;
+import polar.ac.check.checks.movement.nofall.NoFallB;
 import polar.ac.check.checks.movement.speed.SpeedA;
 import polar.ac.check.checks.movement.step.StepA;
 import polar.ac.data.PlayerData;
@@ -42,6 +40,7 @@ public class CheckManager {
                 new SpeedA(data),
                 new StepA(data),
                 new NoFallA(data),
+                new NoFallB(data),
                 new MotionB(data),
                 new MotionA(data),
 
@@ -51,6 +50,8 @@ public class CheckManager {
                 new AimB(data),
                 new AimC(data),
                 new AimD(data),
+                new AimE(data),
+                new AimF(data),
                 new EntityA(data),
                 new AutoclickerA(data),
                 new AutoclickerB(data),
