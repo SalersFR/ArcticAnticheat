@@ -23,7 +23,7 @@ public class MotionB extends Check {
             final boolean exempt = !data.getInteractionData().isSprinting()
                     || new WorldUtils().isOnACertainBlock(data.getBukkitPlayerFromUUID(),
                     "ice")
-                    || !data.getBukkitPlayerFromUUID().isOnGround();
+                    || !data.getBukkitPlayerFromUUID().isOnGround() || data.getInteractionData().isHurt();
 
             debug("deltaZ=" + event.getDeltaZ() + " deltaX=" + event.getDeltaX() + " sprinting=" + data.getInteractionData().isSprinting()
              + " exempt=" + exempt);

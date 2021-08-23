@@ -40,7 +40,8 @@ public class MotionA extends Check {
                     || worldUtils.isAtEdgeOfABlock(player)
                     || player.getFallDistance() > 10.0F
                     || event.isGround()
-                    || data.getInteractionData().getTicksSinceSlime() < 120;
+                    || data.getInteractionData().getTicksSinceSlime() < 120
+                    || data.getInteractData().isHurt();
 
             debug("exempt="+ exempt + " limit=" + jumpLimit + " deltaY=" + deltaY);
 
