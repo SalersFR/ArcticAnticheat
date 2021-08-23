@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import polar.ac.Polar;
 import polar.ac.data.PlayerData;
 import polar.ac.data.PlayerDataManager;
+import polar.ac.utils.WorldUtils;
 
 @Getter
 @Setter
@@ -19,7 +20,7 @@ public class InteractData {
 
 
     private NPC entityANPC;
-    private int ticksSinceHurt;
+    private int ticksSinceHurt,ticksSinceSlime;
     private boolean isDigging, isPlacing, isSprinting, isSneaking,isHurt;
     private long lastHitPacket;
 
@@ -82,6 +83,11 @@ public class InteractData {
 
     public void handleFlying() {
         this.ticksSinceHurt++;
+        this.ticksSinceSlime++;
         this.isHurt = ticksSinceHurt < 70;
+        if(new WorldUtils().isOnACertainBlock(data.getPlayer(),"slime")) {
+            this.ticksSinceSlime = 0;
+        }
+
     }
 }

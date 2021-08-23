@@ -10,6 +10,7 @@ import polar.ac.check.checks.combat.autoclicker.AutoclickerB;
 import polar.ac.check.checks.combat.entity.EntityA;
 import polar.ac.check.checks.combat.killaura.*;
 import polar.ac.check.checks.combat.reach.Reach;
+import polar.ac.check.checks.movement.motion.MotionA;
 import polar.ac.check.checks.movement.fly.FlyA;
 import polar.ac.check.checks.movement.fly.FlyB;
 import polar.ac.check.checks.movement.fly.FlyC;
@@ -41,6 +42,7 @@ public class CheckManager {
                 new StepA(data),
                 new NoFallA(data),
                 new MotionB(data),
+                new MotionA(data),
 
 
                 // COMBAT
