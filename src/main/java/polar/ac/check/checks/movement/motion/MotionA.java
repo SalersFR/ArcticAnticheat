@@ -1,4 +1,4 @@
-package polar.ac.check.checks.motion;
+package polar.ac.check.checks.movement.motion;
 
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
