@@ -1,5 +1,6 @@
 package polar.ac.check.checks.combat.aim;
 
+import net.minecraft.server.v1_8_R3.PacketPlayOutEntityVelocity;
 import polar.ac.check.Check;
 import polar.ac.data.PlayerData;
 import polar.ac.event.Event;
@@ -35,10 +36,11 @@ public class AimB extends Check {
             debug("gcd=" + gcd + " deltaYaw=" + deltaYaw + " exempt=" + exempt);
 
             if (gcd <= 0.0 && !exempt && !exemptCombat) {
-                if (++buffer > 1.5) {
+                if (++buffer > 3) {
                     fail("gcd=" + gcd);
-                } else if (buffer > 0) buffer -= 0.5;
+                } else if (buffer > 0) buffer --;
             }
         }
     }
+    
 }
