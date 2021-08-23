@@ -13,6 +13,7 @@ import polar.ac.check.checks.combat.reach.Reach;
 import polar.ac.check.checks.movement.fly.FlyA;
 import polar.ac.check.checks.movement.fly.FlyB;
 import polar.ac.check.checks.movement.fly.FlyC;
+import polar.ac.check.checks.movement.motion.MotionB;
 import polar.ac.check.checks.movement.nofall.NoFallA;
 import polar.ac.check.checks.movement.speed.SpeedA;
 import polar.ac.check.checks.movement.step.StepA;
@@ -39,6 +40,7 @@ public class CheckManager {
                 new SpeedA(data),
                 new StepA(data),
                 new NoFallA(data),
+                new MotionB(data),
 
 
                 // COMBAT
