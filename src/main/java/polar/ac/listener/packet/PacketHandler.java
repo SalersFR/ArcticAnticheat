@@ -26,12 +26,16 @@ public class PacketHandler {
                 manager.addPacketListener(new PacketAdapter(Polar.INSTANCE, types) {
                     @Override
                     public void onPacketReceiving(PacketEvent event) {
-                        handleReceive(Polar.INSTANCE.getDataManager().getPlayerData(event.getPlayer()), event);
+                        PlayerData data = Polar.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+                        if(data == null ) return;
+                        handleReceive(data, event);
                     }
 
                     @Override
                     public void onPacketSending(PacketEvent event) {
-                        handleSending(Polar.INSTANCE.getDataManager().getPlayerData(event.getPlayer()), event);
+                        PlayerData data = Polar.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+                        if(data == null ) return;
+                        handleSending(data, event);
                     }
                 });
 

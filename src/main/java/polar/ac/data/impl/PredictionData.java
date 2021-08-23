@@ -18,5 +18,5 @@ public class PredictionData {
 
     public float fallDistance = 0.0F,rotationYaw,strafe,forward;
     public Vector predictedMovement;
-    public boolean isLava,isWater,isLadder,isGround;
+    public boolean isLava,isWater,isLadder,isGround,isWeb;
 }
