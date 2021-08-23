@@ -44,7 +44,8 @@ public class PacketHandler {
 
         final boolean exempt = data.getPlayer().getGameMode() == GameMode.CREATIVE
                 || data.getPlayer().getAllowFlight()
-                || data.getPlayer().getGameMode() == GameMode.SPECTATOR;
+                || data.getPlayer().getGameMode() == GameMode.SPECTATOR
+                || data.getInteractionData().isTeleported();
 
         for (Check checks : data.getChecks()) {
             if (checks.isEnabled() && !exempt) {
@@ -191,6 +192,8 @@ public class PacketHandler {
             final WrapperPlayServerEntityTeleport wrapper = new WrapperPlayServerEntityTeleport(event.getPacket());
 
             data.getTargetTracker().handleTeleport(wrapper);
+            data.getInteractionData().handleOutTeleport(wrapper);
+
         } else if (event.getPacketType() == PacketType.Play.Server.NAMED_ENTITY_SPAWN) {
 
             final WrapperPlayServerNamedEntitySpawn wrapper = new WrapperPlayServerNamedEntitySpawn(event.getPacket());

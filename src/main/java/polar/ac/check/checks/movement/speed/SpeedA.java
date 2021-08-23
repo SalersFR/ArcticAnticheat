@@ -6,6 +6,7 @@ import polar.ac.data.PlayerData;
 import polar.ac.event.Event;
 import polar.ac.event.client.MoveEvent;
 import polar.ac.utils.PlayerUtils;
+import polar.ac.utils.WorldUtils;
 
 public class SpeedA extends Check {
 
@@ -73,8 +74,10 @@ public class SpeedA extends Check {
 
             debug("pred=" + prediction + " deltaXZ=" + deltaXZ);
 
+            final boolean exempt = data.getInteractionData().isHurt() || new WorldUtils().isOnACertainBlock(data.getPlayer(),"ice");
+
             // flag
-            if (deltaXZ > prediction) {
+            if (deltaXZ > prediction && !exempt) {
                 if (++this.buffer > 3)
                     fail("p=" + prediction + " d=" + deltaXZ);
             } else if (this.buffer > 0) buffer -= 0.025D;

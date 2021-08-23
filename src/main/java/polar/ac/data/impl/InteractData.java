@@ -2,6 +2,7 @@ package polar.ac.data.impl;
 
 import com.comphenix.packetwrapper.WrapperPlayClientEntityAction;
 import com.comphenix.packetwrapper.WrapperPlayClientUseEntity;
+import com.comphenix.packetwrapper.WrapperPlayServerEntityTeleport;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,8 +21,8 @@ public class InteractData {
 
 
     private NPC entityANPC;
-    private int ticksSinceHurt,ticksSinceSlime;
-    private boolean isDigging, isPlacing, isSprinting, isSneaking,isHurt;
+    private int ticksSinceHurt,ticksSinceSlime,ticksSinceTeleport;
+    private boolean isDigging, isPlacing, isSprinting, isSneaking,isHurt,teleported;
     private long lastHitPacket;
 
     private Player player;
@@ -84,10 +85,18 @@ public class InteractData {
     public void handleFlying() {
         this.ticksSinceHurt++;
         this.ticksSinceSlime++;
+        this.ticksSinceTeleport++;
         this.isHurt = ticksSinceHurt < 70;
+        this.teleported = ticksSinceTeleport < 80;
         if(new WorldUtils().isOnACertainBlock(data.getPlayer(),"slime")) {
             this.ticksSinceSlime = 0;
         }
 
+    }
+
+    public void handleOutTeleport(WrapperPlayServerEntityTeleport wrapper) {
+        if(wrapper.getEntityID() == data.getPlayer().getEntityId()) {
+            this.ticksSinceTeleport = 0;
+        }
     }
 }
