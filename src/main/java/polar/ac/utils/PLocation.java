@@ -2,6 +2,7 @@ package polar.ac.utils;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.util.Vector;
 
 @Getter
 @Setter
@@ -27,5 +28,9 @@ public class PLocation {
 
     public PLocation clone() {
         return new PLocation(x, y, z);
+    }
+
+    public Vector toVector() {
+        return new Vector(x,y,z);
     }
 }

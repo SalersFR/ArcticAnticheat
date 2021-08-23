@@ -25,6 +25,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.injector.PacketConstructor;
 import com.comphenix.protocol.wrappers.WrappedDataWatcher;
+import net.minecraft.server.v1_8_R3.PacketPlayOutSpawnEntityLiving;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -132,8 +133,9 @@ public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
      *
      * @return The current X
      */
+
     public double getX() {
-        return handle.getDoubles().read(0);
+        return handle.getIntegers().read(0);
     }
 
     /**
@@ -153,7 +155,7 @@ public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
      * @return The current y
      */
     public double getY() {
-        return handle.getDoubles().read(1);
+        return handle.getIntegers().read(1);
     }
 
     /**
@@ -173,7 +175,7 @@ public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
      * @return The current z
      */
     public double getZ() {
-        return handle.getDoubles().read(2);
+        return handle.getIntegers().read(2);
     }
 
     /**
