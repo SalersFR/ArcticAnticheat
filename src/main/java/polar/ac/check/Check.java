@@ -37,10 +37,10 @@ public abstract class Check {
     }
 
     protected void fail(String info) {
+        vl++;
+
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("alerts.see") && !player.hasMetadata("ALERTS_OFF")) {
-
-                vl++;
                 final String fromConfig = Polar.INSTANCE.getConfig().getString("flag-message").
                         replace("%player%", data.getBukkitPlayerFromUUID().getName()).
                         replace("%vl%", "" + vl).
@@ -55,27 +55,26 @@ public abstract class Check {
 
                 alertMSG.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + data.getPlayer().getName()));
 
-
-                if (vl > getBanVL()) {
-                    if (isPunish()) {
-
-                        final String toDispatch = Polar.INSTANCE.getConfig().getString("ban-command").
-                                replace("%player%", data.getBukkitPlayerFromUUID().getName()).
-                                replace("%vl%", "" + vl).
-                                replace("%type%", type).
-                                replace("%check%", name);
-
-
-                        Bukkit.getScheduler().runTask(Polar.INSTANCE, () -> {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', toDispatch));
-                            for (Check checks : data.getChecks()) {
-                                checks.vl = 0;
-                            }
-                        });
-                    }
-                }
-
                 player.spigot().sendMessage(alertMSG);
+            }
+
+            if (vl > getBanVL()) {
+                if (isPunish()) {
+
+                    final String toDispatch = Polar.INSTANCE.getConfig().getString("ban-command").
+                            replace("%player%", data.getBukkitPlayerFromUUID().getName()).
+                            replace("%vl%", "" + vl).
+                            replace("%type%", type).
+                            replace("%check%", name);
+
+
+                    Bukkit.getScheduler().runTask(Polar.INSTANCE, () -> {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', toDispatch));
+                        for (Check checks : data.getChecks()) {
+                            checks.vl = 0;
+                        }
+                    });
+                }
             }
         }
 

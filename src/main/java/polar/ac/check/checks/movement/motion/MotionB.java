@@ -20,31 +20,39 @@ public class MotionB extends Check {
 
             String dir = new WorldUtils().getCardinalDirection(data.getBukkitPlayerFromUUID());
 
-            if (data.getInteractionData().isSprinting()) {
+            final boolean exempt = !data.getInteractionData().isSprinting()
+                    || new WorldUtils().isOnACertainBlock(data.getBukkitPlayerFromUUID(),
+                    "ice")
+                    || !data.getBukkitPlayerFromUUID().isOnGround();
+
+            debug("deltaZ=" + event.getDeltaZ() + " deltaX=" + event.getDeltaX() + " sprinting=" + data.getInteractionData().isSprinting()
+             + " exempt=" + exempt);
+
+            if (!exempt) {
                 switch (dir) {
                     case "S":
-                        if (event.getDeltaZ() < 0 && !(Math.abs(event.getDeltaZ()) <= 0.04)) {
+                        if (event.getDeltaZ() < 0 && !(Math.abs(event.getDeltaZ()) < 0.1)) {
                             if (++buffer > 4) {
                                 fail("deltaZ=" + event.getDeltaZ());
                             }
                         } else if (buffer > 0) buffer -= 0.25;
                         break;
                     case "N":
-                        if (event.getDeltaZ() > 0 && !(Math.abs(event.getDeltaZ()) <= 0.04)) {
+                        if (event.getDeltaZ() > 0 && !(Math.abs(event.getDeltaZ()) <= 0.1)) {
                             if (++buffer > 4) {
                                 fail("deltaZ=" + event.getDeltaZ());
                             }
                         } else if (buffer > 0) buffer -= 0.25;
                         break;
                     case "E":
-                        if (event.getDeltaX() < 0 && !(Math.abs(event.getDeltaX()) <= 0.04)) {
+                        if (event.getDeltaX() < 0 && !(Math.abs(event.getDeltaX()) <= 0.1)) {
                             if (++buffer > 4) {
                                 fail("deltaX=" + event.getDeltaX());
                             }
                         } else if (buffer > 0) buffer -= 0.25;
                         break;
                     case "W":
-                        if (event.getDeltaX() > 0 && !(Math.abs(event.getDeltaX()) <= 0.04)) {
+                        if (event.getDeltaX() > 0 && !(Math.abs(event.getDeltaX()) <= 0.1)) {
                             if (++buffer > 4) {
                                 fail("deltaX=" + event.getDeltaX());
                             }
