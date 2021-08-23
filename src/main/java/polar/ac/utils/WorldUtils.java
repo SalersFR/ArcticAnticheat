@@ -6,7 +6,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 public class WorldUtils {
 
@@ -21,8 +20,24 @@ public class WorldUtils {
     }
 
     public Location getBehindPlayer(Player player) {
-        Vector dirOpp = player.getLocation().add(1.26,2.5D,1.26).getDirection().normalize().multiply(-1);
-        return player.getLocation().add(dirOpp);
+        Location finalLoc = player.getLocation();
+        String directionCard = getCardinalDirection(player);
+        switch (directionCard) {
+            case "N":
+                finalLoc.add(0, 0, 3);
+                break;
+            case "S":
+                finalLoc.add(0, 0, -3);
+                break;
+            case "W":
+                finalLoc.add(6, 0, 0);
+                break;
+            case "E":
+                finalLoc.add(-3, 0, 0);
+                break;
+        }
+
+        return finalLoc;
     }
 
     /**
@@ -137,5 +152,29 @@ public class WorldUtils {
 
         }
         return false;
+    }
+
+
+
+
+    public String getCardinalDirection(Entity e) {
+
+        double rotation = (e.getLocation().getYaw() - 90.0F) % 360.0F;
+
+        if (rotation < 0.0D) {
+            rotation += 360.0D;
+        }
+        if ((0.0D <= rotation) && (rotation < 45.0D))
+            return "W";
+        if ((45.0D <= rotation) && (rotation < 135.0D))
+            return "N";
+        if ((135.0D <= rotation) && (rotation < 225.0D))
+            return "E";
+        if ((225.0D <= rotation) && (rotation < 315.0D))
+            return "S";
+        if ((315.0D <= rotation) && (rotation < 360.0D)) {
+            return "W";
+        }
+        return null;
     }
 }
