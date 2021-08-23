@@ -29,6 +29,7 @@ public class AutoclickerC extends Check {
 
                 if(deviation < 5.2D) {
                     if(++buffer > 2) {
+                        fail("deviation=" + deviation + " buffer=" + buffer);
                         buffer = 0;
                     }
                 }else if(buffer > 0) buffer -= 0.5D;
