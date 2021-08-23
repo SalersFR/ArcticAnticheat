@@ -14,6 +14,7 @@ import polar.ac.check.Check;
 import polar.ac.data.PlayerData;
 import polar.ac.event.client.*;
 import polar.ac.event.server.ServerVelocityEvent;
+import polar.ac.prediction.PredictionHandler;
 
 public class PacketHandler {
 
@@ -88,6 +89,10 @@ public class PacketHandler {
 
             data.getInteractData().handleFlying();
 
+            for(PredictionHandler preds : data.getPredictionManager().getPredictions()) {
+                preds.onMove(moveEvent);
+            }
+
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
@@ -103,6 +108,10 @@ public class PacketHandler {
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             data.getInteractData().handleFlying();
+
+            for(PredictionHandler preds : data.getPredictionManager().getPredictions()) {
+                preds.onMove(moveEvent);
+            }
 
 
             for (Check checks : data.getChecks()) {

@@ -2,10 +2,13 @@ package polar.ac.utils;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
 import org.bukkit.util.Vector;
+
 
 @Getter
 @Setter
+
 public class PLocation {
 
     private double x, y, z;
@@ -33,4 +36,15 @@ public class PLocation {
     public Vector toVector() {
         return new Vector(x,y,z);
     }
+
+    public PLocation subtract(PLocation vec) {
+        x -= vec.x;
+        y -= vec.y;
+        z -= vec.z;
+        return this;
+    }
+
+
+
+
 }
