@@ -31,6 +31,11 @@ checks:
         ban-vl: 10
         enabled: true
         punish: true
+    motion:
+      a:
+        ban-vl: 10
+        enabled: true
+        punish: true
   combat:
     autoclicker:
       a:
