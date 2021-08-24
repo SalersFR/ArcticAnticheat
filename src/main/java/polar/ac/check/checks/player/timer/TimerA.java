@@ -18,9 +18,12 @@ public class TimerA extends Check {
     private double balance;
 
 
-    @Override // TODO: fix false flag when hitting player.
+    @Override
     public void handle(Event e) {
         if (e instanceof FlyingEvent){
+            if (data.getInteractData().getLastHitPacket() != 0){
+                if (getMillis(data.getInteractData().getLastHitPacket()) < 110L) return;
+            }
             long systemTime = System.currentTimeMillis();
             long lastTimeRate = this.lastTickTime != 0 ? this.lastTickTime : systemTime - 50;
             this.lastTickTime = systemTime;
@@ -33,7 +36,7 @@ public class TimerA extends Check {
                     balance = 0.0D;
                 }
             }else {
-                buffer -= (buffer > 0) ? 1 : 0;
+                buffer -= (buffer > 0) ? 2 : 0;
             }
 
             debug("balance=" + balance);

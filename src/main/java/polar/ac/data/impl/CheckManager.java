@@ -22,6 +22,7 @@ import polar.ac.check.checks.player.badpackets.BadPacketsB;
 
 import polar.ac.check.checks.player.scaffold.ScaffoldA;
 
+import polar.ac.check.checks.player.timer.TimerA;
 import polar.ac.data.PlayerData;
 
 import java.util.Arrays;
@@ -41,7 +42,9 @@ public class CheckManager {
                 //PLAYER
                 new BadPacketsA(data),
                 new BadPacketsB(data),
-          
+
+                new TimerA(data),
+
                 new ScaffoldA(data),
 
                 //MOVEMENT
