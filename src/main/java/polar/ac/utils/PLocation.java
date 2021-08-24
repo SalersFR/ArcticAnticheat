@@ -35,7 +35,7 @@ public class PLocation {
         return new Vector(x,y,z);
     }
 
-<<<<<<< HEAD
+
     public PLocation subtract(PLocation vec) {
         x -= vec.x;
         y -= vec.y;
@@ -45,7 +45,6 @@ public class PLocation {
 
 
 
-=======
->>>>>>> parent of 83a5ee1 (Merge branch 'main' of https://github.com/SalersFR/PolarAnticheat into main)
+
 
 }
