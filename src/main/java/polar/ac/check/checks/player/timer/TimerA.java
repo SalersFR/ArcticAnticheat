@@ -18,7 +18,7 @@ public class TimerA extends Check {
     private double balance;
 
 
-    @Override
+    @Override // TODO: fix false flag when hitting player.
     public void handle(Event e) {
         if (e instanceof FlyingEvent){
             long systemTime = System.currentTimeMillis();
