@@ -37,7 +37,6 @@ public class PLocation {
         return new Vector(x,y,z);
     }
 
-
     public PLocation subtract(PLocation vec) {
         x -= vec.x;
         y -= vec.y;
