@@ -17,6 +17,8 @@ import polar.ac.check.checks.movement.nofall.NoFallA;
 import polar.ac.check.checks.movement.nofall.NoFallB;
 import polar.ac.check.checks.movement.speed.SpeedA;
 import polar.ac.check.checks.movement.step.StepA;
+import polar.ac.check.checks.player.badpackets.BadPacketsA;
+import polar.ac.check.checks.player.badpackets.BadPacketsB;
 import polar.ac.check.checks.player.scaffold.ScaffoldA;
 import polar.ac.data.PlayerData;
 
@@ -33,6 +35,10 @@ public class CheckManager {
         this.data = data;
 
         this.checks = Arrays.asList(
+
+                //PLAYER
+                new BadPacketsA(data),
+                new BadPacketsB(data),
 
                 //MOVEMENT
                 new FlyA(data),
@@ -58,6 +64,7 @@ public class CheckManager {
                 new AimD(data),
                 new AimE(data),
                 new AimF(data),
+                new AimG(data),
 
                 new EntityA(data),
 

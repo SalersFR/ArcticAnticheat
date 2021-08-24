@@ -38,7 +38,7 @@ public class AimB extends Check {
             if (gcd <= 0.0 && !exempt && !exemptCombat) {
                 if (++buffer > 3) {
                     fail("gcd=" + gcd);
-                } else if (buffer > 0) buffer --;
+                } else if (buffer > 0) buffer -= 0.5D;
             }
         }
     }

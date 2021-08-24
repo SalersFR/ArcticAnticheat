@@ -37,7 +37,8 @@ public class NoFallB extends Check {
                     || worldUtils.isCollidingWithClimbable(player)
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
-                    || worldUtils.isAtEdgeOfABlock(player);
+                    || worldUtils.isAtEdgeOfABlock(player)
+                    || worldUtils.isOnACertainBlock(player,"fence");
 
             if(!serverGround && packetGround && !exempt)  {
                 fail("airTicks=" + airTicks);

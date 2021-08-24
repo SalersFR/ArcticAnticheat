@@ -7,6 +7,10 @@ import java.util.Collection;
 @UtilityClass
 public class MathUtils {
 
+    public final double EXPANDER = Math.pow(2,24);
+
+
+
     public static int floor(final double var0) {
         final int var2 = (int) var0;
         return var0 < var2 ? var2 - 1 : var2;
@@ -32,6 +36,10 @@ public class MathUtils {
         } else {
             return getGcd(b, a - Math.floor(a / b) * b);
         }
+    }
+
+    public double gcd(final double limit, final double a, final double b) {
+        return b <= limit ? a : MathUtils.gcd(limit, b, a % b);
     }
 
     public double getSensitivity(final float tDeltaPitch, final float tLastDeltaPitch) {

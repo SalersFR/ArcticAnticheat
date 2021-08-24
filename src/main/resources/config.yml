@@ -1,6 +1,9 @@
 flag-message: "&b&lPolar &r&7/ &b%player% &7flagged &b%check% &7(%type%&7) &fx%vl%"
 ban-command: "kick %player% &b&lPolar &r&7/ &bDetected for cheating"
 
+bypass-enabled: false
+bypass-permission: polar.bypass
+
 checks:
   movement:
     fly:
@@ -118,8 +121,22 @@ checks:
         ban-vl: 50
         enabled: true
         punish: false
-  scaffold:
-    a:
-      ban-vl: 120
-      enabled: true
-      punish: false
+      g:
+        ban-vl: 50
+        enabled: true
+        punish: false
+  player:
+    badpackets:
+      a:
+        ban-vl: 20
+        enabled: true
+        punish: false
+      b:
+        ban-vl: 5
+        enabled: true
+        punish: false
+    scaffold:
+      a:
+        ban-vl: 120
+        enabled: true
+        punish: false
