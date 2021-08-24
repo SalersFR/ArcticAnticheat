@@ -86,6 +86,10 @@ checks:
         ban-vl: 10
         enabled: true
         punish: true
+      g:
+        ban-vl: 50
+        enabled: true
+        punish: false
     reach:
       a:
         ban-vl: 10

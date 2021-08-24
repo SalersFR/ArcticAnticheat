@@ -7,7 +7,6 @@ import polar.ac.event.Event;
 public class ScaffoldA extends Check {
     @Override
     public void handle(Event e) {
-
     }
 
     public ScaffoldA(PlayerData data) {

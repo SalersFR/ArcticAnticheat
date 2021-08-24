@@ -6,6 +6,7 @@ import polar.ac.data.PlayerData;
 import polar.ac.event.Event;
 import polar.ac.event.client.EntityActionEvent;
 import polar.ac.event.client.FlyingEvent;
+import polar.ac.event.client.UseEntityEvent;
 
 public class BadPacketsA extends Check {
 
@@ -29,16 +30,22 @@ public class BadPacketsA extends Check {
                 sentSneak = true;
             }
 
-            if(sentSneak && sentSprint) {
-                fail("sent sprint & sneak packet in the same tick");
-            }
-
 
 
 
         }else if(e instanceof FlyingEvent) {
             sentSneak = sentSprint = false;
+        }else if(e instanceof UseEntityEvent) {
+
+            final UseEntityEvent event = (UseEntityEvent) e;
+
+            if(event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+                if((sentSprint || sentSneak)) {
+                    fail("sent sprint & sneak packet in the same tick");
+                }
+            }
         }
+
 
     }
 }
