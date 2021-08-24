@@ -76,6 +76,7 @@ public class CheckManager {
                 new KillAuraD(data),
                 new KillAuraE(data),
                 new KillAuraF(data),
+                new KillAuraG(data),
 
                 new Reach(data)
         );
