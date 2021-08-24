@@ -42,10 +42,15 @@ public class PacketHandler {
     public void handleReceive(PlayerData data, PacketEvent event) {
         if (data == null) return;
 
+
+        final boolean bypass = data.getPlayer().hasPermission(Polar.INSTANCE.getConfig().getString("bypass-permission")) &&
+                Polar.INSTANCE.getConfig().getBoolean("bypass-enabled");
+
         final boolean exempt = data.getPlayer().getGameMode() == GameMode.CREATIVE
                 || data.getPlayer().getAllowFlight()
                 || data.getPlayer().getGameMode() == GameMode.SPECTATOR
-                || data.getInteractionData().isTeleported();
+                || data.getInteractionData().isTeleported()
+                || bypass;
 
         for (Check checks : data.getChecks()) {
             if (checks.isEnabled() && !exempt) {
@@ -153,6 +158,14 @@ public class PacketHandler {
             final WrapperPlayClientEntityAction wrapper = new WrapperPlayClientEntityAction(event.getPacket());
 
             data.getInteractData().handleActionPacket(wrapper);
+
+            final EntityActionEvent entityActionEvent = new EntityActionEvent(wrapper);
+
+            for(Check checks : data.getChecks()) {
+                if(checks.isEnabled() && !exempt) {
+                    checks.handle(entityActionEvent);
+                }
+            }
 
 
         }
