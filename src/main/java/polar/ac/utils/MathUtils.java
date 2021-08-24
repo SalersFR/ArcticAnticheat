@@ -10,7 +10,6 @@ public class MathUtils {
     public final double EXPANDER = Math.pow(2,24);
 
 
-
     public static int floor(final double var0) {
         final int var2 = (int) var0;
         return var0 < var2 ? var2 - 1 : var2;
@@ -25,6 +24,7 @@ public class MathUtils {
     Medusa (by GladUrBad) - https://github.com/GladUrBad/Medusa/blob/f00848c2576e4812283e6dc2dc05e29e2ced866a/Impl/src/main/java/com/gladurbad/medusa/util/MathUtil.java
     Spigot Post - https://www.spigotmc.org/threads/determining-a-players-sensitivity.468373/
      */
+
 
     public double getGcd(final double a, final double b) {
         if (a < b) {
