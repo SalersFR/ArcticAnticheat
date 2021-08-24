@@ -39,9 +39,9 @@ public class Polar extends JavaPlugin {
         for (Plugin s : Bukkit.getPluginManager().getPlugins()) {
             Bukkit.broadcastMessage(s.getName());
         }
-        for (LivingEntity entity : Bukkit.getWorlds().get(0).getLivingEntities()) {
-            entities.add(entity);
-        }
+//        for (LivingEntity entity : Bukkit.getWorlds().get(0).getLivingEntities()) {
+//            entities.add(entity);
+//        }
     }
 
 

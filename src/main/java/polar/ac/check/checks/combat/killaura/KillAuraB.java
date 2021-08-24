@@ -22,6 +22,9 @@ public class KillAuraB extends Check {
     public void handle(Event e) {
         if (e instanceof MoveEvent) {
 
+            // Fixes a null error that fires at line 41.
+            if (data.getInteractData().getTarget() == null) return;
+
             final MoveEvent moveEvent = (MoveEvent) e;
 
             final double deltaXZ = moveEvent.getDeltaXZ();

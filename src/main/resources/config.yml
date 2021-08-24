@@ -139,3 +139,8 @@ checks:
         ban-vl: 5
         enabled: true
         punish: false
+    scaffold:
+      a:
+        ban-vl: 120
+        enabled: true
+        punish: false

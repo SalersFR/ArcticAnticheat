@@ -19,6 +19,9 @@ import polar.ac.check.checks.movement.speed.SpeedA;
 import polar.ac.check.checks.movement.step.StepA;
 import polar.ac.check.checks.player.badpackets.BadPacketsA;
 import polar.ac.check.checks.player.badpackets.BadPacketsB;
+
+import polar.ac.check.checks.player.scaffold.ScaffoldA;
+
 import polar.ac.data.PlayerData;
 
 import java.util.Arrays;
@@ -38,6 +41,8 @@ public class CheckManager {
                 //PLAYER
                 new BadPacketsA(data),
                 new BadPacketsB(data),
+          
+                new ScaffoldA(data),
 
                 //MOVEMENT
                 new FlyA(data),
@@ -78,9 +83,14 @@ public class CheckManager {
                 new KillAuraF(data),
                 new KillAuraG(data),
 
+
                 new Reach(data)
+
+
+               
         );
     }
+    // inefficient
 
 
     public List<Check> getChecks() {

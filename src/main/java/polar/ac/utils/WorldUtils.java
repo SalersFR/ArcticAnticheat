@@ -78,6 +78,25 @@ public class WorldUtils {
         }
         return false;
     }
+    /**
+     * Check if player is in liquid vertically
+     *
+     * @param player the player to check
+     * @return if player is in liquid
+     */
+    public boolean isInLiquidVertically(final Player player) {
+        final double expand = 0.31;
+        final Location location = player.getLocation();
+        for (double x = -expand; x <= expand; x += expand) {
+            for (double z = -expand; z <= expand; z += expand) {
+                if (getBlockAsync(location.clone().add(x, 0.5001, z)).isLiquid() || location.getBlock().isLiquid()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Check if player is near a boat

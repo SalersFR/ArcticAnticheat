@@ -46,6 +46,7 @@ public class FlyA extends Check {
             final Player player = data.getBukkitPlayerFromUUID();
 
             final boolean exempt = worldUtils.isInLiquid(player)
+                    || worldUtils.isInLiquidVertically(player)
                     || worldUtils.isCollidingWithClimbable(player)
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)

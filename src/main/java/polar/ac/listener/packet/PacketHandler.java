@@ -52,6 +52,7 @@ public class PacketHandler {
                 || data.getInteractionData().isTeleported()
                 || bypass;
 
+
         for (Check checks : data.getChecks()) {
             if (checks.isEnabled() && !exempt) {
                 checks.handle(new polar.ac.event.client.PacketEvent(event));

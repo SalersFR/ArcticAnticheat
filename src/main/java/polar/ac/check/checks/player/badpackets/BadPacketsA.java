@@ -34,10 +34,10 @@ public class BadPacketsA extends Check {
 
 
 
-
         }else if(e instanceof FlyingEvent) {
             sentSneak = sentSprint = false;
-        } else if(e instanceof UseEntityEvent) {
+        }else if(e instanceof UseEntityEvent) {
+
 
             final UseEntityEvent event = (UseEntityEvent) e;
 
@@ -50,3 +50,4 @@ public class BadPacketsA extends Check {
 
     }
 }
+
