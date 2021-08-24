@@ -2,7 +2,6 @@ package polar.ac.utils;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
 
@@ -44,8 +43,5 @@ public class PLocation {
         z -= vec.z;
         return this;
     }
-
-
-
-
+    
 }
