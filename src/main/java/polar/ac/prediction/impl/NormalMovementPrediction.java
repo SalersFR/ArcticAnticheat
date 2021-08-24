@@ -120,7 +120,7 @@ public class NormalMovementPrediction extends PredictionHandler {
 
     public void waterMovement() {
         Map<Enchantment, Integer> enchantmentMap = data.getBukkitPlayerFromUUID().getInventory().getBoots().getEnchantments();
-        int enchantLvl = 0;
+        int enchantLvl;
 
         if (enchantmentMap.containsKey(Enchantment.DEPTH_STRIDER)) {
             enchantLvl = enchantmentMap.get(Enchantment.DEPTH_STRIDER);
@@ -129,7 +129,7 @@ public class NormalMovementPrediction extends PredictionHandler {
         double d0 = this.posY;
         float f1 = 0.8F;
         float f2 = 0.02F;
-        float f3 = (float) enchantLvl; // Add depth strider modifier here.
+        float f3 = (float) 0; // Add depth strider modifier here.
 
         if (f3 > 3.0F)
         {
@@ -139,22 +139,6 @@ public class NormalMovementPrediction extends PredictionHandler {
         if (data.getBukkitPlayerFromUUID().isOnGround())
         {
             f3 *= 0.5F;
-        }
-
-        if (f3 > 0.0F)
-        {
-            f1 += (0.54600006F - f1) * f3 / 3.0F;
-            f2 += (0 * 1.0F - f2) * f3 / 3.0F; // REPLACE FIRST 0 WITH landMovementFactor
-        }
-
-        predictionData.motionX *= (double)f1;
-        predictionData.motionY *= 0.800000011920929D;
-        predictionData.motionZ *= (double)f1;
-        predictionData.motionY -= 0.02D;
-
-        if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + d1, this.predictionData))
-        {
-            this.motionY = 0.30000001192092896D;
         }
     }
 }
