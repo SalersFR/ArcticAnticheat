@@ -5,8 +5,10 @@ import lombok.Setter;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
 import org.bukkit.entity.Player;
 import polar.ac.check.Check;
-import polar.ac.data.impl.*;
-import polar.ac.prediction.PredictionManager;
+import polar.ac.data.impl.CheckManager;
+import polar.ac.data.impl.InteractData;
+import polar.ac.data.impl.PositionData;
+import polar.ac.data.impl.TargetTracker;
 import polar.ac.utils.PLocation;
 import polar.ac.utils.PRotation;
 
@@ -19,8 +21,6 @@ public class PlayerData {
     private final InteractData interactData;
     private final PositionData posData;
     private final TargetTracker targetTracker;
-    private final PredictionData predictionData;
-    private final PredictionManager predictionManager;
     private final Player player;
 
 
@@ -36,8 +36,6 @@ public class PlayerData {
         this.interactData = new InteractData(this);
         this.posData = new PositionData(this);
         this.targetTracker = new TargetTracker(this);
-        this.predictionData = new PredictionData(this);
-        this.predictionManager = new PredictionManager(this);
         this.player = player;
 
 
