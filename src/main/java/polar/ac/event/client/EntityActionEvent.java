@@ -12,4 +12,5 @@ public class EntityActionEvent extends Event {
     public EntityActionEvent(WrapperPlayClientEntityAction wrapper) {
         this.action = wrapper.getAction();
     }
+
 }

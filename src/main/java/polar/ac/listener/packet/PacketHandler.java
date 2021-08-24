@@ -42,6 +42,7 @@ public class PacketHandler {
     public void handleReceive(PlayerData data, PacketEvent event) {
         if (data == null) return;
 
+
         final boolean bypass = data.getPlayer().hasPermission(Polar.INSTANCE.getConfig().getString("bypass-permission")) &&
                 Polar.INSTANCE.getConfig().getBoolean("bypass-enabled");
 

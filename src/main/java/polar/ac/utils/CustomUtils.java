@@ -13,6 +13,7 @@ import java.util.List;
 @UtilityClass
 public class CustomUtils {
 
+
     public float getFriction(Location loc) {
         try {
             String block = loc.add( 0, -1, 0).getBlock().getType().name().toLowerCase();
