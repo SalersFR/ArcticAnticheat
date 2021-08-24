@@ -24,6 +24,7 @@ public class AutoclickerB extends Check {
     @Override
     public void handle(Event e) {
         if (e instanceof ArmAnimationEvent) {
+            if(data.getInteractionData().isDigging()) return;
 
             final double kurtosis = MathUtils.getKurtosis(samples);
             final double stdDeviation = MathUtils.getStandardDeviation(samples);

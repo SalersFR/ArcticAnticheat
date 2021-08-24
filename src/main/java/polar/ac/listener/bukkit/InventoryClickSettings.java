@@ -16,7 +16,7 @@ public class InventoryClickSettings implements Listener {
         if (event.getClickedInventory().getTitle() == null) return;
 
         String invName = CustomUtils.strip(event.getClickedInventory().getTitle());
-        String settingsName = "polar";
+        String settingsName = "Polar";
 
         if (invName.equalsIgnoreCase(settingsName)) {
             event.setCancelled(true);

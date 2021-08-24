@@ -20,7 +20,7 @@ public class InteractData {
 
 
     private NPC entityANPC;
-    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin;
+    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin,ticksSinceDigging;
     private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported;
     private long lastHitPacket;
 
@@ -82,10 +82,16 @@ public class InteractData {
         }
     }
 
+    public void handleDigging() {
+        this.ticksSinceDigging = 0;
+    }
+
     public void handleFlying() {
         this.ticksSinceHurt++;
         this.ticksSinceSlime++;
         this.ticksSinceTeleport++;
+        this.isDigging = ticksSinceDigging < 15;
+        this.ticksSinceDigging++;
         if (ticksSinceJoin < 1000)
             this.ticksSinceJoin++;
         this.isHurt = ticksSinceHurt < 70;

@@ -37,12 +37,17 @@ public class CheckManager {
                 new FlyA(data),
                 new FlyB(data),
                 new FlyC(data),
+
                 new SpeedA(data),
+
                 new StepA(data),
+
                 new NoFallA(data),
                 new NoFallB(data),
-                new MotionB(data),
+
                 new MotionA(data),
+                new MotionB(data),
+
 
 
                 // COMBAT
@@ -52,15 +57,20 @@ public class CheckManager {
                 new AimD(data),
                 new AimE(data),
                 new AimF(data),
+
                 new EntityA(data),
+
                 new AutoclickerA(data),
                 new AutoclickerB(data),
                 new AutoclickerC(data),
+
                 new KillAuraA(data),
                 new KillAuraB(data),
                 new KillAuraC(data),
                 new KillAuraD(data),
                 new KillAuraE(data),
+                new KillAuraF(data),
+
                 new Reach(data)
         );
     }

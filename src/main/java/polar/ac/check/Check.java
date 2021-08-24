@@ -50,7 +50,7 @@ public abstract class Check {
                 final TextComponent alertMSG = new TextComponent(ChatColor.translateAlternateColorCodes('&', fromConfig));
 
                 alertMSG.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.
-                        translateAlternateColorCodes('&', "&b&lpolar\n&7 \n&7Info: &b" + info +
+                        translateAlternateColorCodes('&', "&b&lPolar\n&7 \n&7Info: &b" + info +
                                 "\n &7\n&7Experimental: &b" + experimental + "\n &f\n&fClick to teleport !")).create()));
 
                 alertMSG.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + data.getPlayer().getName()));

@@ -49,7 +49,7 @@ public class PacketHandler {
 
         for (Check checks : data.getChecks()) {
             if (checks.isEnabled() && !exempt) {
-                checks.handle(new polar.ac.event.client.PacketEvent(event.getPacketType()));
+                checks.handle(new polar.ac.event.client.PacketEvent(event));
             }
         }
 
@@ -143,12 +143,11 @@ public class PacketHandler {
             final WrapperPlayClientBlockDig wrapper = new WrapperPlayClientBlockDig(event.getPacket());
             final boolean isSolid = wrapper.getLocation().toLocation(event.getPlayer().getWorld()).getBlock().getType().isSolid();
 
-            if (isSolid && event.getPacket().getPlayerDigTypes().read(0).equals(EnumWrappers.PlayerDigType.START_DESTROY_BLOCK)) {
-                data.getInteractionData().setDigging(true);
-            } else if (event.getPacket().getPlayerDigTypes().read(0).equals(EnumWrappers.PlayerDigType.ABORT_DESTROY_BLOCK)
-                    || event.getPacket().getPlayerDigTypes().read(0).equals(EnumWrappers.PlayerDigType.STOP_DESTROY_BLOCK)) {
-                data.getInteractionData().setDigging(false);
+            if(isSolid && wrapper.getStatus() != EnumWrappers.PlayerDigType.STOP_DESTROY_BLOCK) {
+                data.getInteractionData().handleDigging();
             }
+
+
         } else if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
 
             final WrapperPlayClientEntityAction wrapper = new WrapperPlayClientEntityAction(event.getPacket());
