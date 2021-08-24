@@ -17,6 +17,7 @@ import polar.ac.check.checks.movement.nofall.NoFallA;
 import polar.ac.check.checks.movement.nofall.NoFallB;
 import polar.ac.check.checks.movement.speed.SpeedA;
 import polar.ac.check.checks.movement.step.StepA;
+import polar.ac.check.checks.player.scaffold.ScaffoldA;
 import polar.ac.data.PlayerData;
 
 import java.util.Arrays;
@@ -71,9 +72,12 @@ public class CheckManager {
                 new KillAuraE(data),
                 new KillAuraF(data),
 
-                new Reach(data)
+                new Reach(data),
+
+                new ScaffoldA(data)
         );
     }
+    // inefficient
 
 
     public List<Check> getChecks() {

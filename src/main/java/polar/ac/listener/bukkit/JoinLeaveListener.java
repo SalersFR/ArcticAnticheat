@@ -18,7 +18,9 @@ public class JoinLeaveListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         final PlayerData data = Polar.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
-        data.getInteractionData().getEntityANPC().destroy();
+        if (Polar.INSTANCE.isCitizensPresent()){
+            data.getInteractionData().getEntityANPC().destroy();
+        }
         Polar.INSTANCE.getDataManager().remove(event.getPlayer());
     }
 }
