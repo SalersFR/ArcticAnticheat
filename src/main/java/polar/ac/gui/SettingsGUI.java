@@ -24,7 +24,7 @@ public class SettingsGUI {
         inventory.setItem(11, CustomUtils.createItem(Material.COMPASS, "&bChecks", "&r ", "&7 - &7&oEnabled/Disable checks"));
     }
 
-    public void open(Player p) {
+    public void display(Player p) {
         p.openInventory(inventory);
     }
 

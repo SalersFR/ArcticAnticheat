@@ -32,7 +32,7 @@ public class CheckManager {
 
     private final PlayerData data;
 
-    private List<Check> checks;
+    private static List<Check> checks;
 
     public CheckManager(PlayerData data) {
         this.data = data;
@@ -96,7 +96,7 @@ public class CheckManager {
     // inefficient
 
 
-    public List<Check> getChecks() {
+    public static List<Check> getChecks() {
         return checks;
     }
 }

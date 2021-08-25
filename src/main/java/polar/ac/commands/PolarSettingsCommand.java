@@ -16,7 +16,7 @@ public class PolarSettingsCommand implements CommandExecutor {
                 SettingsGUI creation = new SettingsGUI().createNewGUI();
                 creation.setItems();
 
-                creation.open(player);
+                creation.display(player);
             }
         }
         return true;
