@@ -4,12 +4,16 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.minecraft.server.v1_8_R3.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import polar.ac.Polar;
 import polar.ac.data.PlayerData;
 import polar.ac.event.Event;
+
+import java.util.Locale;
 
 
 public abstract class Check {
@@ -40,7 +44,7 @@ public abstract class Check {
         vl++;
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.hasPermission("alerts.see") && !player.hasMetadata("ALERTS_OFF")) {
+            if (player.hasPermission("alerts.see") && player.hasMetadata("ALERTS_ON_NORMAL")) {
                 final String fromConfig = Polar.INSTANCE.getConfig().getString("flag-message").
                         replace("%player%", data.getBukkitPlayerFromUUID().getName()).
                         replace("%vl%", "" + vl).
@@ -51,7 +55,25 @@ public abstract class Check {
 
                 alertMSG.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.
                         translateAlternateColorCodes('&', "&b&lPolar\n&7 \n&7Info: &b" + info +
-                                "\n &7\n&7Experimental: &b" + experimental + "\n &f\n&fClick to teleport !")).create()));
+                                "\n &7\n&7Experimental: &b" + experimental + "\n &f\n&fClick to teleport.")).create()));
+
+                alertMSG.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + data.getPlayer().getName()));
+
+                player.spigot().sendMessage(alertMSG);
+            } else if (player.hasPermission("alerts.see") && player.hasMetadata("ALERTS_ON_VERBOSE")) {
+                final String fromConfig = Polar.INSTANCE.getConfig().getString("flag-message-verbose").
+                        replace("%player%", data.getBukkitPlayerFromUUID().getName()).
+                        replace("%vl%", "" + vl).
+                        replace("%type%", type).
+                        replace("%check%", name).
+                        replace("%ping%", ((CraftPlayer)data.getBukkitPlayerFromUUID()).getHandle().ping + "").
+                        replace("%tps%", MinecraftServer.getServer().recentTps[0] + "");
+
+                final TextComponent alertMSG = new TextComponent(ChatColor.translateAlternateColorCodes('&', fromConfig));
+
+                alertMSG.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.
+                        translateAlternateColorCodes('&', "&b&lPolar\n&7 \n&7Info: &b" + info +
+                                "\n &7\n&7Experimental: &b" + experimental + "\n &f\n&fClick to teleport.")).create()));
 
                 alertMSG.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + data.getPlayer().getName()));
 

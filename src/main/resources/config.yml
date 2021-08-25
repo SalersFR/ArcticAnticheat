@@ -1,4 +1,5 @@
 flag-message: "&b&lPolar &r&7/ &b%player% &7flagged &b%check% &7(%type%&7) &fx%vl%"
+flag-message-verbose: "&b&lPolar &r&7/ &b%player% &7[&e%ping%ms&7] &7flagged &b%check% &7(%type%&7) &fx%vl% &7[TPS=%tps%]"
 ban-command: "kick %player% &b&lPolar &r&7/ &bDetected for cheating"
 
 bypass-enabled: false

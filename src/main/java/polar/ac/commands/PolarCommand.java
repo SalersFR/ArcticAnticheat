@@ -15,7 +15,7 @@ public class PolarCommand implements CommandExecutor {
             final Player player = (Player) commandSender;
             if (player.hasPermission("polar.command")) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r \n&b&lPolar Advanced Anticheat\n" +
-                        " \n&7 - &b/alerts &fToggle the display of flags\n&7 - &b/debug <check> &fEnable the debug\n&7 - &b/preload &fReload the config file\n&7 - &b/psettings &fToggle checks or autobans"));
+                        " \n&7 - &b/alerts [verbose] &fToggle the display of flags\n&7 - &b/debug <check> &fEnable the debug\n&7 - &b/preload &fReload the config file\n&7 - &b/psettings &fToggle checks or autobans"));
             }
         }
         return false;
