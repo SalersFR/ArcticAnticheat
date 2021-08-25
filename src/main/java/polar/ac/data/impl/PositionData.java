@@ -12,6 +12,7 @@ import polar.ac.data.PlayerData;
 public class PositionData {
 
     private PacketType lastPacket;
+    private long lastFlying;
     private Player player;
     private PlayerData data;
 
