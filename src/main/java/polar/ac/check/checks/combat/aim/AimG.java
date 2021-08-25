@@ -35,7 +35,7 @@ public class AimG extends Check {
             debug("gcd=" + gcd);
 
             if (Math.min(this.lastPitchAtan, Math.atan(pitch)) == this.result && gcd < 0x20000 && gcd > 0) {
-                if (this.buffer < 15) this.vl++;
+                if (this.buffer < 15) buffer++;
 
                 if (this.buffer > 1.05)
                     fail("gcd=" + gcd);
