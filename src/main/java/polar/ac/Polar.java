@@ -1,7 +1,6 @@
 package polar.ac;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import polar.ac.commands.*;
@@ -10,12 +9,9 @@ import polar.ac.listener.bukkit.InventoryClickSettings;
 import polar.ac.listener.bukkit.JoinLeaveListener;
 import polar.ac.listener.packet.PacketHandler;
 
-import java.util.ArrayList;
-
 public class Polar extends JavaPlugin {
 
     public static Polar INSTANCE;
-    public static ArrayList<LivingEntity> entities = new ArrayList<>();
     private PlayerDataManager dataManager = new PlayerDataManager();
 
     private boolean citizensEnabled;
@@ -39,9 +35,6 @@ public class Polar extends JavaPlugin {
         for (Plugin s : Bukkit.getPluginManager().getPlugins()) {
             Bukkit.broadcastMessage(s.getName());
         }
-//        for (LivingEntity entity : Bukkit.getWorlds().get(0).getLivingEntities()) {
-//            entities.add(entity);
-//        }
     }
 
 
