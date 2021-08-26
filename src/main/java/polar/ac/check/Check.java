@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerFishEvent;
 import polar.ac.Polar;
 import polar.ac.data.PlayerData;
 import polar.ac.event.Event;

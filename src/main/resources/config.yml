@@ -94,6 +94,10 @@ checks:
       h:
         ban-vl: 50
         enabled: true
+        punish: true
+      i:
+        ban-vl: 50
+        enabled: true
         punish: false
     reach:
       a:

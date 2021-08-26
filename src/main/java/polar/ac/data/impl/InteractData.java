@@ -21,7 +21,7 @@ public class InteractData {
 
     private NPC entityANPC;
     private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin,ticksSinceDigging;
-    private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported;
+    private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported, cinematic;
     private long lastHitPacket;
 
     private Player player;

@@ -8,10 +8,10 @@ import polar.ac.check.checks.combat.autoclicker.AutoclickerC;
 import polar.ac.check.checks.combat.entity.EntityA;
 import polar.ac.check.checks.combat.killaura.*;
 import polar.ac.check.checks.combat.reach.Reach;
-import polar.ac.check.checks.movement.motion.MotionA;
 import polar.ac.check.checks.movement.fly.FlyA;
 import polar.ac.check.checks.movement.fly.FlyB;
 import polar.ac.check.checks.movement.fly.FlyC;
+import polar.ac.check.checks.movement.motion.MotionA;
 import polar.ac.check.checks.movement.motion.MotionB;
 import polar.ac.check.checks.movement.nofall.NoFallA;
 import polar.ac.check.checks.movement.nofall.NoFallB;
@@ -19,9 +19,7 @@ import polar.ac.check.checks.movement.speed.SpeedA;
 import polar.ac.check.checks.movement.step.StepA;
 import polar.ac.check.checks.player.badpackets.BadPacketsA;
 import polar.ac.check.checks.player.badpackets.BadPacketsB;
-
 import polar.ac.check.checks.player.scaffold.ScaffoldA;
-
 import polar.ac.check.checks.player.timer.TimerA;
 import polar.ac.data.PlayerData;
 
@@ -86,12 +84,11 @@ public class CheckManager {
                 new KillAuraF(data),
                 new KillAuraG(data),
                 new KillAuraH(data),
+                new KillAuraI(data),
 
 
                 new Reach(data)
 
-
-               
         );
     }
     // inefficient

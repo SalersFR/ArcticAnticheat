@@ -3,6 +3,7 @@ package polar.ac.utils;
 import lombok.experimental.UtilityClass;
 
 import java.util.Collection;
+import java.util.List;
 
 @UtilityClass
 public class MathUtils {
@@ -53,6 +54,7 @@ public class MathUtils {
 
         return finalSens;
     }
+
 
     public double getStandardDeviation(final Collection<? extends Number> data) {
         final double variance = getVariance(data);
@@ -111,5 +113,30 @@ public class MathUtils {
         }
 
         return efficiencyFirst * (varianceSquared / Math.pow(variance / sum, 2.0)) - efficiencySecond;
+    }
+
+    public int getRecurring(List<Long> list, long query) {
+       int total = 0;
+
+       for (long l : list) {
+           if (l == query) total += 1;
+       }
+
+       return total;
+    }
+
+    public boolean recurringPattern(List<Long> list, int lowerThanForPattern, int maxPatternCount) {
+        int total = 0;
+
+        for (long l : list) {
+            if (l < lowerThanForPattern) {
+                total += 1;
+            }
+        }
+
+        if (total > maxPatternCount) {
+            return true;
+        }
+        return false;
     }
 }
