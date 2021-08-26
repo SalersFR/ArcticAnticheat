@@ -25,6 +25,7 @@ public class InventoryClickSettings implements Listener {
         if (event.getInventory() == null) return;
         if (event.getInventory().getTitle() == null) return;
         if (event.getClickedInventory().getTitle() == null) return;
+        if (event.getCurrentItem() == null) return;
 
         String invName = CustomUtils.strip(event.getClickedInventory().getTitle());
         String settingsName = "Polar";
