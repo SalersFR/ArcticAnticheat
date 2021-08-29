@@ -43,6 +43,17 @@ public class MathUtils {
         return b <= limit ? a : MathUtils.gcd(limit, b, a % b);
     }
 
+    // Taken from https://github.com/ElevatedDev/Frequency
+    /**
+     *
+     * @param current - The current value
+     * @param previous - The previous value
+     * @return - The GCD of those two values
+     */
+    public long getGcd(final long current, final long previous) {
+        return (previous <= 16384L) ? current : getGcd(previous, current % previous);
+    }
+
     public double getSensitivity(final float tDeltaPitch, final float tLastDeltaPitch) {
         final float deltaPitch = Math.abs(tDeltaPitch);
         final float lastDeltaPitch = Math.abs(tLastDeltaPitch);

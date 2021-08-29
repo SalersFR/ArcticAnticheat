@@ -2,13 +2,12 @@ package polar.ac.data;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
 import org.bukkit.entity.Player;
 import polar.ac.check.Check;
 import polar.ac.data.impl.CheckManager;
 import polar.ac.data.impl.InteractData;
 import polar.ac.data.impl.PositionData;
-import polar.ac.data.impl.TargetTracker;
+import polar.ac.data.tracker.TargetTracker;
 import polar.ac.utils.PLocation;
 import polar.ac.utils.PRotation;
 

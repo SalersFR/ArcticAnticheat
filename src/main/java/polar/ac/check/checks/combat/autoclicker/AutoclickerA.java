@@ -5,6 +5,7 @@ import polar.ac.data.PlayerData;
 import polar.ac.event.Event;
 import polar.ac.event.client.ArmAnimationEvent;
 import polar.ac.event.client.FlyingEvent;
+import polar.ac.utils.EvictingList;
 import polar.ac.utils.MathUtils;
 import polar.ac.utils.PolarQueue;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class AutoclickerA extends Check {
 
     private PolarQueue samples = new PolarQueue<Integer>(120);
-    private List<Double> pastDiffs = new ArrayList<>();
+    private EvictingList<Double> pastDiffs = new EvictingList<>(15);
 
     private int ticks;
 
