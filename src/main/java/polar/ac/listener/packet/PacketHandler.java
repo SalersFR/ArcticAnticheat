@@ -13,6 +13,7 @@ import polar.ac.Polar;
 import polar.ac.check.Check;
 import polar.ac.data.PlayerData;
 import polar.ac.event.client.*;
+import polar.ac.event.server.ServerPositionEvent;
 import polar.ac.event.server.ServerVelocityEvent;
 
 public class PacketHandler {
@@ -177,7 +178,7 @@ public class PacketHandler {
         if (event.getPacketType() == PacketType.Play.Server.ENTITY_VELOCITY) {
             final WrapperPlayServerEntityVelocity wrapper = new WrapperPlayServerEntityVelocity(event.getPacket());
 
-            ServerVelocityEvent serverVelocityEvent = new ServerVelocityEvent(wrapper);
+            final ServerVelocityEvent serverVelocityEvent = new ServerVelocityEvent(wrapper);
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
@@ -189,7 +190,7 @@ public class PacketHandler {
             final WrapperPlayServerRelEntityMove wrapper = new WrapperPlayServerRelEntityMove(event.getPacket());
 
             data.getTargetTracker().handleRelMove(wrapper);
-        } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE) {
+        } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE_LOOK) {
 
             final WrapperPlayServerRelEntityMoveLook wrapper = new WrapperPlayServerRelEntityMoveLook(event.getPacket());
 
@@ -212,6 +213,18 @@ public class PacketHandler {
             final WrapperPlayServerNamedEntitySpawn wrapper = new WrapperPlayServerNamedEntitySpawn(event.getPacket());
 
             data.getTargetTracker().handleNamedEntitySpawn(wrapper);
+        } else if(event.getPacketType() == PacketType.Play.Server.POSITION) {
+
+            final WrapperPlayServerPosition wrapper = new WrapperPlayServerPosition(event.getPacket());
+
+            final ServerPositionEvent serverPositionEvent = new ServerPositionEvent(wrapper);
+
+
+            for (Check checks : data.getChecks()) {
+                if (checks.isEnabled())
+                    checks.handle(serverPositionEvent);
+            }
+
         }
     }
 }

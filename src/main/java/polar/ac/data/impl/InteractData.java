@@ -94,7 +94,7 @@ public class InteractData {
         this.ticksSinceDigging++;
         if (ticksSinceJoin < 1000)
             this.ticksSinceJoin++;
-        this.isHurt = ticksSinceHurt < 70;
+        this.isHurt = ticksSinceHurt <= 2;
         this.teleported = ticksSinceTeleport < 80;
         if (new WorldUtils().isOnACertainBlock(data.getPlayer(), "slime")) {
             this.ticksSinceSlime = 0;

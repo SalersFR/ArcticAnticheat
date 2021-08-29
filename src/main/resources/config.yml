@@ -138,6 +138,11 @@ checks:
         ban-vl: 50
         enabled: true
         punish: false
+    velocity:
+      a:
+        ban-vl: 50
+        enabled: true
+        punish: false
   player:
     badpackets:
       a:
@@ -145,6 +150,10 @@ checks:
         enabled: true
         punish: false
       b:
+        ban-vl: 5
+        enabled: true
+        punish: false
+      c:
         ban-vl: 5
         enabled: true
         punish: false

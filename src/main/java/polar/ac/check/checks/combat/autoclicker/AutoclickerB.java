@@ -30,9 +30,6 @@ public class AutoclickerB extends Check {
             final double stdDeviation = MathUtils.getStandardDeviation(samples);
 
 
-
-
-
             if (samples.size() >= 120) {
                 final double diff = Math.abs(kurtosis - stdDeviation);
                 final double result = Math.abs(diff - lastDiff);
@@ -54,16 +51,7 @@ public class AutoclickerB extends Check {
             if (ticks < 8)
                 samples.add(ticks);
 
-
-
-
-
-
-
-
-
-
-                this.ticks = 0;
+            this.ticks = 0;
 
 
         } else if (e instanceof FlyingEvent) {

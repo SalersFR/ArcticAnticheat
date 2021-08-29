@@ -173,6 +173,18 @@ public class WorldUtils {
         return false;
     }
 
+    public boolean haveABlockNearHead(final Player player) {
+
+        final Location location = player.getLocation();
+        final Block highest = location.getWorld().getHighestBlockAt(location);
+
+        if(highest.getType() != Material.AIR) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 
 

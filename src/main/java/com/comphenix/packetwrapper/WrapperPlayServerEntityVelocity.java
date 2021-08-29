@@ -82,6 +82,7 @@ public class WrapperPlayServerEntityVelocity extends AbstractPacket {
      *
      * @return The current velocity X
      */
+
     public double getVelocityX() {
         return handle.getIntegers().read(1) / 8000.0D;
     }

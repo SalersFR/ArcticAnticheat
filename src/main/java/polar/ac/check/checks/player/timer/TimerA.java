@@ -8,6 +8,7 @@ import polar.ac.data.PlayerData;
 import polar.ac.event.Event;
 import polar.ac.event.client.FlyingEvent;
 import polar.ac.event.client.PacketEvent;
+import polar.ac.event.server.ServerPositionEvent;
 
 public class TimerA extends Check {
     public TimerA(PlayerData data) {
@@ -40,10 +41,9 @@ public class TimerA extends Check {
             }
 
             debug("balance=" + balance);
-        }else if (e instanceof PacketEvent){
-            if (((PacketEvent) e).getPacketType().equals(PacketType.Play.Server.POSITION)){
-                balance -= 50.0D;
-            }
+        }else if (e instanceof ServerPositionEvent){
+            balance -= 50.D;
+
         }
     }
 
