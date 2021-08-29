@@ -1,20 +1,20 @@
-name: Polar
-main: polar.ac.Polar
+name: Arctic
+main: arctic.ac.Arctic
 version: 0.0.1
-authors: [Salers,xWand,ExDiggers]
+authors: [ Salers,xWand,ExDiggers,Aamber ]
 load: STARTUP
 depend:
   - ProtocolLib
-softdepend: [Citizens]
+softdepend: [ Citizens ]
 
 commands:
-  polar:
-    permission: polar.command
+  arctic:
+    permission: arctic.command
   alerts:
     permission: alerts.command
   debug:
     permission: debug.command
-  preload:
-    permission: preload.command
-  psettings:
-    permission: psettings.command
+  areload:
+    permission: areload.command
+  asettings:
+    permission: asettings.command

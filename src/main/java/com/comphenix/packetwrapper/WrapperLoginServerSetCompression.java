@@ -10,7 +10,7 @@
  * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PArcticULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * <p>
  * You should have received a copy of the GNU General Public License
@@ -35,22 +35,22 @@ public class WrapperLoginServerSetCompression extends AbstractPacket {
     }
 
     /**
-     * Retrieve polar.
+     * Retrieve Arctic.
      * <p>
-     * Notes: polar is the max size of a packet before its compressed
+     * Notes: Arctic is the max size of a packet before its compressed
      *
-     * @return The current polar
+     * @return The current Arctic
      */
-    public int getpolar() {
+    public int getArctic() {
         return handle.getIntegers().read(0);
     }
 
     /**
-     * Set polar.
+     * Set Arctic.
      *
      * @param value - new value.
      */
-    public void setpolar(int value) {
+    public void setArctic(int value) {
         handle.getIntegers().write(0, value);
     }
 

@@ -10,7 +10,7 @@
  * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PArcticULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * <p>
  * You should have received a copy of the GNU General Public License
@@ -133,20 +133,20 @@ public class WrapperPlayServerEntityEffect extends AbstractPacket {
     }
 
     /**
-     * Retrieve Hide Particles.
+     * Retrieve Hide PArcticles.
      *
-     * @return The current Hide Particles
+     * @return The current Hide PArcticles
      */
-    public boolean getHideParticles() {
+    public boolean getHidePArcticles() {
         return handle.getBytes().read(2) == 0;
     }
 
     /**
-     * Set Hide Particles.
+     * Set Hide PArcticles.
      *
      * @param value - new value.
      */
-    public void setHideParticles(boolean value) {
+    public void setHidePArcticles(boolean value) {
         handle.getBytes().write(2, (byte) (value ? 0 : 1));
     }
 
