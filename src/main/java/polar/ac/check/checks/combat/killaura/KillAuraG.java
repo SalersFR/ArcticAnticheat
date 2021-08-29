@@ -8,7 +8,7 @@ import polar.ac.data.PlayerData;
 import polar.ac.event.Event;
 import polar.ac.event.client.UseEntityEvent;
 
-import javax.jws.soap.SOAPBinding;
+
 
 public class KillAuraG extends Check {
 
@@ -29,18 +29,22 @@ public class KillAuraG extends Check {
 
                 //Angle check (TheHunter365's math btw)
 
-                double x1 = player.getEyeLocation().getX();
-                double z1 = player.getEyeLocation().getZ();
-                double vdX = player.getEyeLocation().getDirection().getX();
-                double vdZ = player.getEyeLocation().getDirection().getZ();
-                double x2 = target.getLocation().getX();
-                double z2 = target.getLocation().getZ();
+                final double x1 = player.getEyeLocation().getX();
+                final double z1 = player.getEyeLocation().getZ();
 
-                double dotProduct = vdX * (x2 - x1) + vdZ * (z2 - z1);
-                double avMod = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(z2 - z1, 2));
-                double vdMod = Math.sqrt(vdX * vdX + vdZ * vdZ);
-                double cosAngle = dotProduct / (avMod * vdMod);
-                int angle = (int) Math.toDegrees(Math.acos(cosAngle));
+                final double vdX = player.getEyeLocation().getDirection().getX();
+                final double vdZ = player.getEyeLocation().getDirection().getZ();
+
+                final double x2 = target.getLocation().getX();
+                final double z2 = target.getLocation().getZ();
+
+                final double dotProduct = vdX * (x2 - x1) + vdZ * (z2 - z1);
+                final double avMod = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(z2 - z1, 2));
+
+                final double vdMod = Math.sqrt(vdX * vdX + vdZ * vdZ);
+                final double cosAngle = dotProduct / (avMod * vdMod);
+
+                final int angle = (int) Math.toDegrees(Math.acos(cosAngle));
 
                 debug("angle=" + angle + " buffer=" + buffer);
 

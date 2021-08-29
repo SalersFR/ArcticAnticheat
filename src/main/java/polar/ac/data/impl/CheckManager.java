@@ -8,6 +8,7 @@ import polar.ac.check.checks.combat.autoclicker.AutoclickerC;
 import polar.ac.check.checks.combat.entity.EntityA;
 import polar.ac.check.checks.combat.killaura.*;
 import polar.ac.check.checks.combat.reach.Reach;
+import polar.ac.check.checks.combat.velocity.VelocityA;
 import polar.ac.check.checks.movement.fly.FlyA;
 import polar.ac.check.checks.movement.fly.FlyB;
 import polar.ac.check.checks.movement.fly.FlyC;
@@ -87,6 +88,7 @@ public class CheckManager {
                 new KillAuraH(data),
                 new KillAuraI(data),
 
+                new VelocityA(data),
 
                 new Reach(data)
 

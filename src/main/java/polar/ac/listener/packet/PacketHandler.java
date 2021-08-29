@@ -13,6 +13,7 @@ import polar.ac.Polar;
 import polar.ac.check.Check;
 import polar.ac.data.PlayerData;
 import polar.ac.event.client.*;
+import polar.ac.event.server.ServerPositionEvent;
 import polar.ac.event.server.ServerVelocityEvent;
 
 public class PacketHandler {
@@ -177,12 +178,23 @@ public class PacketHandler {
         if (event.getPacketType() == PacketType.Play.Server.ENTITY_VELOCITY) {
             final WrapperPlayServerEntityVelocity wrapper = new WrapperPlayServerEntityVelocity(event.getPacket());
 
-            ServerVelocityEvent serverVelocityEvent = new ServerVelocityEvent(wrapper);
+            final ServerVelocityEvent serverVelocityEvent = new ServerVelocityEvent(wrapper);
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())
                     checks.handle(serverVelocityEvent);
             }
+
+            final WrapperPlayServerPosition wrapper = new WrapperPlayServerPosition(event.getPacket());
+
+            final ServerPositionEvent serverPositionEvent = new ServerPositionEvent(wrapper);
+
+
+            for (Check checks : data.getChecks()) {
+                if (checks.isEnabled())
+                    checks.handle(serverPositionEvent);
+            }
+
 
         }
     }

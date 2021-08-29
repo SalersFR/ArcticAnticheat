@@ -34,7 +34,7 @@ public class KillAuraE extends Check {
                  * TODO CHECK IF TARGET IS AFK / NOT MOVING
                  */
                 if (++attacks > 89) {
-                    if (++buffer > 3) {
+                    if (++buffer > 12) {
                         fail("attacks=" + attacks);
                     } else if (buffer > 0) buffer -= 0.5D;
                 }
