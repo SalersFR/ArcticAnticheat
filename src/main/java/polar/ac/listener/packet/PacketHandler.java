@@ -184,34 +184,6 @@ public class PacketHandler {
                     checks.handle(serverVelocityEvent);
             }
 
-        } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE) {
-
-            final WrapperPlayServerRelEntityMove wrapper = new WrapperPlayServerRelEntityMove(event.getPacket());
-
-            data.getTargetTracker().handleRelMove(wrapper);
-        } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE) {
-
-            final WrapperPlayServerRelEntityMoveLook wrapper = new WrapperPlayServerRelEntityMoveLook(event.getPacket());
-
-            data.getTargetTracker().handleRelMoveLook(wrapper);
-
-        } else if (event.getPacketType() == PacketType.Play.Server.SPAWN_ENTITY_LIVING) {
-
-            final WrapperPlayServerSpawnEntityLiving wrapper = new WrapperPlayServerSpawnEntityLiving(event.getPacket());
-
-            data.getTargetTracker().handleSpawn(wrapper);
-        } else if (event.getPacketType() == PacketType.Play.Server.ENTITY_TELEPORT) {
-
-            final WrapperPlayServerEntityTeleport wrapper = new WrapperPlayServerEntityTeleport(event.getPacket());
-
-            data.getTargetTracker().handleTeleport(wrapper);
-            data.getInteractionData().handleOutTeleport(wrapper);
-
-        } else if (event.getPacketType() == PacketType.Play.Server.NAMED_ENTITY_SPAWN) {
-
-            final WrapperPlayServerNamedEntitySpawn wrapper = new WrapperPlayServerNamedEntitySpawn(event.getPacket());
-
-            data.getTargetTracker().handleNamedEntitySpawn(wrapper);
         }
     }
 }

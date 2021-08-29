@@ -69,6 +69,7 @@ public class CheckManager {
                 new AimE(data),
                 new AimF(data),
                 new AimG(data),
+                new AimH(data),
 
                 new EntityA(data),
 

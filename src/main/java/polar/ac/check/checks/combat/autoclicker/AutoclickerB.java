@@ -29,22 +29,18 @@ public class AutoclickerB extends Check {
             final double kurtosis = MathUtils.getKurtosis(samples);
             final double stdDeviation = MathUtils.getStandardDeviation(samples);
 
-
-
-
-
             if (samples.size() >= 120) {
                 final double diff = Math.abs(kurtosis - stdDeviation);
                 final double result = Math.abs(diff - lastDiff);
                 debug("lastDiff=" + lastDiff + " diff=" + diff + " result=" + result);
 
                 if(result < 2.5D) {
-                    if(buffer < 8) buffer += result;
+                    if(buffer < 8) buffer += (2.5 - result);
 
                     if(buffer > 3) {
                         fail("result=" + result);
                     }
-                }else if(buffer > 0) buffer --;
+                } else if(buffer > 0) buffer --;
 
                 this.lastDiff = diff;
 
