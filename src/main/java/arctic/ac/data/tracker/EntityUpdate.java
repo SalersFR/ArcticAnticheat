@@ -14,5 +14,5 @@ public class EntityUpdate {
     private final Vector movement;
 
     @Getter
-    private boolean responded = false;
+    private boolean responded, confirmed;
 }
