@@ -1,6 +1,7 @@
 package arctic.ac.data;
 
 import arctic.ac.check.Check;
+import arctic.ac.data.impl.CheckManager;
 import arctic.ac.data.impl.InteractData;
 import arctic.ac.data.impl.PositionData;
 import arctic.ac.data.tracker.TargetTracker;
