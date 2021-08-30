@@ -26,12 +26,12 @@ public class DebugCommand implements CommandExecutor {
                         if (toDebug.equalsIgnoreCase(checks.getName() + checks.getType())) {
                             if (!player.hasMetadata(toDebug)) {
                                 player.setMetadata(checks.getName() + checks.getType(), new FixedMetadataValue(instance, true));
-                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&lArctic&f | " +
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&3&lArctic&7 / " +
                                         "&aNow debugging &7" + toDebug));
                             } else {
                                 player.removeMetadata(checks.getName() + checks.getType(), instance);
-                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&lArctic&f | " +
-                                        "&bNo longer debugging &7" + toDebug));
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&3&lArctic&7 / " +
+                                        "&3No longer debugging &7" + toDebug));
                             }
 
                         }

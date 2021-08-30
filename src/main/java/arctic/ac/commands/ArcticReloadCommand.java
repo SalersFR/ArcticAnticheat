@@ -17,7 +17,7 @@ public class ArcticReloadCommand implements CommandExecutor {
             if (player.hasPermission("areload.command")) {
                 Arctic.INSTANCE.reloadConfig();
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                        "&b&lArctic's &fconfigurations have been reloaded."));
+                        "&3&lArctic's &fconfigurations have been reloaded."));
             }
         }
         return true;

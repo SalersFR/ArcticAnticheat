@@ -26,14 +26,14 @@ public class AlertsCommand implements CommandExecutor {
 
                     if (player.hasMetadata("ALERTS_ON_VERBOSE")) {
                         player.removeMetadata("ALERTS_ON_VERBOSE", instance);
-                        player.sendMessage(CustomUtils.translate("&bVerbose &balerts have been disabled."));
+                        player.sendMessage(CustomUtils.translate("&3Verbose &3alerts have been disabled."));
                         // msg
                         return true;
                     }
 
                     if (player.hasMetadata("ALERTS_ON_NORMAL")) {
                         player.removeMetadata("ALERTS_ON_NORMAL", instance);
-                        player.sendMessage(CustomUtils.translate("&bAlerts have been disabled."));
+                        player.sendMessage(CustomUtils.translate("&3Alerts have been disabled."));
                         // msg
                         return true;
                     } else {
@@ -50,10 +50,10 @@ public class AlertsCommand implements CommandExecutor {
                         if (player.hasMetadata("ALERTS_ON_VERBOSE")) {
                             player.removeMetadata("ALERTS_ON_VERBOSE", instance);
                             // msg
-                            player.sendMessage(CustomUtils.translate("&bVerbose &balerts have been disabled."));
+                            player.sendMessage(CustomUtils.translate("&3Verbose &3alerts have been disabled."));
                         } else {
                             player.setMetadata("ALERTS_ON_VERBOSE", new FixedMetadataValue(instance, true));
-                            player.sendMessage(CustomUtils.translate("&bVerbose &aalerts have been enabled."));
+                            player.sendMessage(CustomUtils.translate("&3Verbose &aalerts have been enabled."));
                             return true;
                         }
                     }
