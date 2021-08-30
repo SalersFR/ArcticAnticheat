@@ -47,7 +47,7 @@ checks:
       b:
         ban-vl: 20
         enabled: true
-        punish: false
+        punish: true
   combat:
     autoclicker:
       a:
@@ -66,7 +66,7 @@ checks:
       a:
         ban-vl: 10
         enabled: true
-        punish: false
+        punish: true
       b:
         ban-vl: 10
         enabled: true
@@ -90,7 +90,7 @@ checks:
       g:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
       h:
         ban-vl: 50
         enabled: true
@@ -98,7 +98,7 @@ checks:
       i:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
     reach:
       a:
         ban-vl: 10
@@ -108,70 +108,70 @@ checks:
       a:
         ban-vl: 25
         enabled: true
-        punish: false
+        punish: true
     aim:
       a:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
       b:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
       c:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
       d:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
       e:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
       f:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
       g:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
       h:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
       i:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
     velocity:
       a:
         ban-vl: 50
         enabled: true
-        punish: false
+        punish: true
   player:
     badpackets:
       a:
         ban-vl: 20
         enabled: true
-        punish: false
+        punish: true
       b:
         ban-vl: 5
         enabled: true
-        punish: false
+        punish: true
       c:
         ban-vl: 5
         enabled: true
-        punish: false
+        punish: true
     scaffold:
       a:
         ban-vl: 120
         enabled: true
-        punish: false
+        punish: true
     timer:
       a:
         ban-vl: 500
         enabled: true
-        punish: false
+        punish: true
