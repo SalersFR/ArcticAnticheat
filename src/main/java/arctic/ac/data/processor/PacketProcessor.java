@@ -152,7 +152,7 @@ public class PacketProcessor {
 
     }
 
-    public void handleSending( PacketEvent event) {
+    public void handleSending(PacketEvent event) {
         if (event.getPacketType() == PacketType.Play.Server.ENTITY_VELOCITY) {
             final WrapperPlayServerEntityVelocity wrapper = new WrapperPlayServerEntityVelocity(event.getPacket());
 

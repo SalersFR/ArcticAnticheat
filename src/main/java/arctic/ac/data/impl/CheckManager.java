@@ -29,7 +29,7 @@ import java.util.List;
 
 public class CheckManager {
 
-    private static List<Check> checks;
+    private List<Check> checks;
     private final PlayerData data;
 
     public CheckManager(PlayerData data) {
@@ -71,6 +71,11 @@ public class CheckManager {
                 new AimG(data),
                 new AimH(data),
                 new AimI(data),
+                new AimJ(data),
+                new AimK(data),
+                new AimL(data),
+                new AimM(data),
+
 
                 new EntityA(data),
 
@@ -97,7 +102,7 @@ public class CheckManager {
     // inefficient
 
 
-    public static List<Check> getChecks() {
-        return checks;
+    public List<Check> getChecks() {
+        return this.checks;
     }
 }
