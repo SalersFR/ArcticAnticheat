@@ -31,15 +31,15 @@ public class AimF extends Check {
 
             final boolean exemptCombat = (System.currentTimeMillis() - data.getInteractionData().getLastHitPacket()) > 250L;
 
-            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || deltaYaw < 9.01D;
+            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F);
 
             debug("accel=" + accel + " deltaPitch=" + deltaPitch + " lastDeltaPitch=" + lastDeltaPitch + " exempt=" + exempt);
 
             if (!exempt && !exemptCombat) {
-                if (accel <= 0.001F) {
+                if (accel <= 0.001F && deltaPitch > 10) {
                     if (++buffer > 4) {
                         buffer /= 2;
-                        fail("accel=" + accel);
+                        fail("accel=" + accel + " dp=" + deltaPitch);
                     }
                 } else if (buffer > 0) buffer -= 0.5D;
             }

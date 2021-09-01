@@ -2,26 +2,18 @@ package arctic.ac.data.impl;
 
 import arctic.ac.check.Check;
 import arctic.ac.check.checks.combat.aim.*;
-import arctic.ac.check.checks.combat.autoclicker.AutoclickerA;
-import arctic.ac.check.checks.combat.autoclicker.AutoclickerB;
-import arctic.ac.check.checks.combat.autoclicker.AutoclickerC;
-import arctic.ac.check.checks.combat.entity.EntityA;
+import arctic.ac.check.checks.combat.autoclicker.*;
 import arctic.ac.check.checks.combat.killaura.*;
-import arctic.ac.check.checks.combat.reach.Reach;
-import arctic.ac.check.checks.combat.velocity.VelocityA;
-import arctic.ac.check.checks.movement.fly.FlyA;
-import arctic.ac.check.checks.movement.fly.FlyB;
-import arctic.ac.check.checks.movement.fly.FlyC;
-import arctic.ac.check.checks.movement.motion.MotionA;
-import arctic.ac.check.checks.movement.motion.MotionB;
-import arctic.ac.check.checks.movement.nofall.NoFallA;
-import arctic.ac.check.checks.movement.nofall.NoFallB;
-import arctic.ac.check.checks.movement.speed.SpeedA;
-import arctic.ac.check.checks.movement.step.StepA;
-import arctic.ac.check.checks.player.badpackets.BadPacketsA;
-import arctic.ac.check.checks.player.badpackets.BadPacketsB;
-import arctic.ac.check.checks.player.scaffold.ScaffoldA;
-import arctic.ac.check.checks.player.timer.TimerA;
+import arctic.ac.check.checks.combat.reach.*;
+import arctic.ac.check.checks.combat.velocity.*;
+import arctic.ac.check.checks.movement.fly.*;
+import arctic.ac.check.checks.movement.motion.*;
+import arctic.ac.check.checks.movement.nofall.*;
+import arctic.ac.check.checks.movement.speed.*;
+import arctic.ac.check.checks.movement.step.*;
+import arctic.ac.check.checks.player.badpackets.*;
+import arctic.ac.check.checks.player.scaffold.*;
+import arctic.ac.check.checks.player.timer.*;
 import arctic.ac.data.PlayerData;
 
 import java.util.Arrays;
@@ -58,8 +50,6 @@ public class CheckManager {
                 new NoFallB(data),
 
                 new MotionA(data),
-                new MotionB(data),
-
 
                 // COMBAT
                 new AimA(data),
@@ -76,9 +66,6 @@ public class CheckManager {
                 new AimL(data),
                 new AimM(data),
 
-
-                new EntityA(data),
-
                 new AutoclickerA(data),
                 new AutoclickerB(data),
                 new AutoclickerC(data),
@@ -89,8 +76,6 @@ public class CheckManager {
                 new KillAuraD(data),
                 new KillAuraE(data),
                 new KillAuraF(data),
-                new KillAuraG(data),
-                new KillAuraH(data),
                 new KillAuraI(data),
 
                 new VelocityA(data),

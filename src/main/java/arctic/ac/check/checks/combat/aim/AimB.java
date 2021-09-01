@@ -34,7 +34,7 @@ public class AimB extends Check {
 
             debug("gcd=" + gcd + " deltaYaw=" + deltaYaw + " exempt=" + exempt);
 
-            if (gcd <= 0.0 && !exempt && !exemptCombat) {
+            if (gcd < 0.0 && !exempt && !exemptCombat) {
                 if (++buffer > 10) {
                     fail("gcd=" + gcd);
                 } else if (buffer > 0) buffer -= 0.5D;
