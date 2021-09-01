@@ -24,5 +24,6 @@ hs_err_pid*
 
 # Misc stuff
 *.xml
+*.iml
 target/
 .idea/
