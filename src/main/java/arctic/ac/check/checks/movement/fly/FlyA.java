@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class FlyA extends Check {
 
-    private double lastDeltaY, airTicks;
+    private double lastDeltaY, airTicks,ticksEdge;
 
     public FlyA(PlayerData data) {
         super(data, "Fly", "A", "movement.fly.a", true);
@@ -45,15 +45,20 @@ public class FlyA extends Check {
 
             final Player player = data.getBukkitPlayerFromUUID();
 
+            if(worldUtils.isAtEdgeOfABlock(player))  {
+                this.ticksEdge = 0;
+            }else this.ticksEdge++;
+
             final boolean exempt = worldUtils.isInLiquid(player)
                     || worldUtils.isInLiquidVertically(player)
                     || worldUtils.isCollidingWithClimbable(player)
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
-                    || airTicks < 9
+                    || airTicks < 12
                     || player.getFallDistance() > 10.0F
-                    || event.isGround();
+                    || event.isGround()
+                    || ticksEdge < 20;
 
             debug("result=" + result + " exempt=" + exempt + " deltaY=" + deltaY + " lastDeltaY=" + lastDeltaY + " airTicks=" + airTicks);
 

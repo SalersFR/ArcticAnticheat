@@ -79,7 +79,7 @@ public abstract class Check {
                 player.spigot().sendMessage(alertMSG);
             }
 
-            if (vl > getBanVL()) {
+            if (vl >= getBanVL()) {
                 if (isPunish()) {
 
                     final String toDispatch = Arctic.INSTANCE.getConfig().getString("ban-command").

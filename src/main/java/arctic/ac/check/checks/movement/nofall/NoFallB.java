@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class NoFallB extends Check {
 
-    private int airTicks;
+    private int airTicks,ticksEdge;
 
     public NoFallB(PlayerData data) {
         super(data, "NoFall", "B", "movement.nofall.b", false);
@@ -23,7 +23,12 @@ public class NoFallB extends Check {
 
             final boolean packetGround = event.isGround();
 
+            final Player player = data.getPlayer();
             final WorldUtils worldUtils = new WorldUtils();
+
+            if(worldUtils.isAtEdgeOfABlock(player))  {
+                this.ticksEdge = 0;
+            }else this.ticksEdge++;
 
             if (worldUtils.isCloseToGround(data.getBukkitPlayerFromUUID().getLocation())) {
                 this.airTicks = 0;
@@ -31,14 +36,15 @@ public class NoFallB extends Check {
 
             final boolean serverGround = airTicks < 21;
 
-            final Player player = data.getPlayer();
+
 
             final boolean exempt = worldUtils.isInLiquid(player)
                     || worldUtils.isCollidingWithClimbable(player)
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
-                    || worldUtils.isOnACertainBlock(player, "fence");
+                    || worldUtils.isOnACertainBlock(player, "fence")
+                    || ticksEdge < 20;
 
             if (!serverGround && packetGround && !exempt) {
                 fail("airTicks=" + airTicks);
