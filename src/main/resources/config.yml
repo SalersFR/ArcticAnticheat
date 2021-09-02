@@ -83,7 +83,7 @@ checks:
         ban-vl: 10
         enabled: true
         punish: true
-      i:
+      g:
         ban-vl: 50
         enabled: true
         punish: true

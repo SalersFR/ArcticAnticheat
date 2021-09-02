@@ -9,13 +9,13 @@ import arctic.ac.utils.MathUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KillAuraI extends Check {
+public class KillAuraG extends Check {
 
     private final List<Long> tickSamples = new ArrayList<>(20);
     private long lastHit = 0;
 
-    public KillAuraI(PlayerData data) {
-        super(data, "KillAura", "I", "combat.killaura.i", true);
+    public KillAuraG(PlayerData data) {
+        super(data, "KillAura", "G", "combat.killaura.g", true);
     }
 
     @Override

@@ -76,7 +76,7 @@ public class CheckManager {
                 new KillAuraD(data),
                 new KillAuraE(data),
                 new KillAuraF(data),
-                new KillAuraI(data),
+                new KillAuraG(data),
 
                 new VelocityA(data),
 

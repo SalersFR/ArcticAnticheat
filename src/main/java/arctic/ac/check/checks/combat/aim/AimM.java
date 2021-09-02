@@ -31,7 +31,7 @@ public class AimM extends Check {
 
             if(!exempt) {
                 debug("accel=" + accel);
-                if(accel < 0.004 && deltaYaw > 10) {
+                if(accel < 0.004) {
                     if(++buffer > 6) {
                         fail("accel=" + accel + " dy=" + deltaYaw);
                     }
