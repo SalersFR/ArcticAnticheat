@@ -35,7 +35,7 @@ public class FlyB extends Check {
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
-                    || airTicks < 9
+                    || airTicks < 11
                     || player.getFallDistance() > 10.0F
                     || event.isGround();
 

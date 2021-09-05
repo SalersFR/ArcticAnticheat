@@ -4,12 +4,15 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
+import arctic.ac.event.client.PacketEvent;
 import arctic.ac.utils.WorldUtils;
+import com.comphenix.protocol.PacketType;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffectType;
 
 public class FlyA extends Check {
 
-    private double lastDeltaY, airTicks,ticksEdge;
+    private double lastDeltaY, airTicks,ticksEdge,ticksPlace;
 
     public FlyA(PlayerData data) {
         super(data, "Fly", "A", "movement.fly.a", true);
@@ -49,6 +52,16 @@ public class FlyA extends Check {
                 this.ticksEdge = 0;
             }else this.ticksEdge++;
 
+            this.ticksPlace++;
+
+            double threshold = 0.01;
+
+            if(ticksPlace < 20 || player.hasPotionEffect(PotionEffectType.JUMP)) {
+                threshold = 0.032;
+            } else if(threshold == 0.032) {
+                threshold = 0.01;
+            }
+
             final boolean exempt = worldUtils.isInLiquid(player)
                     || worldUtils.isInLiquidVertically(player)
                     || worldUtils.isCollidingWithClimbable(player)
@@ -63,7 +76,7 @@ public class FlyA extends Check {
             debug("result=" + result + " exempt=" + exempt + " deltaY=" + deltaY + " lastDeltaY=" + lastDeltaY + " airTicks=" + airTicks);
 
 
-            if (result > 0.01 && !exempt && !worldUtils.isCloseToGround(player.getLocation())) {
+            if (result > threshold && !exempt && !worldUtils.isCloseToGround(player.getLocation())) {
                 if (++buffer > 3) {
                     fail("result=" + result);
 
@@ -72,6 +85,13 @@ public class FlyA extends Check {
             } else if (buffer > 0) buffer -= 0.05D;
 
 
+        } else if(e instanceof PacketEvent) {
+
+            final PacketEvent event = (PacketEvent) e;
+
+            if(event.getPacketType() == PacketType.Play.Client.BLOCK_PLACE) {
+                this.ticksPlace = 0;
+            }
         }
     }
 
