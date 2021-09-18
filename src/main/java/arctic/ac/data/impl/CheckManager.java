@@ -80,7 +80,8 @@ public class CheckManager {
 
                 new VelocityA(data),
 
-                new Reach(data)
+                new Reach(data),
+                new ReachB(data)
 
         );
     }

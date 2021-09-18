@@ -1,5 +1,6 @@
 package arctic.ac.data;
 
+import arctic.ac.Arctic;
 import arctic.ac.check.Check;
 import arctic.ac.data.impl.CheckManager;
 import arctic.ac.data.impl.InteractData;
@@ -10,8 +11,12 @@ import arctic.ac.utils.ALocation;
 import arctic.ac.utils.ARotation;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -23,6 +28,10 @@ public class PlayerData {
     private final TargetTracker targetTracker;
     private final PacketProcessor packetProcessor;
     private final Player player;
+    private final List<ALocation> pastEntityLocations;
+
+    @Setter
+    private LivingEntity target;
 
 
     @Setter
@@ -37,7 +46,24 @@ public class PlayerData {
         this.posData = new PositionData(this);
         this.targetTracker = new TargetTracker(this);
         this.packetProcessor = new PacketProcessor(this);
+        this.pastEntityLocations = new ArrayList<>();
         this.player = player;
+
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                if(target != null) {
+                    final Vector eye = target.getEyeLocation().toVector();
+                    pastEntityLocations.add(new ALocation(eye.getX(),eye.getY(),eye.getZ()));
+                    if(pastEntityLocations.size() >= 20) {
+                        pastEntityLocations.clear();
+                    }
+                }
+            }
+        }.runTaskTimer(Arctic.INSTANCE,0L,1L);
+
+
 
 
     }

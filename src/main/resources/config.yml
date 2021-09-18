@@ -92,6 +92,10 @@ checks:
         ban-vl: 10
         enabled: true
         punish: true
+      b:
+        ban-vl: 10
+        enabled: true
+        punish: true
     aim:
       a:
         ban-vl: 50
