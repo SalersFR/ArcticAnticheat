@@ -44,9 +44,9 @@ public class VelocityA extends Check {
                     || worldUtils.isCollidingWithClimbable(player)
                     || worldUtils.haveABlockNearHead(player);
 
-            if (lastVelY > 0.0 && !exempt && data.getInteractData().isHurt()) {
+            if (lastVelY > 0.0 && !exempt && data.getInteractData().isHurt() && deltaY > 0.0) {
                 if (ticksSinceVel <= maxTicksForResponse
-                        && deltaY < lastVelY) {
+                        && deltaY < lastVelY * 0.99D) {
                     if (++buffer > maxTicksForResponse) {
                         buffer = 0;
                         fail("deltaY=" + deltaY + " velY=" + lastVelY);
