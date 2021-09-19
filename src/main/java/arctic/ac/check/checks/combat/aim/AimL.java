@@ -27,7 +27,7 @@ public class AimL extends Check {
 
             final float pitch = event.getTo().getPitch();
 
-            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F);
+            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || data.getCinematicProcessor().getTicksSince() < 10;
 
             debug("deltaYaw=" + deltaYaw +" deltaPitch=" + deltaPitch);
 

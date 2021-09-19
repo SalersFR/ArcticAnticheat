@@ -26,16 +26,17 @@ public class AimM extends Check {
             this.lastDeltaYaw = deltaYaw;
 
             final boolean exempt = deltaYaw == lastDeltaYaw;
+            final boolean exemptCombat = (System.currentTimeMillis() - data.getInteractionData().getLastHitPacket()) > 100L;
 
             final double accel = Math.abs(deltaYaw - lastDeltaYaw);
 
-            if(!exempt) {
+            if(!exempt && !exemptCombat) {
                 debug("accel=" + accel);
-                if(accel < 0.004) {
-                    if(++buffer > 6) {
+                if(accel < 0.00401D) {
+                    if(++buffer > 3) {
                         fail("accel=" + accel + " dy=" + deltaYaw);
                     }
-                } else if(buffer > 0) buffer -= 0.75D;
+                } else if(buffer > 0) buffer -= 1.5D;
             }
         }
 

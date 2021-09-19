@@ -32,6 +32,8 @@ public class PacketProcessor {
                 || bypass;
 
 
+
+
         for (Check checks : data.getChecks()) {
             if (checks.isEnabled() && !exempt) {
                 checks.handle(new arctic.ac.event.client.PacketEvent(event));
@@ -47,6 +49,8 @@ public class PacketProcessor {
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             data.getInteractData().handleFlying();
+
+            data.getCinematicProcessor().process(rotationEvent);
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
@@ -70,6 +74,8 @@ public class PacketProcessor {
             final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getOnGround());
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
+
+            data.getCinematicProcessor().process(rotationEvent);
 
             data.getInteractData().handleFlying();
 
