@@ -20,7 +20,7 @@ public class InteractData {
 
 
     private NPC entityANPC;
-    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging;
+    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging,ticksSinceBow;
     private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported, cinematic;
     private long lastHitPacket;
 
@@ -92,6 +92,7 @@ public class InteractData {
         this.ticksSinceTeleport++;
         this.isDigging = ticksSinceDigging < 15;
         this.ticksSinceDigging++;
+        this.ticksSinceBow++;
         if (ticksSinceJoin < 1000)
             this.ticksSinceJoin++;
         this.isHurt = ticksSinceHurt <= 2;
@@ -106,5 +107,11 @@ public class InteractData {
         if (wrapper.getEntityID() == data.getPlayer().getEntityId()) {
             this.ticksSinceTeleport = 0;
         }
+    }
+
+    public void onBow() {this.ticksSinceBow = 0;}
+
+    public void onEDBE() {
+        this.ticksSinceHurt = 0;
     }
 }

@@ -6,6 +6,7 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
 import arctic.ac.event.client.UseEntityEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
 public class KillAuraA extends Check {
 
@@ -29,6 +30,10 @@ public class KillAuraA extends Check {
 
 
                 final long elapsed = Math.abs(System.currentTimeMillis() - this.lastFlying);
+
+                final int ping = ((CraftPlayer)data.getPlayer()).getHandle().ping;
+
+                if(ping > 200) return;
 
                 debug("elapsed=" + elapsed + " current=" + System.currentTimeMillis() + " last=" + lastFlying);
 

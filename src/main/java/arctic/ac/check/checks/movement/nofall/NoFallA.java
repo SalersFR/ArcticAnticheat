@@ -23,7 +23,7 @@ public class NoFallA extends Check {
 
             if (event.getPacketType().equals(PacketType.Play.Client.FLYING)) {
                 if (data.getPosData().getLastPacket().equals(PacketType.Play.Client.POSITION)
-                        && data.getBukkitPlayerFromUUID().getFallDistance() > 0.1) {
+                        && data.getBukkitPlayerFromUUID().getFallDistance() > 0.1 && data.getInteractData().getTicksSinceHurt() > 40) {
                     if (++buffer >= 3) {
                         fail("currentPacket=FLYING" + " lastPacket=POSITION");
                     }

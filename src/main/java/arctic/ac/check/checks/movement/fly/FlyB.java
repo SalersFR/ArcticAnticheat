@@ -37,7 +37,8 @@ public class FlyB extends Check {
                     || worldUtils.isAtEdgeOfABlock(player)
                     || airTicks < 11
                     || player.getFallDistance() > 10.0F
-                    || event.isGround();
+                    || event.isGround()
+                    || player.isInsideVehicle();
 
 
             if (worldUtils.isCloseToGround(data.getBukkitPlayerFromUUID().getLocation())) {

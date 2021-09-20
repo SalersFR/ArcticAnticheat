@@ -41,8 +41,8 @@ public class MotionA extends Check {
                     || player.getFallDistance() > 10.0F
                     || event.isGround()
                     || data.getInteractionData().getTicksSinceSlime() < 120
-                    || data.getInteractionData().getTicksSinceSlime() < 120
-                    || data.getInteractData().isHurt();
+                    || data.getInteractData().isHurt()
+                    || data.getInteractData().getTicksSinceHurt() < 40;
 
             debug("exempt=" + exempt + " limit=" + jumpLimit + " deltaY=" + deltaY);
 

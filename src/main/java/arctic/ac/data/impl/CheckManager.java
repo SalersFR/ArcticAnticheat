@@ -43,6 +43,7 @@ public class CheckManager {
                 new FlyC(data),
 
                 new SpeedA(data),
+                new SpeedB(data),
 
                 new StepA(data),
 

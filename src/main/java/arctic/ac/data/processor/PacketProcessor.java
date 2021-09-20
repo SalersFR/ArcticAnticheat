@@ -29,7 +29,8 @@ public class PacketProcessor {
                 || data.getPlayer().getAllowFlight()
                 || data.getPlayer().getGameMode() == GameMode.SPECTATOR
                 || data.getInteractionData().isTeleported()
-                || bypass;
+                || bypass
+                || data.getInteractData().getTicksSinceTeleport() < 10;
 
 
 
@@ -181,6 +182,9 @@ public class PacketProcessor {
             }
 
 
+        } else if(event.getPacketType() == PacketType.Play.Server.ENTITY_TELEPORT) {
+            final WrapperPlayServerEntityTeleport packet = new WrapperPlayServerEntityTeleport(event.getPacket());
+            data.getInteractData().handleOutTeleport(packet);
         }
 
     }

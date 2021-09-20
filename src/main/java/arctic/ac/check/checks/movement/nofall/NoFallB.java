@@ -44,7 +44,10 @@ public class NoFallB extends Check {
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
                     || worldUtils.isOnACertainBlock(player, "fence")
-                    || ticksEdge < 20;
+                    || ticksEdge < 20
+                    || !data.getPlayer().getLocation().add(0,-2.2,0).getBlock().isEmpty()
+                    || data.getInteractData().getTicksSinceHurt() < 30
+                    || player.getVehicle() != null;
 
             if (!serverGround && packetGround && !exempt) {
                 fail("airTicks=" + airTicks);
