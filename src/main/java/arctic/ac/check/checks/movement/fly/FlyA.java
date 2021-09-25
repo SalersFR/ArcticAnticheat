@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class FlyA extends Check {
 
-    private double lastDeltaY, airTicks,ticksEdge,ticksPlace;
+    private double lastDeltaY, airTicks, ticksEdge, ticksPlace;
 
     public FlyA(PlayerData data) {
         super(data, "Fly", "A", "movement.fly.a", true);
@@ -48,17 +48,17 @@ public class FlyA extends Check {
 
             final Player player = data.getBukkitPlayerFromUUID();
 
-            if(worldUtils.isAtEdgeOfABlock(player))  {
+            if (worldUtils.isAtEdgeOfABlock(player)) {
                 this.ticksEdge = 0;
-            }else this.ticksEdge++;
+            } else this.ticksEdge++;
 
             this.ticksPlace++;
 
             double threshold = 0.01;
 
-            if(ticksPlace < 20 || player.hasPotionEffect(PotionEffectType.JUMP)) {
+            if (ticksPlace < 20 || player.hasPotionEffect(PotionEffectType.JUMP)) {
                 threshold = 0.032;
-            } else if(threshold == 0.032) {
+            } else if (threshold == 0.032) {
                 threshold = 0.01;
             }
 
@@ -78,17 +78,16 @@ public class FlyA extends Check {
             if (result > threshold && !exempt && !worldUtils.isCloseToGround(player.getLocation())) {
                 if (++buffer > 3) {
                     fail("result=" + result);
-
                 }
 
-            } else if (buffer > 0) buffer -= 0.05D;
+            } else if (buffer > 0) buffer -= 0.5D;
 
 
-        } else if(e instanceof PacketEvent) {
+        } else if (e instanceof PacketEvent) {
 
             final PacketEvent event = (PacketEvent) e;
 
-            if(event.getPacketType() == PacketType.Play.Client.BLOCK_PLACE) {
+            if (event.getPacketType() == PacketType.Play.Client.BLOCK_PLACE) {
                 this.ticksPlace = 0;
             }
         }

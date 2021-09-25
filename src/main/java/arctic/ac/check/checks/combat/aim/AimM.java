@@ -4,7 +4,6 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.RotationEvent;
-import org.bukkit.Bukkit;
 
 public class AimM extends Check {
 
