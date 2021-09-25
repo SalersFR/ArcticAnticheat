@@ -13,6 +13,8 @@ public class PositionData {
     private PacketType lastPacket;
     private long lastFlying;
     private Player player;
+    private boolean teleported;
+    private long lastTeleport;
     private PlayerData data;
 
     public PositionData(PlayerData data) {

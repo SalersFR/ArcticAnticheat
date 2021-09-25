@@ -54,10 +54,10 @@ public class ReachB extends Check {
                 debug(distance + "");
 
                 if (distance > 3.1D) {
-                    if (++buffer > 5) {
+                    if (++buffer > 4) {
                         fail("distance=" + distance);
                     }
-                } else if (buffer > 0) buffer -= 0.75D;
+                } else if (buffer > 0) buffer -= 0.5D;
 
 
             }
