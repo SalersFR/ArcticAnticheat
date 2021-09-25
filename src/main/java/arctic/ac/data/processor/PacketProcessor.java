@@ -35,11 +35,7 @@ public class PacketProcessor {
 
 
 
-        for (Check checks : data.getChecks()) {
-            if (checks.isEnabled() && !exempt) {
-                checks.handle(new arctic.ac.event.client.PacketEvent(event));
-            }
-        }
+
 
         data.getPosData().setLastPacket(event.getPacketType());
 
@@ -167,6 +163,12 @@ public class PacketProcessor {
     }
 
     public void handleSending(PacketEvent event) {
+
+        for (Check checks : data.getChecks()) {
+            if (checks.isEnabled()) {
+                checks.handle(new arctic.ac.event.client.PacketEvent(event));
+            }
+        }
         if (event.getPacketType() == PacketType.Play.Server.ENTITY_VELOCITY) {
             final WrapperPlayServerEntityVelocity wrapper = new WrapperPlayServerEntityVelocity(event.getPacket());
 

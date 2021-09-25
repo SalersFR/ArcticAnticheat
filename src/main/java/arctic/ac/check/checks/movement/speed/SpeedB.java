@@ -23,8 +23,9 @@ public class SpeedB extends Check {
 
             final double deltaXZ = moveEvent.getDeltaXZ();
 
-            if(deltaXZ > 1.5D) {
+            if(deltaXZ > 1.7D) {
                 fail("very blatant speed=" + deltaXZ);
+                return;
             }
 
              double limit = 0.7D;

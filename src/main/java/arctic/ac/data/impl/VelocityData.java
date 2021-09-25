@@ -20,7 +20,7 @@ public class VelocityData {
     public Vector velocity = new Vector();
     public double velocityY, originalVelocityY;
     public int velocityTicks = 1000;
-    private short velocityID = 9000;
+    private short velocityID = 10000;
 
     private PlayerData data;
 
@@ -70,8 +70,8 @@ public class VelocityData {
                 exception.printStackTrace();
             }
 
-            if(velocityID <= -1) {
-                velocityID = 9000;
+            if(velocityID <= 200) {
+                velocityID = 10000;
             }
         }
     }

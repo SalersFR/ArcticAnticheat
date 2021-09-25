@@ -19,8 +19,7 @@ import arctic.ac.check.checks.movement.nofall.NoFallB;
 import arctic.ac.check.checks.movement.speed.SpeedA;
 import arctic.ac.check.checks.movement.speed.SpeedB;
 import arctic.ac.check.checks.movement.step.StepA;
-import arctic.ac.check.checks.player.badpackets.BadPacketsA;
-import arctic.ac.check.checks.player.badpackets.BadPacketsB;
+import arctic.ac.check.checks.player.badpackets.*;
 import arctic.ac.check.checks.player.scaffold.ScaffoldA;
 import arctic.ac.check.checks.player.timer.TimerA;
 import arctic.ac.data.PlayerData;
@@ -41,6 +40,9 @@ public class CheckManager {
                 //PLAYER
                 new BadPacketsA(data),
                 new BadPacketsB(data),
+                new BadPacketsC(data),
+                new BadPacketsD(data),
+                //new BadPacketsE(data),
 
                 new TimerA(data),
 
