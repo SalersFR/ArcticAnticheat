@@ -50,6 +50,7 @@ public class PacketProcessor {
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             data.getInteractData().handleFlying();
+            data.getVelocityData().handleFlying();
 
             data.getCinematicProcessor().process(rotationEvent);
 
@@ -62,6 +63,8 @@ public class PacketProcessor {
         } else if (event.getPacketType() == PacketType.Play.Client.FLYING) {
 
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
+
+            data.getVelocityData().handleFlying();
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
@@ -79,7 +82,7 @@ public class PacketProcessor {
             data.getCinematicProcessor().process(rotationEvent);
 
             data.getInteractData().handleFlying();
-
+            data.getVelocityData().handleFlying();
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
@@ -95,7 +98,7 @@ public class PacketProcessor {
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             data.getInteractData().handleFlying();
-
+            data.getVelocityData().handleFlying();
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt)
@@ -155,6 +158,10 @@ public class PacketProcessor {
             }
 
 
+        } else if(event.getPacketType() == PacketType.Play.Client.TRANSACTION) {
+            final WrapperPlayClientTransaction wrapper = new WrapperPlayClientTransaction(event.getPacket());
+
+            data.getVelocityData().handleTransaction(wrapper);
         }
 
     }
@@ -164,6 +171,8 @@ public class PacketProcessor {
             final WrapperPlayServerEntityVelocity wrapper = new WrapperPlayServerEntityVelocity(event.getPacket());
 
             final ServerVelocityEvent serverVelocityEvent = new ServerVelocityEvent(wrapper);
+
+            data.getVelocityData().handleVelocity(serverVelocityEvent);
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled())

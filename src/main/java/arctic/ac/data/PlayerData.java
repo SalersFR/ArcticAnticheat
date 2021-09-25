@@ -5,6 +5,7 @@ import arctic.ac.check.Check;
 import arctic.ac.data.impl.CheckManager;
 import arctic.ac.data.impl.InteractData;
 import arctic.ac.data.impl.PositionData;
+import arctic.ac.data.impl.VelocityData;
 import arctic.ac.data.processor.CinematicProcessor;
 import arctic.ac.data.processor.PacketProcessor;
 import arctic.ac.data.tracker.TargetTracker;
@@ -26,6 +27,7 @@ public class PlayerData {
     private final CheckManager checkManager;
     private final InteractData interactData;
     private final PositionData posData;
+    private final VelocityData velocityData;
     private final TargetTracker targetTracker;
     private final PacketProcessor packetProcessor;
     private final CinematicProcessor cinematicProcessor;
@@ -46,6 +48,7 @@ public class PlayerData {
         this.checkManager = new CheckManager(this);
         this.interactData = new InteractData(this);
         this.posData = new PositionData(this);
+        this.velocityData = new VelocityData(this);
         this.targetTracker = new TargetTracker(this);
         this.packetProcessor = new PacketProcessor(this);
         this.cinematicProcessor = new CinematicProcessor(this);
