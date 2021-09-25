@@ -51,6 +51,8 @@ public class ReachB extends Check {
 
                 final double distance = pastVectors.stream().mapToDouble(vec -> vec.clone().setY(0).distance(attacker.clone().setY(0)) - 0.56969D).min().orElse(0);
 
+                if(distance == 0) return;
+
                 debug(distance + "");
 
                 if (distance > 3.1D) {

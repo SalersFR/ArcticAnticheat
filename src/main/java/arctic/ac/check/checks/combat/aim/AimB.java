@@ -29,7 +29,7 @@ public class AimB extends Check {
             final double gcd = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
             final float pitch = event.getTo().getPitch();
 
-            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || deltaYaw < 5.0;
+            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || deltaYaw < 7.2;
             final boolean exemptCombat = (System.currentTimeMillis() - data.getInteractionData().getLastHitPacket()) > 100L;
 
             debug("gcd=" + gcd + " deltaYaw=" + deltaYaw + " exempt=" + exempt);
@@ -37,7 +37,7 @@ public class AimB extends Check {
             if (gcd <= 0.0 && !exempt && !exemptCombat) {
                 if (++buffer > 15) {
                     fail("gcd=" + gcd);
-                } else if (buffer > 0) buffer -= 0.5D;
+                } else if (buffer > 0) buffer -= 1.5D;
             }
         }
     }
