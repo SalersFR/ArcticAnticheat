@@ -13,6 +13,7 @@ import arctic.ac.check.checks.movement.fly.FlyA;
 import arctic.ac.check.checks.movement.fly.FlyB;
 import arctic.ac.check.checks.movement.fly.FlyC;
 import arctic.ac.check.checks.movement.motion.MotionA;
+import arctic.ac.check.checks.movement.motion.MotionB;
 import arctic.ac.check.checks.movement.nofall.NoFallA;
 import arctic.ac.check.checks.movement.nofall.NoFallB;
 import arctic.ac.check.checks.movement.speed.SpeedA;
