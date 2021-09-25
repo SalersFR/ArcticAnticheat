@@ -1,8 +1,10 @@
 package arctic.ac.utils;
 
+import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
+@Getter
 public class ABox {
     //credits to somewhere lol, but
     private double x1, x2, y1, y2, z1, z2;
@@ -20,6 +23,15 @@ public class ABox {
 
     public ABox(final double x, final double y, final double z) {
         this(x, x, y, y, z, z);
+    }
+
+    public ABox(final Vector data) {
+        this(data.getX() - 0.4D,
+                data.getY(),
+                data.getZ() - 0.4D,
+                data.getX() + 0.4D,
+                data.getY() + 1.9D,
+                data.getZ() + 0.4D);
     }
 
     public ABox(final ALocation PLocation, final ALocation PLocation2) {

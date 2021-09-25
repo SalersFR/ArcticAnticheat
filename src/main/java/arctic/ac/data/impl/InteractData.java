@@ -22,7 +22,7 @@ public class InteractData {
     private NPC entityANPC;
     private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging,ticksSinceBow;
     private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported, cinematic;
-    private long lastHitPacket;
+    private long lastHitPacket, lastTeleport;
 
     private Player player;
 
@@ -96,7 +96,7 @@ public class InteractData {
         if (ticksSinceJoin < 1000)
             this.ticksSinceJoin++;
         this.isHurt = ticksSinceHurt <= 2;
-        this.teleported = ticksSinceTeleport < 80;
+        this.teleported = System.currentTimeMillis() - lastTeleport < 30;
         if (new WorldUtils().isOnACertainBlock(data.getPlayer(), "slime")) {
             this.ticksSinceSlime = 0;
         }
@@ -106,6 +106,8 @@ public class InteractData {
     public void handleOutTeleport(WrapperPlayServerEntityTeleport wrapper) {
         if (wrapper.getEntityID() == data.getPlayer().getEntityId()) {
             this.ticksSinceTeleport = 0;
+            this.lastTeleport = System.currentTimeMillis();
+
         }
     }
 

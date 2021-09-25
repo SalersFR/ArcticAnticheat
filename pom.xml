@@ -89,6 +89,9 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
+
+
+
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
@@ -102,17 +105,25 @@
             <scope>provided</scope>
         </dependency>
 
+
+
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>19.0.0</version>
             <scope>compile</scope>
         </dependency>
+
+
+
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
             <version>4.6.0</version>
         </dependency>
+
+
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

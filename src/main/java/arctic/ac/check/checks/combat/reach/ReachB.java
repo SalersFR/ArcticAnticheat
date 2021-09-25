@@ -23,7 +23,7 @@ public class ReachB extends Check {
             for (int i = 0; i < 2; i++) {
                 toReturn.add(data.getPastEntityLocations().get(i + (ping / 50)).toVector());
             }
-        }catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
 
         }
 
@@ -31,18 +31,19 @@ public class ReachB extends Check {
     }
 
     public ReachB(final PlayerData data) {
-        super(data,"Reach","B","combat.reach.b",true);
+        super(data, "Reach", "B", "combat.reach.b", true);
     }
+
     @Override
     public void handle(Event e) {
-        if(e instanceof UseEntityEvent) {
+        if (e instanceof UseEntityEvent) {
 
             final UseEntityEvent event = (UseEntityEvent) e;
-            if(event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+            if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
 
                 data.setTarget((LivingEntity) event.getTarget());
 
-                final EntityPlayer nms = ((CraftPlayer)data.getPlayer()).getHandle();
+                final EntityPlayer nms = ((CraftPlayer) data.getPlayer()).getHandle();
 
                 final List<Vector> pastVectors = ray(nms.ping);
 
@@ -52,12 +53,11 @@ public class ReachB extends Check {
 
                 debug(distance + "");
 
-                if(distance > 3.1D) {
-                    if(++buffer > 5) {
+                if (distance > 3.1D) {
+                    if (++buffer > 4) {
                         fail("distance=" + distance);
                     }
-                } else if(buffer > 0) buffer -= 0.75D;
-
+                } else if (buffer > 0) buffer -= 0.5D;
 
 
             }
