@@ -5,13 +5,16 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.ArmAnimationEvent;
 import arctic.ac.event.client.UseEntityEvent;
+import arctic.ac.utils.ArcticQueue;
 import com.comphenix.protocol.wrappers.EnumWrappers;
+import org.bukkit.Location;
 
 public class KillAuraE extends Check {
 
     //Got the idea from GladUrBad
 
     private int attacks, swings;
+    private ArcticQueue<Location> pastHittedLocations = new ArcticQueue<Location>(11);
 
     public KillAuraE(PlayerData data) {
         super(data, "KillAura", "E", "combat.killaura.e", true);
@@ -25,16 +28,21 @@ public class KillAuraE extends Check {
 
             if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
                 this.attacks++;
+                this.pastHittedLocations.add(event.getTarget().getLocation());
 
             }
         } else if (e instanceof ArmAnimationEvent) {
             this.swings++;
             if (swings >= 100) {
-                /**
-                 * TODO CHECK IF TARGET IS AFK / NOT MOVING
-                 */
-                if (++attacks > 89) {
-                    if (++buffer > 12) {
+
+                if(pastHittedLocations.size() < 3) return;
+
+                final Location current = pastHittedLocations.get(0);
+                final Location past = pastHittedLocations.get(3);
+
+                final boolean moved = past.getYaw() != current.getYaw() && past.getPitch() != current.getPitch() && past.distance(current) > 0.01D;
+                if (++attacks > 89 && moved) {
+                    if (++buffer > 4) {
                         fail("attacks=" + attacks);
                     } else if (buffer > 0) buffer -= 0.5D;
                 }
