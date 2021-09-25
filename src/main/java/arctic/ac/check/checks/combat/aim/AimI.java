@@ -32,7 +32,8 @@ public class AimI extends Check {
                     (Math.abs(deltaPitch) * MathUtils.EXPANDER), (Math.abs(lastDeltaPitch) * MathUtils.EXPANDER));
             final float pitch = event.getTo().getPitch();
 
-            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || deltaYaw < 5.0 || deltaPitch == 0.0 || lastDeltaPitch == 0.0 || data.getCinematicProcessor().getTicksSince() < 10;
+            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || deltaYaw < 5.0 || deltaPitch == 0.0 ||
+                    lastDeltaPitch == 0.0 || data.getCinematicProcessor().getTicksSince() < 10;
             final boolean exemptCombat = (System.currentTimeMillis() - data.getInteractionData().getLastHitPacket()) > 100L;
 
             debug("gcd=" + gcd + " deltaYaw=" + deltaYaw + " exempt=" + exempt);

@@ -51,6 +51,7 @@ public class CheckManager {
                 new NoFallB(data),
 
                 new MotionA(data),
+                new MotionB(data),
 
                 // COMBAT
                 new AimA(data),

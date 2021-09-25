@@ -40,6 +40,19 @@ public class WorldUtils {
         return finalLoc;
     }
 
+
+    public boolean isOnGround(final Location location, final double dropDown) {
+        final double expand = 0.31;
+
+        for (double x = -expand; x <= expand; x += expand) {
+            for (double z = -expand; z <= expand; z += expand) {
+                if (getBlockAsync(location.clone().add(x,dropDown,z)).getType() != Material.AIR)
+                    return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Checking if a location is close to ground
      *
@@ -51,13 +64,25 @@ public class WorldUtils {
         double distanceToGround = 0.3;
         for (double locX = -distanceToGround; locX <= distanceToGround; locX += distanceToGround) {
             for (double locZ = -distanceToGround; locZ <= distanceToGround; locZ += distanceToGround) {
-                if (location.clone().add(0, -0.5001, 0).getBlock().getType() == Material.AIR) {
+                if (location.clone().add(locX, -0.5001, locZ).getBlock().getType() == Material.AIR) {
                     return false;
                 }
             }
 
         }
         return true;
+    }
+
+    public boolean blockNearHead(final Location location, final Player player) {
+        final double expand = 0.31;
+
+        for (double x = -expand; x <= expand; x += expand) {
+            for (double z = -expand; z <= expand; z += expand) {
+                if (getBlockAsync(location.clone().add(x, 2.0, z)).getType() != Material.AIR)
+                    return true;
+            }
+        }
+        return false;
     }
 
     /**
