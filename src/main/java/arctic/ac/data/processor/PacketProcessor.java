@@ -32,6 +32,12 @@ public class PacketProcessor {
                 || bypass
                 || data.getInteractData().getTicksSinceTeleport() < 10;
 
+        for (Check checks : data.getChecks()) {
+            if (checks.isEnabled() && !exempt) {
+                checks.handle(new arctic.ac.event.client.PacketEvent(event));
+            }
+        }
+
 
 
 

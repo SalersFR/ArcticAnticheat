@@ -10,7 +10,6 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
-import net.minecraft.server.v1_8_R3.PacketPlayOutTransaction;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
 import java.lang.reflect.InvocationTargetException;
@@ -34,13 +33,12 @@ public class BadPacketsE extends Check {
 
             if (type == PacketType.Play.Client.TRANSACTION) {
                 final WrapperPlayClientTransaction wrapperPlayClientTransaction = new WrapperPlayClientTransaction(event.getContainer());
-                    debug("ticks=" + this.ticksSinceLastTransactionConfirm +  "currentID=" + wrapperPlayClientTransaction.getWindowId());
-                    this.ticksSinceLastTransactionConfirm = 0;
+                debug("ticks=" + this.ticksSinceLastTransactionConfirm + "currentID=" + wrapperPlayClientTransaction.getWindowId());
+                this.ticksSinceLastTransactionConfirm = 0;
             }
 
 
         } else if (e instanceof FlyingEvent) {
-            final EntityPlayer nmsPlayer = ((CraftPlayer) data.getPlayer()).getHandle();
 
             PacketContainer packet = new PacketContainer(PacketType.Play.Server.TRANSACTION);
             packet.getBooleans().write(0, false);
@@ -54,9 +52,9 @@ public class BadPacketsE extends Check {
             }
 
             debug("ticks=" + this.ticksSinceLastTransactionConfirm);
-            if (++this.ticksSinceLastTransactionConfirm > 21) {
+            if (++this.ticksSinceLastTransactionConfirm > 27) {
                 if (++buffer > 1) {
-                    fail("ticks=" + this.ticksSinceLastTransactionConfirm );
+                    fail("ticks=" + this.ticksSinceLastTransactionConfirm);
                 }
 
             } else if (buffer > 0) buffer = 0;

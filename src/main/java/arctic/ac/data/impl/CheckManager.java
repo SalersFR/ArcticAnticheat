@@ -42,7 +42,8 @@ public class CheckManager {
                 new BadPacketsB(data),
                 new BadPacketsC(data),
                 new BadPacketsD(data),
-                //new BadPacketsE(data),
+                new BadPacketsE(data),
+                new BadPacketsF(data),
 
                 new TimerA(data),
 

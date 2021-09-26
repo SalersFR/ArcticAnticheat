@@ -7,7 +7,7 @@ import arctic.ac.event.client.RotationEvent;
 
 public class AimK extends Check {
 
-    private double lastDeltaYaw,lastLastDeltaYaw;
+
 
     public AimK(PlayerData data) {
         super(data, "Aim","K","combat.aim.k",true);
