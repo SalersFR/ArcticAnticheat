@@ -13,35 +13,31 @@ public class PacketHandler {
     public PacketHandler() {
 
 
+        final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
+        for (PacketType types : PacketType.values()) {
+            if (types.isSupported()) {
+                manager.addPacketListener(new PacketAdapter(Arctic.INSTANCE, types) {
+                    @Override
+                    public void onPacketReceiving(PacketEvent event) {
+
+                        final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+
+                        data.getPacketProcessor().handleReceive(event);
+                    }
+
+                    @Override
+                    public void onPacketSending(PacketEvent event) {
+
+                        final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+
+                        data.getPacketProcessor().handleSending(event);
+                    }
+                });
 
 
-            final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
-            for (PacketType types : PacketType.values()) {
-                if (types.isSupported()) {
-                    manager.addPacketListener(new PacketAdapter(Arctic.INSTANCE, types) {
-                        @Override
-                        public void onPacketReceiving(PacketEvent event) {
-
-                            final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
-
-                            data.getPacketProcessor().handleReceive(event);
-                        }
-
-                        @Override
-                        public void onPacketSending(PacketEvent event) {
-
-                            final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
-
-                            data.getPacketProcessor().handleSending(event);
-                        }
-                    });
-
-
-                }
             }
         }
-
-
-
-
     }
+
+
+}

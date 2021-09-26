@@ -39,10 +39,6 @@ public class PacketProcessor {
         }
 
 
-
-
-
-
         data.getPosData().setLastPacket(event.getPacketType());
 
         if (event.getPacketType() == PacketType.Play.Client.LOOK) {
@@ -160,7 +156,7 @@ public class PacketProcessor {
             }
 
 
-        } else if(event.getPacketType() == PacketType.Play.Client.TRANSACTION) {
+        } else if (event.getPacketType() == PacketType.Play.Client.TRANSACTION) {
             final WrapperPlayClientTransaction wrapper = new WrapperPlayClientTransaction(event.getPacket());
 
             data.getVelocityData().handleTransaction(wrapper);
@@ -199,7 +195,7 @@ public class PacketProcessor {
             }
 
 
-        } else if(event.getPacketType() == PacketType.Play.Server.ENTITY_TELEPORT) {
+        } else if (event.getPacketType() == PacketType.Play.Server.ENTITY_TELEPORT) {
             final WrapperPlayServerEntityTeleport packet = new WrapperPlayServerEntityTeleport(event.getPacket());
             data.getInteractData().handleOutTeleport(packet);
         }

@@ -10,12 +10,12 @@ public class AimM extends Check {
     private double lastDeltaYaw;
 
     public AimM(PlayerData data) {
-        super(data, "Aim","M","combat.aim.m",true);
+        super(data, "Aim", "M", "combat.aim.m", true);
     }
 
     @Override
     public void handle(Event e) {
-        if(e instanceof RotationEvent) {
+        if (e instanceof RotationEvent) {
 
             final RotationEvent event = (RotationEvent) e;
 
@@ -29,13 +29,13 @@ public class AimM extends Check {
 
             final double accel = Math.abs(deltaYaw - lastDeltaYaw);
 
-            if(!exempt && !exemptCombat) {
+            if (!exempt && !exemptCombat) {
                 debug("accel=" + accel);
-                if(accel < 0.00401D) {
-                    if(++buffer > 3) {
+                if (accel < 0.00401D) {
+                    if (++buffer > 3) {
                         fail("accel=" + accel + " dy=" + deltaYaw);
                     }
-                } else if(buffer > 0) buffer -= 1.5D;
+                } else if (buffer > 0) buffer -= 1.5D;
             }
         }
 

@@ -34,7 +34,6 @@ public class AutoclickerB extends Check {
                 debug("lastDiff=" + lastDiff + " diff=" + diff + " result=" + result);
 
 
-
                 if (result < 3.5D) {
                     if (buffer < 8 && result != 0) buffer += Math.abs((2.5 - result));
 

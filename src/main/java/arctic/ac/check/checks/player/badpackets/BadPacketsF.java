@@ -6,7 +6,6 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
 import arctic.ac.event.client.PacketEvent;
 import com.comphenix.protocol.PacketType;
-import org.bukkit.Bukkit;
 
 public class BadPacketsF extends Check {
 
@@ -14,28 +13,29 @@ public class BadPacketsF extends Check {
 
 
     public BadPacketsF(PlayerData data) {
-        super(data, "BadPackets","F","player.badpackets.f",true);
+        super(data, "BadPackets", "F", "player.badpackets.f", true);
     }
 
     @Override
     public void handle(Event e) {
-        if(e instanceof PacketEvent) {
+        if (e instanceof PacketEvent) {
 
             final PacketEvent event = (PacketEvent) e;
             final PacketType type = event.getPacketType();
 
-            if(type == PacketType.Play.Client.KEEP_ALIVE) {
+            if (type == PacketType.Play.Client.KEEP_ALIVE) {
                 this.ticksSince = 0;
             }
 
+        } else if (e instanceof FlyingEvent) {
 
-
-        } else if(e instanceof FlyingEvent) {
             debug("ticksSince=" + ticksSince);
-            if(++this.ticksSince > 79) {
-                if(++buffer > 2)
+
+            if (++this.ticksSince > 79) {
+                if (++buffer > 2)
                     fail("ticks=" + ticksSince);
-            } else if(buffer > 0) buffer = 0;
+                
+            } else if (buffer > 0) buffer = 0;
 
         }
 

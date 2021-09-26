@@ -46,7 +46,7 @@ public class WorldUtils {
 
         for (double x = -expand; x <= expand; x += expand) {
             for (double z = -expand; z <= expand; z += expand) {
-                if (getBlockAsync(location.clone().add(x,dropDown,z)).getType() != Material.AIR)
+                if (getBlockAsync(location.clone().add(x, dropDown, z)).getType() != Material.AIR)
                     return true;
             }
         }

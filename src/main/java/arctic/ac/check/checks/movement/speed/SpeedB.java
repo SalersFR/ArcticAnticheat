@@ -9,7 +9,8 @@ import org.bukkit.entity.Player;
 
 public class SpeedB extends Check {
 
-    private int gTicks,aTicks,ticksSinceAir;
+    private int gTicks, aTicks, ticksSinceAir;
+
     public SpeedB(PlayerData data) {
         super(data, "Speed", "B", "movement.speed.b", true);
     }
@@ -17,18 +18,18 @@ public class SpeedB extends Check {
 
     @Override
     public void handle(Event e) {
-        if(e instanceof MoveEvent) {
+        if (e instanceof MoveEvent) {
 
             final MoveEvent moveEvent = (MoveEvent) e;
 
             final double deltaXZ = moveEvent.getDeltaXZ();
 
-            if(deltaXZ > 1.7D) {
+            if (deltaXZ > 1.7D) {
                 fail("very blatant speed=" + deltaXZ);
                 return;
             }
 
-             double limit = 0.7D;
+            double limit = 0.7D;
 
             final boolean ground = moveEvent.isGround();
 
@@ -40,36 +41,34 @@ public class SpeedB extends Check {
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
-                    || worldUtils.isOnACertainBlock(player,"ICE")
-                    || worldUtils.isOnACertainBlock(player,"FENCE")
+                    || worldUtils.isOnACertainBlock(player, "ICE")
+                    || worldUtils.isOnACertainBlock(player, "FENCE")
                     || data.getInteractData().getTicksSinceHurt() < 140;
 
-            if(exempt) return;
+            if (exempt) return;
 
-            if(ground) {
+            if (ground) {
                 gTicks++;
                 aTicks = 0;
-             } else  {
+            } else {
                 gTicks = 0;
                 aTicks++;
             }
 
-            if(gTicks > 10 || ground ) {
+            if (gTicks > 10 || ground) {
                 limit = 0.42873899;
 
 
-
-
-            }else {
+            } else {
                 limit = 0.689;
                 this.ticksSinceAir = 0;
             }
 
-            if(deltaXZ > limit && !exempt) {
-                if(++buffer > 2) {
-                    fail( deltaXZ + ">=" + limit);
+            if (deltaXZ > limit && !exempt) {
+                if (++buffer > 2) {
+                    fail(deltaXZ + ">=" + limit);
                 }
-            } else if(buffer > 0) buffer *= 0.99D;
+            } else if (buffer > 0) buffer *= 0.99D;
 
 
             this.ticksSinceAir++;

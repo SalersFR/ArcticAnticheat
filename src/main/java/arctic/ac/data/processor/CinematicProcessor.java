@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 public class CinematicProcessor {
 
     private final PlayerData data;
-    private double lastDeltaPitch,lastDeltaYaw,lastAccelPitch,lastAccelYaw;
+    private double lastDeltaPitch, lastDeltaYaw, lastAccelPitch, lastAccelYaw;
     private int ticksSince;
 
     public void process(final RotationEvent event) {
@@ -41,13 +41,13 @@ public class CinematicProcessor {
 
         final double sensivity = MathUtils.getSensitivity(deltaPitch, (float) lastDeltaPitch);
 
-        final boolean invalidYaw = accelAccelYaw< .05 && accelAccelYaw > 0;
+        final boolean invalidYaw = accelAccelYaw < .05 && accelAccelYaw > 0;
         final boolean invalidPitch = accelAccelPitch < .05 && accelAccelPitch > 0;
 
         final boolean exponentialYaw = String.valueOf(accelAccelYaw).contains("E");
         final boolean exponentialPitch = String.valueOf(accelAccelPitch).contains("E");
 
-        if(sensivity < 100 && (exponentialPitch || exponentialYaw || invalidYaw || invalidPitch)) {
+        if (sensivity < 100 && (exponentialPitch || exponentialYaw || invalidYaw || invalidPitch)) {
             this.ticksSince = 0;
 
         }

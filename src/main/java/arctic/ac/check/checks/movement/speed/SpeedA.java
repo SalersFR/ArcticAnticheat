@@ -74,7 +74,7 @@ public class SpeedA extends Check {
 
             debug("pred=" + prediction + " deltaXZ=" + deltaXZ);
 
-            if(data.getInteractData().getTicksSinceBow() < 11)
+            if (data.getInteractData().getTicksSinceBow() < 11)
                 prediction += 0.49D;
 
             final boolean exempt = data.getInteractionData().isHurt() ||

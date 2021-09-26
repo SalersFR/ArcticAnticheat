@@ -2,7 +2,6 @@ package arctic.ac.data.impl;
 
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.server.ServerVelocityEvent;
-import arctic.ac.utils.WorldUtils;
 import com.comphenix.packetwrapper.WrapperPlayClientTransaction;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -29,14 +28,14 @@ public class VelocityData {
     }
 
     public void handleFlying() {
-        if(velocityTicks > 0) {
-            if(velocityY > 0) {
+        if (velocityTicks > 0) {
+            if (velocityY > 0) {
                 velocityY -= 0.08D;
                 velocityY *= 0.98F;
             } else velocityY = 0;
         }
 
-        if(velocityY < 0.005) {
+        if (velocityY < 0.005) {
             velocityY = 0;
         }
 
@@ -44,14 +43,14 @@ public class VelocityData {
     }
 
     public void handleTransaction(WrapperPlayClientTransaction wrapper) {
-        if(wrapper.getActionNumber() == velocityID) {
+        if (wrapper.getActionNumber() == velocityID) {
             velocityY = originalVelocityY = velocity.getY();
             velocityTicks = 0;
         }
     }
 
     public void handleVelocity(ServerVelocityEvent e) {
-        if(e.getEntityID() == data.getPlayer().getEntityId()) {
+        if (e.getEntityID() == data.getPlayer().getEntityId()) {
             double x = Math.abs(e.getX());
             double y = e.getY();
             double z = Math.abs(e.getZ());
@@ -70,7 +69,7 @@ public class VelocityData {
                 exception.printStackTrace();
             }
 
-            if(velocityID <= 200) {
+            if (velocityID <= 200) {
                 velocityID = 10000;
             }
         }

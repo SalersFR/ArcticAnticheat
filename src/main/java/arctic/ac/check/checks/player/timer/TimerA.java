@@ -9,6 +9,7 @@ import arctic.ac.event.server.ServerPositionEvent;
 public class TimerA extends Check {
     private long lastTickTime;
     private double balance;
+
     public TimerA(PlayerData data) {
         super(data, "Timer", "A", "player.timer.a", true);
     }

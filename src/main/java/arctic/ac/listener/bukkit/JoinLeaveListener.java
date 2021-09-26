@@ -38,9 +38,9 @@ public class JoinLeaveListener implements Listener {
 
     @EventHandler
     public void onBow(EntityShootBowEvent event) {
-        if(event.getEntity().getType() == EntityType.PLAYER) {
+        if (event.getEntity().getType() == EntityType.PLAYER) {
             final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData((Player) event.getEntity());
-            if(data == null) return;
+            if (data == null) return;
 
             data.getInteractData().onBow();
 
@@ -49,9 +49,9 @@ public class JoinLeaveListener implements Listener {
 
     @EventHandler
     public void onEDBE(EntityDamageByEntityEvent event) {
-        if(event.getEntity().getType() == EntityType.PLAYER) {
+        if (event.getEntity().getType() == EntityType.PLAYER) {
             final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData((Player) event.getEntity());
-            if(data == null) return;
+            if (data == null) return;
 
             data.getInteractData().onEDBE();
         }

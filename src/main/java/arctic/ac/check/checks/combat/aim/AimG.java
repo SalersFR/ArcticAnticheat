@@ -33,7 +33,7 @@ public class AimG extends Check {
 
             debug("gcd=" + gcd);
 
-            if(data.getCinematicProcessor().getTicksSince() < 10) return;
+            if (data.getCinematicProcessor().getTicksSince() < 10) return;
 
             if (Math.min(this.lastPitchAtan, Math.atan(pitch)) == this.result && gcd < 0x20000 && gcd > 0) {
                 if (this.buffer < 15) buffer++;

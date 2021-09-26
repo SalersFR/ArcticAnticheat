@@ -20,7 +20,7 @@ public class InteractData {
 
 
     private NPC entityANPC;
-    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging,ticksSinceBow;
+    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging, ticksSinceBow;
     private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported, cinematic;
     private long lastHitPacket, lastTeleport;
 
@@ -111,7 +111,9 @@ public class InteractData {
         }
     }
 
-    public void onBow() {this.ticksSinceBow = 0;}
+    public void onBow() {
+        this.ticksSinceBow = 0;
+    }
 
     public void onEDBE() {
         this.ticksSinceHurt = 0;

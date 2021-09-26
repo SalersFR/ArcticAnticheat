@@ -35,7 +35,7 @@ public class KillAuraE extends Check {
             this.swings++;
             if (swings >= 100) {
 
-                if(pastHittedLocations.size() < 3) return;
+                if (pastHittedLocations.size() < 3) return;
 
                 final Location current = pastHittedLocations.get(0);
                 final Location past = pastHittedLocations.get(3);

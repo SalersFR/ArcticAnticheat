@@ -8,15 +8,14 @@ import arctic.ac.event.client.RotationEvent;
 public class AimK extends Check {
 
 
-
     public AimK(PlayerData data) {
-        super(data, "Aim","K","combat.aim.k",true);
+        super(data, "Aim", "K", "combat.aim.k", true);
     }
 
     @Override
     public void handle(Event e) {
 
-        if(e instanceof RotationEvent) {
+        if (e instanceof RotationEvent) {
 
 
             final RotationEvent event = (RotationEvent) e;
