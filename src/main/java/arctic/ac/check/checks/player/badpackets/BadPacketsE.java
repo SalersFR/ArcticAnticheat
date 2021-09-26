@@ -9,8 +9,6 @@ import com.comphenix.packetwrapper.WrapperPlayClientTransaction;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
 import java.lang.reflect.InvocationTargetException;
 

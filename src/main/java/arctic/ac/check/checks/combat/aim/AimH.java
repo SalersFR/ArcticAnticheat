@@ -19,9 +19,8 @@ public class AimH extends Check {
         if (event instanceof RotationEvent) {
             RotationEvent rotationEvent = (RotationEvent) event;
             /**
-            CREDITS FREQUENCY
-            **/
-
+             CREDITS FREQUENCY
+             **/
 
 
             // Get the deltas from the rotation update

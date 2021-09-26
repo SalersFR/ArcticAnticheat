@@ -31,19 +31,19 @@ public class VelocityA extends Check {
 
             int velocityTicks = data.getVelocityData().getVelocityTicks() - 1;
 
-            if(velocityTicks < 5 && !exempt) {
+            if (velocityTicks < 5 && !exempt) {
                 double predictedVelocity = data.getVelocityData().getVelocityY();
 
                 double ratio = deltaY / predictedVelocity;
 
-                if(ratio > 0 && ratio < 0.9999) {
-                    if(buffer++ > 0) {
-                        fail("percentage="+(float)ratio+" deltaY="+(float)deltaY+" predicted="+(float)predictedVelocity);
+                if (ratio > 0 && ratio < 0.9999) {
+                    if (buffer++ > 0) {
+                        fail("percentage=" + (float) ratio + " deltaY=" + (float) deltaY + " predicted=" + (float) predictedVelocity);
                         buffer = 0;
                     }
                 } else buffer = Math.max(0, buffer - 0.1);
 
-                debug("percentage="+(float)(ratio*100.0)+", deltaY="+(float)deltaY+", predicted="+(float)predictedVelocity);
+                debug("percentage=" + (float) (ratio * 100.0) + ", deltaY=" + (float) deltaY + ", predicted=" + (float) predictedVelocity);
             }
         }
     }

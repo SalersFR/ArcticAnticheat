@@ -45,7 +45,7 @@ public abstract class Check {
             if (player.hasPermission("alerts.see") && player.hasMetadata("ALERTS_ON_NORMAL")) {
                 final String fromConfig = Arctic.INSTANCE.getConfig().getString("flag-message").
                         replace("%player%", data.getBukkitPlayerFromUUID().getName()).
-                        replace("%vl%", "" +((int) vl)).
+                        replace("%vl%", "" + ((int) vl)).
                         replace("%maxvl%", "" + getBanVL()).
                         replace("%type%", type).
                         replace("%check%", name);

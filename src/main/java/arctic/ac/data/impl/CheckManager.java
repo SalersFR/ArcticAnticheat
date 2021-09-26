@@ -29,8 +29,8 @@ import java.util.List;
 
 public class CheckManager {
 
-    private List<Check> checks;
     private final PlayerData data;
+    private List<Check> checks;
 
     public CheckManager(PlayerData data) {
         this.data = data;

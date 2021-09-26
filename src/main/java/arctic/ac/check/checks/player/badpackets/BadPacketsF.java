@@ -34,7 +34,7 @@ public class BadPacketsF extends Check {
             if (++this.ticksSince > 79) {
                 if (++buffer > 2)
                     fail("ticks=" + ticksSince);
-                
+
             } else if (buffer > 0) buffer = 0;
 
         }

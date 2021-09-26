@@ -13,12 +13,12 @@ public class AimL extends Check {
      */
 
     public AimL(PlayerData data) {
-        super(data, "Aim","L","combat.aim.k",true);
+        super(data, "Aim", "L", "combat.aim.k", true);
     }
 
     @Override
     public void handle(Event e) {
-        if(e instanceof RotationEvent) {
+        if (e instanceof RotationEvent) {
 
             final RotationEvent event = (RotationEvent) e;
 
@@ -29,15 +29,15 @@ public class AimL extends Check {
 
             final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || data.getCinematicProcessor().getTicksSince() < 10;
 
-            debug("deltaYaw=" + deltaYaw +" deltaPitch=" + deltaPitch);
+            debug("deltaYaw=" + deltaYaw + " deltaPitch=" + deltaPitch);
 
-            if(exempt) return;
+            if (exempt) return;
 
-            if(Double.toString(deltaPitch).contains("E") || Double.toString(deltaYaw).contains("E")) {
-                if(++buffer > 2) {
+            if (Double.toString(deltaPitch).contains("E") || Double.toString(deltaYaw).contains("E")) {
+                if (++buffer > 2) {
                     fail("too small delta");
                 }
-            } else if(buffer > 0) buffer -= 0.025D;
+            } else if (buffer > 0) buffer -= 0.025D;
 
         }
     }

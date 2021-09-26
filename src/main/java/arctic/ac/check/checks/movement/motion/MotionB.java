@@ -6,7 +6,6 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
 import arctic.ac.utils.PlayerUtils;
 import arctic.ac.utils.WorldUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -47,10 +46,10 @@ public class MotionB extends Check {
             final boolean exempt = worldUtils.blockNearHead(bukkitTo, player) || worldUtils.isCollidingWithClimbable(player)
                     || data.getInteractData().isTeleported() || data.getInteractionData().getTicksSinceHurt() < 40 || ticksSinceIce < 15;
 
-            debug("jumped=" + jumped +" deltaY=" + deltaY +" predicted=" + predicted);
+            debug("jumped=" + jumped + " deltaY=" + deltaY + " predicted=" + predicted);
 
             if (jumped && deltaY < fixedPredicted && bukkitFrom.getY() % 1 == 0 && !exempt) {
-                fail("d=" + deltaY +" p=" + fixedPredicted);
+                fail("d=" + deltaY + " p=" + fixedPredicted);
             }
 
 

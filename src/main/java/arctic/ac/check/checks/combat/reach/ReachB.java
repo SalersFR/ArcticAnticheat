@@ -15,6 +15,10 @@ import java.util.List;
 
 public class ReachB extends Check {
 
+    public ReachB(final PlayerData data) {
+        super(data, "Reach", "B", "combat.reach.b", true);
+    }
+
     private List<Vector> ray(final int ping) {
 
         final List<Vector> toReturn = new ArrayList<>();
@@ -28,10 +32,6 @@ public class ReachB extends Check {
         }
 
         return toReturn;
-    }
-
-    public ReachB(final PlayerData data) {
-        super(data, "Reach", "B", "combat.reach.b", true);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ReachB extends Check {
 
                 final double distance = pastVectors.stream().mapToDouble(vec -> vec.clone().setY(0).distance(attacker.clone().setY(0)) - 0.56969D).min().orElse(0);
 
-                if(distance == 0) return;
+                if (distance == 0) return;
 
                 debug(distance + "");
 

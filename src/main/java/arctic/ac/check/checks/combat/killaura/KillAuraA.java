@@ -31,9 +31,9 @@ public class KillAuraA extends Check {
 
                 final long elapsed = Math.abs(System.currentTimeMillis() - this.lastFlying);
 
-                final int ping = ((CraftPlayer)data.getPlayer()).getHandle().ping;
+                final int ping = ((CraftPlayer) data.getPlayer()).getHandle().ping;
 
-                if(ping > 200) return;
+                if (ping > 200) return;
 
                 debug("elapsed=" + elapsed + " current=" + System.currentTimeMillis() + " last=" + lastFlying);
 

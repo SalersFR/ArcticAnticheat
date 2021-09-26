@@ -59,17 +59,15 @@ public class PlayerData {
 
             @Override
             public void run() {
-                if(target != null) {
+                if (target != null) {
                     final Vector eye = target.getEyeLocation().toVector();
-                    pastEntityLocations.add(new ALocation(eye.getX(),eye.getY(),eye.getZ()));
-                    if(pastEntityLocations.size() >= 20) {
+                    pastEntityLocations.add(new ALocation(eye.getX(), eye.getY(), eye.getZ()));
+                    if (pastEntityLocations.size() >= 20) {
                         pastEntityLocations.clear();
                     }
                 }
             }
-        }.runTaskTimer(Arctic.INSTANCE,0L,1L);
-
-
+        }.runTaskTimer(Arctic.INSTANCE, 0L, 1L);
 
 
     }

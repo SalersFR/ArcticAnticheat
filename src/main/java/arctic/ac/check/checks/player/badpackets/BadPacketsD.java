@@ -10,20 +10,19 @@ import com.comphenix.protocol.PacketType;
 public class BadPacketsD extends Check {
 
 
-
     public BadPacketsD(PlayerData data) {
         super(data, "BadPackets", "D", "player.badpackets.d", false);
     }
 
     @Override
     public void handle(Event e) {
-        if(e instanceof FlyingEvent) {
-            if(buffer != 0) buffer = 0;
-        } else if(e instanceof PacketEvent) {
+        if (e instanceof FlyingEvent) {
+            if (buffer != 0) buffer = 0;
+        } else if (e instanceof PacketEvent) {
             final PacketEvent event = (PacketEvent) e;
-            if(event.getPacketType() == PacketType.Play.Client.WINDOW_CLICK) {
-                if(data.getInteractionData().isSprinting() || data.getInteractionData().isSneaking()) {
-                    if(++buffer > 1)
+            if (event.getPacketType() == PacketType.Play.Client.WINDOW_CLICK) {
+                if (data.getInteractionData().isSprinting() || data.getInteractionData().isSneaking()) {
+                    if (++buffer > 1)
                         fail();
                 }
             }
