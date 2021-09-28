@@ -31,7 +31,7 @@ public class BadPacketsF extends Check {
 
             debug("ticksSince=" + ticksSince);
 
-            if (++this.ticksSince > 79) {
+            if (++this.ticksSince > 89 && data.getInteractData().getTicksAlive() > 100) {
                 if (++buffer > 2)
                     fail("ticks=" + ticksSince);
 

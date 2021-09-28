@@ -27,7 +27,7 @@ public class TimerA extends Check {
             balance -= (systemTime - lastTimeRate);
 
             if (balance >= 30.0) {
-                if (++buffer > 6) {
+                if (++buffer > 6 && data.getInteractData().getTicksAlive() > 100) {
                     fail("balance=" + balance);
                     balance = 0.0D;
                 }

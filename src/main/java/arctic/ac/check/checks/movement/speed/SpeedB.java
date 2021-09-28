@@ -25,7 +25,10 @@ public class SpeedB extends Check {
             final double deltaXZ = moveEvent.getDeltaXZ();
 
             if (deltaXZ > 1.7D) {
-                fail("very blatant speed=" + deltaXZ);
+                if (++buffer > 3) {
+                    buffer = 0;
+                    fail("very blatant speed=" + deltaXZ);
+                }
                 return;
             }
 
@@ -44,9 +47,7 @@ public class SpeedB extends Check {
                     || worldUtils.isOnACertainBlock(player, "ICE")
                     || worldUtils.isOnACertainBlock(player, "FENCE")
                     || data.getInteractData().getTicksSinceHurt() < 140;
-
-            if (exempt) return;
-
+            
             if (ground) {
                 gTicks++;
                 aTicks = 0;

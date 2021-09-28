@@ -18,6 +18,15 @@ public class EntityLocation {
 
     private short id;
 
+    public void spawn(double x,double y,double z) {
+        this.minX = x;
+        this.maxX = x;
+        this.minY = y;
+        this.maxY = y;
+        this.minZ = z;
+        this.maxZ = z;
+    }
+
     public void expand(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         this.minX -= minX;
         this.minY -= minY;
@@ -39,12 +48,12 @@ public class EntityLocation {
     }
 
     public void teleport(double x, double y, double z) {
-        newMinX = x - 0.4;
-        newMinY = y - 0.1; // Am stupid not sure if expand bottom
-        newMinZ = z - 0.4;
-        newMaxX = x + 0.4;
-        newMaxY = y + 1.9;
-        newMaxZ = z + 0.4;
+        newMinX = x - 0.4D;
+        newMinY = y - 0.1D; // Am stupid not sure if expand bottom
+        newMinZ = z - 0.4D;
+        newMaxX = x + 0.4D;
+        newMaxY = y + 1.9D;
+        newMaxZ = z + 0.4D;
 
         interpolationSteps = 3;
     }

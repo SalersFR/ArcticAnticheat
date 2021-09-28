@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class MotionB extends Check {
 
-    private int ticksSinceIce;
+    private int ticksSinceIce,ticksSinceNearHead;
 
     public MotionB(PlayerData data) {
         super(data, "Motion", "B", "movement.motion.b", false);
@@ -43,8 +43,13 @@ public class MotionB extends Check {
             final float fixedPredicted = player.hasPotionEffect(PotionEffectType.JUMP) ? predicted
                     + ((PlayerUtils.getPotionLevel(player, PotionEffectType.JUMP)) * 0.1F) : predicted;
 
+            if(worldUtils.blockNearHead(bukkitTo, player)) {
+                this.ticksSinceNearHead = 0;
+            }
+
             final boolean exempt = worldUtils.blockNearHead(bukkitTo, player) || worldUtils.isCollidingWithClimbable(player)
-                    || data.getInteractData().isTeleported() || data.getInteractionData().getTicksSinceHurt() < 40 || ticksSinceIce < 15;
+                    || data.getInteractData().isTeleported() || data.getInteractionData().getTicksSinceHurt() < 40
+                    || ticksSinceIce < 15 || ticksSinceNearHead < 15    || data.getInteractionData().getTicksSinceSlime() < 60;
 
             debug("jumped=" + jumped + " deltaY=" + deltaY + " predicted=" + predicted);
 
@@ -54,6 +59,7 @@ public class MotionB extends Check {
 
 
             this.ticksSinceIce++;
+            this.ticksSinceNearHead++;
 
 
         }

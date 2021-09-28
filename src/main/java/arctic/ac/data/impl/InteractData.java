@@ -20,7 +20,7 @@ public class InteractData {
 
 
     private NPC entityANPC;
-    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging, ticksSinceBow;
+    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging, ticksSinceBow,ticksAlive;
     private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported, cinematic;
     private long lastHitPacket, lastTeleport;
 
@@ -100,6 +100,10 @@ public class InteractData {
         if (new WorldUtils().isOnACertainBlock(data.getPlayer(), "slime")) {
             this.ticksSinceSlime = 0;
         }
+
+        this.ticksAlive++;
+
+        if(data.getPlayer().isDead()) ticksAlive = 0;
 
     }
 

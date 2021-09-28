@@ -71,6 +71,7 @@ public class WrapperPlayServerEntityTeleport extends AbstractPacket {
      * @param event - the packet event.
      * @return The entity.
      */
+
     public Entity getEntity(PacketEvent event) {
         return getEntity(event.getPlayer().getWorld());
     }

@@ -3,11 +3,12 @@ package arctic.ac.check.checks.combat.aim;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
+import arctic.ac.event.client.MoveEvent;
 import arctic.ac.event.client.RotationEvent;
 
 public class AimM extends Check {
 
-    private double lastDeltaYaw;
+    private double lastDeltaYaw,deltaXZ;
 
     public AimM(PlayerData data) {
         super(data, "Aim", "M", "combat.aim.m", true);
@@ -24,7 +25,7 @@ public class AimM extends Check {
 
             this.lastDeltaYaw = deltaYaw;
 
-            final boolean exempt = deltaYaw == lastDeltaYaw;
+            final boolean exempt = deltaYaw == lastDeltaYaw || deltaXZ < 0.19D;
             final boolean exemptCombat = (System.currentTimeMillis() - data.getInteractionData().getLastHitPacket()) > 100L;
 
             final double accel = Math.abs(deltaYaw - lastDeltaYaw);
@@ -37,6 +38,8 @@ public class AimM extends Check {
                     }
                 } else if (buffer > 0) buffer -= 1.5D;
             }
+        } else if(e instanceof MoveEvent) {
+            this.deltaXZ = ((MoveEvent) e).getDeltaXZ();
         }
 
     }

@@ -34,7 +34,7 @@ public class NoFallB extends Check {
                 this.airTicks = 0;
             } else this.airTicks++;
 
-            final boolean serverGround = airTicks < 21;
+            final boolean serverGround = airTicks < 11;
 
 
             final boolean exempt = worldUtils.isInLiquid(player)

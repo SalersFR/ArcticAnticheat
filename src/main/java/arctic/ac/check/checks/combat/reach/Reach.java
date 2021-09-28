@@ -3,9 +3,11 @@ package arctic.ac.check.checks.combat.reach;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.data.tracker.TargetTracker;
+import arctic.ac.data.tracker.TrackedEntity;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.UseEntityEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 public class Reach extends Check {
@@ -36,7 +38,11 @@ public class Reach extends Check {
 
             if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
 
-                //TODO
+                for(TrackedEntity entites : tracker.getTrackedEntityList()) {
+                    if(entites.getId() == event.getTarget().getEntityId()) {
+                        Bukkit.broadcastMessage("d=" + entites.getEntityLocation().toString());
+                    }
+                }
             }
         }
 

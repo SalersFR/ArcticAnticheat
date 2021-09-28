@@ -50,7 +50,7 @@ public class BadPacketsE extends Check {
             }
 
             debug("ticks=" + this.ticksSinceLastTransactionConfirm);
-            if (++this.ticksSinceLastTransactionConfirm > 27) {
+            if (++this.ticksSinceLastTransactionConfirm > 47 &&  data.getInteractData().getTicksAlive() > 100) {
                 if (++buffer > 1) {
                     fail("ticks=" + this.ticksSinceLastTransactionConfirm);
                 }
