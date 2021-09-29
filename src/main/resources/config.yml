@@ -12,46 +12,61 @@ checks:
         ban-vl: 10
         enabled: true
         punish: true
+        setback: true
       b:
         ban-vl: 10
         enabled: true
         punish: true
+        setback: true
       c:
         ban-vl: 10
         enabled: true
         punish: true
+        setback: true
     speed:
       a:
         ban-vl: 10
         enabled: true
         punish: true
+        setback: true
       b:
         ban-vl: 10
         enabled: true
         punish: true
+        setback: true
     step:
       a:
         ban-vl: 10
         enabled: true
         punish: true
+        setback: true
     nofall:
       a:
         ban-vl: 10
         enabled: true
         punish: true
+        setback: false
       b:
         ban-vl: 10
         enabled: true
         punish: true
+        setback: false
     motion:
       a:
         ban-vl: 10
         enabled: true
         punish: true
+        setback: true
       b:
         ban-vl: 10
         enabled: true
         punish: true
+        setback: true
+      c:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: true
   combat:
     autoclicker:
       a:

@@ -41,7 +41,7 @@ public class MotionB extends Check {
 
             final float predicted = 0.42F;
             final float fixedPredicted = player.hasPotionEffect(PotionEffectType.JUMP) ? predicted
-                    + ((PlayerUtils.getPotionLevel(player, PotionEffectType.JUMP)) * 0.1F) : predicted;
+                    + ((PlayerUtils.getPotionLevel(player, PotionEffectType.JUMP)) * 0.1F) - 0.0001F : predicted;
 
             if(worldUtils.blockNearHead(bukkitTo, player)) {
                 this.ticksSinceNearHead = 0;

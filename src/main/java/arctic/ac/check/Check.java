@@ -41,6 +41,11 @@ public abstract class Check {
     protected void fail(String info) {
         vl++;
 
+        final String loweredName = this.configName.toLowerCase();
+
+        if(loweredName.contains("movement") && this.isSetback() )
+          data.getSetbackProcessor().setback();
+
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("alerts.see") && player.hasMetadata("ALERTS_ON_NORMAL")) {
                 final String fromConfig = Arctic.INSTANCE.getConfig().getString("flag-message").
@@ -136,5 +141,9 @@ public abstract class Check {
 
     public boolean isPunish() {
         return Arctic.INSTANCE.getConfig().getBoolean("checks." + this.getConfigName() + ".punish");
+    }
+
+    public boolean isSetback() {
+        return Arctic.INSTANCE.getConfig().getBoolean("checks." + this.getConfigName() + ".setback");
     }
 }

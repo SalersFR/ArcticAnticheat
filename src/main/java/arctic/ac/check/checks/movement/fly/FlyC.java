@@ -43,7 +43,8 @@ public class FlyC extends Check {
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
                     || airTicks < 9
-                    || player.getFallDistance() > 5.0F
+                    || player.getFallDistance() > 9.0F
+                    || data.getInteractData().isHurt()
                     || event.isGround();
 
             if (!exempt && deltaY > lastDeltaY) {

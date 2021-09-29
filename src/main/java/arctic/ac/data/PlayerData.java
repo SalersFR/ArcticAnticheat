@@ -8,6 +8,7 @@ import arctic.ac.data.impl.PositionData;
 import arctic.ac.data.impl.VelocityData;
 import arctic.ac.data.processor.CinematicProcessor;
 import arctic.ac.data.processor.PacketProcessor;
+import arctic.ac.data.processor.SetbackProcessor;
 import arctic.ac.data.tracker.TargetTracker;
 import arctic.ac.utils.ALocation;
 import arctic.ac.utils.ARotation;
@@ -31,6 +32,7 @@ public class PlayerData {
     private final TargetTracker targetTracker;
     private final PacketProcessor packetProcessor;
     private final CinematicProcessor cinematicProcessor;
+    private final SetbackProcessor setbackProcessor;
     private final Player player;
     private final List<ALocation> pastEntityLocations;
 
@@ -52,6 +54,7 @@ public class PlayerData {
         this.targetTracker = new TargetTracker(this);
         this.packetProcessor = new PacketProcessor(this);
         this.cinematicProcessor = new CinematicProcessor(this);
+        this.setbackProcessor = new SetbackProcessor(this);
         this.pastEntityLocations = new ArrayList<>();
         this.player = player;
 

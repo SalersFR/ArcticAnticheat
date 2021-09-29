@@ -30,7 +30,8 @@ public class PacketProcessor {
                 || data.getPlayer().getGameMode() == GameMode.SPECTATOR
                 || data.getInteractionData().isTeleported()
                 || bypass
-                || data.getInteractData().getTicksSinceTeleport() < 10;
+                || data.getInteractData().getTicksSinceTeleport() < 10
+                || data.getSetbackProcessor().getTicksSince() < 4;
 
         for (Check checks : data.getChecks()) {
             if (checks.isEnabled() && !exempt) {
@@ -81,6 +82,7 @@ public class PacketProcessor {
 
             data.getInteractData().handleFlying();
             data.getVelocityData().handleFlying();
+            data.getSetbackProcessor().handle(moveEvent);
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
@@ -97,6 +99,7 @@ public class PacketProcessor {
 
             data.getInteractData().handleFlying();
             data.getVelocityData().handleFlying();
+            data.getSetbackProcessor().handle(moveEvent);
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt)
@@ -176,7 +179,8 @@ public class PacketProcessor {
                 || data.getPlayer().getGameMode() == GameMode.SPECTATOR
                 || data.getInteractionData().isTeleported()
                 || bypass
-                || data.getInteractData().getTicksSinceTeleport() < 10;
+                || data.getInteractData().getTicksSinceTeleport() < 10
+                || data.getSetbackProcessor().getTicksSince() < 4;;
 
 
         for (Check checks : data.getChecks()) {

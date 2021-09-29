@@ -30,7 +30,7 @@ public class JoinLeaveListener implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
-        if (Arctic.INSTANCE.isCitizensPresent()) {
+        if (Arctic.INSTANCE.isCitizensPresent() && data.getInteractData().getEntityANPC() != null) {
             data.getInteractionData().getEntityANPC().destroy();
         }
         Arctic.INSTANCE.getDataManager().remove(event.getPlayer());
