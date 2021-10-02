@@ -10,7 +10,7 @@ import arctic.ac.utils.MathUtils;
 
 public class AutoclickerC extends Check {
 
-    private final ArcticQueue samples = new ArcticQueue<Integer>(120);
+    private final ArcticQueue samples = new ArcticQueue<Integer>(60);
     private int ticks;
 
     public AutoclickerC(PlayerData data) {
@@ -22,7 +22,7 @@ public class AutoclickerC extends Check {
         if (e instanceof ArmAnimationEvent) {
             if (data.getInteractionData().isDigging()) return;
 
-            if (samples.size() >= 120) {
+            if (samples.size() >= 60) {
 
                 final double deviation = MathUtils.getStandardDeviation(samples);
 

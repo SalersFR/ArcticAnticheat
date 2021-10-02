@@ -10,7 +10,7 @@ import arctic.ac.utils.MathUtils;
 
 public class AutoclickerB extends Check {
 
-    private ArcticQueue samples = new ArcticQueue<Integer>(120);
+    private ArcticQueue samples = new ArcticQueue<Integer>(60);
 
 
     private int ticks;
@@ -28,7 +28,7 @@ public class AutoclickerB extends Check {
             final double kurtosis = MathUtils.getKurtosis(samples);
             final double stdDeviation = MathUtils.getStandardDeviation(samples);
 
-            if (samples.size() >= 120) {
+            if (samples.size() >= 60) {
                 final double diff = Math.abs(kurtosis - stdDeviation);
                 final double result = Math.abs(diff - lastDiff);
                 debug("lastDiff=" + lastDiff + " diff=" + diff + " result=" + result);

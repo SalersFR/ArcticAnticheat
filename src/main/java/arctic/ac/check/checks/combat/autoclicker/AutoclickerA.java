@@ -11,7 +11,7 @@ import arctic.ac.utils.MathUtils;
 
 public class AutoclickerA extends Check {
 
-    private ArcticQueue samples = new ArcticQueue<Integer>(120);
+    private ArcticQueue samples = new ArcticQueue<Integer>(60);
     private EvictingList<Double> pastDiffs = new EvictingList<>(15);
 
     private int ticks;
@@ -30,7 +30,7 @@ public class AutoclickerA extends Check {
         if (e instanceof ArmAnimationEvent) {
             if (data.getInteractionData().isDigging()) return;
 
-            if (samples.size() >= 120) {
+            if (samples.size() >= 60) {
 
                 final double kurtosis = MathUtils.getKurtosis(samples);
                 final double stdDeviation = MathUtils.getStandardDeviation(samples);
