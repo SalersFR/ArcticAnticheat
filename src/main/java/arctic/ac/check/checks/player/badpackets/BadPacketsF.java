@@ -6,6 +6,7 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
 import arctic.ac.event.client.PacketEvent;
 import com.comphenix.protocol.PacketType;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
 public class BadPacketsF extends Check {
 
@@ -31,7 +32,7 @@ public class BadPacketsF extends Check {
 
             debug("ticksSince=" + ticksSince);
 
-            if (++this.ticksSince > 89 && data.getInteractData().getTicksAlive() > 100) {
+            if (++this.ticksSince > (89 + ((CraftPlayer) data.getPlayer()).getHandle().ping * 0.9F) && data.getInteractData().getTicksAlive() > 100) {
                 if (++buffer > 2)
                     fail("ticks=" + ticksSince);
 

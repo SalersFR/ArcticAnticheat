@@ -22,7 +22,7 @@ public class SetbackProcessor {
     private int ticksSince;
 
     public void handle(final MoveEvent event) {
-        if (event.isGround()) {
+        if (event.getTo().getY() % (1 / 64D) < 0.0001D) {
             this.lastGroundLocation = event.getTo();
         }
         this.ticksSince++;

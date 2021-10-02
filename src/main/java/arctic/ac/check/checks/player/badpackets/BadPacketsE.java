@@ -9,6 +9,7 @@ import com.comphenix.packetwrapper.WrapperPlayClientTransaction;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -50,7 +51,7 @@ public class BadPacketsE extends Check {
             }
 
             debug("ticks=" + this.ticksSinceLastTransactionConfirm);
-            if (++this.ticksSinceLastTransactionConfirm > 47 &&  data.getInteractData().getTicksAlive() > 100) {
+            if (++this.ticksSinceLastTransactionConfirm > (47 + ((CraftPlayer) data.getPlayer()).getHandle().ping * 0.87F)&&  data.getInteractData().getTicksAlive() > 100) {
                 if (++buffer > 1) {
                     fail("ticks=" + this.ticksSinceLastTransactionConfirm);
                 }
