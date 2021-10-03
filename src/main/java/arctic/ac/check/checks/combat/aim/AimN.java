@@ -47,17 +47,17 @@ public class AimN extends Check {
                 debug("d=" + standardDev + "\nk=" + kurtosis + "\ns=" + skewness);
 
 
-                if (kurtosis > 5790.0D) {
+                if (kurtosis > 7590.0D) {
                     if (++buffer > 2)
                         fail("kurtosis=" + kurtosis);
                 } else if (buffer > 0) buffer -= 1.25D;
 
-                if (Double.toString(skewness).contains("E")) {
+                if (Double.toString(skewness).contains("E") && deltaYaw > 4.2D) {
                     if (++buffer > 5)
                         fail("skewness=" + skewness);
                 } else if (buffer > 0) buffer -= 0.25D;
 
-                if (standardDev > 339) {
+                if (standardDev > 409) {
                     if (++buffer > 5)
                         fail("deviation=" + standardDev);
                 } else if (buffer > 0) buffer -= 0.25D;
