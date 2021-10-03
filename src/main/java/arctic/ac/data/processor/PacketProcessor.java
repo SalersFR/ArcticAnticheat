@@ -21,6 +21,7 @@ public class PacketProcessor {
     public void handleReceive(PacketEvent event) {
         if (data == null) return;
 
+        data.getPosData().setLastPacket(event.getPacketType());
 
         final boolean bypass = data.getPlayer().hasPermission(Arctic.INSTANCE.getConfig().getString("bypass-permission")) &&
                 Arctic.INSTANCE.getConfig().getBoolean("bypass-enabled");
@@ -39,8 +40,6 @@ public class PacketProcessor {
             }
         }
 
-
-        data.getPosData().setLastPacket(event.getPacketType());
 
         if (event.getPacketType() == PacketType.Play.Client.LOOK) {
             final WrapperPlayClientLook wrapper = new WrapperPlayClientLook(event.getPacket());

@@ -34,9 +34,9 @@ public class KillAuraG extends Check {
             double maxBuffer = 14;
 
             if (((CraftPlayer) data.getPlayer()).getHandle().ping > 150) maxBuffer = 20;
-            if (((CraftPlayer) data.getPlayer()).getHandle().ping > 150) maxBuffer = 26;
+            if (((CraftPlayer) data.getPlayer()).getHandle().ping > 215) maxBuffer = 26;
 
-            if (similarCount > 7 && pattern) {
+            if (similarCount > 12 && pattern) {
                 if (buffer++ > maxBuffer) {
                     fail("samples=" + tickSamples.size() + " recurring=" + similarCount + " patternDetected=" + pattern);
                 }

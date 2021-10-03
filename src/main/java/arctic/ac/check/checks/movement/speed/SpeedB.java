@@ -47,7 +47,7 @@ public class SpeedB extends Check {
                     || worldUtils.isOnACertainBlock(player, "ICE")
                     || worldUtils.isOnACertainBlock(player, "FENCE")
                     || data.getInteractData().getTicksSinceHurt() < 140;
-            
+
             if (ground) {
                 gTicks++;
                 aTicks = 0;

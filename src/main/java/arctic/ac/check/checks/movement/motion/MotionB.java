@@ -43,11 +43,11 @@ public class MotionB extends Check {
             final float fixedPredicted = player.hasPotionEffect(PotionEffectType.JUMP) ? predicted
                     + ((PlayerUtils.getPotionLevel(player, PotionEffectType.JUMP)) * 0.1F) - 0.0001F : predicted;
 
-            if(worldUtils.blockNearHead(bukkitTo, player)) {
+            if(worldUtils.blockNearHead(bukkitTo)) {
                 this.ticksSinceNearHead = 0;
             }
 
-            final boolean exempt = worldUtils.blockNearHead(bukkitTo, player) || worldUtils.isCollidingWithClimbable(player)
+            final boolean exempt = worldUtils.blockNearHead(bukkitTo) || worldUtils.isCollidingWithClimbable(player)
                     || data.getInteractData().isTeleported() || data.getInteractionData().getTicksSinceHurt() < 40
                     || ticksSinceIce < 15 || ticksSinceNearHead < 15    || data.getInteractionData().getTicksSinceSlime() < 60;
 

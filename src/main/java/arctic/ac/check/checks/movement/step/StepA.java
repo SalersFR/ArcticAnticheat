@@ -27,7 +27,8 @@ public class StepA extends Check {
 
             debug("groundTicks=" + groundTicks + " deltaY=" + deltaY);
 
-            if (groundTicks > 2 && deltaY > 0.6D && data.getPlayer().getVehicle() == null) {
+            if (groundTicks > 2 && deltaY > 0.6D && data.getPlayer().getVehicle() == null
+             && data.getInteractData().getTicksSinceJoin() > 10) {
                 fail("deltaY=" + deltaY);
             }
         }
