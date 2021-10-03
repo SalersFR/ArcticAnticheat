@@ -40,7 +40,7 @@ public class MotionC extends Check {
 
             final boolean exempt = worldUtils.blockNearHead(bukkitTo, player) || worldUtils.isCollidingWithClimbable(player)
                     || data.getInteractData().isTeleported() || worldUtils.isOnACertainBlock(player,"ice")||
-                    data.getInteractionData().getTicksSinceHurt() < 40;
+                    data.getInteractionData().getTicksSinceHurt() < 40 || worldUtils.blockNearHead(bukkitFrom, player);
 
 
             final double limit = 0.6239;

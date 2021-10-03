@@ -42,7 +42,9 @@ public class MotionA extends Check {
                     || event.isGround()
                     || data.getInteractionData().getTicksSinceSlime() < 120
                     || data.getInteractData().isHurt()
-                    || data.getInteractData().getTicksSinceHurt() < 40;
+                    || data.getInteractData().getTicksSinceHurt() < 40
+                    || data.getPlayer().getLocation().add(0, -0.999, 0).getBlock().toString().toLowerCase().contains("slime")
+                    || data.getPlayer().getLocation().add(0, -0.999, 0).getBlock().toString().toLowerCase().contains("piston");
 
             debug("exempt=" + exempt + " limit=" + jumpLimit + " deltaY=" + deltaY);
 
