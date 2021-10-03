@@ -35,7 +35,7 @@ public class AimN extends Check {
 
             final double accelYaw = Math.abs(deltaYaw - lastDeltaYaw);
 
-            if(!exemptCombat && event.getDeltaPitch() > 0.1D && accelYaw > 0.01)
+            if(!exemptCombat && event.getDeltaPitch() > 0.3D && accelYaw > 0.012D)
                 this.deltaYawSamples.add(event.getDeltaYaw());
 
 
