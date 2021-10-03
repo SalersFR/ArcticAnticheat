@@ -38,7 +38,7 @@ public class MotionC extends Check {
 
             final double deltaXZ = event.getDeltaXZ();
 
-            final boolean exempt = worldUtils.blockNearHead(bukkitTo, player) || worldUtils.isCollidingWithClimbable(player)
+            final boolean exempt = worldUtils.blockNearHead(bukkitTo) || worldUtils.isCollidingWithClimbable(player)
                     || data.getInteractData().isTeleported() || worldUtils.isOnACertainBlock(player,"ice")||
                     data.getInteractionData().getTicksSinceHurt() < 40;
 

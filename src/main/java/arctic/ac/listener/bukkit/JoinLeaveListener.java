@@ -18,6 +18,11 @@ public class JoinLeaveListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Arctic.INSTANCE.getDataManager().add(event.getPlayer());
 
+
+        final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+
+        data.getInteractData().setTicksSinceJoin(0);
+
         if (event.getPlayer().hasPermission("alerts.see") && event.getPlayer().hasPermission("alerts.command")) {
             if (event.getPlayer().hasMetadata("ALERTS_ON_NORMAL") || event.getPlayer().hasMetadata("ALERTS_ON_VERBOSE"))
                 return;

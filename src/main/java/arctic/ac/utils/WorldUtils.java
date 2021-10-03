@@ -73,7 +73,7 @@ public class WorldUtils {
         return true;
     }
 
-    public boolean blockNearHead(final Location location, final Player player) {
+    public boolean blockNearHead(final Location location) {
         final double expand = 0.31;
 
         for (double x = -expand; x <= expand; x += expand) {

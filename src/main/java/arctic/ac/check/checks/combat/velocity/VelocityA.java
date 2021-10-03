@@ -27,7 +27,8 @@ public class VelocityA extends Check {
                     || worldUtils.isInLiquid(player)
                     || worldUtils.isInLiquidVertically(player)
                     || worldUtils.isCollidingWithClimbable(player)
-                    || worldUtils.haveABlockNearHead(player);
+                    || worldUtils.haveABlockNearHead(player)
+                    || worldUtils.blockNearHead(player.getLocation());
 
             int velocityTicks = data.getVelocityData().getVelocityTicks() - 1;
 
