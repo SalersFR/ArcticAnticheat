@@ -1,8 +1,10 @@
 package arctic.ac.utils;
 
+import com.google.common.collect.Lists;
 import lombok.experimental.UtilityClass;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @UtilityClass
@@ -42,6 +44,8 @@ public class MathUtils {
     public double gcd(final double limit, final double a, final double b) {
         return b <= limit ? a : MathUtils.gcd(limit, b, a % b);
     }
+
+
 
     // Taken from https://github.com/ElevatedDev/Frequency
 
@@ -149,5 +153,27 @@ public class MathUtils {
             return true;
         }
         return false;
+    }
+
+    public double getSkewness(final Collection<? extends Number> data) {
+        double sum = 0;
+        int count = 0;
+
+        final List<Double> numbers = Lists.newArrayList();
+
+        for (final Number number : data) {
+            sum += number.doubleValue();
+            ++count;
+
+            numbers.add(number.doubleValue());
+        }
+
+        Collections.sort(numbers);
+
+        final double mean =  sum / count;
+        final double median = (count % 2 != 0) ? numbers.get(count / 2) : (numbers.get((count - 1) / 2) + numbers.get(count / 2)) / 2;
+        final double variance = getVariance(data);
+
+        return 3 * (mean - median) / variance;
     }
 }

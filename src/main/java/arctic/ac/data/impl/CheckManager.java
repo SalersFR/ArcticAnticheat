@@ -80,6 +80,7 @@ public class CheckManager {
                 new AimK(data),
                 new AimL(data),
                 new AimM(data),
+                new AimN(data),
 
                 new AutoclickerA(data),
                 new AutoclickerB(data),
