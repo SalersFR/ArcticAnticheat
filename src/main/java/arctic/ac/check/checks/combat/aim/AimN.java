@@ -35,6 +35,8 @@ public class AimN extends Check {
 
             final double accelYaw = Math.abs(deltaYaw - lastDeltaYaw);
 
+            if(data.getCinematicProcessor().getTicksSince() < 3) return;
+
             if(!exemptCombat && event.getDeltaPitch() > 0.3D && accelYaw > 0.012D)
                 this.deltaYawSamples.add(event.getDeltaYaw());
 
@@ -42,6 +44,8 @@ public class AimN extends Check {
             final double kurtosis = MathUtils.getKurtosis(deltaYawSamples);
             final double standardDev = MathUtils.getStandardDeviation(deltaYawSamples);
             final double skewness = MathUtils.getSkewness(deltaYawSamples);
+
+
 
             if(deltaYawSamples.size() >= 120) {
                 debug("d=" + standardDev + "\nk=" + kurtosis + "\ns=" + skewness);
