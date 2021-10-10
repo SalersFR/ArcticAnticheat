@@ -4,7 +4,14 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
+import arctic.ac.event.client.PacketEvent;
 import arctic.ac.event.server.ServerPositionEvent;
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class TimerA extends Check {
     private long lastTickTime;
@@ -16,30 +23,41 @@ public class TimerA extends Check {
 
     @Override
     public void handle(Event e) {
-        if (e instanceof FlyingEvent) {
-            if (data.getInteractData().getLastHitPacket() != 0) {
-                if (getMillis(data.getInteractData().getLastHitPacket()) < 110L) return;
-            }
-            long systemTime = System.currentTimeMillis();
-            long lastTimeRate = this.lastTickTime != 0 ? this.lastTickTime : systemTime - 50;
-            this.lastTickTime = systemTime;
-            balance += 50.0;
-            balance -= (systemTime - lastTimeRate);
 
-            boolean exempt = data.getInteractData().getTicksSinceJoin() < 60;
 
-            if (balance >= 30.0 && !exempt) {
-                if (++buffer > 6 && data.getInteractData().getTicksAlive() > 100) {
-                    fail("balance=" + balance);
-                    balance = 0.0D;
+
+       if(e instanceof PacketEvent) {
+            final PacketEvent event = (PacketEvent) e;
+            if(event.getPacketType() == PacketType.Play.Client.TRANSACTION) {
+                final int ping = ((CraftPlayer) data.getPlayer()).getHandle().ping;
+                this.balance -= ping * 0.05F;
+                debug("balance=" + balance);
+            } else if(event.getPacketType() == PacketType.Play.Client.FLYING ||
+                    event.getPacketType() == PacketType.Play.Client.POSITION ||
+                    event.getPacketType() == PacketType.Play.Client.POSITION_LOOK ||
+                    event.getPacketType() == PacketType.Play.Client.LOOK) {
+
+
+
+                balance++;
+
+                PacketContainer packet = new PacketContainer(PacketType.Play.Server.TRANSACTION);
+                packet.getBooleans().write(0, false);
+                packet.getShorts().write(0, (short) 0);
+                packet.getIntegers().write(0, 0);
+
+                try {
+                    ProtocolLibrary.getProtocolManager().sendServerPacket(data.getPlayer(), packet);
+                } catch (InvocationTargetException exception) {
+                    exception.printStackTrace();
                 }
-            } else {
-                buffer -= (buffer > 0) ? 2 : 0;
-            }
 
-            debug("balance=" + balance);
-        } else if (e instanceof ServerPositionEvent) {
-            balance -= 50.D;
+
+
+
+
+
+            }
 
         }
     }

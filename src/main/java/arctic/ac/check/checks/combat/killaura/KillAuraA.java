@@ -33,7 +33,7 @@ public class KillAuraA extends Check {
 
                 final int ping = ((CraftPlayer) data.getPlayer()).getHandle().ping;
 
-                if (ping > 200) return;
+                if (ping > 125) return;
 
                 debug("elapsed=" + elapsed + " current=" + System.currentTimeMillis() + " last=" + lastFlying);
 

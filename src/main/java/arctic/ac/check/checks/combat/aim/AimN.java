@@ -16,6 +16,7 @@ public class AimN extends Check {
     private double lastDeltaYaw;
 
     private final ArcticQueue<Float> deltaYawSamples = new ArcticQueue<Float>(120);
+    private double lastSkewness,lastDev,lastKurtosis;
 
     public AimN(PlayerData data) {
         super(data, "Aim", "N", "combat.aim.n", true);
@@ -51,23 +52,28 @@ public class AimN extends Check {
                 debug("d=" + standardDev + "\nk=" + kurtosis + "\ns=" + skewness);
 
 
-                if (kurtosis > 7590.0D) {
+
+                if (kurtosis > 7590.0D && kurtosis != lastKurtosis) {
                     if (++buffer > 2)
                         fail("kurtosis=" + kurtosis);
                 } else if (buffer > 0) buffer -= 1.25D;
 
-                if (Double.toString(skewness).contains("E") && deltaYaw > 4.2D) {
+                if (Double.toString(skewness).contains("E") && deltaYaw > 4.2D && lastSkewness != skewness)  {
                     if (++buffer > 5)
                         fail("skewness=" + skewness);
                 } else if (buffer > 0) buffer -= 0.25D;
 
-                if (standardDev > 409) {
+                if (standardDev > 409 && standardDev != lastDev) {
                     if (++buffer > 5)
                         fail("deviation=" + standardDev);
                 } else if (buffer > 0) buffer -= 0.25D;
 
 
             }
+
+            this.lastKurtosis = kurtosis;
+            this.lastDev = standardDev;
+            this.lastSkewness = skewness;
 
         }
 
