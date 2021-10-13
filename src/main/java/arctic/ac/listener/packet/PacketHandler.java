@@ -12,7 +12,6 @@ public class PacketHandler {
 
     public PacketHandler() {
 
-
         final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
         for (PacketType types : PacketType.values()) {
             if (types.isSupported()) {
@@ -22,6 +21,8 @@ public class PacketHandler {
 
                         final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
+                        if (data == null) return;
+
                         data.getPacketProcessor().handleReceive(event);
                     }
 
@@ -29,6 +30,8 @@ public class PacketHandler {
                     public void onPacketSending(PacketEvent event) {
 
                         final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+
+                        if (data == null) return;
 
                         data.getPacketProcessor().handleSending(event);
                     }

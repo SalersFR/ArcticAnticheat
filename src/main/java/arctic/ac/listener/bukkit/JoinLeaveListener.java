@@ -10,6 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
 public class JoinLeaveListener implements Listener {
@@ -60,5 +61,13 @@ public class JoinLeaveListener implements Listener {
 
             data.getInteractData().onEDBE();
         }
+    }
+
+    @EventHandler
+    public void onTeleport(final PlayerTeleportEvent event) {
+        final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+        if (data == null) return;
+
+        data.getInteractData().handleEventTeleport(event);
     }
 }

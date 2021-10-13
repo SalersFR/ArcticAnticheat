@@ -80,7 +80,7 @@ public class SpeedA extends Check {
             final boolean exempt = data.getInteractionData().isHurt() ||
                     new WorldUtils().isOnACertainBlock(data.getPlayer(), "ice") || data.getInteractData().getTicksSinceHurt() < 140
                     || data.getInteractionData().isTeleported() ||
-            new WorldUtils().isOnACertainBlock(data.getPlayer(), "door") ;
+                    new WorldUtils().isOnACertainBlock(data.getPlayer(), "door");
 
             // flag
             if (deltaXZ > prediction && !exempt) {

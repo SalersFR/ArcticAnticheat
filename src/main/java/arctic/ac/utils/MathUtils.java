@@ -46,7 +46,6 @@ public class MathUtils {
     }
 
 
-
     // Taken from https://github.com/ElevatedDev/Frequency
 
     /**
@@ -170,7 +169,7 @@ public class MathUtils {
 
         Collections.sort(numbers);
 
-        final double mean =  sum / count;
+        final double mean = sum / count;
         final double median = (count % 2 != 0) ? numbers.get(count / 2) : (numbers.get((count - 1) / 2) + numbers.get(count / 2)) / 2;
         final double variance = getVariance(data);
 

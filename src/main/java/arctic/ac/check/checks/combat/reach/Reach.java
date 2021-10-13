@@ -38,8 +38,8 @@ public class Reach extends Check {
 
             if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
 
-                for(TrackedEntity entites : tracker.getTrackedEntityList()) {
-                    if(entites.getId() == event.getTarget().getEntityId()) {
+                for (TrackedEntity entites : tracker.getTrackedEntityList()) {
+                    if (entites.getId() == event.getTarget().getEntityId()) {
                         Bukkit.broadcastMessage("d=" + entites.getEntityLocation().toString());
                     }
                 }

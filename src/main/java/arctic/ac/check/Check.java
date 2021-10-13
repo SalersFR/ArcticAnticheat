@@ -43,8 +43,8 @@ public abstract class Check {
 
         final String loweredName = this.configName.toLowerCase();
 
-        if(loweredName.contains("movement") && this.isSetback() )
-          data.getSetbackProcessor().setback();
+        if (loweredName.contains("movement") && this.isSetback())
+            data.getSetbackProcessor().setback();
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("alerts.see") && player.hasMetadata("ALERTS_ON_NORMAL")) {

@@ -18,7 +18,7 @@ public class EntityLocation {
 
     private short id;
 
-    public void spawn(double x,double y,double z) {
+    public void spawn(double x, double y, double z) {
         this.minX = x;
         this.maxX = x;
         this.minY = y;

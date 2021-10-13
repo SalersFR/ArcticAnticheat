@@ -104,7 +104,6 @@ public class TargetTracker {
 
     private void add(double x, double y, double z, int id) {
         final TrackedEntity toAdd = new TrackedEntity(id);
-        toAdd.getEntityLocation().spawn(x, y, z);
         trackedEntityList.add(toAdd);
     }
 

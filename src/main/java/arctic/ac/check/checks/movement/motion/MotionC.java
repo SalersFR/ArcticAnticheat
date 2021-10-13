@@ -6,13 +6,14 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
 import arctic.ac.utils.PlayerUtils;
 import arctic.ac.utils.WorldUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
 public class MotionC extends Check {
+
+    private int ticksSinceIce;
 
 
     public MotionC(PlayerData data) {
@@ -38,10 +39,15 @@ public class MotionC extends Check {
 
             final double deltaXZ = event.getDeltaXZ();
 
+            if (worldUtils.isOnACertainBlock(player, "ice")) {
+                buffer = 0;
+                ticksSinceIce = 0;
+            }
+
             final boolean exempt = worldUtils.blockNearHead(bukkitTo) || worldUtils.isCollidingWithClimbable(player)
-                    || data.getInteractData().isTeleported() || worldUtils.isOnACertainBlock(player,"ice")||
+                    || data.getInteractData().isTeleported() || worldUtils.isOnACertainBlock(player, "ice") ||
                     data.getInteractionData().getTicksSinceHurt() < 40 || worldUtils.blockNearHead(bukkitFrom)
-                    || worldUtils.isOnACertainBlock(player,"ice");
+                    || worldUtils.isOnACertainBlock(player, "ice") || ticksSinceIce < 9;
 
 
             final double limit = 0.6239;
@@ -51,11 +57,13 @@ public class MotionC extends Check {
             debug("jumped=" + jumped + " deltaY=" + deltaY + " dXZ=" + deltaXZ + "fixed=" + fixedLimit);
 
             if (deltaXZ > fixedLimit && jumped && !exempt) {
-                if(++buffer > 2)
+                if (++buffer > 2)
                     fail("moved too fast while jumping=" + deltaXZ);
 
 
-            } else if(buffer > 0) buffer -= 0.001D;
+            } else if (buffer > 0) buffer -= 0.001D;
+
+            this.ticksSinceIce++;
 
         }
     }

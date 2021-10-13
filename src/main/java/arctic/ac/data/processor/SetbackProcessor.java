@@ -5,10 +5,7 @@ import arctic.ac.event.client.MoveEvent;
 import arctic.ac.utils.ALocation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntityTeleport;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 @Getter
@@ -32,7 +29,7 @@ public class SetbackProcessor {
 
     public void setback() {
         final Player player = data.getPlayer();
-        player.teleport(new Location(player.getWorld(),lastGroundLocation.getX(),lastGroundLocation.getY() + 0.001D,lastGroundLocation.getZ()));
+        player.teleport(new Location(player.getWorld(), lastGroundLocation.getX(), lastGroundLocation.getY() + 0.001D, lastGroundLocation.getZ()));
         this.ticksSince = 0;
 
     }

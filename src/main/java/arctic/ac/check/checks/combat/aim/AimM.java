@@ -8,7 +8,7 @@ import arctic.ac.event.client.RotationEvent;
 
 public class AimM extends Check {
 
-    private double lastDeltaYaw,deltaXZ;
+    private double lastDeltaYaw, deltaXZ;
 
     public AimM(PlayerData data) {
         super(data, "Aim", "M", "combat.aim.m", true);
@@ -38,7 +38,7 @@ public class AimM extends Check {
                     }
                 } else if (buffer > 0) buffer -= 1.5D;
             }
-        } else if(e instanceof MoveEvent) {
+        } else if (e instanceof MoveEvent) {
             this.deltaXZ = ((MoveEvent) e).getDeltaXZ();
         }
 

@@ -13,6 +13,7 @@ import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 @Getter
 @Setter
@@ -20,7 +21,7 @@ public class InteractData {
 
 
     private NPC entityANPC;
-    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging, ticksSinceBow,ticksAlive;
+    private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging, ticksSinceBow, ticksAlive;
     private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported, cinematic;
     private long lastHitPacket, lastTeleport;
 
@@ -103,12 +104,20 @@ public class InteractData {
 
         this.ticksAlive++;
 
-        if(data.getPlayer().isDead()) ticksAlive = 0;
+        if (data.getPlayer().isDead()) ticksAlive = 0;
 
     }
 
     public void handleOutTeleport(WrapperPlayServerEntityTeleport wrapper) {
         if (wrapper.getEntityID() == data.getPlayer().getEntityId()) {
+            this.ticksSinceTeleport = 0;
+            this.lastTeleport = System.currentTimeMillis();
+
+        }
+    }
+
+    public void handleEventTeleport(final PlayerTeleportEvent event) {
+        if (event.getPlayer().getEntityId() == data.getPlayer().getEntityId()) {
             this.ticksSinceTeleport = 0;
             this.lastTeleport = System.currentTimeMillis();
 
