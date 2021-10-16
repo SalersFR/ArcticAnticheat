@@ -15,6 +15,7 @@ import arctic.ac.check.checks.movement.fly.FlyC;
 import arctic.ac.check.checks.movement.motion.MotionA;
 import arctic.ac.check.checks.movement.motion.MotionB;
 import arctic.ac.check.checks.movement.motion.MotionC;
+import arctic.ac.check.checks.movement.motion.MotionD;
 import arctic.ac.check.checks.movement.nofall.NoFallA;
 import arctic.ac.check.checks.movement.nofall.NoFallB;
 import arctic.ac.check.checks.movement.speed.SpeedA;
@@ -68,6 +69,7 @@ public class CheckManager {
                 new MotionA(data),
                 new MotionB(data),
                 new MotionC(data),
+                new MotionD(data),
 
                 // COMBAT
                 new AimA(data),
