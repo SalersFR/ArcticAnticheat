@@ -4,12 +4,13 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
+import arctic.ac.utils.ALocation;
 import arctic.ac.utils.WorldUtils;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 public class NoFallB extends Check {
 
-    private int airTicks, ticksEdge;
 
     public NoFallB(PlayerData data) {
         super(data, "NoFall", "B", "movement.nofall.b", false);
@@ -21,21 +22,16 @@ public class NoFallB extends Check {
 
             final MoveEvent event = (MoveEvent) e;
 
-            final boolean packetGround = event.isGround();
-
-            final Player player = data.getPlayer();
+            final World world = data.getPlayer().getWorld();
             final WorldUtils worldUtils = new WorldUtils();
+            final Player player = data.getPlayer();
 
-            if (worldUtils.isAtEdgeOfABlock(player)) {
-                this.ticksEdge = 0;
-            } else this.ticksEdge++;
+            final ALocation to = event.getTo();
+            final ALocation from = event.getFrom();
 
-            if (worldUtils.isCloseToGround(data.getBukkitPlayerFromUUID().getLocation())) {
-                this.airTicks = 0;
-            } else this.airTicks++;
-
-            final boolean serverGround = airTicks < 11;
-
+            final boolean client = event.isGround();
+            final boolean math = to.isMathOnGround() && from.isMathOnGround();
+            final boolean coll = to.isCollOnGround(world) && from.isCollOnGround(world);
 
             final boolean exempt = worldUtils.isInLiquid(player)
                     || worldUtils.isCollidingWithClimbable(player)
@@ -43,14 +39,20 @@ public class NoFallB extends Check {
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
                     || worldUtils.isOnACertainBlock(player, "fence")
-                    || ticksEdge < 20
-                    || !data.getPlayer().getLocation().add(0, -2.2, 0).getBlock().isEmpty()
                     || data.getInteractData().getTicksSinceHurt() < 30
                     || player.getVehicle() != null;
 
-            if (!serverGround && packetGround && !exempt) {
-                fail("airTicks=" + airTicks);
-            }
+
+            if(client && (!math || !coll) && !exempt) {
+                if(++buffer > 4)
+                    fail("spoofing flying ground\ncoll=" + coll + "\nmath=" + math);
+            } else if(buffer > 0) buffer -= 0.25D;
+
+            if(math && !coll && !exempt) {
+                if(++buffer > 4)
+                    fail("spoofing math ground\nflying=" + client);
+            } else if(buffer > 0) buffer -= 0.5D;
+
 
 
         }

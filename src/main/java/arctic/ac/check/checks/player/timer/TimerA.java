@@ -19,12 +19,20 @@ public class TimerA extends Check {
     public void handle(Event e) {
         if (e instanceof FlyingEvent) {
 
-            if(++balance > 22) {
-                if(++buffer > 3)
-                    Bukkit.broadcastMessage("§cBALANCECJHEAQZEHJQZIDNQZ=" + balance);
-            } else {
-                Bukkit.broadcastMessage("§abalance=" + balance);
-            }
+            this.balance++;
+
+            final boolean exempt = data.getInteractData().getTicksAlive() < 50;
+
+            debug("exempt=" + exempt + " balance=" + balance + " buffer=" + buffer);
+
+            if (!exempt && balance >= 2) {
+                if (++buffer > 7) {
+                    buffer -= 1.25D;
+
+                    fail("balance=" + balance);
+                }
+
+            } else if (buffer > 0) buffer -= 0.25D;
 
             Bukkit.getScheduler().runTaskLaterAsynchronously(Arctic.INSTANCE, () -> {
                 balance = 0;

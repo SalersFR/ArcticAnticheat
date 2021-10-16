@@ -2,6 +2,8 @@ package arctic.ac.utils;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.util.Vector;
 
 @Getter
@@ -40,6 +42,14 @@ public class ALocation {
         y -= vec.y;
         z -= vec.z;
         return this;
+    }
+
+    public boolean isMathOnGround() {
+        return this.y % 0.015625 == 0.0;
+    }
+
+    public boolean isCollOnGround(final World world) {
+        return new WorldUtils().isCloseToGround(new Location(world,x,y,z));
     }
 
 
