@@ -137,7 +137,33 @@ public class MathUtils {
         return total;
     }
 
+    public int getRecurring2(List<Integer> list, long query) {
+        int total = 0;
+
+        for (long l : list) {
+            if (l == query) total += 1;
+        }
+
+        return total;
+    }
+
+
     public boolean recurringPattern(List<Long> list, int lowerThanForPattern, int maxPatternCount) {
+        int total = 0;
+
+        for (long l : list) {
+            if (l < lowerThanForPattern) {
+                total += 1;
+            }
+        }
+
+        if (total > maxPatternCount) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean recurringPattern2(List<Integer> list, int lowerThanForPattern, int maxPatternCount) {
         int total = 0;
 
         for (long l : list) {
