@@ -49,8 +49,9 @@ public class VelocityData {
         }
     }
 
+
     public void handleVelocity(ServerVelocityEvent e) {
-        if (e.getEntityID() == data.getPlayer().getEntityId()) {
+        if(e.getEntityID() == data.getPlayer().getEntityId()) {
             double x = Math.abs(e.getX());
             double y = e.getY();
             double z = Math.abs(e.getZ());
@@ -69,10 +70,9 @@ public class VelocityData {
                 exception.printStackTrace();
             }
 
-            if (velocityID <= 200) {
-                velocityID = 10000;
+            if(velocityID <= -1) {
+                velocityID = 900;
             }
         }
     }
-
 }

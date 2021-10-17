@@ -44,7 +44,7 @@ public class MotionD extends Check {
             if (jumped)
                 ticksSinceJumped = 0;
 
-            debug("deltaY=" + deltaY + " ticksSinceJumped=" + ticksSinceJumped);
+            debug("deltaY=" + deltaY + " ticksSinceJumped=" + ticksSinceJumped + " airTicks=" + airTicks);
 
             if (ticksSinceJumped <= 10 && deltaY < -0.38 && !exempt) {
                 if (++buffer > 2)
@@ -57,6 +57,11 @@ public class MotionD extends Check {
                     fail("fast fall \ndDY:" + deltaY);
 
             } else if (buffer > 0) buffer -= 0.01D;
+
+            if(deltaY < -4.3275 && !exempt && airTicks > 0) {
+                if (++buffer > 2)
+                    fail("very fast fall \ndDY:" + deltaY);
+            }
 
 
             this.ticksSinceJumped++;
