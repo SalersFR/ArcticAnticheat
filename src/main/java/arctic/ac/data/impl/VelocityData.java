@@ -17,9 +17,10 @@ import java.lang.reflect.InvocationTargetException;
 public class VelocityData {
 
     public Vector velocity = new Vector();
-    public double velocityY, originalVelocityY;
+    public double velocityY, originalVelocityY,originalVelocityX,originalVelocityZ,velocityX,velocityZ;
     public int velocityTicks = 1000;
     private short velocityID = 10000;
+
 
     private PlayerData data;
 
@@ -32,6 +33,10 @@ public class VelocityData {
             if (velocityY > 0) {
                 velocityY -= 0.08D;
                 velocityY *= 0.98F;
+
+                velocityX *= 0.6F;
+                velocityZ *= 0.6F;
+
             } else velocityY = 0;
         }
 
@@ -39,13 +44,22 @@ public class VelocityData {
             velocityY = 0;
         }
 
+        if(velocityX < 0.005)
+            velocityX = 0;
+
+        if(velocityZ < 0.005)
+            velocityZ = 0;
+
         ++velocityTicks;
     }
 
     public void handleTransaction(WrapperPlayClientTransaction wrapper) {
         if (wrapper.getActionNumber() == velocityID) {
             velocityY = originalVelocityY = velocity.getY();
+            velocityX = originalVelocityX = velocity.getX();
+            velocityZ = originalVelocityZ = velocity.getZ();
             velocityTicks = 0;
+
         }
     }
 
