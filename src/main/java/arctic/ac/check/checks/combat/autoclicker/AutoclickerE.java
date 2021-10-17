@@ -13,6 +13,7 @@ public class AutoclickerE extends Check {
     private ArcticQueue samples = new ArcticQueue<Integer>(20);
 
     private int ticks;
+    private double lastKurt;
 
     public AutoclickerE(PlayerData data) {
         super(data, "Autoclicker", "E", "combat.autoclicker.e", true);
@@ -24,12 +25,15 @@ public class AutoclickerE extends Check {
             if (data.getInteractionData().isDigging()) return;
 
             double kurtosis = MathUtils.getKurtosis(samples);
+            double lastKurt = this.lastKurt;
+            this.lastKurt = kurtosis;
+            double diff = MathUtils.hypot(kurtosis, lastKurt);
 
             if (samples.size() >= 20) {
-                debug("kurt=" + kurtosis);
+                debug("diffK=" + diff);
 
-                if (kurtosis <= 3.6) {
-                    if (++buffer > 1) {
+                if (diff <= 10) {
+                    if (++buffer >= 3) {
                         fail("kurt=" + kurtosis);
                     }
                 } else if (buffer > 0) buffer -= 0.25;
