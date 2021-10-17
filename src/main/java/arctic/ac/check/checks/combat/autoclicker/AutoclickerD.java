@@ -40,7 +40,7 @@ public class AutoclickerD extends Check {
 
                 debug("dev=" + deviation + " outliers=" + total + " diff=" + difference + " result=" + result);
 
-                if (result < 2.25D) {
+                if (result < 2.257D) {
                     buffer += (2.5 - result);
                     if (buffer > 3)
                         fail("result=" + result + " outliers=" + outliers + " deviation=" + deviation);

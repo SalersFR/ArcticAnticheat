@@ -2,10 +2,7 @@ package arctic.ac.data.impl;
 
 import arctic.ac.check.Check;
 import arctic.ac.check.checks.combat.aim.*;
-import arctic.ac.check.checks.combat.autoclicker.AutoclickerA;
-import arctic.ac.check.checks.combat.autoclicker.AutoclickerB;
-import arctic.ac.check.checks.combat.autoclicker.AutoclickerC;
-import arctic.ac.check.checks.combat.autoclicker.AutoclickerD;
+import arctic.ac.check.checks.combat.autoclicker.*;
 import arctic.ac.check.checks.combat.killaura.*;
 import arctic.ac.check.checks.combat.reach.Reach;
 import arctic.ac.check.checks.combat.reach.ReachB;
@@ -90,6 +87,7 @@ public class CheckManager {
                 new AutoclickerB(data),
                 new AutoclickerC(data),
                 new AutoclickerD(data),
+                new AutoclickerE(data),
 
                 new KillAuraA(data),
                 new KillAuraB(data),
