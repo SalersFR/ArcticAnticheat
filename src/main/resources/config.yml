@@ -91,6 +91,10 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      d:
+        ban-vl: 50
+        enabled: true
+        punish: true
     killaura:
       a:
         ban-vl: 10
