@@ -15,6 +15,9 @@ public class TimerA extends Check {
         super(data, "Timer", "A", "player.timer.a", true);
     }
 
+
+    // TODO redo this
+
     @Override
     public void handle(Event e) {
         if (e instanceof FlyingEvent) {
@@ -29,7 +32,7 @@ public class TimerA extends Check {
                 if (++buffer > 7) {
                     buffer -= 1.25D;
 
-                    fail("balance=" + balance);
+                    // fail("balance=" + balance);
                 }
 
             } else if (buffer > 0) buffer -= 0.25D;

@@ -40,7 +40,7 @@ public class Reach extends Check {
 
                 for (TrackedEntity entites : tracker.getTrackedEntityList()) {
                     if (entites.getId() == event.getTarget().getEntityId()) {
-                        Bukkit.broadcastMessage("d=" + entites.getEntityLocation().toString());
+                        // Bukkit.broadcastMessage("d=" + entites.getEntityLocation().toString());
                     }
                 }
             }

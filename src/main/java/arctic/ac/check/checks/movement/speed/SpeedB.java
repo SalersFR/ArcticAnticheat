@@ -61,7 +61,7 @@ public class SpeedB extends Check {
 
 
             } else {
-                limit = 0.689;
+                limit = 0.823;
                 this.ticksSinceAir = 0;
             }
 
