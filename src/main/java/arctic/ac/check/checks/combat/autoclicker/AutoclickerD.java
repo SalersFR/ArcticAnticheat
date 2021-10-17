@@ -15,7 +15,7 @@ public class AutoclickerD extends Check {
 
     private int ticks;
     private double lastDifference;
-    private ArcticQueue<Integer> samples = new ArcticQueue(20);
+    private ArcticQueue<Integer> samples = new ArcticQueue(30);
 
     public AutoclickerD(final PlayerData data) {
         super(data, "Autoclicker", "D", "combat.autoclicker.d", false);
@@ -25,26 +25,20 @@ public class AutoclickerD extends Check {
     public void handle(Event e) {
         if (e instanceof ArmAnimationEvent) {
 
-            if (this.samples.size() >= 20) {
+            if (this.samples.size() >= 30) {
 
                 final Pair<List<Double>, List<Double>> outliers = MathUtils.getOutliers(samples);
                 final int total = outliers.getX().size() + outliers.getY().size();
 
                 final double deviation = MathUtils.getStandardDeviation(samples);
-                final double difference = deviation - total;
+                final int sames = MathUtils.getSames(samples);
 
-                final double lastDifference = this.lastDifference;
-                this.lastDifference = difference;
+                debug("dev=" + deviation + " outliers=" + total + " sames=" + sames);
 
-                final double result = Math.abs(difference - lastDifference);
-
-                debug("dev=" + deviation + " outliers=" + total + " diff=" + difference + " result=" + result);
-
-                if (result < 2.257D) {
-                    buffer += (2.5 - result);
-                    if (buffer > 3)
-                        fail("result=" + result + " outliers=" + outliers + " deviation=" + deviation);
-                } else if (buffer > 0) buffer -= 0.25D;
+                if ((deviation < 4.825D || total <= 3) && sames > 27) {
+                    if (++buffer > 3)
+                        fail( " outliers=" + outliers + " deviation=" + deviation + " sames=" + sames);
+                } else if (buffer > 0) buffer -= 0.05D;
             }
 
 

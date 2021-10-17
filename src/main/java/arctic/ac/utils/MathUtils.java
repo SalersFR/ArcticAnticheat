@@ -3,10 +3,7 @@ package arctic.ac.utils;
 import com.google.common.collect.Lists;
 import lombok.experimental.UtilityClass;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @UtilityClass
 public class MathUtils {
@@ -222,5 +219,15 @@ public class MathUtils {
 
         return tuple;
     }
+
+    public static int getDistinct(final Collection<? extends Number> collection) {
+        Set<Object> set = new HashSet<>(collection);
+        return set.size();
+    }
+
+    public static int getSames(final Collection<? extends Number> collection) {
+        return collection.size() - getDistinct(collection);
+    }
+
 
 }
