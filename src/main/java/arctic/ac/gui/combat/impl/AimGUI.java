@@ -11,11 +11,11 @@ import org.bukkit.inventory.Inventory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Aim {
+public class AimGUI {
 
     private Inventory inventory;
 
-    public Aim createNewGUI() {
+    public AimGUI createNewGUI() {
         Inventory inv = Bukkit.createInventory(null, 27, "§b§lAim Checks");
 
 

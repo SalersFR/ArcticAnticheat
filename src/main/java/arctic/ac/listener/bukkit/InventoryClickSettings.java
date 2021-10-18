@@ -1,9 +1,8 @@
 package arctic.ac.listener.bukkit;
 
-import arctic.ac.Arctic;
 import arctic.ac.gui.ChecksGUI;
 import arctic.ac.gui.combat.CombatChecksGUI;
-import arctic.ac.gui.combat.impl.Aim;
+import arctic.ac.gui.combat.impl.AimGUI;
 import arctic.ac.utils.CustomUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -67,7 +66,7 @@ public class InventoryClickSettings implements Listener {
             ItemMeta meta = item.getItemMeta();
             List<String> newLore = new ArrayList<>();
 
-            final Aim aimGUI = new Aim().createNewGUI();
+            final AimGUI aimGUI = new AimGUI().createNewGUI();
             // ✓
             // ✗
             // &r &7» Enabled: " + (checkAndActive.get(s) ? "&a✓" : "&c✗"))
@@ -92,7 +91,7 @@ public class InventoryClickSettings implements Listener {
 
         switch (invName) {
 
-            case "Aim Checks":
+            case "AimGUI Checks":
                 event.setCancelled(true);
               //TODO -> Enabling/Disabling checks (aim)
                 break;
