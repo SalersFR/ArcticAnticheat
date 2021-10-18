@@ -2,7 +2,8 @@ package arctic.ac.listener.bukkit;
 
 import arctic.ac.Arctic;
 import arctic.ac.gui.ChecksGUI;
-import arctic.ac.gui.CombatChecksGUI;
+import arctic.ac.gui.combat.CombatChecksGUI;
+import arctic.ac.gui.combat.impl.Aim;
 import arctic.ac.utils.CustomUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -65,34 +66,18 @@ public class InventoryClickSettings implements Listener {
             ItemStack item = event.getCurrentItem();
             ItemMeta meta = item.getItemMeta();
             List<String> newLore = new ArrayList<>();
+
+            final Aim aimGUI = new Aim();
             // ✓
             // ✗
             // &r &7» Enabled: " + (checkAndActive.get(s) ? "&a✓" : "&c✗"))
 
-            for (String s : meta.getLore()) {
-                if (CustomUtils.strip(s).contains("✓")) {
-                    newLore.add(CustomUtils.translate("&r &7» Enabled: &c✗"));
-                    Arctic.INSTANCE.getConfig().set("checks.combat." + CustomUtils.strip(meta.getDisplayName().substring(0, meta.getDisplayName().length() - 1)
-                    ).toLowerCase() + "." + CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase() + ".enabled", false);
-                    Arctic.INSTANCE.saveConfig();
+           switch (meta.getDisplayName()) {
+               case "§b§lAim Checks":
+                   break;
+           }
 
-                    meta.getLore().clear();
-                    meta.setLore(newLore);
 
-                    Arctic.INSTANCE.reloadConfig();
-                } else if (CustomUtils.strip(s).contains("✗")) {
-                    newLore.add(CustomUtils.translate("&r &7» Enabled: &a✓"));
-                    Arctic.INSTANCE.getConfig().set("checks.combat." + CustomUtils.strip(meta.getDisplayName().substring(0, meta.getDisplayName().length() - 1)
-                    ).toLowerCase() + "." + CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase() + ".enabled", true);
-                    Arctic.INSTANCE.saveConfig();
-
-                    meta.getLore().clear();
-                    meta.setLore(newLore);
-                }
-            }
-            item.setItemMeta(meta);
-
-            event.getInventory().setItem(event.getSlot(), item);
 
             player.updateInventory();
         }
