@@ -37,17 +37,35 @@ public class Aim {
         for (String s : checkAndActive.keySet()) {
             String var1 = s.substring(s.length() - 1);
             var1 = var1.toUpperCase();
-            inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
-                    "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                    CustomUtils.translate("&r &7» Enabled: " + (checkAndActive.get(s) ? "&a✓" : "&c✗"))));
+
+            final boolean enabled = checkAndActive.get(s);
+            
+            if(enabled)
+                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
+                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
+                        CustomUtils.translate("&r &7» Enabled: &a✓")));
+
+            else
+                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
+                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
+                        CustomUtils.translate("&r &7» Enabled: &c✗")));
         }
 
         for (String s : checkAndActive.keySet()) {
             String var1 = s.substring(s.length() - 1);
             var1 = var1.toUpperCase();
+
+            final boolean enabled = checkAndActive.get(s);
+
+            if(enabled)
             inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
                     "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                    CustomUtils.translate("&r &7» Enabled: " + (checkAndActive.get(s) ? "&a✓" : "&c✗"))));
+                    CustomUtils.translate("&r &7» Enabled: &a✓")));
+
+            else
+                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
+                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
+                        CustomUtils.translate("&r &7» Enabled: &c✗")));
         }
     }
 
