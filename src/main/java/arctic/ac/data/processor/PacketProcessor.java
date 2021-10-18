@@ -34,6 +34,8 @@ public class PacketProcessor {
                 || data.getInteractData().getTicksSinceTeleport() < 10
                 || data.getSetbackProcessor().getTicksSince() < 4;
 
+        data.getNetworkProcessor().handleIn(event);
+
         for (Check checks : data.getChecks()) {
             if (checks.isEnabled() && !exempt) {
                 checks.handle(new arctic.ac.event.client.PacketEvent(event));
@@ -180,7 +182,8 @@ public class PacketProcessor {
                 || bypass
                 || data.getInteractData().getTicksSinceTeleport() < 10
                 || data.getSetbackProcessor().getTicksSince() < 4;
-        ;
+
+        data.getNetworkProcessor().handleOut(event);
 
 
         for (Check checks : data.getChecks()) {

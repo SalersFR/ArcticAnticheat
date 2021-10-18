@@ -39,7 +39,7 @@ public class Aim {
             var1 = var1.toUpperCase();
 
             final boolean enabled = checkAndActive.get(s);
-            
+
             if(enabled)
                 inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
                                 "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
