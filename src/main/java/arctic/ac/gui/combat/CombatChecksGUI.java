@@ -39,7 +39,7 @@ public class CombatChecksGUI {
 
         aimMeta.setDisplayName("§b§lAim Checks");
         autoclickerMeta.setDisplayName("§b§lAutoclicker Checks");
-        killauraMeta.setDisplayName("§b§lKillaura Checks");
+        killauraMeta.setDisplayName("§b§lKillAura Checks");
         reachMeta.setDisplayName("§b§lReach Checks");
         velocityMeta.setDisplayName("§b§lVelocity Checks");
 
