@@ -15,5 +15,5 @@ Arctic is an AntiCheat designed to block cheats on 1.7 and 1.8. It can block com
 `/debug <check>` - Get important debug feedback for certain checks (mainly used for development).
 
 ### Dependencies
-None required, Arctic shades in ProtocolLib so you don't have to install it on your server.
+Since Arctic is packet based, you needs to have ProtocolLib on your server (https://www.spigotmc.org/resources/protocollib.1997/)
 
