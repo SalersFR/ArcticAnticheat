@@ -17,7 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 public class VelocityData {
 
     public Vector velocity = new Vector();
-    public double velocityY, originalVelocityY,originalVelocityX,originalVelocityZ,velocityX,velocityZ;
+    public double velocityY, originalVelocityY, originalVelocityX, originalVelocityZ, velocityX, velocityZ;
     public int velocityTicks = 1000;
     private short velocityID = 10000;
 
@@ -34,8 +34,13 @@ public class VelocityData {
                 velocityY -= 0.08D;
                 velocityY *= 0.98F;
 
-                velocityX *= 0.6F;
-                velocityZ *= 0.6F;
+                if (getData().getInteractData().isSprinting()) {
+                    velocityX *= 0.6F;
+                    velocityZ *= 0.6F;
+                }
+
+                velocityX *= 0.91F;
+                velocityZ *= 0.91F;
 
             } else velocityY = 0;
         }
@@ -44,10 +49,10 @@ public class VelocityData {
             velocityY = 0;
         }
 
-        if(velocityX < 0.005)
+        if (velocityX < 0.005)
             velocityX = 0;
 
-        if(velocityZ < 0.005)
+        if (velocityZ < 0.005)
             velocityZ = 0;
 
         ++velocityTicks;
@@ -65,7 +70,7 @@ public class VelocityData {
 
 
     public void handleVelocity(ServerVelocityEvent e) {
-        if(e.getEntityID() == data.getPlayer().getEntityId()) {
+        if (e.getEntityID() == data.getPlayer().getEntityId()) {
             double x = Math.abs(e.getX());
             double y = e.getY();
             double z = Math.abs(e.getZ());
@@ -84,7 +89,7 @@ public class VelocityData {
                 exception.printStackTrace();
             }
 
-            if(velocityID <= -1) {
+            if (velocityID <= -1) {
                 velocityID = 900;
             }
         }

@@ -11,5 +11,6 @@ public class ScaffoldA extends Check {
 
     @Override
     public void handle(Event e) {
+
     }
 }

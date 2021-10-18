@@ -67,19 +67,35 @@ public class InventoryClickSettings implements Listener {
             ItemMeta meta = item.getItemMeta();
             List<String> newLore = new ArrayList<>();
 
-            final Aim aimGUI = new Aim();
+            final Aim aimGUI = new Aim().createNewGUI();
             // ✓
             // ✗
             // &r &7» Enabled: " + (checkAndActive.get(s) ? "&a✓" : "&c✗"))
 
-           switch (meta.getDisplayName()) {
-               case "§b§lAim Checks":
-                   break;
-           }
 
+            player.updateInventory();
+
+            switch (meta.getDisplayName()) {
+                case "§b§lAim Checks":
+                    aimGUI.setItems();
+                    aimGUI.display(player);
+                    break;
+            }
 
 
             player.updateInventory();
+        }
+
+        ItemStack item = event.getCurrentItem();
+        ItemMeta meta = item.getItemMeta();
+        List<String> newLore = new ArrayList<>();
+
+        switch (invName) {
+
+            case "Aim Checks":
+                event.setCancelled(true);
+              //TODO -> Enabling/Disabling checks (aim)
+                break;
         }
     }
 }

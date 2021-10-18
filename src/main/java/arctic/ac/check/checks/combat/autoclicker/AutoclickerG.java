@@ -22,6 +22,7 @@ public class AutoclickerG extends Check {
     @Override
     public void handle(Event e) {
         if (e instanceof ArmAnimationEvent) {
+            if (data.getInteractionData().isDigging()) return;
 
             if (this.samples.size() >= 20) {
                 final int sames = MathUtils.getSames(this.samples);

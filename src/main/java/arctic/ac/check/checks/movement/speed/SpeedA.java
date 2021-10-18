@@ -85,7 +85,7 @@ public class SpeedA extends Check {
             // flag
             if (deltaXZ > prediction && !exempt) {
                 if (++this.buffer > 3)
-                    fail("p=" + prediction + " d=" + deltaXZ);
+                    fail("limit=" + prediction + " delta=" + deltaXZ);
             } else if (this.buffer > 0) buffer -= 0.025D;
         }
     }

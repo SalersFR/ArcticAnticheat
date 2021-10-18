@@ -46,7 +46,7 @@ public class VelocityB extends Check {
 
                 if (ratio > 0 && ratio < 0.9999) {
                     if (buffer++ > 3) {
-                        // fail("percentage=" + (float) ratio + " deltaXZ=" + (float) deltaXZ + " predicted=" + (float) predictedVelocity);
+                        //fail("percentage=" + (float) ratio + " deltaXZ=" + (float) deltaXZ + " predicted=" + (float) predictedVelocity);
                         buffer = 0;
                     }
                 } else buffer = Math.max(0, buffer - 0.5);
