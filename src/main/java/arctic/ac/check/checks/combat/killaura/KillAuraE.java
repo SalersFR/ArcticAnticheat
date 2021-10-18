@@ -17,7 +17,7 @@ public class KillAuraE extends Check {
     private ArcticQueue<Location> pastHittedLocations = new ArcticQueue<Location>(11);
 
     public KillAuraE(PlayerData data) {
-        super(data, "KillAura", "E", "combat.killaura.e", true);
+        super(data, "KillAura", "E", "combat.killaura.e", "Checks for too high accuracy.", true);
     }
 
     @Override

@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class VelocityA extends Check {
 
     public VelocityA(PlayerData data) {
-        super(data, "Velocity", "A", "combat.velocity.a", true);
+        super(data, "Velocity", "A", "combat.velocity.a", "Checks for vertical knockback modifications", true);
     }
 
     @Override

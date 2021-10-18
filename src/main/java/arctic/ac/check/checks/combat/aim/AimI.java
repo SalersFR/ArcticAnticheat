@@ -11,7 +11,7 @@ public class AimI extends Check {
     private float lastDeltaPitch;
 
     public AimI(PlayerData data) {
-        super(data, "Aim", "I", "combat.aim.i", true);
+        super(data, "Aim", "I", "combat.aim.i", "Checks for valid sensitivity using gcd.", true);
     }
 
     @Override

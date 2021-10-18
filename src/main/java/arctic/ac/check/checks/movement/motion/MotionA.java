@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 public class MotionA extends Check {
 
     public MotionA(PlayerData data) {
-        super(data, "Motion", "A", "movement.motion.a", false);
+        super(data, "Motion", "A", "movement.motion.a", "Checks for too high jumps.",false);
     }
 
     @Override

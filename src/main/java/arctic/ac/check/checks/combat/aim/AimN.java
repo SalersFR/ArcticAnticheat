@@ -14,7 +14,7 @@ public class AimN extends Check {
     private double lastSkewness, lastDev, lastKurtosis;
 
     public AimN(PlayerData data) {
-        super(data, "Aim", "N", "combat.aim.n", true);
+        super(data, "Aim", "N", "combat.aim.n", "Checks if rotations are legit using stats.",true);
     }
 
     @Override

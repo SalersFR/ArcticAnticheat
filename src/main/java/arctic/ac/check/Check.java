@@ -17,11 +17,11 @@ import org.bukkit.entity.Player;
 public abstract class Check {
 
     public final PlayerData data;
-    private final String name, configName, type;
+    private final String name, configName, type,desc;
     private final boolean experimental;
     public double buffer = 0, vl = 0;
 
-    public Check(PlayerData data, String name, String type, String configName, boolean experimental) {
+    public Check(PlayerData data, String name, String type, String configName,String desc, boolean experimental) {
 
         this.data = data;
 
@@ -29,6 +29,7 @@ public abstract class Check {
         this.type = type;
         this.configName = configName;
         this.experimental = experimental;
+        this.desc = desc;
 
     }
 
@@ -127,6 +128,10 @@ public abstract class Check {
         return type;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
     public boolean isExperimental() {
         return experimental;
     }
@@ -146,4 +151,6 @@ public abstract class Check {
     public boolean isSetback() {
         return Arctic.INSTANCE.getConfig().getBoolean("checks." + this.getConfigName() + ".setback");
     }
+
+
 }

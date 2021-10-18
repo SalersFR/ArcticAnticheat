@@ -12,7 +12,7 @@ public class FlyB extends Check {
     private int airTicks;
 
     public FlyB(PlayerData data) {
-        super(data, "Fly", "B", "movement.fly.b", true);
+        super(data, "Fly", "B", "movement.fly.b", "Checks if player is not taking care about gravity.", true);
     }
 
     @Override

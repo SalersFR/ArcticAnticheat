@@ -10,7 +10,7 @@ public class StepA extends Check {
     private int groundTicks;
 
     public StepA(PlayerData data) {
-        super(data, "Step", "A", "movement.step.a", false);
+        super(data, "Step", "A", "movement.step.a", "Checks for invalid step height.", false);
     }
 
     @Override

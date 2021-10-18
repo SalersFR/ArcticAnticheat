@@ -9,7 +9,7 @@ public class AimK extends Check {
 
 
     public AimK(PlayerData data) {
-        super(data, "Aim", "K", "combat.aim.k", true);
+        super(data, "Aim", "K", "combat.aim.k", "Checks for rounded rotations values.",true);
     }
 
     @Override

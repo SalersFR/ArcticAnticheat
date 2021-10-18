@@ -12,7 +12,7 @@ public class FlyC extends Check {
     private double lastDeltaY, airTicks;
 
     public FlyC(PlayerData data) {
-        super(data, "Fly", "C", "movement.fly.c", true);
+        super(data, "Fly", "C", "movement.fly.c", "Checks for jumping while being in the air.", true);
     }
 
 

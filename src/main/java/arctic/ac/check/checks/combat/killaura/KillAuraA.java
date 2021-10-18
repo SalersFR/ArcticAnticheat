@@ -13,7 +13,7 @@ public class KillAuraA extends Check {
     private long lastFlying;
 
     public KillAuraA(PlayerData data) {
-        super(data, "KillAura", "A", "combat.killaura.a", true);
+        super(data, "KillAura", "A", "combat.killaura.a", "Checks for invalid delay between attack and flying packets.", true);
     }
 
     @Override

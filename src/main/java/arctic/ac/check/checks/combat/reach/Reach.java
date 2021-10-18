@@ -14,7 +14,7 @@ public class Reach extends Check {
 
 
     public Reach(PlayerData data) {
-        super(data, "Reach", "A", "combat.reach.a", true);
+        super(data, "Reach", "A", "combat.reach.a", "Checking reach using interpolation and relmoves.",true);
     }
 
     public Location getEyeLocation() {

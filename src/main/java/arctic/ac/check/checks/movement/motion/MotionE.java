@@ -11,7 +11,7 @@ public class MotionE extends Check {
     private double deltaXZ, lastDeltaXZ;
 
     public MotionE(PlayerData data) {
-        super(data, "Motion", "E", "movement.motion.e", true);
+        super(data, "Motion", "E", "movement.motion.e", "Checks for proper acceleration mechanics.", true);
     }
 
     @Override

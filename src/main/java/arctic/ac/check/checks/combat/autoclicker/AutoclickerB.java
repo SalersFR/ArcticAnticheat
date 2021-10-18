@@ -17,7 +17,7 @@ public class AutoclickerB extends Check {
     private double lastDiff;
 
     public AutoclickerB(PlayerData data) {
-        super(data, "Autoclicker", "B", "combat.autoclicker.b", true);
+        super(data, "Autoclicker", "B", "combat.autoclicker.b", "Checks for too low difference between kurtosis and deviation.", true);
     }
 
     @Override

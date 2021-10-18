@@ -12,7 +12,7 @@ public class KillAuraD extends Check {
     private int attacksWithoutSwing;
 
     public KillAuraD(PlayerData data) {
-        super(data, "KillAura", "D", "combat.killaura.d", true);
+        super(data, "KillAura", "D", "combat.killaura.d", "Checks if player is not swinging when attacking.",true);
     }
 
     @Override

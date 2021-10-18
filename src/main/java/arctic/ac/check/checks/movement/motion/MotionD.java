@@ -16,7 +16,7 @@ public class MotionD extends Check {
 
 
     public MotionD(PlayerData data) {
-        super(data, "Motion", "D", "movement.motion.d", false);
+        super(data, "Motion", "D", "movement.motion.d", "Checks for fast falls modules.",false);
     }
 
     @Override

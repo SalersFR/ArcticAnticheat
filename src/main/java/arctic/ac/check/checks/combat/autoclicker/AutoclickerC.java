@@ -14,7 +14,7 @@ public class AutoclickerC extends Check {
     private int ticks;
 
     public AutoclickerC(PlayerData data) {
-        super(data, "Autoclicker", "C", "combat.autoclicker.c", false);
+        super(data, "Autoclicker", "C", "combat.autoclicker.c", "Checks for too low deviation.", false);
     }
 
     @Override

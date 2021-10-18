@@ -12,7 +12,7 @@ public class SpeedB extends Check {
     private int gTicks, aTicks, ticksSinceAir;
 
     public SpeedB(PlayerData data) {
-        super(data, "Speed", "B", "movement.speed.b", true);
+        super(data, "Speed", "B", "movement.speed.b", "Simple limit speed check.", true);
     }
 
 

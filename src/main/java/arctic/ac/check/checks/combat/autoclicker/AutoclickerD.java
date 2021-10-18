@@ -18,7 +18,7 @@ public class AutoclickerD extends Check {
     private ArcticQueue<Integer> samples = new ArcticQueue(30);
 
     public AutoclickerD(final PlayerData data) {
-        super(data, "Autoclicker", "D", "combat.autoclicker.d", false);
+        super(data, "Autoclicker", "D", "combat.autoclicker.d", "Checks for consistency.",false);
     }
 
     @Override

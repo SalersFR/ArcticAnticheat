@@ -19,7 +19,7 @@ public class AutoclickerF extends Check {
 
 
     public AutoclickerF(PlayerData data) {
-        super(data, "Autoclicker", "F", "combat.autoclicker.f", true);
+        super(data, "Autoclicker", "F", "combat.autoclicker.f", "Checks for consistency.", true);
     }
 
     @Override

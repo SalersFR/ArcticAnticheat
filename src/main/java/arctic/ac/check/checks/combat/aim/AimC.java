@@ -10,7 +10,7 @@ public class AimC extends Check {
     private float lastDeltaYaw;
 
     public AimC(PlayerData data) {
-        super(data, "Aim", "C", "combat.aim.c", true);
+        super(data, "Aim", "C", "combat.aim.c","Checks for too straight rotations.", true);
     }
 
     @Override

@@ -16,7 +16,7 @@ public class KillAuraG extends Check {
     private long lastHit = 0;
 
     public KillAuraG(PlayerData data) {
-        super(data, "KillAura", "G", "combat.killaura.g", true);
+        super(data, "KillAura", "G", "combat.killaura.g", "Checks for recurring attacks patterns.",true);
     }
 
     @Override

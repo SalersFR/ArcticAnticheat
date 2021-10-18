@@ -13,7 +13,7 @@ public class NoFallB extends Check {
 
 
     public NoFallB(PlayerData data) {
-        super(data, "NoFall", "B", "movement.nofall.b", false);
+        super(data, "NoFall", "B", "movement.nofall.b", "Checks if player is spoofing ground state.",false);
     }
 
     @Override

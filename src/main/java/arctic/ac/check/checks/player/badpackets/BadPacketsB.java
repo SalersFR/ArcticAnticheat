@@ -10,7 +10,7 @@ public class BadPacketsB extends Check {
 
 
     public BadPacketsB(PlayerData data) {
-        super(data, "BadPackets", "B", "player.badpackets.b", false);
+        super(data, "BadPackets", "B", "player.badpackets.b", "Checks for impossible pitch.", false);
     }
 
     @Override

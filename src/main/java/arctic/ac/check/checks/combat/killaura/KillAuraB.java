@@ -15,7 +15,7 @@ public class KillAuraB extends Check {
 
 
     public KillAuraB(PlayerData data) {
-        super(data, "KillAura", "B", "combat.killaura.b", true);
+        super(data, "KillAura", "B", "combat.killaura.b", "Checks for invalid sprint mechanic while attacking.", true);
     }
 
     @Override

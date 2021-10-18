@@ -17,7 +17,7 @@ public class MotionC extends Check {
 
 
     public MotionC(PlayerData data) {
-        super(data, "Motion", "C", "movement.motion.c", false);
+        super(data, "Motion", "C", "movement.motion.c", "Checks if player is moving too fast while being in the air.", false);
     }
 
     @Override

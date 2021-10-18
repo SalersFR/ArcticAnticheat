@@ -16,7 +16,7 @@ public class MotionB extends Check {
     private int ticksSinceIce, ticksSinceNearHead;
 
     public MotionB(PlayerData data) {
-        super(data, "Motion", "B", "movement.motion.b", false);
+        super(data, "Motion", "B", "movement.motion.b",  "Checks for too low jumps.",false);
     }
 
     @Override

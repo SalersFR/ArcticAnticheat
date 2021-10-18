@@ -11,7 +11,7 @@ public class AimH extends Check {
     private float lastDeltaYaw, lastDeltaPitch;
 
     public AimH(PlayerData data) {
-        super(data, "Aim", "H", "combat.aim.h", true);
+        super(data, "Aim", "H", "combat.aim.h", "Checks for GCD-Fix modules.", true);
     }
 
     @Override

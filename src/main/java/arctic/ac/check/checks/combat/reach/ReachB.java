@@ -16,7 +16,7 @@ import java.util.List;
 public class ReachB extends Check {
 
     public ReachB(final PlayerData data) {
-        super(data, "Reach", "B", "combat.reach.b", true);
+        super(data, "Reach", "B", "combat.reach.b", "Simple past locations check.", true);
     }
 
     private List<Vector> ray(final int ping) {

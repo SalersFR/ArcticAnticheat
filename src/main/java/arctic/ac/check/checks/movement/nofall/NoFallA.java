@@ -13,7 +13,7 @@ public class NoFallA extends Check {
      */
 
     public NoFallA(PlayerData data) {
-        super(data, "NoFall", "A", "movement.nofall.a", true);
+        super(data, "NoFall", "A", "movement.nofall.a", "Checks for invalid flying packets while falling.", true);
     }
 
     @Override

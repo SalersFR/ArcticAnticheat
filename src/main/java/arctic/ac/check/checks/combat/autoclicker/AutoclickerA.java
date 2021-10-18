@@ -22,7 +22,7 @@ public class AutoclickerA extends Check {
 
 
     public AutoclickerA(PlayerData data) {
-        super(data, "Autoclicker", "A", "combat.autoclicker.a", true);
+        super(data, "Autoclicker", "A", "combat.autoclicker.a", "Checks for mistake in clicker randomization", true);
     }
 
     @Override

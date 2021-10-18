@@ -15,7 +15,7 @@ public class FlyA extends Check {
     private double lastDeltaY, airTicks, ticksEdge, ticksPlace;
 
     public FlyA(PlayerData data) {
-        super(data, "Fly", "A", "movement.fly.a", true);
+        super(data, "Fly", "A", "movement.fly.a","Checks if player is not taking care about gravity.", true);
     }
 
     @Override

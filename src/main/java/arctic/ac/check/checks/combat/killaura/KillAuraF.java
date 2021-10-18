@@ -19,7 +19,7 @@ public class KillAuraF extends Check {
      */
 
     public KillAuraF(PlayerData data) {
-        super(data, "KillAura", "F", "combat.killaura.f", true);
+        super(data, "KillAura", "F", "combat.killaura.f", "Checks for autoblock modules.", true);
     }
 
     @Override

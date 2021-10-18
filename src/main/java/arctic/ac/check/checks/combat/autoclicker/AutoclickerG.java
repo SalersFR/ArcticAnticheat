@@ -16,7 +16,7 @@ public class AutoclickerG extends Check {
     private final ArcticQueue<Double> pastKurtosis = new ArcticQueue(3);
 
     public AutoclickerG(PlayerData data) {
-        super(data, "Autoclicker", "G", "combat.autoclicker.g", true);
+        super(data, "Autoclicker", "G", "combat.autoclicker.g", "Checks for impossibles clicking samples.", true);
     }
 
     @Override

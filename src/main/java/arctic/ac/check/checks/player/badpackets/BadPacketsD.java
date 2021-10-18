@@ -11,7 +11,7 @@ public class BadPacketsD extends Check {
 
 
     public BadPacketsD(PlayerData data) {
-        super(data, "BadPackets", "D", "player.badpackets.d", false);
+        super(data, "BadPackets", "D", "player.badpackets.d", "Checks if player is sending action packets while sending winow click packet.",false);
     }
 
     @Override

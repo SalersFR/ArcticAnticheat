@@ -9,7 +9,7 @@ public class BadPacketsC extends Check {
 
 
     public BadPacketsC(PlayerData data) {
-        super(data, "BadPackets", "C", "player.badpackets.c", false);
+        super(data, "BadPackets", "C", "player.badpackets.c", "Checks if player is attacking himself.", false);
     }
 
     @Override

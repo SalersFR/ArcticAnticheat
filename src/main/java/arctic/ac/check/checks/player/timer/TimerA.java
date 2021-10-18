@@ -12,7 +12,7 @@ public class TimerA extends Check {
     private double balance;
 
     public TimerA(PlayerData data) {
-        super(data, "Timer", "A", "player.timer.a", true);
+        super(data, "Timer", "A", "player.timer.a", "Checks if player is speeding up time.", true);
     }
 
 

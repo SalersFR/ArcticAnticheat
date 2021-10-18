@@ -16,7 +16,7 @@ public class AutoclickerE extends Check {
     private double lastKurt;
 
     public AutoclickerE(PlayerData data) {
-        super(data, "Autoclicker", "E", "combat.autoclicker.e", true);
+        super(data, "Autoclicker", "E", "combat.autoclicker.e", "Checks for too low kurtosis.",true);
     }
 
     @Override

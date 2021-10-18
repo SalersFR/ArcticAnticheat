@@ -10,7 +10,7 @@ public class AimJ extends Check {
     private double lastDeltaYaw, lastLastDeltaYaw;
 
     public AimJ(PlayerData data) {
-        super(data, "Aim", "J", "combat.aim.j", true);
+        super(data, "Aim", "J", "combat.aim.j", "Checks for too brutal rotations.", true);
     }
 
     @Override
