@@ -3,6 +3,7 @@ package arctic.ac.check;
 import arctic.ac.Arctic;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
+import arctic.ac.utils.CustomUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -47,16 +48,18 @@ public abstract class Check {
         if (loweredName.contains("movement") && this.isSetback())
             data.getSetbackProcessor().setback();
 
+        final String prefix = CustomUtils.translate(Arctic.INSTANCE.getConfig().getString("prefix"));
+
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("alerts.see") && player.hasMetadata("ALERTS_ON_NORMAL")) {
-                final String fromConfig = Arctic.INSTANCE.getConfig().getString("flag-message").
+                final String fromConfig = CustomUtils.translate(Arctic.INSTANCE.getConfig().getString("flag-message").
                         replace("%player%", data.getBukkitPlayerFromUUID().getName()).
                         replace("%vl%", "" + ((int) vl)).
                         replace("%maxvl%", "" + getBanVL()).
                         replace("%type%", type).
-                        replace("%check%", name);
-
-                final TextComponent alertMSG = new TextComponent(ChatColor.translateAlternateColorCodes('&', fromConfig));
+                        replace("%check%", name).
+                        replace("%prefix%", prefix));
+                final TextComponent alertMSG = new TextComponent(fromConfig);
 
                 alertMSG.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.
                         translateAlternateColorCodes('&', "&b&lArctic\n&7 \n&7Info: &b" + info +
@@ -64,7 +67,9 @@ public abstract class Check {
 
                 alertMSG.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + data.getPlayer().getName()));
 
-                player.spigot().sendMessage(alertMSG);
+                TextComponent prefixComp = new TextComponent(prefix);
+                prefixComp.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(CustomUtils.translate("&b&lArctic &r&bCheat Detection")).create()));
+                player.spigot().sendMessage(prefixComp, alertMSG);
             } else if (player.hasPermission("alerts.see") && player.hasMetadata("ALERTS_ON_VERBOSE")) {
                 final String fromConfig = Arctic.INSTANCE.getConfig().getString("flag-message-verbose").
                         replace("%player%", data.getBukkitPlayerFromUUID().getName()).
@@ -72,7 +77,8 @@ public abstract class Check {
                         replace("%type%", type).
                         replace("%check%", name).
                         replace("%ping%", ((CraftPlayer) data.getBukkitPlayerFromUUID()).getHandle().ping + "").
-                        replace("%tps%", MinecraftServer.getServer().recentTps[0] + "");
+                        replace("%tps%", MinecraftServer.getServer().recentTps[0] + "").
+                        replace("%prefix%", prefix);
 
                 final TextComponent alertMSG = new TextComponent(ChatColor.translateAlternateColorCodes('&', fromConfig));
 
@@ -92,7 +98,8 @@ public abstract class Check {
                             replace("%player%", data.getBukkitPlayerFromUUID().getName()).
                             replace("%vl%", "" + vl).
                             replace("%type%", type).
-                            replace("%check%", name);
+                            replace("%check%", name).
+                            replace("%prefix%", prefix);
 
 
                     Bukkit.getScheduler().runTask(Arctic.INSTANCE, () -> {

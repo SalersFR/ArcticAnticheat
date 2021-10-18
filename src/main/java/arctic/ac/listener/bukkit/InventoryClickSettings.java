@@ -85,7 +85,7 @@ public class InventoryClickSettings implements Listener {
 
             switch (meta.getDisplayName()) {
                 case "§b§lAim Checks":
-                    aimGUI.setItems();
+                    aimGUI.setItems(player);
                     aimGUI.display(player);
                     break;
                 case "§b§lAutoclicker Checks":
@@ -118,7 +118,7 @@ public class InventoryClickSettings implements Listener {
             if (CustomUtils.strip(s).contains("✓")) {
                 event.setCancelled(true);
 
-                newLore.add(CustomUtils.translate("&r &7» Enabled: &c✗"));
+                newLore.add(CustomUtils.translate("&r &7» Enabled: &b✗"));
                 Arctic.INSTANCE.getConfig().set("checks.combat." + CustomUtils.strip(meta.getDisplayName().substring(0, meta.getDisplayName().length() - 1)
                 ).toLowerCase() + "." + CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase() + ".enabled", false);
                 Arctic.INSTANCE.saveConfig();
@@ -136,7 +136,7 @@ public class InventoryClickSettings implements Listener {
             }  else if (CustomUtils.strip(s).contains("✗")) {
                 event.setCancelled(true);
 
-                newLore.add(CustomUtils.translate("&r &7» Enabled: &a✓"));
+                newLore.add(CustomUtils.translate("&r &7» Enabled: &b✓"));
                 Arctic.INSTANCE.getConfig().set("checks.combat." + CustomUtils.strip(meta.getDisplayName().substring(0, meta.getDisplayName().length() - 1)
                 ).toLowerCase() + "." + CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase() + ".enabled", true);
                 Arctic.INSTANCE.saveConfig();
