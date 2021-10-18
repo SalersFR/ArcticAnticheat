@@ -11,12 +11,12 @@ import org.bukkit.inventory.Inventory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AimGUI {
+public class AutoclickerGUI {
 
     private Inventory inventory;
 
-    public AimGUI createNewGUI() {
-        Inventory inv = Bukkit.createInventory(null, 27, "§b§lAim Checks");
+    public AutoclickerGUI createNewGUI() {
+        Inventory inv = Bukkit.createInventory(null, 27, "§b§lAutoclicker Checks");
 
 
 
@@ -28,9 +28,9 @@ public class AimGUI {
         ArrayList<String> checks = new ArrayList<>();
         HashMap<String, Boolean> checkAndActive = new HashMap<>();
 
-        for (String checkVariation : Arctic.INSTANCE.getConfig().getConfigurationSection("checks.combat" + "." + "aim").getKeys(false)) {
-            checks.add("aim" + checkVariation);
-            checkAndActive.put("aim" +  checkVariation, Arctic.INSTANCE.getConfig().getBoolean("checks.combat." + "aim" + "." + checkVariation + ".enabled"));
+        for (String checkVariation : Arctic.INSTANCE.getConfig().getConfigurationSection("checks.combat" + "." + "autoclicker").getKeys(false)) {
+            checks.add("autoclicker" + checkVariation);
+            checkAndActive.put("autoclicker" +  checkVariation, Arctic.INSTANCE.getConfig().getBoolean("checks.combat." + "autoclicker" + "." + checkVariation + ".enabled"));
 
         }
 
@@ -60,9 +60,9 @@ public class AimGUI {
             final boolean enabled = checkAndActive.get(s);
 
             if(enabled)
-            inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
-                    "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                    CustomUtils.translate("&r &7» Enabled: &a✓")));
+                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
+                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
+                        CustomUtils.translate("&r &7» Enabled: &a✓")));
 
             else
                 inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
