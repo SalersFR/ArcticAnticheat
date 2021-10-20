@@ -5,6 +5,7 @@ import arctic.ac.gui.ChecksGUI;
 import arctic.ac.gui.combat.CombatChecksGUI;
 import arctic.ac.gui.combat.impl.*;
 import arctic.ac.utils.CustomUtils;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -85,7 +86,7 @@ public class InventoryClickSettings implements Listener {
 
             switch (meta.getDisplayName()) {
                 case "§b§lAim Checks":
-                    aimGUI.setItems();
+                    aimGUI.setItems(player);
                     aimGUI.display(player);
                     break;
                 case "§b§lAutoclicker Checks":
@@ -107,45 +108,52 @@ public class InventoryClickSettings implements Listener {
             }
         }
 
-        // &r &7» Enabled: &a✓
-        // &r &7» Enabled: &a✗
+        // &r &7» Enabled: &b✓
+        // &r &7» Enabled: &b✗
 
         ItemStack item = event.getCurrentItem();
         ItemMeta meta = item.getItemMeta();
         List<String> newLore = new ArrayList<>();
 
+        if (meta.getLore() == null) return;
+        if (meta.getLore().isEmpty()) return;
+
+        FileConfiguration config = Arctic.INSTANCE.getConfig();
+
         for (String s : meta.getLore()) {
+
+            String name = CustomUtils.strip(meta.getDisplayName().substring(0, meta.getDisplayName().length() - 1)).toLowerCase();
+            String type = CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase();
+
+            boolean enabled = config.getBoolean("checks.combat." + name + "." + type + ".enabled");
+            boolean punishable = config.getBoolean("checks.combat." + name + "." + type + ".punish");
+            newLore.clear();
             if (CustomUtils.strip(s).contains("✓")) {
                 event.setCancelled(true);
-
-                newLore.add(CustomUtils.translate("&r &7» Enabled: &c✗"));
-                Arctic.INSTANCE.getConfig().set("checks.combat." + CustomUtils.strip(meta.getDisplayName().substring(0, meta.getDisplayName().length() - 1)
-                ).toLowerCase() + "." + CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase() + ".enabled", false);
+                config.set("checks.combat." + name + "." + type+ ".enabled", false);
                 Arctic.INSTANCE.saveConfig();
-
-                meta.getLore().clear();
-                meta.setLore(newLore);
-
                 Arctic.INSTANCE.reloadConfig();
 
+                newLore.addAll(meta.getLore());
+                newLore.set(1, CustomUtils.translate("&r &7» Enabled: &b" + (enabled ? "✓" : "✗")));
+                newLore.set(2, CustomUtils.translate("&r &7» Punish: &b" + (punishable ? "✓" : "✗")));
+
+                meta.setLore(newLore);
                 item.setItemMeta(meta);
                 inventory.setItem(event.getSlot(), item);
                 player.updateInventory();
-
-
             }  else if (CustomUtils.strip(s).contains("✗")) {
                 event.setCancelled(true);
-
-                newLore.add(CustomUtils.translate("&r &7» Enabled: &a✓"));
-                Arctic.INSTANCE.getConfig().set("checks.combat." + CustomUtils.strip(meta.getDisplayName().substring(0, meta.getDisplayName().length() - 1)
-                ).toLowerCase() + "." + CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase() + ".enabled", true);
+                config.set("checks.combat." + name + "." + type+ ".enabled", true);
                 Arctic.INSTANCE.saveConfig();
-
-                meta.getLore().clear();
-                meta.setLore(newLore);
-
                 Arctic.INSTANCE.reloadConfig();
 
+
+                newLore.addAll(meta.getLore());
+                newLore.set(1, CustomUtils.translate("&r &7» Enabled: &b" + (enabled ? "✓" : "✗")));
+                newLore.set(2, CustomUtils.translate("&r &7» Punish: &b" + (punishable ? "✓" : "✗")));
+
+                meta.setLore(newLore);
                 item.setItemMeta(meta);
                 inventory.setItem(event.getSlot(), item);
                 player.updateInventory();

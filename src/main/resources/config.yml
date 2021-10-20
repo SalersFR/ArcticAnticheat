@@ -1,6 +1,7 @@
-flag-message: "&3Arctic &r&7/ &b%player% &7flagged &b%check% &7(&3Type %type%&7) (&b%vl%&7/&b%maxvl%&7)"
-flag-message-verbose: "&3Arctic &r&7/ &b%player% &7[&e%ping%ms&7] &7flagged &3%check% &7(%type%&7) &fx%vl% &7[TPS=%tps%]"
-ban-command: "kick %player% &3Arctic &r&7/ &bDetected for cheating"
+prefix: "&3Arctic &r&7/"
+flag-message: "%prefix% &b%player% &7flagged &b%check% &7(&3Type %type%&7) (&b%vl%&7/&b%maxvl%&7)"
+flag-message-verbose: "%prefix%  &b%player% &7[&e%ping%ms&7] &7flagged &3%check% &7(%type%&7) &fx%vl% &7[TPS=%tps%]"
+ban-command: "kick %player% %prefix%  &bDetected for cheating"
 
 bypass-enabled: false
 bypass-permission: arctic.bypass

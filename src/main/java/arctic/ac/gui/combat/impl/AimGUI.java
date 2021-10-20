@@ -1,6 +1,8 @@
 package arctic.ac.gui.combat.impl;
 
 import arctic.ac.Arctic;
+import arctic.ac.check.Check;
+import arctic.ac.data.PlayerData;
 import arctic.ac.utils.CustomUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -10,64 +12,57 @@ import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class AimGUI {
 
     private Inventory inventory;
 
     public AimGUI createNewGUI() {
-        Inventory inv = Bukkit.createInventory(null, 27, "§b§lAim Checks");
-
+        Inventory inv = Bukkit.createInventory(null, 36, "§b§lAim Checks");
 
 
         this.inventory = inv;
         return this;
     }
 
-    public void setItems() {
-        ArrayList<String> checks = new ArrayList<>();
-        HashMap<String, Boolean> checkAndActive = new HashMap<>();
+    // Needed chars:
+    // »
+    // ✓
+    // ✗
 
-        for (String checkVariation : Arctic.INSTANCE.getConfig().getConfigurationSection("checks.combat" + "." + "aim").getKeys(false)) {
-            checks.add("aim" + checkVariation);
-            checkAndActive.put("aim" +  checkVariation, Arctic.INSTANCE.getConfig().getBoolean("checks.combat." + "aim" + "." + checkVariation + ".enabled"));
-
+    public void setItems(Player player) {
+        PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(player);
+        if (data == null) {
+            player.closeInventory();
+            return;
         }
 
-        for (String s : checkAndActive.keySet()) {
-            String var1 = s.substring(s.length() - 1);
-            var1 = var1.toUpperCase();
+        String name = "aim";
 
-            final boolean enabled = checkAndActive.get(s);
+        List<Check> checks = data.getChecks();
+        List<Check> aims = new ArrayList<>();
 
-            if (checks.indexOf(s) > 27) return;
 
-            if(enabled)
-                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
-                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                        CustomUtils.translate("&r &7» Enabled: &a✓")));
-
-            else
-                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
-                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                        CustomUtils.translate("&r &7» Enabled: &c✗")));
+        for (Check c : checks) {
+            if (c.getConfigName().contains(name)) {
+                aims.add(c);
+            }
         }
 
-        for (String s : checkAndActive.keySet()) {
-            String var1 = s.substring(s.length() - 1);
-            var1 = var1.toUpperCase();
+        for (Check c : aims) {
 
-            final boolean enabled = checkAndActive.get(s);
 
-            if(enabled)
-            inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
-                    "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                    CustomUtils.translate("&r &7» Enabled: &a✓")));
+            boolean enabled = Arctic.INSTANCE.getConfig().getBoolean("checks.combat." + name + "." + c.getType().toLowerCase() + ".enabled");
+            boolean punishable = Arctic.INSTANCE.getConfig().getBoolean("checks.combat." + name + "." + c.getType().toLowerCase() + ".punish");
 
-            else
-                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
-                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                        CustomUtils.translate("&r &7» Enabled: &c✗")));
+            if (enabled) {
+                inventory.setItem(aims.indexOf(c), CustomUtils.createItem(Material.MAP, "&b" + c.getName() + c.getType(), "&r &7» Description: &b" + c.getDesc(), "&r &7» Enabled: &b" +
+                        (enabled ? "✓" : "✗"), "&r &7» Punish: &b" + (punishable ? "✓" : "✗")));
+            } else {
+                inventory.setItem(aims.indexOf(c), CustomUtils.createItem(Material.EMPTY_MAP, "&b" + c.getName() + c.getType(), "&r &7» Description: &b" + c.getDesc(), "&r &7» Enabled: &b" +
+                        (enabled ? "✓" : "✗"), "&r &7» Punish: &b" + (punishable ? "✓" : "✗")));
+            }
         }
     }
 
