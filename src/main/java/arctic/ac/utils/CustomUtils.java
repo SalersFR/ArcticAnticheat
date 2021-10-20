@@ -54,4 +54,31 @@ public class CustomUtils {
 
         return item;
     }
+
+    public Category getCategory(String checkName) {
+        switch (checkName) {
+            case "aim":
+            case "autoclicker":
+            case "killaura":
+            case "reach":
+            case "velocity":
+                return Category.COMBAT;
+            case "fly":
+            case "motion":
+            case "nofall":
+            case "speed":
+            case "step":
+                return Category.MOVEMENT;
+            case "badpackets":
+            case "scaffold":
+            case "timer":
+                return Category.PLAYER;
+        }
+
+        return null;
+    }
+
+    enum Category {
+        MOVEMENT, COMBAT, PLAYER;
+    }
 }

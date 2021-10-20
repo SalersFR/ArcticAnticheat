@@ -12,84 +12,57 @@ import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class AimGUI {
 
     private Inventory inventory;
 
     public AimGUI createNewGUI() {
-        Inventory inv = Bukkit.createInventory(null, 27, "§b§lAim Checks");
+        Inventory inv = Bukkit.createInventory(null, 36, "§b§lAim Checks");
 
 
         this.inventory = inv;
         return this;
     }
 
+    // Needed chars:
+    // »
+    // ✓
+    // ✗
+
     public void setItems(Player player) {
-        ArrayList<String> checks = new ArrayList<>();
-        HashMap<String, Boolean> checkAndActive = new HashMap<>();
         PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(player);
         if (data == null) {
             player.closeInventory();
             return;
         }
 
-        for (String checkVariation : Arctic.INSTANCE.getConfig().getConfigurationSection("checks.combat" + "." + "aim").getKeys(false)) {
-            checks.add("aim" + checkVariation);
-            checkAndActive.put("aim" + checkVariation, Arctic.INSTANCE.getConfig().getBoolean("checks.combat." + "aim" + "." + checkVariation + ".enabled"));
+        String name = "aim";
 
+        List<Check> checks = data.getChecks();
+        List<Check> aims = new ArrayList<>();
+
+
+        for (Check c : checks) {
+            if (c.getConfigName().contains(name)) {
+                aims.add(c);
+            }
         }
 
-        for (String s : checkAndActive.keySet()) {
-            String var1 = s.substring(s.length() - 1);
-            var1 = var1.toUpperCase();
+        for (Check c : aims) {
 
-            final boolean enabled = checkAndActive.get(s);
 
-            if (checks.indexOf(s) > 27) return;
+            boolean enabled = Arctic.INSTANCE.getConfig().getBoolean("checks.combat." + name + "." + c.getType().toLowerCase() + ".enabled");
+            boolean punishable = Arctic.INSTANCE.getConfig().getBoolean("checks.combat." + name + "." + c.getType().toLowerCase() + ".punish");
 
-            Check c = null;
-
-            for (Check check : data.getChecks()) {
-                if (check.getConfigName().equalsIgnoreCase(StringUtils.capitalize(s.substring(0, s.length() - 1) + var1))) {
-                    c = check;
-                }
+            if (enabled) {
+                inventory.setItem(aims.indexOf(c), CustomUtils.createItem(Material.MAP, "&b" + c.getName() + c.getType(), "&r &7» Description: &b" + c.getDesc(), "&r &7» Enabled: &b" +
+                        (enabled ? "✓" : "✗"), "&r &7» Punish: &b" + (punishable ? "✓" : "✗")));
+            } else {
+                inventory.setItem(aims.indexOf(c), CustomUtils.createItem(Material.EMPTY_MAP, "&b" + c.getName() + c.getType(), "&r &7» Description: &b" + c.getDesc(), "&r &7» Enabled: &b" +
+                        (enabled ? "✓" : "✗"), "&r &7» Punish: &b" + (punishable ? "✓" : "✗")));
             }
-
-            if (enabled)
-                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
-                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                        CustomUtils.translate("&r &7» Description: &b" + (c == null ? "" : c.getDesc())), CustomUtils.translate("&r &7» Enabled: &b✓")));
-
-            else
-                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
-                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                        CustomUtils.translate("&r &7» Description: &b" + (c == null ? "" : c.getDesc())), CustomUtils.translate("&r &7» Enabled: &b✗")));
-        }
-
-        for (String s : checkAndActive.keySet()) {
-            String var1 = s.substring(s.length() - 1);
-            var1 = var1.toUpperCase();
-
-            final boolean enabled = checkAndActive.get(s);
-
-            Check c = null;
-
-            for (Check check : data.getChecks()) {
-                if (check.getConfigName().equalsIgnoreCase(StringUtils.capitalize(s.substring(0, s.length() - 1) + var1))) {
-                    c = check;
-                }
-            }
-
-            if (enabled)
-                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
-                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                        CustomUtils.translate("&r &7» Description: &b" + (c == null ? "" : c.getDesc())), CustomUtils.translate("&r &7» Enabled: &b✓")));
-
-            else
-                inventory.setItem(checks.indexOf(s), CustomUtils.createItem(Material.PAPER, CustomUtils.translate("" +
-                                "&b" + StringUtils.capitalize(s.substring(0, s.length() - 1) + var1)),
-                        CustomUtils.translate("&r &7» Description: &b" + (c == null ? "" : c.getDesc())), CustomUtils.translate("&r &7» Enabled: &b✗")));
         }
     }
 
