@@ -1,15 +1,16 @@
 package arctic.ac.check.checks.player.timer;
 
-import arctic.ac.Arctic;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
+import arctic.ac.data.processor.NetworkProcessor;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
-import org.bukkit.Bukkit;
+import arctic.ac.event.client.TransactionConfirmEvent;
+import arctic.ac.event.server.ServerPositionEvent;
 
 public class TimerA extends Check {
 
-    private double balance;
+    private double balance = 20D;
 
     public TimerA(PlayerData data) {
         super(data, "Timer", "A", "player.timer.a", "Checks if player is speeding up time.", true);
@@ -20,29 +21,29 @@ public class TimerA extends Check {
 
     @Override
     public void handle(Event e) {
-        if (e instanceof FlyingEvent) {
+        if (e instanceof ServerPositionEvent) {
 
-            this.balance++;
 
-            final boolean exempt = data.getInteractData().getTicksAlive() < 50;
+            final NetworkProcessor networkProcessor = data.getNetworkProcessor();
 
-            debug("exempt=" + exempt + " balance=" + balance + " buffer=" + buffer);
+            this.balance -= getMillis(networkProcessor.getLastFlying());
+            debug("out position sent !");
 
-            if (!exempt && balance >= 2) {
-                if (++buffer > 7) {
-                    buffer -= 1.25D;
+            //sent a transaction confirm, so changing balance
 
-                    // fail("balance=" + balance);
-                }
 
-            } else if (buffer > 0) buffer -= 0.25D;
+        } else if (e instanceof FlyingEvent) {
 
-            Bukkit.getScheduler().runTaskLaterAsynchronously(Arctic.INSTANCE, () -> {
-                balance = 0;
 
-            }, 20L);
+            final NetworkProcessor networkProcessor = data.getNetworkProcessor();
 
+            //using transaction ping cuz it's more accurate.
+            debug("balance=" + balance + " transactionPing=" + networkProcessor.getTransactionPing());
+
+            //finally setting the balance as it was at the start
+            this.balance += 0.01;
         }
+
 
     }
 

@@ -7,6 +7,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Bukkit;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -16,7 +17,7 @@ public class NetworkProcessor {
 
     private final PlayerData data;
     private short transactionID = 2000;
-    private long lastTransactionSent, lastTransactionConfirm, lastKeepAliveSent, lastKeepAliveConfirm; //confirm = PlayIn , sent = PlayOut
+    private long lastTransactionSent, lastTransactionConfirm, lastKeepAliveSent, lastKeepAliveConfirm,lastFlying; //confirm = PlayIn , sent = PlayOut
     private int transactionPing, keepAlivePing;
 
     private long time() {
@@ -41,6 +42,7 @@ public class NetworkProcessor {
 
             transactionID--;
             this.lastTransactionSent = time();
+            this.lastFlying = time();
 
             if (transactionID <= 1200)
                 transactionID = 2000;

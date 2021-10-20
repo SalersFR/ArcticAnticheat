@@ -164,6 +164,11 @@ public class PacketProcessor {
             final WrapperPlayClientTransaction wrapper = new WrapperPlayClientTransaction(event.getPacket());
 
             data.getVelocityData().handleTransaction(wrapper);
+            for(Check checks : data.getChecks()) {
+                if(checks.isEnabled() && !exempt) {
+                    checks.handle(new TransactionConfirmEvent(wrapper));
+                }
+            }
         }
 
     }
