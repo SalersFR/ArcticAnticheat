@@ -10,7 +10,7 @@ public class AimE extends Check {
     private double lastDeltaYaw;
 
     public AimE(PlayerData data) {
-        super(data, "Aim", "E", "combat.aim.e","Checks for too smooth rotations (yaw)", true);
+        super(data, "Aim", "E", "combat.aim.e","Checks for great acceleration with smoothness in rotations (yaw).", true);
     }
 
     @Override

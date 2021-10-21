@@ -56,13 +56,15 @@ public class AimGUI {
             boolean enabled = Arctic.INSTANCE.getConfig().getBoolean("checks.combat." + name + "." + c.getType().toLowerCase() + ".enabled");
             boolean punishable = Arctic.INSTANCE.getConfig().getBoolean("checks.combat." + name + "." + c.getType().toLowerCase() + ".punish");
 
-            if (enabled) {
-                inventory.setItem(aims.indexOf(c), CustomUtils.createItem(Material.MAP, "&b" + c.getName() + c.getType(), "&r &7» Description: &b" + c.getDesc(), "&r &7» Enabled: &b" +
-                        (enabled ? "✓" : "✗"), "&r &7» Punish: &b" + (punishable ? "✓" : "✗")));
-            } else {
-                inventory.setItem(aims.indexOf(c), CustomUtils.createItem(Material.EMPTY_MAP, "&b" + c.getName() + c.getType(), "&r &7» Description: &b" + c.getDesc(), "&r &7» Enabled: &b" +
-                        (enabled ? "✓" : "✗"), "&r &7» Punish: &b" + (punishable ? "✓" : "✗")));
-            }
+            inventory.setItem(aims.indexOf(c), CustomUtils.createItem((enabled ? Material.MAP : Material.EMPTY_MAP),
+                    "&b" + c.getName() + c.getType(),
+                    "&r &7» Description: &b" + c.getDesc(),
+                    "&r &7» Enabled: &b" + (enabled ? "✓" : "✗"),
+                    "&r &7» Punish: &b" + (punishable ? "✓" : "✗"),
+                    "&r &7» Max VL: &b" + c.getBanVL(),
+                    "",
+                    "&7&oLeft click to toggle enabled status.",
+                    "&7&oRight click to toggle punish status."));
         }
     }
 

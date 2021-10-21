@@ -11,7 +11,7 @@ public class AimA extends Check {
     private float lastDeltaYaw, lastDeltaPitch;
 
     public AimA(PlayerData data) {
-        super(data, "Aim", "A", "combat.aim.a", "Checks for invalid yaw sensitivity" ,true);
+        super(data, "Aim", "A", "combat.aim.a", "Checks for invalid yaw sensitivity." ,true);
     }
 
     @Override

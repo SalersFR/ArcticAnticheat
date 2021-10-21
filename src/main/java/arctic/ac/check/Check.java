@@ -22,6 +22,7 @@ public abstract class Check {
     private final boolean experimental;
     public double buffer = 0, vl = 0;
 
+
     public Check(PlayerData data, String name, String type, String configName,String desc, boolean experimental) {
 
         this.data = data;

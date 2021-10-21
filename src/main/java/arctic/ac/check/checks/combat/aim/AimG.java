@@ -13,7 +13,7 @@ public class AimG extends Check {
     private double lastDeltaPitch, lastPitchAtan, result;
 
     public AimG(PlayerData data) {
-        super(data, "Aim", "G", "combat.aim.g", "Checks for invalid gcd.",true);
+        super(data, "Aim", "G", "combat.aim.g", "Checks for invalid GCD.",true);
     }
 
     @Override

@@ -5,10 +5,12 @@ import arctic.ac.gui.ChecksGUI;
 import arctic.ac.gui.combat.CombatChecksGUI;
 import arctic.ac.gui.combat.impl.*;
 import arctic.ac.utils.CustomUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -120,48 +122,44 @@ public class InventoryClickSettings implements Listener {
 
         FileConfiguration config = Arctic.INSTANCE.getConfig();
 
-        for (String s : meta.getLore()) {
 
-            String name = CustomUtils.strip(meta.getDisplayName().substring(0, meta.getDisplayName().length() - 1)).toLowerCase();
-            String type = CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase();
+        String name = CustomUtils.strip(meta.getDisplayName().substring(0, meta.getDisplayName().length() - 1)).toLowerCase();
+        String type = CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase();
 
-            boolean enabled = config.getBoolean("checks.combat." + name + "." + type + ".enabled");
-            boolean punishable = config.getBoolean("checks.combat." + name + "." + type + ".punish");
-            newLore.clear();
-            if (CustomUtils.strip(s).contains("✓")) {
+        boolean enabled = config.getBoolean("checks.combat." + name + "." + type + ".enabled");
+        boolean punishable = config.getBoolean("checks.combat." + name + "." + type + ".punish");
+
+        String punishStr = meta.getLore().get(2);
+        String enableStr = meta.getLore().get(1);
+        newLore.clear();
+
+        Bukkit.broadcastMessage(event.getClick().name());
+        if (event.getClick().equals(ClickType.RIGHT)) {
+            if (CustomUtils.strip(punishStr).contains("✓")) {
                 event.setCancelled(true);
-                config.set("checks.combat." + name + "." + type+ ".enabled", false);
-                Arctic.INSTANCE.saveConfig();
-                Arctic.INSTANCE.reloadConfig();
-
-                newLore.addAll(meta.getLore());
-                newLore.set(1, CustomUtils.translate("&r &7» Enabled: &b" + (enabled ? "✓" : "✗")));
-                newLore.set(2, CustomUtils.translate("&r &7» Punish: &b" + (punishable ? "✓" : "✗")));
-
-                meta.setLore(newLore);
-                item.setItemMeta(meta);
-                inventory.setItem(event.getSlot(), item);
-                player.updateInventory();
-            }  else if (CustomUtils.strip(s).contains("✗")) {
+                config.set("checks.combat." + name + "." + type + ".punish", false);
+            } else if (CustomUtils.strip(punishStr).contains("✗")) {
                 event.setCancelled(true);
-                config.set("checks.combat." + name + "." + type+ ".enabled", true);
-                Arctic.INSTANCE.saveConfig();
-                Arctic.INSTANCE.reloadConfig();
-
-
-                newLore.addAll(meta.getLore());
-                newLore.set(1, CustomUtils.translate("&r &7» Enabled: &b" + (enabled ? "✓" : "✗")));
-                newLore.set(2, CustomUtils.translate("&r &7» Punish: &b" + (punishable ? "✓" : "✗")));
-
-                meta.setLore(newLore);
-                item.setItemMeta(meta);
-                inventory.setItem(event.getSlot(), item);
-                player.updateInventory();
+                config.set("checks.combat." + name + "." + type + ".punish", true);
             }
+        } else if (event.getClick().equals(ClickType.LEFT)) {
+            if (CustomUtils.strip(enableStr).contains("✓")) {
+                event.setCancelled(true);
+                config.set("checks.combat." + name + "." + type + ".enabled", false);
+            } else if (CustomUtils.strip(enableStr).contains("✗")) {
+                event.setCancelled(true);
+                config.set("checks.combat." + name + "." + type + ".enabled", true);
+            }
+        }
 
+        Arctic.INSTANCE.saveConfig();
+        Arctic.INSTANCE.reloadConfig();
 
-
-
+        switch (CustomUtils.strip(inventory.getTitle())) {
+            case "Aim Checks":
+                AimGUI aim = new AimGUI().createNewGUI();
+                aim.setItems((Player) event.getWhoClicked());
+                aim.display((Player) event.getWhoClicked());
         }
     }
 }

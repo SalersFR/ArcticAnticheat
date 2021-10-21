@@ -10,7 +10,7 @@ public class AimF extends Check {
     private double lastDeltaPitch;
 
     public AimF(PlayerData data) {
-        super(data, "Aim", "F", "combat.aim.f", "Checks for too smooth rotations (pitch)", true);
+        super(data, "Aim", "F", "combat.aim.f", "Checks for great acceleration with smoothness in rotations (pitch).", true);
     }
 
     @Override

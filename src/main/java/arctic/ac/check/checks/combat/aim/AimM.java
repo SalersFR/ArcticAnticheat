@@ -11,7 +11,7 @@ public class AimM extends Check {
     private double lastDeltaYaw, deltaXZ;
 
     public AimM(PlayerData data) {
-        super(data, "Aim", "M", "combat.aim.m", "Checks for too small yaw rotations.",true);
+        super(data, "Aim", "M", "combat.aim.m", "Checks for too small acceleration in yaw rotations.",true);
     }
 
     @Override

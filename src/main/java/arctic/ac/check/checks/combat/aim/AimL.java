@@ -13,7 +13,7 @@ public class AimL extends Check {
      */
 
     public AimL(PlayerData data) {
-        super(data, "Aim", "L", "combat.aim.k", "Checks for near impossible rotations.",true);
+        super(data, "Aim", "L", "combat.aim.k", "Checks for extremely small rotations.",true);
     }
 
     @Override
