@@ -37,11 +37,11 @@ public class CombatChecksGUI {
         final ItemMeta reachMeta = reach.getItemMeta();
         final ItemMeta velocityMeta = velocity.getItemMeta();
 
-        aimMeta.setDisplayName("§b§lAim Checks");
-        autoclickerMeta.setDisplayName("§b§lAutoclicker Checks");
-        killauraMeta.setDisplayName("§b§lKillAura Checks");
-        reachMeta.setDisplayName("§b§lReach Checks");
-        velocityMeta.setDisplayName("§b§lVelocity Checks");
+        aimMeta.setDisplayName("§bAim Checks");
+        autoclickerMeta.setDisplayName("§bAutoclicker Checks");
+        killauraMeta.setDisplayName("§bKillAura Checks");
+        reachMeta.setDisplayName("§bReach Checks");
+        velocityMeta.setDisplayName("§bVelocity Checks");
 
         aim.setItemMeta(aimMeta);
         autoclicker.setItemMeta(autoclickerMeta);
@@ -54,9 +54,6 @@ public class CombatChecksGUI {
         this.inventory.setItem(13,killaura);
         this.inventory.setItem(15,reach);
         this.inventory.setItem(16,velocity);
-
-
-
 
     }
 

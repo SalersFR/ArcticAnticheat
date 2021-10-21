@@ -2,8 +2,10 @@ package arctic.ac.listener.bukkit;
 
 import arctic.ac.Arctic;
 import arctic.ac.gui.ChecksGUI;
+import arctic.ac.gui.SettingsGUI;
 import arctic.ac.gui.combat.CombatChecksGUI;
 import arctic.ac.gui.combat.impl.*;
+import arctic.ac.gui.movement.MovementGUI;
 import arctic.ac.utils.CustomUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -37,6 +39,8 @@ public class InventoryClickSettings implements Listener {
         String settingsName = "Arctic";
         String checksName = "Checks";
         String combatName = "Combat Checks";
+        String movementName = "Movement Checks";
+        String playerName = "Player Checks";
 
         if (invName.equalsIgnoreCase(settingsName)) {
             event.setCancelled(true);
@@ -61,6 +65,9 @@ public class InventoryClickSettings implements Listener {
                 player.closeInventory();
 
                 // OPEN MOVEMENT INVENTORY
+                MovementGUI gui = new MovementGUI().createNewGUI();
+                gui.setItems();
+                gui.display(player);
             } else if (event.getSlot() == 15) {
                 player.closeInventory();
 
@@ -68,10 +75,8 @@ public class InventoryClickSettings implements Listener {
             }
         } else if (invName.equalsIgnoreCase(combatName)) {
             event.setCancelled(true);
-
             ItemStack item = event.getCurrentItem();
             ItemMeta meta = item.getItemMeta();
-            List<String> newLore = new ArrayList<>();
 
             final AimGUI aimGUI = new AimGUI().createNewGUI();
             final AutoclickerGUI clickerGUI = new AutoclickerGUI().createNewGUI();
@@ -79,34 +84,39 @@ public class InventoryClickSettings implements Listener {
             final ReachGUI reachGUI = new ReachGUI().createNewGUI();
             final VelocityGUI velocityGUI = new VelocityGUI().createNewGUI();
 
-            // ✓
-            // ✗
-            // &r &7» Enabled: " + (checkAndActive.get(s) ? "&a✓" : "&c✗"))
+            player.updateInventory();
 
+            switch (meta.getDisplayName()) {
+                case "§bAim Checks":
+                    aimGUI.setItems(player);
+                    aimGUI.display(player);
+                    break;
+                case "§bAutoclicker Checks":
+                    clickerGUI.setItems(player);
+                    clickerGUI.display(player);
+                    break;
+                case "§bKillAura Checks":
+                    auraGUI.setItems(player);
+                    auraGUI.display(player);
+                    break;
+                case "§bReach Checks":
+                    reachGUI.setItems(player);
+                    reachGUI.display(player);
+                    break;
+                case "§bVelocity Checks":
+                    velocityGUI.setItems(player);
+                    velocityGUI.display(player);
+                    break;
+            }
+        } else if (invName.equalsIgnoreCase(movementName)) {
+            event.setCancelled(true);
+            ItemStack item = event.getCurrentItem();
+            ItemMeta meta = item.getItemMeta();
 
             player.updateInventory();
 
             switch (meta.getDisplayName()) {
-                case "§b§lAim Checks":
-                    aimGUI.setItems(player);
-                    aimGUI.display(player);
-                    break;
-                case "§b§lAutoclicker Checks":
-                    clickerGUI.setItems(player);
-                    clickerGUI.display(player);
-                    break;
-                case "§b§lKillAura Checks":
-                    auraGUI.setItems(player);
-                    auraGUI.display(player);
-                    break;
-                case "§b§lReach Checks":
-                    reachGUI.setItems(player);
-                    reachGUI.display(player);
-                    break;
-                case "§b§lVelocity Checks":
-                    velocityGUI.setItems(player);
-                    velocityGUI.display(player);
-                    break;
+
             }
         }
 
@@ -115,23 +125,20 @@ public class InventoryClickSettings implements Listener {
 
         ItemStack item = event.getCurrentItem();
         ItemMeta meta = item.getItemMeta();
-        List<String> newLore = new ArrayList<>();
 
+        if (meta == null) return;
         if (meta.getLore() == null) return;
         if (meta.getLore().isEmpty()) return;
 
         FileConfiguration config = Arctic.INSTANCE.getConfig();
 
-
         String name = CustomUtils.strip(meta.getDisplayName().substring(0, meta.getDisplayName().length() - 1)).toLowerCase();
         String type = CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase();
 
-        boolean enabled = config.getBoolean("checks.combat." + name + "." + type + ".enabled");
-        boolean punishable = config.getBoolean("checks.combat." + name + "." + type + ".punish");
+        if (meta.getLore().size() < 2) return;
 
         String punishStr = meta.getLore().get(2);
         String enableStr = meta.getLore().get(1);
-        newLore.clear();
 
         if (event.getClick().equals(ClickType.RIGHT)) {
             if (CustomUtils.strip(punishStr).contains("✓")) {
