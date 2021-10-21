@@ -92,19 +92,19 @@ public class InventoryClickSettings implements Listener {
                     aimGUI.display(player);
                     break;
                 case "§b§lAutoclicker Checks":
-                    clickerGUI.setItems();
+                    clickerGUI.setItems(player);
                     clickerGUI.display(player);
                     break;
                 case "§b§lKillAura Checks":
-                    auraGUI.setItems();
+                    auraGUI.setItems(player);
                     auraGUI.display(player);
                     break;
                 case "§b§lReach Checks":
-                    reachGUI.setItems();
+                    reachGUI.setItems(player);
                     reachGUI.display(player);
                     break;
                 case "§b§lVelocity Checks":
-                    velocityGUI.setItems();
+                    velocityGUI.setItems(player);
                     velocityGUI.display(player);
                     break;
             }
@@ -133,7 +133,6 @@ public class InventoryClickSettings implements Listener {
         String enableStr = meta.getLore().get(1);
         newLore.clear();
 
-        Bukkit.broadcastMessage(event.getClick().name());
         if (event.getClick().equals(ClickType.RIGHT)) {
             if (CustomUtils.strip(punishStr).contains("✓")) {
                 event.setCancelled(true);
@@ -160,6 +159,27 @@ public class InventoryClickSettings implements Listener {
                 AimGUI aim = new AimGUI().createNewGUI();
                 aim.setItems((Player) event.getWhoClicked());
                 aim.display((Player) event.getWhoClicked());
+                break;
+            case "Autoclicker Checks":
+                AutoclickerGUI clicker = new AutoclickerGUI().createNewGUI();
+                clicker.setItems((Player) event.getWhoClicked());
+                clicker.display((Player) event.getWhoClicked());
+                break;
+            case "KillAura Checks":
+                KillAuraGUI aura = new KillAuraGUI().createNewGUI();
+                aura.setItems((Player) event.getWhoClicked());
+                aura.display((Player) event.getWhoClicked());
+                break;
+            case "Reach Checks":
+                ReachGUI reach = new ReachGUI().createNewGUI();
+                reach.setItems((Player) event.getWhoClicked());
+                reach.display((Player) event.getWhoClicked());
+                break;
+            case "Velocity Checks":
+                VelocityGUI velocity = new VelocityGUI().createNewGUI();
+                velocity.setItems((Player) event.getWhoClicked());
+                velocity.display((Player) event.getWhoClicked());
+                break;
         }
     }
 }
