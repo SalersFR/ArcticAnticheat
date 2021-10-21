@@ -5,8 +5,12 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.data.processor.NetworkProcessor;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
-import arctic.ac.event.client.TransactionConfirmEvent;
-import arctic.ac.event.server.ServerPositionEvent;
+import arctic.ac.event.client.PacketEvent;
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class TimerA extends Check {
 
@@ -21,15 +25,15 @@ public class TimerA extends Check {
 
     @Override
     public void handle(Event e) {
-        if (e instanceof ServerPositionEvent) {
+        if (e instanceof PacketEvent) {
 
+            final PacketEvent event = (PacketEvent) e;
+            final PacketType type = event.getPacketType();
 
-            final NetworkProcessor networkProcessor = data.getNetworkProcessor();
+            if (type.equals(PacketType.Play.Client.CUSTOM_PAYLOAD)) {
+                balance = 0;
 
-            this.balance -= getMillis(networkProcessor.getLastFlying());
-            debug("out position sent !");
-
-            //sent a transaction confirm, so changing balance
+            }
 
 
         } else if (e instanceof FlyingEvent) {
@@ -40,8 +44,19 @@ public class TimerA extends Check {
             //using transaction ping cuz it's more accurate.
             debug("balance=" + balance + " transactionPing=" + networkProcessor.getTransactionPing());
 
-            //finally setting the balance as it was at the start
-            this.balance += 0.01;
+            //sending payload every tick
+            final PacketContainer payload = new PacketContainer(PacketType.Play.Server.CUSTOM_PAYLOAD);
+            payload.getStrings().write(0,"jaj");
+
+            try {
+                ProtocolLibrary.getProtocolManager().sendServerPacket(data.getPlayer(), payload);
+            } catch (InvocationTargetException invocationTargetException) {
+                invocationTargetException.printStackTrace();
+            }
+
+
+            //increasing balance
+            this.balance++;
         }
 
 

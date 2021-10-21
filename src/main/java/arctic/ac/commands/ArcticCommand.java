@@ -15,7 +15,8 @@ public class ArcticCommand implements CommandExecutor {
             final Player player = (Player) commandSender;
             if (player.hasPermission("arctic.command")) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r \n&3&lArctic Advanced Anticheat\n" +
-                        " \n&7 - &3/alerts [verbose] &fToggle the display of flags\n&7 - &3/debug <check> &fEnable the debug\n&7 - &3/preload &fReload the config file\n&7 - &3/psettings &fToggle checks or autobans"));
+                        " \n&7 - &3/alerts [verbose] &fToggle the display of flags\n&7 -" +
+                        " &3/debug <check> &fEnable the debug\n&7 - &3/areload &fReload the config file\n&7 - &3/asettings &fToggle checks or autobans"));
             }
         }
         return false;
