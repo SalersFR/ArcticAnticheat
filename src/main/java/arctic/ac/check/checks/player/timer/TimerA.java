@@ -13,7 +13,7 @@ public class TimerA extends Check {
 
 
     public TimerA(PlayerData data) {
-        super(data, "Timer", "A", "player.timer.a", "Checks if player is speeding up packets rate.", true);
+        super(data, "Timer", "A", "player.timer.a", "Checks if player is changing packets rate.", true);
     }
 
     @Override
@@ -33,10 +33,13 @@ public class TimerA extends Check {
 
             if(buffer < 0) buffer = 0;
 
-            if(difference >= 10) {
-                if(++buffer > 3)
+            final boolean exempt = data.getInteractData().getTicksAlive() < 35;
+
+            if(difference >= 10 && !exempt) {
+                if(buffer < 10.5) buffer++;
+                if(buffer > 7)
                     fail("diff=" + difference + " buffer=" + buffer);
-            } else if(buffer > 0) buffer -= 0.02D;
+            } else if(buffer > 0) buffer -= 0.1D;
 
 
 
