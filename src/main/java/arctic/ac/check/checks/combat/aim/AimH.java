@@ -5,10 +5,12 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.RotationEvent;
 import arctic.ac.utils.MathUtils;
+import org.bukkit.Bukkit;
 
 public class AimH extends Check {
 
     private float lastDeltaYaw, lastDeltaPitch;
+    private double lastGCD;
 
     public AimH(PlayerData data) {
         super(data, "Aim", "H", "combat.aim.h", "Checks for GCD-Fix modules.", true);
@@ -18,33 +20,36 @@ public class AimH extends Check {
     public void handle(Event event) {
         if (event instanceof RotationEvent) {
             RotationEvent rotationEvent = (RotationEvent) event;
-            /**
-             CREDITS FREQUENCY
-             **/
 
-
-            // Get the deltas from the rotation update
-            float deltaYaw = rotationEvent.getDeltaYaw();
-            float deltaPitch = rotationEvent.getDeltaPitch();
+            final float deltaYaw = rotationEvent.getDeltaYaw();
+            final float deltaPitch = rotationEvent.getDeltaPitch();
 
             // Grab the gcd using an expander.
-            double divisorYaw = MathUtils.getGcd((long) (deltaYaw * MathUtils.EXPANDER), (long) (lastDeltaYaw * MathUtils.EXPANDER));
-            double divisorPitch = MathUtils.getGcd((long) (deltaPitch * MathUtils.EXPANDER), (long) (lastDeltaPitch * MathUtils.EXPANDER));
+            final double gcdYaw = MathUtils.getGcd((long) (deltaYaw * MathUtils.EXPANDER), (long) (lastDeltaYaw * MathUtils.EXPANDER));
+            final double gcdPitch = MathUtils.getGcd((long) (deltaPitch * MathUtils.EXPANDER), (long) (lastDeltaPitch * MathUtils.EXPANDER));
 
-            // Get the constant for both rotation updates by dividing by the expander
-            double constantYaw = divisorYaw / MathUtils.EXPANDER;
-            double constantPitch = divisorPitch / MathUtils.EXPANDER;
+            final double gcd = gcdYaw / gcdPitch;
+            final double diffGCD = Math.abs(gcd - lastGCD);
 
-            // Get the estimated mouse delta from the constant
-            double deltaX = deltaYaw / constantYaw;
-            double deltaY = deltaPitch / constantPitch;
+            debug("gcdDiff=" + diffGCD + " buffer=" + buffer);
 
-            // Get the estimated mouse delta from the old rotations using the new constant
-            double lastDeltaX = lastDeltaYaw / constantYaw;
-            double lastDeltaY = lastDeltaPitch / constantPitch;
+
+
+            final float pitch = ((RotationEvent) event).getTo().getPitch();
+
+            final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || deltaYaw < 3.5D;
+            final boolean exemptCombat = (System.currentTimeMillis() - data.getInteractionData().getLastHitPacket()) > 100L;
 
             lastDeltaYaw = deltaYaw;
             lastDeltaPitch = deltaPitch;
+            lastGCD = gcd;
+
+            if(!exempt && !exemptCombat) {
+                if(Double.toString(diffGCD).contains("E")) {
+                    if(++buffer > 8)
+                        fail("gcdDiff=" + diffGCD);
+                } else if(buffer > 0) buffer -= 0.25D;
+            }
         }
     }
 }
