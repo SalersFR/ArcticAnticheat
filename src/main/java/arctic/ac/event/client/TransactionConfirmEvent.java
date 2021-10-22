@@ -2,7 +2,9 @@ package arctic.ac.event.client;
 
 import arctic.ac.event.Event;
 import com.comphenix.packetwrapper.WrapperPlayClientTransaction;
+import lombok.Getter;
 
+@Getter
 public class TransactionConfirmEvent extends Event {
 
 

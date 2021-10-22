@@ -4,65 +4,43 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.data.processor.NetworkProcessor;
 import arctic.ac.event.Event;
-import arctic.ac.event.client.FlyingEvent;
-import arctic.ac.event.client.PacketEvent;
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.PacketContainer;
-
-import java.lang.reflect.InvocationTargetException;
+import arctic.ac.event.client.TransactionConfirmEvent;
+import org.bukkit.Bukkit;
 
 public class TimerA extends Check {
 
-    private double balance = 20D;
+    private int lastFlyingDelta;
+
 
     public TimerA(PlayerData data) {
-        super(data, "Timer", "A", "player.timer.a", "Checks if player is speeding up time.", true);
+        super(data, "Timer", "A", "player.timer.a", "Checks if player is speeding up packets rate.", true);
     }
-
-
-    // TODO redo this
 
     @Override
     public void handle(Event e) {
-        if (e instanceof PacketEvent) {
 
-            final PacketEvent event = (PacketEvent) e;
-            final PacketType type = event.getPacketType();
-
-            if (type.equals(PacketType.Play.Client.CUSTOM_PAYLOAD)) {
-                balance = 0;
-
-            }
-
-
-        } else if (e instanceof FlyingEvent) {
-
+        if (e instanceof TransactionConfirmEvent) {
 
             final NetworkProcessor networkProcessor = data.getNetworkProcessor();
+            final int flyingDelta = (int) (System.currentTimeMillis() - networkProcessor.getLastFlying());
 
-            //using transaction ping cuz it's more accurate.
-            debug("balance=" + balance + " transactionPing=" + networkProcessor.getTransactionPing());
+            final int lastFlyingDelta = this.lastFlyingDelta;
+            this.lastFlyingDelta = flyingDelta;
 
-            //sending payload every tick
-            final PacketContainer payload = new PacketContainer(PacketType.Play.Server.CUSTOM_PAYLOAD);
-            payload.getStrings().write(0,"jaj");
+            final int difference = flyingDelta - lastFlyingDelta;
 
-            try {
-                ProtocolLibrary.getProtocolManager().sendServerPacket(data.getPlayer(), payload);
-            } catch (InvocationTargetException invocationTargetException) {
-                invocationTargetException.printStackTrace();
-            }
+            debug("fD=" + flyingDelta + " diff=" + difference + " buffer=" + buffer);
+
+            if(buffer < 0) buffer = 0;
+
+            if(difference >= 10) {
+                if(++buffer > 3)
+                    fail("diff=" + difference + " buffer=" + buffer);
+            } else if(buffer > 0) buffer -= 0.02D;
 
 
-            //increasing balance
-            this.balance++;
+
+
         }
-
-
-    }
-
-    private long getMillis(long val) {
-        return System.currentTimeMillis() - val;
     }
 }

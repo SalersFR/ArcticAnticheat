@@ -11,6 +11,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 
 @RequiredArgsConstructor
@@ -103,9 +104,10 @@ public class PacketProcessor {
             data.getSetbackProcessor().handle(moveEvent);
 
             for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt)
+                if (checks.isEnabled() && !exempt) {
                     checks.handle(moveEvent);
-                checks.handle(flyingEvent);
+                    checks.handle(flyingEvent);
+                }
 
 
             }
@@ -161,12 +163,15 @@ public class PacketProcessor {
 
 
         } else if (event.getPacketType() == PacketType.Play.Client.TRANSACTION) {
+
             final WrapperPlayClientTransaction wrapper = new WrapperPlayClientTransaction(event.getPacket());
+            final TransactionConfirmEvent transactionConfirmEvent = new TransactionConfirmEvent(wrapper);
 
             data.getVelocityData().handleTransaction(wrapper);
+
             for(Check checks : data.getChecks()) {
                 if(checks.isEnabled() && !exempt) {
-                    checks.handle(new TransactionConfirmEvent(wrapper));
+                    checks.handle(transactionConfirmEvent);
                 }
             }
         }
