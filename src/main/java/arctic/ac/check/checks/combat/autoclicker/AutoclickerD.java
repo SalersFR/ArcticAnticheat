@@ -36,7 +36,7 @@ public class AutoclickerD extends Check {
 
                 debug("dev=" + deviation + " outliers=" + total + " sames=" + sames);
 
-                if ((deviation < 2.425D || total <= 3) && sames > 27) {
+                if ((deviation < 1.525D || total <= 3) && sames > 28) {
                     if (++buffer > 3)
                         fail( " outliers=" + outliers + " deviation=" + deviation + " sames=" + sames);
                 } else if (buffer > 0) buffer -= 0.25D;

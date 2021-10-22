@@ -33,7 +33,7 @@ public class AutoclickerE extends Check {
                 debug("diffK=" + diff);
 
                 if (diff <= 10) {
-                    if (++buffer >= 3) {
+                    if (++buffer > 3) {
                         fail("kurt=" + kurtosis);
                     }
                 } else if (buffer > 0) buffer -= 0.25;

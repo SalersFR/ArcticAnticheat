@@ -19,11 +19,11 @@ public class ArcticCommand implements CommandExecutor {
                 if (args.length == 0) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r \n&3&lArctic Advanced Anticheat\n" +
                             " \n&7 " +
-                            "- &3/alerts [verbose] &fToggle the display of flags\n&7 " +
-                            "- &3/debug <check> &fEnable the debug\n&7 " +
-                            "- &3/arctic reload &fReload the config file\n&7 " +
-                            "- &3/arctic settings &fToggle checks or autobans\n&7 " +
-                            "- &3/info <player> &fCheck a player's information"));
+                            "- &b/alerts [verbose] &fToggle the display of flags\n&7 " +
+                            "- &b/debug <check> &fEnable the debug\n&7 " +
+                            "- &b/arctic reload &fReload the config file\n&7 " +
+                            "- &b/arctic settings &fToggle checks or autobans\n&7 " +
+                            "- &b/info <player> &fCheck a player's information"));
                 } else if (args.length >= 1) {
                     if (args[0].equalsIgnoreCase("reload")) {
                         Arctic.INSTANCE.reloadConfig();

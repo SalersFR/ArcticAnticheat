@@ -91,6 +91,7 @@ public class CheckManager {
                 new AutoclickerE(data),
                 new AutoclickerF(data),
                 new AutoclickerG(data),
+                new AutoclickerH(data),
 
                 new KillAuraA(data),
                 new KillAuraB(data),
