@@ -83,7 +83,7 @@ public class CustomUtils {
         return null;
     }
 
-    enum Category {
+    public enum Category {
         MOVEMENT, COMBAT, PLAYER;
     }
 }
