@@ -169,8 +169,9 @@ public class PacketProcessor {
 
             data.getVelocityData().handleTransaction(wrapper);
 
-            for(Check checks : data.getChecks()) {
-                if(checks.isEnabled() && !exempt) {
+
+            for (Check checks : data.getChecks()) {
+                if (checks.isEnabled() && !exempt) {
                     checks.handle(transactionConfirmEvent);
                 }
             }
@@ -226,29 +227,28 @@ public class PacketProcessor {
 
             /**
 
-        } else if (event.getPacketType() == PacketType.Play.Server.ENTITY_TELEPORT) {
-            final WrapperPlayServerEntityTeleport packet = new WrapperPlayServerEntityTeleport(event.getPacket());
-            data.getInteractData().handleOutTeleport(packet);
-            data.getTargetTracker().handleTeleport(packet, event.getPlayer().getWorld());
-        } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE) {
-            final WrapperPlayServerRelEntityMove packet = new WrapperPlayServerRelEntityMove(event.getPacket());
-            data.getTargetTracker().handleRelMove(packet);
-        } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE_LOOK) {
-            final WrapperPlayServerRelEntityMoveLook packet = new WrapperPlayServerRelEntityMoveLook(event.getPacket());
-            data.getTargetTracker().handleRelMoveLook(packet);
-        } else if (event.getPacketType() == PacketType.Play.Server.SPAWN_ENTITY) {
-            final WrapperPlayServerSpawnEntity packet = new WrapperPlayServerSpawnEntity(event.getPacket());
-            data.getTargetTracker().handleEntitySpawn(packet);
-        } else if (event.getPacketType() == PacketType.Play.Server.SPAWN_ENTITY_LIVING) {
-            final WrapperPlayServerSpawnEntityLiving packet = new WrapperPlayServerSpawnEntityLiving(event.getPacket());
-            data.getTargetTracker().handleLivingSpawn(packet);
-        } else if (event.getPacketType() == PacketType.Play.Server.NAMED_ENTITY_SPAWN) {
-            final WrapperPlayServerNamedEntitySpawn packet = new WrapperPlayServerNamedEntitySpawn(event.getPacket());
-            data.getTargetTracker().handleNamedSpawn(packet);
-        }
-
+             } else if (event.getPacketType() == PacketType.Play.Server.ENTITY_TELEPORT) {
+             final WrapperPlayServerEntityTeleport packet = new WrapperPlayServerEntityTeleport(event.getPacket());
+             data.getInteractData().handleOutTeleport(packet);
+             data.getTargetTracker().handleTeleport(packet, event.getPlayer().getWorld());
+             } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE) {
+             final WrapperPlayServerRelEntityMove packet = new WrapperPlayServerRelEntityMove(event.getPacket());
+             data.getTargetTracker().handleRelMove(packet);
+             } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE_LOOK) {
+             final WrapperPlayServerRelEntityMoveLook packet = new WrapperPlayServerRelEntityMoveLook(event.getPacket());
+             data.getTargetTracker().handleRelMoveLook(packet);
+             } else if (event.getPacketType() == PacketType.Play.Server.SPAWN_ENTITY) {
+             final WrapperPlayServerSpawnEntity packet = new WrapperPlayServerSpawnEntity(event.getPacket());
+             data.getTargetTracker().handleEntitySpawn(packet);
+             } else if (event.getPacketType() == PacketType.Play.Server.SPAWN_ENTITY_LIVING) {
+             final WrapperPlayServerSpawnEntityLiving packet = new WrapperPlayServerSpawnEntityLiving(event.getPacket());
+             data.getTargetTracker().handleLivingSpawn(packet);
+             } else if (event.getPacketType() == PacketType.Play.Server.NAMED_ENTITY_SPAWN) {
+             final WrapperPlayServerNamedEntitySpawn packet = new WrapperPlayServerNamedEntitySpawn(event.getPacket());
+             data.getTargetTracker().handleNamedSpawn(packet);
+             }
              **/
 
-    }
+        }
     }
 }
