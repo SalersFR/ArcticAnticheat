@@ -64,13 +64,15 @@ public class PacketProcessor {
 
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
-            data.getVelocityData().handleFlying();
-
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
                     checks.handle(flyingEvent);
                 }
             }
+
+            if (data.getVelocityData() == null) return;
+
+            data.getVelocityData().handleFlying();
 
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION_LOOK) {
             final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
