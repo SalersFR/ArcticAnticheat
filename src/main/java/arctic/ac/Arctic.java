@@ -2,9 +2,12 @@ package arctic.ac;
 
 import arctic.ac.commands.*;
 import arctic.ac.data.PlayerDataManager;
+import arctic.ac.data.impl.CheckManager;
+import arctic.ac.file.CheckFileManager;
 import arctic.ac.listener.bukkit.InventoryClickSettings;
 import arctic.ac.listener.bukkit.JoinLeaveListener;
 import arctic.ac.listener.packet.PacketHandler;
+import arctic.ac.utils.CustomUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,14 +17,28 @@ public class Arctic extends JavaPlugin {
     public static Arctic INSTANCE;
     private PlayerDataManager dataManager = new PlayerDataManager();
 
+    private CheckFileManager checkFileManager;
+
     private boolean citizensEnabled;
 
     @Override
+    public void onLoad() {
+        CustomUtils.consoleLog("&bLoading Arctic b1-BETA");
+    }
+
+    @Override
     public void onEnable() {
+        CustomUtils.consoleLog("&bEnabling Arctic b1-BETA");
+        CustomUtils.consoleLog("&bArctic AntiCheat - Developed by &eSalers&b, &exWand&b, &eDerRedstoner&b.");
+        CustomUtils.consoleLog("&bLoading checks and modules...");
+        CustomUtils.consoleLog("&bLoading configuration files...");
+        checkFileManager = new CheckFileManager(this);
+        saveDefaultConfig();
         INSTANCE = this;
+        CustomUtils.consoleLog("&bRegistering events and listeners...");
         registerEvents();
         registerCommands();
-        saveDefaultConfig();
+
 
         // Changes
 
@@ -31,10 +48,11 @@ public class Arctic extends JavaPlugin {
             citizensEnabled = true;
         }
 
-        Bukkit.broadcastMessage(citizensEnabled + "");
         for (Plugin s : Bukkit.getPluginManager().getPlugins()) {
             Bukkit.broadcastMessage(s.getName());
         }
+
+        CustomUtils.consoleLog("&bSuccessfully enabled.");
     }
 
 

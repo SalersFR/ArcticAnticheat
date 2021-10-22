@@ -1,6 +1,7 @@
 package arctic.ac.utils;
 
 import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -53,6 +54,10 @@ public class CustomUtils {
         item.setItemMeta(meta);
 
         return item;
+    }
+
+    public void consoleLog(String s) {
+        Bukkit.getServer().getConsoleSender().sendMessage(translate(s));
     }
 
     public Category getCategory(String checkName) {

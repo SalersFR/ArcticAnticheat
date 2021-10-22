@@ -2,7 +2,7 @@ name: Arctic
 main: arctic.ac.Arctic
 version: 0.0.1
 authors: [ Salers,xWand,ExDiggers,Aamber ]
-load: STARTUP
+load: POSTWORLD
 depend:
   - ProtocolLib
 softdepend: [ Citizens ]
