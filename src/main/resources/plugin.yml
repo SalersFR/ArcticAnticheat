@@ -14,7 +14,3 @@ commands:
     permission: alerts.command
   debug:
     permission: debug.command
-  areload:
-    permission: areload.command
-  asettings:
-    permission: asettings.command
