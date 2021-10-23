@@ -157,7 +157,6 @@ public class InventoryClickSettings implements Listener {
         String type = CustomUtils.strip(meta.getDisplayName().substring(meta.getDisplayName().length() - 1)).toLowerCase();
 
         if (meta.getLore().size() < 2) return;
-        if (meta.getLore().get(2) == null) return;
 
         String punishStr = meta.getLore().get(2);
         String enableStr = meta.getLore().get(1);

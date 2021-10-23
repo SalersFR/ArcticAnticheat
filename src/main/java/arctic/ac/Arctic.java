@@ -5,6 +5,7 @@ import arctic.ac.commands.completion.ArcticCompletion;
 import arctic.ac.commands.completion.DebugCompletion;
 import arctic.ac.commands.impl.AlertsCommand;
 import arctic.ac.commands.impl.ArcticCommand;
+import arctic.ac.commands.impl.ArcticInfoCommand;
 import arctic.ac.commands.impl.DebugCommand;
 import arctic.ac.data.PlayerDataManager;
 import arctic.ac.file.CheckFileManager;
@@ -83,6 +84,7 @@ public class Arctic extends JavaPlugin {
         getCommand("alerts").setTabCompleter(new AlertsCompletion());
         getCommand("debug").setExecutor(new DebugCommand());
         getCommand("debug").setTabCompleter(new DebugCompletion());
+        getCommand("info").setExecutor(new ArcticInfoCommand());
     }
 
     public boolean isCitizensPresent() {

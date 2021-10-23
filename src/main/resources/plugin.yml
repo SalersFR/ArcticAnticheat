@@ -9,8 +9,10 @@ softdepend: [ Citizens ]
 
 commands:
   arctic:
-    permission: arctic.command
+    permission: arctic.admin
   alerts:
-    permission: alerts.command
+    permission: arctic.alerts
   debug:
-    permission: debug.command
+    permission: arctic.debug
+  info:
+    permission: arctic.info
