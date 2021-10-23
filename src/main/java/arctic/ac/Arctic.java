@@ -1,8 +1,11 @@
 package arctic.ac;
 
-import arctic.ac.commands.AlertsCommand;
-import arctic.ac.commands.ArcticCommand;
-import arctic.ac.commands.DebugCommand;
+import arctic.ac.commands.completion.AlertsCompletion;
+import arctic.ac.commands.completion.ArcticCompletion;
+import arctic.ac.commands.completion.DebugCompletion;
+import arctic.ac.commands.impl.AlertsCommand;
+import arctic.ac.commands.impl.ArcticCommand;
+import arctic.ac.commands.impl.DebugCommand;
 import arctic.ac.data.PlayerDataManager;
 import arctic.ac.file.CheckFileManager;
 import arctic.ac.listener.bukkit.InventoryClickSettings;
@@ -75,8 +78,11 @@ public class Arctic extends JavaPlugin {
 
     private void registerCommands() {
         getCommand("arctic").setExecutor(new ArcticCommand());
+        getCommand("arctic").setTabCompleter(new ArcticCompletion());
         getCommand("alerts").setExecutor(new AlertsCommand());
+        getCommand("alerts").setTabCompleter(new AlertsCompletion());
         getCommand("debug").setExecutor(new DebugCommand());
+        getCommand("debug").setTabCompleter(new DebugCompletion());
     }
 
     public boolean isCitizensPresent() {

@@ -1,4 +1,4 @@
-package arctic.ac.commands;
+package arctic.ac.commands.impl;
 
 import arctic.ac.Arctic;
 import arctic.ac.utils.CustomUtils;
@@ -20,7 +20,7 @@ public class AlertsCommand implements CommandExecutor {
             // player.removeMetadata("ALERTS_OFF", instance);
             // player.setMetadata("ALERTS_OFF", new FixedMetadataValue(instance, true));
 
-            if (player.hasPermission("alerts.command")) {
+            if (player.hasPermission("arctic.alerts")) {
                 if (args.length == 0) {
                     // Player has typed /alerts
 

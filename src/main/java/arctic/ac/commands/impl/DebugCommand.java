@@ -1,4 +1,4 @@
-package arctic.ac.commands;
+package arctic.ac.commands.impl;
 
 import arctic.ac.Arctic;
 import arctic.ac.check.Check;
@@ -17,7 +17,7 @@ public class DebugCommand implements CommandExecutor {
         if (commandSender instanceof Player) {
             final Player player = (Player) commandSender;
             final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(player);
-            if (player.hasPermission("debug.command")) {
+            if (player.hasPermission("arctic.debug")) {
                 if (args.length >= 1) {
                     final Arctic instance = Arctic.INSTANCE;
                     final String toDebug = args[0];

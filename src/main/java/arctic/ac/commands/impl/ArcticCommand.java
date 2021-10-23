@@ -1,4 +1,4 @@
-package arctic.ac.commands;
+package arctic.ac.commands.impl;
 
 import arctic.ac.Arctic;
 import arctic.ac.gui.SettingsGUI;
