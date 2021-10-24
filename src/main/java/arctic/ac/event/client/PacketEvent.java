@@ -15,4 +15,5 @@ public class PacketEvent extends Event {
         this.packetType = packetEvent.getPacketType();
         this.container = packetEvent.getPacket();
     }
+
 }

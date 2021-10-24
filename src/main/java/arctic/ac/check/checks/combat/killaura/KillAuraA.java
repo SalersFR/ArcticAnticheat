@@ -10,7 +10,9 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
 public class KillAuraA extends Check {
 
-    private long lastFlying;
+    private long lastFlying, lastFlyingDelay;
+    private double average = 50;
+    private int hits;
 
     public KillAuraA(PlayerData data) {
         super(data, "KillAura", "A", "combat.killaura.a", "Checks for invalid delay between attack and flying packets.", true);
@@ -18,32 +20,25 @@ public class KillAuraA extends Check {
 
     @Override
     public void handle(Event e) {
-        if (e instanceof FlyingEvent) {
-
+        if(e instanceof FlyingEvent) {
+            this.lastFlyingDelay = System.currentTimeMillis() - lastFlying;
             this.lastFlying = ((FlyingEvent) e).getTime();
-
-        } else if (e instanceof UseEntityEvent) {
-
+        } else if(e instanceof UseEntityEvent) {
             final UseEntityEvent event = (UseEntityEvent) e;
 
-            if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+            if(event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+                final long delta = Math.abs(System.currentTimeMillis() - this.lastFlying);
 
+                average = ((average * 14) + delta) / 15;
 
-                final long elapsed = Math.abs(System.currentTimeMillis() - this.lastFlying);
+                debug("elapsed=" + delta + " current=" + System.currentTimeMillis() + " last=" + lastFlying);
 
-                final int ping = ((CraftPlayer) data.getPlayer()).getHandle().ping;
-
-                if (ping > 125) return;
-
-                debug("elapsed=" + elapsed + " current=" + System.currentTimeMillis() + " last=" + lastFlying);
-
-                if (elapsed < 25L) {
-                    if (++this.buffer > 7) {
-                        fail("elapsed=" + elapsed);
+                if(lastFlyingDelay > 10L && lastFlyingDelay < 90L) {
+                    if(average < 5 && hits++ > 10) {
+                        fail("delta="+average);
+                        average = 5;
                     }
-                } else if (this.buffer > 0) this.buffer--;
-
-
+                }
             }
         }
 
