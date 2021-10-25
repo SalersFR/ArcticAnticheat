@@ -23,7 +23,7 @@ public class AutoclickerH extends Check {
     @Override
     public void handle(Event e) {
         if (e instanceof ArmAnimationEvent) {
-
+            if (data.getInteractionData().isDigging()) return;
 
             if (samples.size() >= 25) {
 

@@ -11,19 +11,25 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.minecraft.server.v1_8_R3.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Random;
 
 
 public abstract class Check {
 
     public final PlayerData data;
-    private final String name, configName, type,desc;
+    private final String name, configName, type, desc;
     private final boolean experimental;
     public double buffer = 0, vl = 0;
 
 
-    public Check(PlayerData data, String name, String type, String configName,String desc, boolean experimental) {
+    public Check(PlayerData data, String name, String type, String configName, String desc, boolean experimental) {
 
         this.data = data;
 
@@ -104,7 +110,12 @@ public abstract class Check {
 
 
                     Bukkit.getScheduler().runTask(Arctic.INSTANCE, () -> {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', toDispatch));
+                        data.getBukkitPlayerFromUUID().getWorld().strikeLightning(data.getBukkitPlayerFromUUID().getLocation());
+                        // Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', toDispatch));
+                        Bukkit.broadcastMessage(CustomUtils.translate("&m&l-----------------------------------------"));
+                        Bukkit.broadcastMessage(CustomUtils.translate("&b&lArctic &r&bremoved &c" + data.getBukkitPlayerFromUUID().getName() + " &bfor &cUnfair Advantage."));
+                        Bukkit.broadcastMessage(CustomUtils.translate("&m&l-----------------------------------------"));
+                        blood(data.getBukkitPlayerFromUUID());
                         for (Check checks : data.getChecks()) {
                             checks.vl = 0;
                         }
@@ -114,6 +125,19 @@ public abstract class Check {
         }
 
 
+    }
+
+    private void blood(Player player) {
+        ItemStack redBlood = new ItemStack(Material.INK_SACK, 1, DyeColor.RED.getDyeData());
+        for (int i = 0; i < 8; i++) {
+            Item item = player.getWorld().dropItemNaturally(player.getEyeLocation().subtract(0, 0.2, 0), redBlood);
+            item.getItemStack().getItemMeta().setDisplayName(CustomUtils.translate("Blood"));
+            item.setPickupDelay(1000000);
+
+            Bukkit.getScheduler().runTaskLater(Arctic.INSTANCE, () -> {
+                if (item.isValid()) item.remove();
+            }, 20 * 3);
+        }
     }
 
     protected void debug(String debug) {

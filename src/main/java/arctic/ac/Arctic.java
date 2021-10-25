@@ -74,6 +74,7 @@ public class Arctic extends JavaPlugin {
     private void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new JoinLeaveListener(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryClickSettings(), this);
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "MC|Brand", new JoinLeaveListener());
         new PacketHandler();
     }
 

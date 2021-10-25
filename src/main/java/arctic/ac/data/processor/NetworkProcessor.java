@@ -7,11 +7,13 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 
 import java.lang.reflect.InvocationTargetException;
 
 @Getter
+@Setter
 @RequiredArgsConstructor
 public class NetworkProcessor {
 
@@ -19,6 +21,8 @@ public class NetworkProcessor {
     private short transactionID = 2000;
     private long lastTransactionSent, lastTransactionConfirm, lastKeepAliveSent, lastKeepAliveConfirm,lastFlying; //confirm = PlayIn , sent = PlayOut
     private int transactionPing, keepAlivePing;
+    private int clientVersion;
+    private String clientBrand;
 
     private long time() {
         return System.currentTimeMillis();

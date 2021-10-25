@@ -14,7 +14,7 @@ import java.util.List;
 public class AutoclickerF extends Check {
 
     private int ticks, lastOutliers;
-    private double lastSkewness;
+    private double lastSkewness, lastSkewnessDiff;
     private ArcticQueue<Integer> samples = new ArcticQueue<>(10);
 
 
@@ -46,18 +46,16 @@ public class AutoclickerF extends Check {
 
                 debug("outliersDiff=" + outlierDifference + " skewnessDiff=" + skewnessDifference);
 
-                if((skewnessDifference < 0.001 || Double.isNaN(skewnessDifference)) && outlierDifference <= 1) {
+                if((skewnessDifference < 1.0E-5 || (Double.isNaN(skewnessDifference) && Double.isNaN(lastSkewnessDiff))) && outlierDifference <= 1) {
                     if(++buffer > 3)
-                        fail("outliersDiff=" + outlierDifference + " skewness=" + skewness);
+                        fail("outliersDiff=" + outlierDifference + " skewness=" + skewness + " skewDiff=" + skewnessDifference);
 
                 } else if(buffer > 0) buffer -= 0.25D;
 
-
+                this.lastSkewnessDiff = skewnessDifference;
             }
             samples.add(this.ticks);
             this.ticks = 0;
-
-
         } else if (e instanceof FlyingEvent) {
             this.ticks++;
         }

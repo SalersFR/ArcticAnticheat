@@ -2,18 +2,27 @@ package arctic.ac.listener.bukkit;
 
 import arctic.ac.Arctic;
 import arctic.ac.data.PlayerData;
+import com.comphenix.protocol.ProtocolLibrary;
+import org.bukkit.DyeColor;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
-public class JoinLeaveListener implements Listener {
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
+
+public class JoinLeaveListener implements Listener, PluginMessageListener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
@@ -21,6 +30,7 @@ public class JoinLeaveListener implements Listener {
 
 
         final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+        addChannel(event.getPlayer(), "MC|BRAND");
 
         data.getInteractData().setTicksSinceJoin(0);
 
@@ -60,6 +70,13 @@ public class JoinLeaveListener implements Listener {
             if (data == null) return;
 
             data.getInteractData().onEDBE();
+        } else if (event.getEntity() instanceof Item) {
+            Item item = (Item) event.getEntity();
+
+            if (item.getItemStack().getType() == Material.INK_SACK
+                    && item.getItemStack().getData().getData() == DyeColor.RED.getDyeData())
+                event.setCancelled(true);
+
         }
     }
 
@@ -69,5 +86,36 @@ public class JoinLeaveListener implements Listener {
         if (data == null) return;
 
         data.getInteractData().handleEventTeleport(event);
+    }
+
+    @Override
+    public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+        try {
+            PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(player);
+            if (data == null) return;
+            data.getNetworkProcessor().setClientBrand(new String(message, "UTF-8").substring(1));
+            data.getNetworkProcessor().setClientVersion(ProtocolLibrary.getProtocolManager().getProtocolVersion(player));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addChannel(Player player, String channel) {
+        try {
+            player.getClass().getMethod("addChannel", String.class).invoke(player, channel);
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @EventHandler
+    public void onItemPickup(PlayerPickupItemEvent event) {
+        Player player = event.getPlayer();
+
+        if (!(event.getItem().getItemStack().getData().getData() == (short) DyeColor.RED.getData())) return;
+        if (event.getItem().getItemStack().getItemMeta().getDisplayName() == null) return;
+        if (!(event.getItem().getItemStack().getItemMeta().getDisplayName().contains("Blood"))) return;
+
+        event.setCancelled(true);
     }
 }
