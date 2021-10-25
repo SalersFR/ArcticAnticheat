@@ -46,9 +46,9 @@ public class MotionD extends Check {
 
             debug("deltaY=" + deltaY + " ticksSinceJumped=" + ticksSinceJumped + " airTicks=" + airTicks);
 
-            if (ticksSinceJumped <= 10 && deltaY < -0.38 && !exempt) {
+            if (airTicks >= ticksSinceJumped && ticksSinceJumped <= 10 && deltaY < -0.38 && !exempt) {
                 if (++buffer > 2)
-                    fail("fast fall jump\ndDY:" + deltaY);
+                    fail("fast fall jump\ndDY:" + deltaY + "\ntSJ:"+ticksSinceJumped);
 
             } else if (buffer > 0) buffer -= 0.01D;
 

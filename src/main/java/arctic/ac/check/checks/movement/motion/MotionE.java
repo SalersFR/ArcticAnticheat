@@ -5,6 +5,7 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
 import arctic.ac.event.client.RotationEvent;
+import arctic.ac.utils.WorldUtils;
 
 public class MotionE extends Check {
 
@@ -24,7 +25,7 @@ public class MotionE extends Check {
             this.deltaXZ = event.getDeltaXZ();
 
         } else if(e instanceof RotationEvent) {
-
+            final WorldUtils worldUtils = new WorldUtils();
             final RotationEvent event = (RotationEvent) e;
 
             final double deltaYaw = event.getDeltaYaw();
@@ -34,7 +35,10 @@ public class MotionE extends Check {
 
             debug("deltaYaw=" + deltaYaw + " accelXZ=" + accelXZ + " current=" + deltaXZ  + " last=" + lastDeltaXZ);
 
-            if(deltaYaw > 1.6F && deltaXZ > 0.15D && scaledAccel < 0.00001) {
+            if(deltaYaw > 1.6F
+                    && deltaXZ > 0.15D
+                    && scaledAccel < 0.00001
+                    && !worldUtils.isCollidingWithClimbable(data.getPlayer())) {
                 if(++buffer > 3)
                     fail("a=" + scaledAccel);
             } else if(buffer > 0) buffer -= 0.025D;
