@@ -19,6 +19,21 @@ public class WorldUtils {
         return null;
     }
 
+    /*
+    public boolean isCollidedHorizontally(Player player) {
+        double ex = 0.3;
+        for (double x = -ex; x <= ex; x += ex) {
+            for (double z = -ex; z <= ex; z += ex) {
+                if (player.getLocation().clone().add(x, 0.0D, z).getBlock().getType() != Material.AIR) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+     */
+
     public Location getBehindPlayer(Player player) {
         Location finalLoc = player.getLocation();
         String directionCard = getCardinalDirection(player);

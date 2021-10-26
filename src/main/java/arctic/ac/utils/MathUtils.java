@@ -26,6 +26,19 @@ public class MathUtils {
     Spigot Post - https://www.spigotmc.org/threads/determining-a-players-sensitivity.468373/
      */
 
+    public boolean areAllEqual(double... values) {
+        if (values.length == 0) {
+            return true; // Alternative below
+        }
+        double checkValue = values[0];
+        for (int i = 1; i < values.length; i++) {
+            if (values[i] != checkValue) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public double getGcd(final double a, final double b) {
         if (a < b) {
@@ -203,7 +216,6 @@ public class MathUtils {
     /**
      * @param data - The data you want the median from
      * @return - The middle number of that data
-     *
      * @See - https://en.wikipedia.org/wiki/Median
      */
     private double getMedian(final List<Double> data) {

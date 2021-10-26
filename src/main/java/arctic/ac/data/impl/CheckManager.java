@@ -16,6 +16,7 @@ import arctic.ac.check.checks.movement.nofall.NoFallA;
 import arctic.ac.check.checks.movement.nofall.NoFallB;
 import arctic.ac.check.checks.movement.speed.SpeedA;
 import arctic.ac.check.checks.movement.speed.SpeedB;
+import arctic.ac.check.checks.movement.spider.SpiderA;
 import arctic.ac.check.checks.movement.step.StepA;
 import arctic.ac.check.checks.player.badpackets.BadPacketsA;
 import arctic.ac.check.checks.player.badpackets.BadPacketsB;
@@ -53,6 +54,8 @@ public class CheckManager {
                 new FlyA(data),
                 new FlyB(data),
                 new FlyC(data),
+
+                new SpiderA(data),
 
                 new SpeedA(data),
                 new SpeedB(data),
