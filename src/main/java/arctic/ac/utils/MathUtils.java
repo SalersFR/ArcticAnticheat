@@ -20,6 +20,13 @@ public class MathUtils {
         return Math.sqrt((x * x) + (z * z));
     }
 
+    public double getReversedModulus(float div, float a, double remainder) {
+        if (a < remainder)
+            return (remainder - a);
+
+        return (div + remainder - a);
+    }
+
     /*
     GladUrBad GCD & Sensitivity
     Medusa (by GladUrBad) - https://github.com/GladUrBad/Medusa/blob/f00848c2576e4812283e6dc2dc05e29e2ced866a/Impl/src/main/java/com/gladurbad/medusa/util/MathUtil.java
