@@ -2,14 +2,14 @@ package arctic.ac.check.checks.player.timer;
 
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
-import arctic.ac.data.processor.NetworkProcessor;
 import arctic.ac.event.Event;
-import arctic.ac.event.client.TransactionConfirmEvent;
-import org.bukkit.Bukkit;
+import arctic.ac.event.client.FlyingEvent;
+import arctic.ac.event.server.ServerPositionEvent;
 
 public class TimerA extends Check {
 
-    private int lastFlyingDelta;
+    private long lastTickTime;
+    private double balance;
 
 
     public TimerA(PlayerData data) {
@@ -19,31 +19,37 @@ public class TimerA extends Check {
     @Override
     public void handle(Event e) {
 
-        if (e instanceof TransactionConfirmEvent) {
+        if (e instanceof FlyingEvent) {
+            if (data.getInteractData().getLastHitPacket() != 0) {
+                if (getMillis(data.getInteractData().getLastHitPacket()) < 110L) return;
+            }
+            long systemTime = System.currentTimeMillis();
+            long lastTimeRate = this.lastTickTime != 0 ? this.lastTickTime : systemTime - 50;
+            this.lastTickTime = systemTime;
+            balance += 50.0;
+            balance -= (systemTime - lastTimeRate);
 
-            final NetworkProcessor networkProcessor = data.getNetworkProcessor();
-            final int flyingDelta = (int) (System.currentTimeMillis() - networkProcessor.getLastFlying());
-
-            final int lastFlyingDelta = this.lastFlyingDelta;
-            this.lastFlyingDelta = flyingDelta;
-
-            final int difference = flyingDelta - lastFlyingDelta;
-
-            debug("fD=" + flyingDelta + " diff=" + difference + " buffer=" + buffer);
-
-            if(buffer < 0) buffer = 0;
-
-            final boolean exempt = data.getInteractData().getTicksAlive() < 35;
-
-            if(difference >= 10 && !exempt) {
-                if(buffer < 10.5) buffer++;
-                if(buffer > 7)
-                    fail("diff=" + difference + " buffer=" + buffer);
-            } else if(buffer > 0) buffer -= 0.1D;
+            if(balance < -100) balance = 0.0D;
 
 
+            if (balance >= 30.0) {
+                if (++buffer > 6) {
+                    fail("balance=" + balance);
+                    balance = 0.0D;
+                }
+            } else {
+                buffer -= (buffer > 0) ? 2 : 0;
+            }
 
+            debug("balance=" + balance);
+        } else if (e instanceof ServerPositionEvent) {
+
+            balance -= 50.0D;
 
         }
+    }
+
+    private long getMillis(long val){
+        return System.currentTimeMillis() - val;
     }
 }

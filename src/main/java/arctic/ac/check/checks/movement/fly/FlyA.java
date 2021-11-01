@@ -3,21 +3,18 @@ package arctic.ac.check.checks.movement.fly;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
-import arctic.ac.event.client.FlyingEvent;
 import arctic.ac.event.client.MoveEvent;
 import arctic.ac.event.client.PacketEvent;
-import arctic.ac.event.client.TransactionConfirmEvent;
 import arctic.ac.utils.WorldUtils;
 import com.comphenix.protocol.PacketType;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffectType;
 
 public class FlyA extends Check {
 
     private double lastDeltaY, airTicks, ticksEdge, ticksPlace;
 
     public FlyA(PlayerData data) {
-        super(data, "Fly", "A", "movement.fly.a","Checks if player is not taking care about gravity.", true);
+        super(data, "Fly", "A", "movement.fly.a", "Checks if player is not taking care about gravity.", true);
     }
 
     @Override
@@ -29,59 +26,50 @@ public class FlyA extends Check {
             final double deltaY = event.getDeltaY();
             final double lastDeltaY = this.lastDeltaY;
 
+            final double deltaX = event.getDeltaX();
+            final double deltaZ = event.getDeltaZ();
+
             this.lastDeltaY = deltaY;
 
-            final WorldUtils worldUtils = new WorldUtils();
+            final double prediction = (lastDeltaY - 0.08F) * 0.98F;
+            final double fivePrediction = Math.abs(prediction) < 0.005 ? 0 : prediction;
 
-            if (worldUtils.isCloseToGround(data.getBukkitPlayerFromUUID().getLocation())) {
+            final boolean zeroZeroThree = (Math.abs(deltaX) <= 0.03 || Math.abs(deltaZ) <= 0.03) && Math.abs(fivePrediction) <= 0.03;
+
+            double threePrediction = prediction;
+            double fixedThreePrediction = fivePrediction;
+
+            double fixedPrediction = fivePrediction;
+
+            if (zeroZeroThree) {
+                threePrediction = (fivePrediction - 0.08F) * 0.98F;
+                fixedThreePrediction = Math.abs(threePrediction) < 0.005 ? 0 : threePrediction;
+
+                if (Math.abs(fixedThreePrediction - deltaY) <= 0.00001D)
+                    fixedPrediction = fivePrediction;
+
+            }
+
+            if (event.isGround())
                 this.airTicks = 0;
-            } else this.airTicks++;
+            else this.airTicks++;
 
-            /*final*/
-            double predictedDeltaY = (lastDeltaY - 0.08) * 0.98F;
-
-
-            if (Math.abs(predictedDeltaY) < 0.005) {
-                predictedDeltaY = 0;
-            }
-
-            final double result = Math.abs(deltaY - predictedDeltaY);
-
-
-            final Player player = data.getBukkitPlayerFromUUID();
-
-            if (worldUtils.isAtEdgeOfABlock(player)) {
-                this.ticksEdge = 0;
-            } else this.ticksEdge++;
-
-            this.ticksPlace++;
-
-            double threshold = 0.01;
-
-            if (ticksPlace < 20 || player.hasPotionEffect(PotionEffectType.JUMP)) {
-                threshold = 0.032;
-            } else if (threshold == 0.032) {
-                threshold = 0.01;
-            }
+            final Player player = data.getPlayer();
+            final WorldUtils worldUtils = new WorldUtils();
 
             final boolean exempt = worldUtils.isInLiquid(player)
                     || worldUtils.isInLiquidVertically(player)
                     || worldUtils.isCollidingWithClimbable(player)
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
-                    || worldUtils.isAtEdgeOfABlock(player)
-                    || airTicks < 12
-                    || event.isGround();
+                    || worldUtils.isAtEdgeOfABlock(player);
 
-            debug("result=" + result + " exempt=" + exempt + " deltaY=" + deltaY + " lastDeltaY=" + lastDeltaY + " airTicks=" + airTicks);
+            if (airTicks > 1 && Math.abs(fixedPrediction - deltaY) > 0.001D && event.getDeltaXZ() > 0.001D && !exempt) {
+                if (++buffer > 1)
+                    fail("diff=" + Math.abs(fixedPrediction - deltaY));
+            } else if(buffer > 0) buffer -= 0.01D;
 
-
-            if (result > threshold && !exempt && !worldUtils.isCloseToGround(player.getLocation())) {
-                if (++buffer > 3) {
-                    fail("result=" + result);
-                }
-
-            } else if (buffer > 0) buffer -= 0.5D;
+            debug("diff=" + Math.abs(fixedPrediction - deltaY));
 
 
         } else if (e instanceof PacketEvent) {
