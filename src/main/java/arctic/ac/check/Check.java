@@ -110,7 +110,7 @@ public abstract class Check {
 
 
                     Bukkit.getScheduler().runTask(Arctic.INSTANCE, () -> {
-                        data.getBukkitPlayerFromUUID().getWorld().strikeLightning(data.getBukkitPlayerFromUUID().getLocation());
+                        data.getBukkitPlayerFromUUID().getWorld().strikeLightningEffect(data.getBukkitPlayerFromUUID().getLocation());
                         // Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', toDispatch));
                         Bukkit.broadcastMessage(CustomUtils.translate("&m&l-----------------------------------------"));
                         Bukkit.broadcastMessage(CustomUtils.translate("&b&lArctic &r&bremoved &c" + data.getBukkitPlayerFromUUID().getName() + " &bfor &cUnfair Advantage."));
