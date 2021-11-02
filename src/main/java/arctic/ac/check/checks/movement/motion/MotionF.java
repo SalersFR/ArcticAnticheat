@@ -10,9 +10,10 @@ import arctic.ac.utils.WorldUtils;
 public class MotionF extends Check {
 
     private double lastDeltaY;
+    private int ticksSinceUpper;
 
     public MotionF(PlayerData data) {
-        super(data, "Motion", "F", "movement.motion.f", "Checks for brutal y movement while being near ground..", true);
+        super(data, "Motion", "F", "movement.motion.f", "Checks for brutal y movement while being near ground.", true);
     }
 
     @Override
@@ -27,15 +28,20 @@ public class MotionF extends Check {
             this.lastDeltaY = deltaY;
 
             final boolean nearGround = new WorldUtils().isOnGround(data.getPlayer().getLocation(), -0.3);
-            final boolean exempt = data.getPlayer().getFallDistance() > 5F;
+            final boolean exempt = data.getPlayer().getFallDistance() > 5F || data.getInteractData().getTicksAlive() < 35 || ticksSinceUpper < 10 || deltaY == 0;
 
             final double accel = Math.abs(deltaY - lastDeltaY);
 
-            if (nearGround && !exempt && accel >= 0.53D) {
+            if (nearGround && !exempt && accel >= 0.699D) {
                 if (++buffer > 1)
                     fail("accel=" + accel);
 
             } else if(buffer > 0) buffer -= 0.025D;
+
+            if(new WorldUtils().isOnACertainBlock(data.getPlayer(), "slabs") || new WorldUtils().isOnACertainBlock(data.getPlayer(), "stairs"))
+                this.ticksSinceUpper = 0;
+
+            this.ticksSinceUpper++;
 
             debug("deltaY=" + deltaY +" lastDeltaY=" + lastDeltaY + " nearGround=" + nearGround + "\naccel=" + accel + " exempt=" + exempt);
         }

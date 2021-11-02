@@ -62,7 +62,8 @@ public class FlyA extends Check {
                     || worldUtils.isCollidingWithClimbable(player)
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
-                    || worldUtils.isAtEdgeOfABlock(player);
+                    || worldUtils.isAtEdgeOfABlock(player)
+                    || worldUtils.isOnACertainBlock(player,"stairs");
 
             if (airTicks > 1 && Math.abs(fixedPrediction - deltaY) > 0.001D && event.getDeltaXZ() > 0.001D && !exempt) {
                 if (++buffer > 1)

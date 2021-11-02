@@ -25,7 +25,7 @@ public class AimO extends Check {
 
             final float gcd = (float) MathUtils.getGcd(Math.abs(deltaPitch), Math.abs(lastDeltaPitch));
 
-            if (gcd < 0.01 && gcd != 0 && (event.getDeltaPitch() < 15 && event.getDeltaYaw() < 15)) {
+            if (gcd < 0.01 && gcd != 0 && (event.getDeltaPitch() < 15 && event.getDeltaYaw() < 15) && data.getCinematicProcessor().getTicksSince() > 3) {
                 if (++buffer > 10) {
                     fail("GCD=" + gcd);
                 }

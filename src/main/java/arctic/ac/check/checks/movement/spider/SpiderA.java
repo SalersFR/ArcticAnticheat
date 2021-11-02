@@ -7,6 +7,7 @@ import arctic.ac.event.client.MoveEvent;
 import arctic.ac.utils.MathUtils;
 import arctic.ac.utils.PlayerUtils;
 import arctic.ac.utils.WorldUtils;
+import org.bukkit.World;
 
 public class SpiderA extends Check {
 
@@ -34,7 +35,9 @@ public class SpiderA extends Check {
                     || data.getInteractionData().isTeleported()
                     || new WorldUtils().isCollidingWithClimbable(data.getPlayer())
                     || new WorldUtils().isCollidingWithWeb(data.getPlayer())
-                    || new WorldUtils().isCloseToGround(data.getPlayer().getLocation());
+                    || new WorldUtils().isCloseToGround(data.getPlayer().getLocation())
+                    || new WorldUtils().isOnACertainBlock(data.getPlayer(), "stairs");
+
 
             debug("dY=" + deltaY + " LdY=" + lastDeltaY + " LLdY=" + lastLastDeltaY + " LLLdY=" + lastLastLastDeltaY);
             if (MathUtils.areAllEqual(deltaY, lastDeltaY, lastLastDeltaY, lastLastLastDeltaY) && !exempt && deltaY > 0) {
