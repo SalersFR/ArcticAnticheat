@@ -28,18 +28,20 @@ public class AutoclickerE extends Check {
             double lastKurt = this.lastKurt;
             this.lastKurt = kurtosis;
             double diff = MathUtils.hypot(kurtosis, lastKurt);
+            double absDiff = Math.abs(diff);
 
             if (samples.size() >= 20) {
                 debug("diffK=" + diff);
 
-                if (diff <= 10) {
+                if (absDiff <= 0.55D) {
                     if (++buffer > 3) {
-                        fail("kurt=" + kurtosis);
+                        fail("absDiff=" + absDiff);
                     }
                 } else if (buffer > 0) buffer -= 0.25;
             }
 
             samples.add(this.ticks);
+            debug("absDiff=" + absDiff + " buffer=" + buffer);
             this.ticks = 0;
 
         } else if (e instanceof FlyingEvent) {
