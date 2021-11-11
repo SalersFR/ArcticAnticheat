@@ -23,6 +23,7 @@ public class TimerA extends Check {
             if (data.getInteractData().getLastHitPacket() != 0) {
                 if (getMillis(data.getInteractData().getLastHitPacket()) < 110L) return;
             }
+            if(data.getInteractData().getTicksAlive() < 30) return;
             long systemTime = System.currentTimeMillis();
             long lastTimeRate = this.lastTickTime != 0 ? this.lastTickTime : systemTime - 50;
             this.lastTickTime = systemTime;

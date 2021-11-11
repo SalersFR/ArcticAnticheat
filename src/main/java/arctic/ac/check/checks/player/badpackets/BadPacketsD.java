@@ -24,7 +24,7 @@ public class BadPacketsD extends Check {
                 if (data.getInteractionData().isSprinting() || data.getInteractionData().isSneaking()) {
                     if (++buffer > 1)
                         fail();
-                }
+                } else if(buffer > 0) buffer /= 2;
             }
         }
     }

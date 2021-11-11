@@ -38,7 +38,7 @@ public class AimG extends Check {
             if (Math.min(this.lastPitchAtan, Math.atan(pitch)) == this.result && gcd < 0x20000 && gcd > 0 && event.getDeltaYaw() < 125) {
                 if (this.buffer < 15) buffer++;
 
-                if (this.buffer > 1.05)
+                if (this.buffer > 2)
                     fail("gcd=" + gcd);
             } else this.buffer -= this.buffer > 0 ? 0.05 : 0;
 

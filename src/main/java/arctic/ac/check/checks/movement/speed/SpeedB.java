@@ -24,7 +24,7 @@ public class SpeedB extends Check {
 
             final double deltaXZ = moveEvent.getDeltaXZ();
 
-            if (deltaXZ > 1.7D) {
+            if (deltaXZ > 1.7D && data.getPlayer().getWalkSpeed() == 0.2) {
                 if (++buffer > 3) {
                     buffer = 0;
                     fail("very blatant speed=" + deltaXZ);
@@ -64,6 +64,7 @@ public class SpeedB extends Check {
                 limit = 0.823;
                 this.ticksSinceAir = 0;
             }
+            limit += player.getWalkSpeed();
 
             if (deltaXZ > limit && !exempt) {
                 if (++buffer > 2) {
