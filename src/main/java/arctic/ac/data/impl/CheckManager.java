@@ -16,6 +16,7 @@ import arctic.ac.check.checks.movement.nofall.NoFallA;
 import arctic.ac.check.checks.movement.nofall.NoFallB;
 import arctic.ac.check.checks.movement.speed.SpeedA;
 import arctic.ac.check.checks.movement.speed.SpeedB;
+import arctic.ac.check.checks.movement.speed.SpeedC;
 import arctic.ac.check.checks.movement.spider.SpiderA;
 import arctic.ac.check.checks.movement.step.StepA;
 import arctic.ac.check.checks.player.badpackets.BadPacketsA;
@@ -59,6 +60,7 @@ public class CheckManager {
 
                 new SpeedA(data),
                 new SpeedB(data),
+                new SpeedC(data),
 
                 new StepA(data),
 
@@ -107,6 +109,8 @@ public class CheckManager {
                 new KillAuraE(data),
                 new KillAuraF(data),
                 new KillAuraG(data),
+                new KillAuraH(data),
+                new KillAuraI(data),
 
                 new VelocityA(data),
                 new VelocityB(data),
