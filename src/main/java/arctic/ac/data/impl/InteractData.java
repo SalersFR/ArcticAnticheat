@@ -22,8 +22,8 @@ public class InteractData {
 
     private NPC entityANPC;
     private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging, ticksSinceBow, ticksAlive;
-    private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported, cinematic;
-    private long lastHitPacket, lastTeleport;
+    private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported, cinematic,hasHitSlowDown;
+    private long lastHitPacket, lastTeleport,attackSlowDownTime = 0;
 
     private Player player;
 
@@ -72,6 +72,8 @@ public class InteractData {
     public void handleUseEntity(WrapperPlayClientUseEntity wrapper) {
         if (wrapper.getType() == EnumWrappers.EntityUseAction.ATTACK) {
             this.target = wrapper.getTarget(data.getPlayer().getWorld());
+            hasHitSlowDown = true;
+            attackSlowDownTime = System.currentTimeMillis();
         }
 
         if (wrapper.getTarget(data.getPlayer().getWorld()) == null) return;
@@ -100,6 +102,9 @@ public class InteractData {
         this.teleported = System.currentTimeMillis() - lastTeleport < 30;
         if (new WorldUtils().isOnACertainBlock(data.getPlayer(), "slime")) {
             this.ticksSinceSlime = 0;
+        }
+        if (data.getPlayer().isSprinting() && Math.abs(System.currentTimeMillis() - attackSlowDownTime) > 40) {
+            hasHitSlowDown = false;
         }
 
         this.ticksAlive++;
