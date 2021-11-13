@@ -5,12 +5,15 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import lombok.Data;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 
 @Data
 
@@ -20,6 +23,7 @@ public class AEntity {
     private EntityType type;
     private int id, interpolationSteps;
     private short transactionID = -900;
+    private HashMap<Short, Vector> transactionTimes = new HashMap<>();
 
     public AEntity(double x, double y, double z, int id) {
         this.x = x / 32;
@@ -30,12 +34,12 @@ public class AEntity {
 
     public void relMove(final double x, final double y, double z) {
 
-        this.relX += (x / 32);
-        this.relY += (y / 32);
-        this.relZ += (z / 32);
+        double relX = (x / 32);
+        double relY = (y / 32);
+        double relZ = (z / 32);
 
-        sendTransaction();
-
+        sendTransaction(new Vector(relX,relY,relZ));
+        interpolationSteps = 3;
 
     }
 
@@ -52,19 +56,21 @@ public class AEntity {
 
     public void teleport(final double x, final double y, final double z) {
 
-        this.relX = (x / 32);
-        this.relY = (y / 32);
-        this.relZ = (z / 32);
+        double relX = (x / 32);
+        double relY = (y / 32);
+        double relZ = (z / 32);
 
-        sendTransaction();
+        sendTransaction(new Vector(relX,relY,relZ));
     }
 
-    public void sendTransaction() {
+    public void sendTransaction(Vector loc) {
 
         final PacketContainer packet = new PacketContainer(PacketType.Play.Server.TRANSACTION);
 
         packet.getBooleans().write(0, false);
         packet.getShorts().write(0, transactionID);
+
+        transactionTimes.put(transactionID,loc);
 
         this.transactionID++;
 
@@ -72,6 +78,7 @@ public class AEntity {
             transactionID = -900;
 
         packet.getIntegers().write(0, getId());
+
 
         try {
             ProtocolLibrary.getProtocolManager().sendServerPacket((Player) getEntity(), packet);
@@ -83,20 +90,24 @@ public class AEntity {
     public void interpolate() {
         if (interpolationSteps > 0) {
 
-            x = (x + (newX - x)) / interpolationSteps;
-            y = (y + (newY - y)) / interpolationSteps;
-            z = (z + (newZ - z)) / interpolationSteps;
+            x = ((newX - x)) / interpolationSteps;
+            y = ((newY - y)) / interpolationSteps;
+            z = ((newZ - z)) / interpolationSteps;
+
+            Bukkit.broadcastMessage("steps " + interpolationSteps);
 
             --interpolationSteps;
         }
 
     }
 
-    public void handleTransaction() {
+    public void handleTransaction(short id) {
         this.interpolationSteps = 3;
 
-        newX = relX;
-        newY = relY;
-        newZ = relZ;
+        Vector transVector = transactionTimes.get(id);
+
+        newX = transVector.getX();
+        newY = transVector.getY();
+        newZ = transVector.getZ();
     }
 }

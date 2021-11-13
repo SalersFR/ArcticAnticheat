@@ -192,7 +192,7 @@ public class PacketProcessor {
 
             for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
                 if(entities.getId() == data.getTarget().getEntityId() && (wrapper.getActionNumber() - entities.getTransactionID()) < 2)
-                    entities.handleTransaction();
+                    entities.handleTransaction(wrapper.getActionNumber());
             }
 
 
