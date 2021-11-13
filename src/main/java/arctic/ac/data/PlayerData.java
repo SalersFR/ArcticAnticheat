@@ -10,7 +10,7 @@ import arctic.ac.data.processor.CinematicProcessor;
 import arctic.ac.data.processor.NetworkProcessor;
 import arctic.ac.data.processor.PacketProcessor;
 import arctic.ac.data.processor.SetbackProcessor;
-import arctic.ac.data.tracker.TargetTracker;
+import arctic.ac.data.tracker.EntityTracker;
 import arctic.ac.utils.ALocation;
 import arctic.ac.utils.ARotation;
 import lombok.Getter;
@@ -30,7 +30,7 @@ public class PlayerData {
     private final InteractData interactData;
     private final PositionData posData;
     private final VelocityData velocityData;
-    private final TargetTracker targetTracker;
+    private final EntityTracker entityTracker;
     private final PacketProcessor packetProcessor;
     private final CinematicProcessor cinematicProcessor;
     private final SetbackProcessor setbackProcessor;
@@ -53,7 +53,7 @@ public class PlayerData {
         this.interactData = new InteractData(this);
         this.posData = new PositionData(this);
         this.velocityData = new VelocityData(this);
-        this.targetTracker = new TargetTracker(this);
+        this.entityTracker = new EntityTracker(this);
         this.packetProcessor = new PacketProcessor(this);
         this.cinematicProcessor = new CinematicProcessor(this);
         this.setbackProcessor = new SetbackProcessor(this);

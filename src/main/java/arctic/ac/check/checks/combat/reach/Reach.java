@@ -2,10 +2,10 @@ package arctic.ac.check.checks.combat.reach;
 
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
-import arctic.ac.data.tracker.TargetTracker;
-import arctic.ac.data.tracker.TrackedEntity;
+import arctic.ac.data.tracker.EntityTracker;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.UseEntityEvent;
+import arctic.ac.utils.AEntity;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -34,13 +34,13 @@ public class Reach extends Check {
 
             final UseEntityEvent event = (UseEntityEvent) e;
 
-            final TargetTracker tracker = data.getTargetTracker();
+            final EntityTracker entityTracker = data.getEntityTracker();
 
             if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
 
-                for (TrackedEntity entites : tracker.getTrackedEntityList()) {
-                    if (entites.getId() == event.getTarget().getEntityId()) {
-                        // Bukkit.broadcastMessage("d=" + entites.getEntityLocation().toString());
+                for (AEntity entities : entityTracker.getTrackedEntities()) {
+                    if (entities.getId() == event.getTarget().getEntityId()) {
+                        Bukkit.broadcastMessage("x=" + entities.getX() + " y=" + entities.getY() + " z=" + entities.getZ());
                     }
                 }
             }

@@ -6,6 +6,7 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.client.*;
 import arctic.ac.event.server.ServerPositionEvent;
 import arctic.ac.event.server.ServerVelocityEvent;
+import arctic.ac.utils.AEntity;
 import com.comphenix.packetwrapper.*;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketEvent;
@@ -55,6 +56,11 @@ public class PacketProcessor {
 
             data.getCinematicProcessor().process(rotationEvent);
 
+            for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
+                if(entities.getId() == data.getTarget().getEntityId())
+                    entities.interpolate();
+            }
+
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
                     checks.handle(rotationEvent);
@@ -73,6 +79,11 @@ public class PacketProcessor {
                 }
             }
 
+            for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
+                if(entities.getId() == data.getTarget().getEntityId())
+                    entities.interpolate();
+            }
+
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION_LOOK) {
             final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
 
@@ -85,6 +96,11 @@ public class PacketProcessor {
             data.getInteractData().handleFlying();
             data.getVelocityData().handleFlying();
             data.getSetbackProcessor().handle(moveEvent);
+
+            for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
+                if(entities.getId() == data.getTarget().getEntityId())
+                    entities.interpolate();
+            }
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
@@ -102,6 +118,11 @@ public class PacketProcessor {
             data.getInteractData().handleFlying();
             data.getVelocityData().handleFlying();
             data.getSetbackProcessor().handle(moveEvent);
+
+            for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
+                if(entities.getId() == data.getTarget().getEntityId())
+                    entities.interpolate();
+            }
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
@@ -169,6 +190,11 @@ public class PacketProcessor {
 
             data.getVelocityData().handleTransaction(wrapper);
 
+            for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
+                if(entities.getId() == data.getTarget().getEntityId() && (wrapper.getActionNumber() - entities.getTransactionID()) < 2)
+                    entities.handleTransaction();
+            }
+
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {
@@ -225,30 +251,25 @@ public class PacketProcessor {
                     checks.handle(serverPositionEvent);
             }
 
-            /**
 
-             } else if (event.getPacketType() == PacketType.Play.Server.ENTITY_TELEPORT) {
-             final WrapperPlayServerEntityTeleport packet = new WrapperPlayServerEntityTeleport(event.getPacket());
-             data.getInteractData().handleOutTeleport(packet);
-             data.getTargetTracker().handleTeleport(packet, event.getPlayer().getWorld());
-             } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE) {
-             final WrapperPlayServerRelEntityMove packet = new WrapperPlayServerRelEntityMove(event.getPacket());
-             data.getTargetTracker().handleRelMove(packet);
-             } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE_LOOK) {
-             final WrapperPlayServerRelEntityMoveLook packet = new WrapperPlayServerRelEntityMoveLook(event.getPacket());
-             data.getTargetTracker().handleRelMoveLook(packet);
-             } else if (event.getPacketType() == PacketType.Play.Server.SPAWN_ENTITY) {
-             final WrapperPlayServerSpawnEntity packet = new WrapperPlayServerSpawnEntity(event.getPacket());
-             data.getTargetTracker().handleEntitySpawn(packet);
-             } else if (event.getPacketType() == PacketType.Play.Server.SPAWN_ENTITY_LIVING) {
-             final WrapperPlayServerSpawnEntityLiving packet = new WrapperPlayServerSpawnEntityLiving(event.getPacket());
-             data.getTargetTracker().handleLivingSpawn(packet);
-             } else if (event.getPacketType() == PacketType.Play.Server.NAMED_ENTITY_SPAWN) {
-             final WrapperPlayServerNamedEntitySpawn packet = new WrapperPlayServerNamedEntitySpawn(event.getPacket());
-             data.getTargetTracker().handleNamedSpawn(packet);
-             }
-             **/
+        } else if (event.getPacketType().equals(PacketType.Play.Server.REL_ENTITY_MOVE)) {
+            final WrapperPlayServerRelEntityMove wrapper = new WrapperPlayServerRelEntityMove(event.getPacket());
 
+            data.getEntityTracker().handleRelMove(wrapper);
+
+        } else if (event.getPacketType().equals(PacketType.Play.Server.REL_ENTITY_MOVE_LOOK)) {
+            final WrapperPlayServerRelEntityMoveLook wrapper = new WrapperPlayServerRelEntityMoveLook(event.getPacket());
+
+            data.getEntityTracker().handleRelMoveLook(wrapper);
+
+        } else if(event.getPacketType().equals(PacketType.Play.Server.ENTITY_TELEPORT)) {
+            final WrapperPlayServerEntityTeleport wrapper = new WrapperPlayServerEntityTeleport(event.getPacket());
+
+            data.getEntityTracker().handleTeleport(wrapper);
+        } else if(event.getPacketType().equals(PacketType.Play.Server.NAMED_ENTITY_SPAWN)) {
+            final WrapperPlayServerNamedEntitySpawn wrapper = new WrapperPlayServerNamedEntitySpawn(event.getPacket());
+
+            data.getEntityTracker().handleNamedSpawn(wrapper);
         }
     }
 }
