@@ -62,36 +62,10 @@ public class SpeedC extends Check {
             //stillFlying
             if (airTicks > 3 && diff > 26 && !attackSlowDown && !nearBlocks & !velocityTaken) {
                 buffer++;
-                if (buffer > 4) {
+                if (buffer > 5) {
                     fail("diff " + diff);
                 }
             } else if (buffer > 0) buffer-=0.05;
-
-            if (onGround) {
-                if (attackSlowDown) {
-                    lastMotionXZ.multiply(0.6);
-                }
-                final float yaw = e.getTo().getYaw();
-                final double yawRadians = Math.toRadians(yaw);
-
-                final Vector look = new Vector(-Math.sin(yawRadians), 0.0, Math.cos(yawRadians));
-                final Vector move = motionXZ.clone().subtract(lastMotionXZ.clone());
-
-                double angle = angle(look, move);
-                angle = angle % (Math.PI / 4);
-
-                Location loc = e.getTo().toVector().toLocation(data.getPlayer().getWorld());
-                boolean nearSlime = isNearSlime(loc);
-                boolean sneaking = data.getPlayer().isSneaking();
-
-                boolean closeToIce = isNearIce(loc);
-
-                double dist = e.getTo().toVector().distance(e.getFrom().toVector());
-
-                if (angle > 0.05 && angle < (Math.PI / 4 - 0.05) && onGround && !nearBlocks && !sneaking && dist > 0.09 && !nearSlime && !closeToIce) {
-                    //Bukkit.broadcastMessage("angle " + angle);
-                }
-            }
         }
     }
 

@@ -21,6 +21,7 @@ public class KillAuraJ extends Check {
     public long lastAim;
     public double aimSpeed;
     public double aimPitch;
+    public double buffer;
 
     @Override
     public void handle(Event e) {
@@ -31,9 +32,12 @@ public class KillAuraJ extends Check {
                 hits=0;
                 swings=0;
 
-                if (acc > 10) {
-                    fail("acc " + acc);
-                }
+                if (acc > 13) {
+                    buffer++;
+                    if (buffer > 1) {
+                        fail("acc " + acc);
+                    }
+                } else if (buffer > 0) buffer-=0.1;
             }
         }
         if (e instanceof UseEntityEvent) {

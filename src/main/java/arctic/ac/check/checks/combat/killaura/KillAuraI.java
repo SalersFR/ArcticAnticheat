@@ -27,6 +27,8 @@ public class KillAuraI extends Check {
     public double dist;
     public double buffer;
 
+    //TODO recode all of this
+
     @Override
     public void handle(Event e) {
         if (e instanceof UseEntityEvent) {
@@ -42,7 +44,7 @@ public class KillAuraI extends Check {
                     if (diff < 100 && diff != 0) {
                         buffer++;
                         if (buffer > 2) {
-                            fail("buffer " + buffer + " diff " + diff + " reach " + dist);
+                            //fail("buffer " + buffer + " diff " + diff + " reach " + dist);
                         }
                     } else if (buffer > 0) buffer-=0.05;
                 } else if (buffer > 0) buffer-=0.05;

@@ -27,6 +27,7 @@ public class KillAuraH extends Check {
     private double attacks;
     private double swings;
     public long lastAim;
+    public double buffer;
 
     @Override
     public void handle(Event e) {
@@ -68,8 +69,11 @@ public class KillAuraH extends Check {
             if (swings >= 50) {
                 double acc = attacks * 2;
                 if (acc > 40) {
-                    fail("acc " + acc);
-                }
+                    buffer++;
+                    if (buffer > 1) {
+                        fail("acc " + acc + " buffer " + buffer);
+                    }
+                } else if (buffer > 0) buffer-=0.1;
                 swings = 0;
                 attacks = 0;
             }
