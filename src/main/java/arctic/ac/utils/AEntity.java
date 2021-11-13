@@ -59,6 +59,9 @@ public class AEntity {
         double relX = (x / 32);
         double relY = (y / 32);
         double relZ = (z / 32);
+        this.relX = relX;
+        this.relY = relY;
+        this.relZ = relZ;
 
         sendTransaction(new Vector(relX,relY,relZ));
     }
@@ -90,11 +93,11 @@ public class AEntity {
     public void interpolate() {
         if (interpolationSteps > 0) {
 
-            x = x +((newX - x)) / interpolationSteps;
-            y = y + ((newY - y)) / interpolationSteps;
-            z = z + ((newZ - z)) / interpolationSteps;
+            x = x + ((newX)) / interpolationSteps;
+            y = y + ((newY)) / interpolationSteps;
+            z = z + ((newZ)) / interpolationSteps;
 
-            Bukkit.broadcastMessage("steps " + interpolationSteps);
+            Bukkit.broadcastMessage("motionX" + newX);
 
             --interpolationSteps;
         }
@@ -106,8 +109,8 @@ public class AEntity {
 
         Vector transVector = transactionTimes.get(id);
 
-        newX = transVector.getX();
-        newY = transVector.getY();
-        newZ = transVector.getZ();
+        newX = relX;
+        newY = relY;
+        newZ = relZ;
     }
 }
