@@ -37,6 +37,9 @@ public class AEntity {
         double relX = (x / 32);
         double relY = (y / 32);
         double relZ = (z / 32);
+        this.relX = relX;
+        this.relY = relY;
+        this.relZ = relZ;
 
         sendTransaction(new Vector(relX,relY,relZ));
         interpolationSteps = 3;
