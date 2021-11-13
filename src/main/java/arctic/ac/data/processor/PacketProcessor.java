@@ -197,14 +197,12 @@ public class PacketProcessor {
 
             data.getVelocityData().handleTransaction(wrapper);
 
-
             if (data.getTarget() != null) {
                 for (AEntity entities : data.getEntityTracker().getTrackedEntities()) {
-                    if (entities.getId() == data.getTarget().getEntityId() && (wrapper.getActionNumber() - entities.getTransactionID()) < 2)
+                    if (entities.getId() == data.getTarget().getEntityId())
                         entities.handleTransaction(wrapper.getActionNumber());
                 }
             }
-
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt) {

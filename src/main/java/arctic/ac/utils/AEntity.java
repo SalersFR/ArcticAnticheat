@@ -41,6 +41,8 @@ public class AEntity {
         this.relY = relY;
         this.relZ = relZ;
 
+        //Bukkit.broadcastMessage("relX1 " + this.relX);
+
         sendTransaction(new Vector(relX,relY,relZ));
         interpolationSteps = 3;
 
@@ -85,9 +87,9 @@ public class AEntity {
 
         packet.getIntegers().write(0, getId());
 
-
         try {
             ProtocolLibrary.getProtocolManager().sendServerPacket((Player) getEntity(), packet);
+            ((Player) getEntity()).sendMessage("test?");
         } catch (InvocationTargetException exception) {
             exception.printStackTrace();
         }
@@ -100,7 +102,7 @@ public class AEntity {
             y = y + ((newY)) / interpolationSteps;
             z = z + ((newZ)) / interpolationSteps;
 
-            Bukkit.broadcastMessage("motionX" + newX);
+            //Bukkit.broadcastMessage("motionX" + newX);
 
             --interpolationSteps;
         }
@@ -115,5 +117,7 @@ public class AEntity {
         newX = relX;
         newY = relY;
         newZ = relZ;
+
+        Bukkit.broadcastMessage("relX2 " + this.relX);
     }
 }
