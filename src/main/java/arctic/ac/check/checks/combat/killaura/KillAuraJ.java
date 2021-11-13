@@ -7,14 +7,13 @@ import arctic.ac.event.client.ArmAnimationEvent;
 import arctic.ac.event.client.RotationEvent;
 import arctic.ac.event.client.UseEntityEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 public class KillAuraJ extends Check {
 
     public KillAuraJ(PlayerData data) {
-        super(data, "KillAura", "J", "combat.killaura.j", "Checks for extremely high aim with high attack accuracion",true);
+        super(data, "KillAura", "J", "combat.killaura.j", "Checks for extremely high aim with high attack accuracion", true);
     }
+
     public int swings;
     public int hits;
     public long lastHit;
@@ -29,15 +28,15 @@ public class KillAuraJ extends Check {
             swings++;
             if (swings >= 38) {
                 int acc = hits;
-                hits=0;
-                swings=0;
+                hits = 0;
+                swings = 0;
 
                 if (acc > 13) {
                     buffer++;
                     if (buffer > 1) {
                         fail("acc " + acc);
                     }
-                } else if (buffer > 0) buffer-=0.1;
+                } else if (buffer > 0) buffer -= 0.1;
             }
         }
         if (e instanceof UseEntityEvent) {

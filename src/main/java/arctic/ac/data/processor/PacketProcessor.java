@@ -12,7 +12,6 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 
 @RequiredArgsConstructor
@@ -56,9 +55,11 @@ public class PacketProcessor {
 
             data.getCinematicProcessor().process(rotationEvent);
 
-            for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
-                if(entities.getId() == data.getTarget().getEntityId())
-                    entities.interpolate();
+            if (data.getTarget() != null) {
+                for (AEntity entities : data.getEntityTracker().getTrackedEntities()) {
+                    if (entities.getId() == data.getTarget().getEntityId())
+                        entities.interpolate();
+                }
             }
 
             for (Check checks : data.getChecks()) {
@@ -79,15 +80,17 @@ public class PacketProcessor {
                 }
             }
 
-            for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
-                if(entities.getId() == data.getTarget().getEntityId())
-                    entities.interpolate();
+            if (data.getTarget() != null) {
+                for (AEntity entities : data.getEntityTracker().getTrackedEntities()) {
+                    if (entities.getId() == data.getTarget().getEntityId())
+                        entities.interpolate();
+                }
             }
 
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION_LOOK) {
             final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
 
-            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getYaw(), wrapper.getPitch(),wrapper.getOnGround());
+            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getYaw(), wrapper.getPitch(), wrapper.getOnGround());
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
@@ -97,9 +100,11 @@ public class PacketProcessor {
             data.getVelocityData().handleFlying();
             data.getSetbackProcessor().handle(moveEvent);
 
-            for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
-                if(entities.getId() == data.getTarget().getEntityId())
-                    entities.interpolate();
+            if (data.getTarget() != null) {
+                for (AEntity entities : data.getEntityTracker().getTrackedEntities()) {
+                    if (entities.getId() == data.getTarget().getEntityId())
+                        entities.interpolate();
+                }
             }
 
             for (Check checks : data.getChecks()) {
@@ -112,16 +117,18 @@ public class PacketProcessor {
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION) {
             final WrapperPlayClientPosition wrapper = new WrapperPlayClientPosition(event.getPacket());
 
-            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(),0,0, wrapper.getOnGround());
+            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), 0, 0, wrapper.getOnGround());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             data.getInteractData().handleFlying();
             data.getVelocityData().handleFlying();
             data.getSetbackProcessor().handle(moveEvent);
 
-            for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
-                if(entities.getId() == data.getTarget().getEntityId())
-                    entities.interpolate();
+            if (data.getTarget() != null) {
+                for (AEntity entities : data.getEntityTracker().getTrackedEntities()) {
+                    if (entities.getId() == data.getTarget().getEntityId())
+                        entities.interpolate();
+                }
             }
 
             for (Check checks : data.getChecks()) {
@@ -190,9 +197,12 @@ public class PacketProcessor {
 
             data.getVelocityData().handleTransaction(wrapper);
 
-            for(AEntity entities : data.getEntityTracker().getTrackedEntities()) {
-                if(entities.getId() == data.getTarget().getEntityId() && (wrapper.getActionNumber() - entities.getTransactionID()) < 2)
-                    entities.handleTransaction(wrapper.getActionNumber());
+
+            if (data.getTarget() != null) {
+                for (AEntity entities : data.getEntityTracker().getTrackedEntities()) {
+                    if (entities.getId() == data.getTarget().getEntityId() && (wrapper.getActionNumber() - entities.getTransactionID()) < 2)
+                        entities.handleTransaction(wrapper.getActionNumber());
+                }
             }
 
 
@@ -262,11 +272,11 @@ public class PacketProcessor {
 
             data.getEntityTracker().handleRelMoveLook(wrapper);
 
-        } else if(event.getPacketType().equals(PacketType.Play.Server.ENTITY_TELEPORT)) {
+        } else if (event.getPacketType().equals(PacketType.Play.Server.ENTITY_TELEPORT)) {
             final WrapperPlayServerEntityTeleport wrapper = new WrapperPlayServerEntityTeleport(event.getPacket());
 
             data.getEntityTracker().handleTeleport(wrapper);
-        } else if(event.getPacketType().equals(PacketType.Play.Server.NAMED_ENTITY_SPAWN)) {
+        } else if (event.getPacketType().equals(PacketType.Play.Server.NAMED_ENTITY_SPAWN)) {
             final WrapperPlayServerNamedEntitySpawn wrapper = new WrapperPlayServerNamedEntitySpawn(event.getPacket());
 
             data.getEntityTracker().handleNamedSpawn(wrapper);
