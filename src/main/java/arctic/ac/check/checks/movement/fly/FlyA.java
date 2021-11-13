@@ -69,8 +69,9 @@ public class FlyA extends Check {
                     || worldUtils.haveABlockNearHead(player);
 
             if (airTicks > 1 && Math.abs(fixedPrediction - deltaY) > 0.001D && event.getDeltaXZ() > 0.001D && !exempt) {
-                if (++buffer > 1)
-                    fail("diff=" + Math.abs(fixedPrediction - deltaY));
+                if (++buffer > 1) {
+                    //fail("diff=" + Math.abs(fixedPrediction - deltaY));
+                }
             } else if(buffer > 0) buffer -= 0.01D;
 
             debug("diff=" + Math.abs(fixedPrediction - deltaY));
