@@ -54,9 +54,11 @@ public class MotionC extends Check {
             final double fixedLimit = player.hasPotionEffect(PotionEffectType.SPEED) ? limit +
                     (PlayerUtils.getPotionLevel(player, PotionEffectType.SPEED) * 0.11F) : limit;
 
+
+
             debug("jumped=" + jumped + " deltaY=" + deltaY + " dXZ=" + deltaXZ + "fixed=" + fixedLimit);
 
-            if (deltaXZ > fixedLimit && jumped && !exempt) {
+            if (deltaXZ > (fixedLimit + (player.getWalkSpeed() * 0.33D)) && jumped && !exempt) {
                 if (++buffer > 2)
                     fail("moved too fast while jumping=" + deltaXZ);
 

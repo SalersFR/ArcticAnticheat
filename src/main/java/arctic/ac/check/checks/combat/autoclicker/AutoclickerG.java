@@ -35,7 +35,7 @@ public class AutoclickerG extends Check {
                     final double kurtosisVariance = MathUtils.getVariance(pastKurtosis);
                     debug("sames=" + sames + " kurtosisVariance=" + kurtosisVariance);
 
-                    if((kurtosisVariance < 1.0E-7 || Double.isNaN(kurtosisVariance)) && sames > 18) {
+                    if((kurtosisVariance < 1.0E-7 || Double.isNaN(kurtosisVariance) || kurtosisVariance < 1.25D) && sames > 18) {
                         if(++buffer > 1)
                             fail("sames=" + sames + " kurtosisVariance=" + kurtosisVariance);
                     } else if(buffer > 0) buffer -= 0.5D;

@@ -56,6 +56,7 @@ public class MotionF extends Check {
                     || worldUtils.isOnACertainBlock(player,"stairs")
                     || worldUtils.isOnACertainBlock(player,"ice")
                     || data.getInteractData().isHurt()
+                    || data.getInteractData().getTicksSinceHurt() < 20
                     || worldUtils.haveABlockNearHead(player)
                     || airTicks >= 8
                     || bukkitTo.add(0,-0.65D,0).getBlock().isEmpty();

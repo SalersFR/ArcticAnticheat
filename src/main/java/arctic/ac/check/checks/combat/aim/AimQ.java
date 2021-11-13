@@ -33,7 +33,8 @@ public class AimQ extends Check {
             double modulusResPitch = MathUtils.getReversedModulus(gcd, deltaPitch, resPitch);
             double modulusResYaw = MathUtils.getReversedModulus(gcd, deltaYaw, resYaw);
 
-            if ((Double.isNaN(modulusResPitch) || Double.isNaN(modulusResYaw)) && (deltaYaw >= 0.45 || deltaPitch >= 0.45)  && (event.getDeltaPitch() < 15 && event.getDeltaYaw() < 15)) {
+            if ((Double.isNaN(modulusResPitch) || Double.isNaN(modulusResYaw)) && (deltaYaw >= 0.45 || deltaPitch >= 0.45)
+                    && (event.getDeltaPitch() < 15 && event.getDeltaYaw() < 15) && data.getCinematicProcessor().getTicksSince() > 0) {
                 if (++buffer > 10.0) {
                     fail("modPitch: " + modulusResPitch + ", modYaw: " + modulusResYaw +
                             ", dYaw: " + deltaYaw + ", dPitch: " + deltaPitch);

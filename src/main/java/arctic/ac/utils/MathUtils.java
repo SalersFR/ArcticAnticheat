@@ -27,6 +27,11 @@ public class MathUtils {
         return (div + remainder - a);
     }
 
+
+
+    public boolean isScientificNotation(final Number num) {
+        return num.doubleValue() < .001D;
+    }
     /*
     GladUrBad GCD & Sensitivity
     Medusa (by GladUrBad) - https://github.com/GladUrBad/Medusa/blob/f00848c2576e4812283e6dc2dc05e29e2ced866a/Impl/src/main/java/com/gladurbad/medusa/util/MathUtil.java
@@ -58,6 +63,16 @@ public class MathUtils {
             return getGcd(b, a - Math.floor(a / b) * b);
         }
     }
+
+    public static long getAbsoluteGcd(final float current, final float last) {
+
+        final long currentExpanded = (long) (current * EXPANDER);
+
+        final long lastExpanded = (long) (last * EXPANDER);
+
+        return getGcd(currentExpanded, lastExpanded);
+    }
+
 
     public double gcd(final double limit, final double a, final double b) {
         return b <= limit ? a : MathUtils.gcd(limit, b, a % b);

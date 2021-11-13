@@ -14,6 +14,10 @@ public class CinematicProcessor {
     private double lastDeltaPitch, lastDeltaYaw, lastAccelPitch, lastAccelYaw;
     private int ticksSince;
 
+    //This is the minimum rotation constant
+    private static final double CINEMATIC_CONSTANT = 7.8125E-3;
+
+
     public void process(final RotationEvent event) {
 
         final float deltaPitch = event.getDeltaPitch();
@@ -21,7 +25,7 @@ public class CinematicProcessor {
 
         this.lastDeltaPitch = deltaPitch;
 
-        final double deltaYaw = event.getDeltaYaw();
+        final float deltaYaw = event.getDeltaYaw();
         final double lastDeltaYaw = this.lastDeltaYaw;
 
         this.lastDeltaYaw = deltaYaw;
@@ -52,6 +56,35 @@ public class CinematicProcessor {
 
         }
 
+
+        //Fixes exploits
+        if (deltaPitch == 0F || deltaYaw == 0F) return;
+
+
+        final boolean invalid = MathUtils.isScientificNotation(accelYaw)
+                || accelPitch == 0F
+                || MathUtils.isScientificNotation(accelPitch)
+                || accelYaw == 0F;
+
+
+        final double yawGcd = MathUtils.getAbsoluteGcd(deltaYaw, (float) lastDeltaYaw);
+        final double pitchGcd = MathUtils.getAbsoluteGcd(deltaPitch, (float) lastDeltaPitch);
+
+        final double constantYaw = yawGcd / MathUtils.EXPANDER;
+        final double constantPitch = pitchGcd / MathUtils.EXPANDER;
+
+
+        final boolean cinematic = !invalid && accelYaw < 1F && accelPitch < 1F;
+
+        if (cinematic) {
+
+            if (constantYaw < CINEMATIC_CONSTANT && constantPitch < CINEMATIC_CONSTANT) this.ticksSince = 0;
+
+        }
+
+
         this.ticksSince++;
     }
+
+
 }
