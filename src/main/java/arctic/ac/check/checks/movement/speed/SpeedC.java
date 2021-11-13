@@ -24,6 +24,8 @@ public class SpeedC extends Check {
     private boolean stillFlying;
     public long lastFlyingTime;
     public double buffer;
+    public boolean lastLastOnGround;
+    public boolean lastOnGround;
 
     @Override
     public void handle(Event event) {
@@ -34,7 +36,15 @@ public class SpeedC extends Check {
             Vector lastMotionXZ = motion.clone();
             motion = motionXZ;
 
-            double friction = 0.91;
+            boolean lastOnGround = this.lastOnGround;
+            boolean lastLastOnGround = this.lastLastOnGround;
+            this.lastOnGround = e.isGround();
+            this.lastLastOnGround = lastLastOnGround;
+
+            float friction = 0.91F;
+            if (lastLastOnGround) {
+                friction = 0.6f;
+            }
             lastMotionXZ.multiply(friction);
 
             boolean onGround = e.isGround();
@@ -56,7 +66,38 @@ public class SpeedC extends Check {
                     fail("diff " + diff);
                 }
             } else if (buffer > 0) buffer-=0.05;
+
+            if (onGround) {
+                if (attackSlowDown) {
+                    lastMotionXZ.multiply(0.6);
+                }
+                final float yaw = e.getTo().getYaw();
+                final double yawRadians = Math.toRadians(yaw);
+
+                final Vector look = new Vector(-Math.sin(yawRadians), 0.0, Math.cos(yawRadians));
+                final Vector move = motionXZ.clone().subtract(lastMotionXZ.clone());
+
+                double angle = angle(look, move);
+                angle = angle % (Math.PI / 4);
+
+                Location loc = e.getTo().toVector().toLocation(data.getPlayer().getWorld());
+                boolean nearSlime = isNearSlime(loc);
+                boolean sneaking = data.getPlayer().isSneaking();
+
+                boolean closeToIce = isNearIce(loc);
+
+                double dist = e.getTo().toVector().distance(e.getFrom().toVector());
+
+                if (angle > 0.05 && angle < (Math.PI / 4 - 0.05) && onGround && !nearBlocks && !sneaking && dist > 0.09 && !nearSlime && !closeToIce) {
+                    //Bukkit.broadcastMessage("angle " + angle);
+                }
+            }
         }
+    }
+
+    public static double angle(Vector a, Vector b) {
+        double dot = Math.min(Math.max(a.dot(b) / (a.length() * b.length()), -1), 1);
+        return Math.acos(dot);
     }
 
     public void checkForFlying(Player player) {
@@ -73,6 +114,33 @@ public class SpeedC extends Check {
                 return true;
             }
         }
+        return false;
+    }
+
+    public boolean isNearSlime(Location location) {
+        Location min = location.toVector().add(new Vector(0.6,0,0.6)).toLocation(location.getWorld());
+        Location max = location.toVector().subtract(new Vector(0.6,1,0.6)).toLocation(location.getWorld());
+        for (Block block : blocksFromTwoPoints(min,max)) {
+            if (block.getType() == Material.SLIME_BLOCK) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isNearIce(Location location) {
+        Location min = location.toVector().add(new Vector(0.6,0,0.6)).toLocation(location.getWorld());
+        Location max = location.toVector().subtract(new Vector(0.6,1,0.6)).toLocation(location.getWorld());
+        for (Block block : blocksFromTwoPoints(min,max)) {
+            if (block.getType() == Material.ICE) {
+                return true;
+            }
+            if (block.getType() == Material.PACKED_ICE) {
+                return true;
+            }
+        }
+
         return false;
     }
 

@@ -76,7 +76,7 @@ public class PacketProcessor {
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION_LOOK) {
             final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
 
-            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getOnGround());
+            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getYaw(), wrapper.getPitch(),wrapper.getOnGround());
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
@@ -96,7 +96,7 @@ public class PacketProcessor {
         } else if (event.getPacketType() == PacketType.Play.Client.POSITION) {
             final WrapperPlayClientPosition wrapper = new WrapperPlayClientPosition(event.getPacket());
 
-            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getOnGround());
+            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(),0,0, wrapper.getOnGround());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             data.getInteractData().handleFlying();
