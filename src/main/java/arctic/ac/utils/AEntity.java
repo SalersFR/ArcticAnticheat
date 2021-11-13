@@ -90,9 +90,9 @@ public class AEntity {
     public void interpolate() {
         if (interpolationSteps > 0) {
 
-            x = ((newX - x)) / interpolationSteps;
-            y = ((newY - y)) / interpolationSteps;
-            z = ((newZ - z)) / interpolationSteps;
+            x = x +((newX - x)) / interpolationSteps;
+            y = y + ((newY - y)) / interpolationSteps;
+            z = z + ((newZ - z)) / interpolationSteps;
 
             Bukkit.broadcastMessage("steps " + interpolationSteps);
 
