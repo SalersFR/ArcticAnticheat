@@ -95,7 +95,6 @@ public class WrapperPlayServerEntityTeleport extends AbstractPacket {
     public double getZ() {
         return handle.getIntegers().read(2);
     }
-
     public void setZ(double value) {
         handle.getDoubles().write(2, value);
     }

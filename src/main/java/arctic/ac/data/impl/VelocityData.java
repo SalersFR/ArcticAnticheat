@@ -89,7 +89,7 @@ public class VelocityData {
                 exception.printStackTrace();
             }
 
-            if (velocityID <= -1) {
+            if (velocityID <= 1) {
                 velocityID = 900;
             }
         }
