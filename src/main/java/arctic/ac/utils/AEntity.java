@@ -89,7 +89,6 @@ public class AEntity {
 
         try {
             ProtocolLibrary.getProtocolManager().sendServerPacket((Player) getEntity(), packet);
-            ((Player) getEntity()).sendMessage("test?");
         } catch (InvocationTargetException exception) {
             exception.printStackTrace();
         }
