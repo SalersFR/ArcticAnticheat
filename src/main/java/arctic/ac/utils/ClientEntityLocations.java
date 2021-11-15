@@ -19,7 +19,7 @@ public class ClientEntityLocations {
     }
 
     public void addEntity(int id, double x, double y, double z) {
-        getEntityFromId.put(id, new EntityId(id, x, y, z));
+        getEntityFromId.put(id, new EntityId(id, x / 32D, y / 32D, z / 32D));
     }
 
     public void relMove(int id, final double x, final double y, double z) {
