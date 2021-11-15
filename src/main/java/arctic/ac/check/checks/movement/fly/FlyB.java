@@ -86,8 +86,8 @@ public class FlyB extends Check {
     }
 
     public boolean isNearBlocks(Location location) {
-        Location min = location.toVector().add(new Vector(0.6,-5,0.6)).toLocation(location.getWorld());
-        Location max = location.toVector().subtract(new Vector(0.6,0,0.6)).toLocation(location.getWorld());
+        Location min = location.toVector().add(new Vector(0.8,-5,0.8)).toLocation(location.getWorld());
+        Location max = location.toVector().subtract(new Vector(0.8,0,0.8)).toLocation(location.getWorld());
         for (Block block : blocksFromTwoPoints(min,max)) {
             if (block.getType() != Material.AIR) {
                 return true;

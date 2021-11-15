@@ -89,6 +89,7 @@ public class AEntity {
 
         try {
             ProtocolLibrary.getProtocolManager().sendServerPacket((Player) getEntity(), packet);
+            ((Player) getEntity()).sendMessage("test?");
         } catch (InvocationTargetException exception) {
             exception.printStackTrace();
         }
@@ -97,9 +98,9 @@ public class AEntity {
     public void interpolate() {
         if (interpolationSteps > 0) {
 
-            x = (x + (newX - x)) / interpolationSteps;
-            y = (y + (newY - y)) / interpolationSteps;
-            z = (z + (newZ - z)) / interpolationSteps;
+            x = x + ((newX)) / interpolationSteps;
+            y = y + ((newY)) / interpolationSteps;
+            z = z + ((newZ)) / interpolationSteps;
 
             //Bukkit.broadcastMessage("motionX" + newX);
 
@@ -113,9 +114,10 @@ public class AEntity {
 
         Vector transVector = transactionTimes.get(id);
 
-        newX = transVector.getX();
-        newY = transVector.getY();
-        newZ = transVector.getZ();
+        newX = relX;
+        newY = relY;
+        newZ = relZ;
 
+        Bukkit.broadcastMessage("relX2 " + this.relX);
     }
 }
