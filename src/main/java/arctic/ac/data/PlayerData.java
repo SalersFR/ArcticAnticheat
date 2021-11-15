@@ -13,6 +13,7 @@ import arctic.ac.data.processor.SetbackProcessor;
 import arctic.ac.data.tracker.EntityTracker;
 import arctic.ac.utils.ALocation;
 import arctic.ac.utils.ARotation;
+import arctic.ac.utils.ClientEntityLocations;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.LivingEntity;
@@ -30,7 +31,7 @@ public class PlayerData {
     private final InteractData interactData;
     private final PositionData posData;
     private final VelocityData velocityData;
-    private final EntityTracker entityTracker;
+    private final ClientEntityLocations clientEntityLocations;
     private final PacketProcessor packetProcessor;
     private final CinematicProcessor cinematicProcessor;
     private final SetbackProcessor setbackProcessor;
@@ -53,11 +54,11 @@ public class PlayerData {
         this.interactData = new InteractData(this);
         this.posData = new PositionData(this);
         this.velocityData = new VelocityData(this);
-        this.entityTracker = new EntityTracker(this);
         this.packetProcessor = new PacketProcessor(this);
         this.cinematicProcessor = new CinematicProcessor(this);
         this.setbackProcessor = new SetbackProcessor(this);
         this.networkProcessor = new NetworkProcessor(this);
+        this.clientEntityLocations = new ClientEntityLocations(this);
         this.pastEntityLocations = new ArrayList<>();
         this.player = player;
 
