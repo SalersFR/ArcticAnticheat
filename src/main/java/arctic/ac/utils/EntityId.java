@@ -13,7 +13,7 @@ public class EntityId {
     @Getter @Setter
     private EntityType type;
     @Getter @Setter
-    private int id, interpolationSteps;
+    private int id, interpolationSteps = 0;
     @Getter @Setter
     private short transactionID = -900;
     @Getter @Setter
