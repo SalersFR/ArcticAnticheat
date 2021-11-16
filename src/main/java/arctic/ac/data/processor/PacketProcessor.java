@@ -130,10 +130,14 @@ public class PacketProcessor {
 
             final ArmAnimationEvent armAnimationEvent = new ArmAnimationEvent(data, wrapper);
 
+
+
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt)
                     checks.handle(armAnimationEvent);
             }
+
+            //data.getInteractData().handleArmAnimation();
 
 
             // PLAYER DATA

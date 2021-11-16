@@ -46,8 +46,8 @@ public class AutoclickerF extends Check {
                 debug("outliersDiff=" + outlierDifference + " skewnessDiff=" + skewnessDifference);
 
                 if((skewnessDifference < 1.0E-5 || (Double.isNaN(skewnessDifference) && Double.isNaN(lastSkewnessDiff)))
-                        && outlierDifference <= 1 && skewness < 0.2D) {
-                    if(++buffer > 3)
+                        && outlierDifference <= 1 && (skewness < 3.5D || Double.isNaN(skewness))) {
+                    if(++buffer > 5)
                         fail("outliersDiff=" + outlierDifference + " skewness=" + skewness + " skewDiff=" + skewnessDifference);
 
                 } else if(buffer > 0) buffer -= 0.25D;

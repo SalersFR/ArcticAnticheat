@@ -4,25 +4,19 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.ArmAnimationEvent;
-import arctic.ac.event.client.FlyingEvent;
 import arctic.ac.event.client.RotationEvent;
 import arctic.ac.event.client.UseEntityEvent;
-import arctic.ac.utils.ALocation;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.util.Vector;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class KillAuraH extends Check {
 
     public KillAuraH(PlayerData data) {
-        super(data, "KillAura", "H", "combat.killaura.h", "Checks for killaura accuration",true);
+        super(data, "KillAura", "H", "combat.killaura.h", "Checks for killaura accuration", true);
     }
+
     private double aimSpeed;
     private double attacks;
     private double swings;
@@ -68,13 +62,16 @@ public class KillAuraH extends Check {
             if (swings >= 50) {
                 double acc = attacks * 2;
                 if (acc > 40) {
-                    fail("acc " + acc);
-                }
-                swings = 0;
-                attacks = 0;
+                    buffer += (acc * 0.1F);
+                    if (buffer > 2)
+                        fail("acc " + acc);
+                } else if (buffer > 0) buffer -= 0.2D;
             }
-        }
-        if (e instanceof RotationEvent) {
+            swings = 0;
+            attacks = 0;
+        } else if (e instanceof RotationEvent) {
+
+
             RotationEvent rot = (RotationEvent) e;
             aimSpeed = ((aimSpeed * 4) + rot.getDeltaYaw()) / 5;
             lastAim = System.currentTimeMillis();

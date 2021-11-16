@@ -10,10 +10,14 @@ import com.comphenix.protocol.wrappers.EnumWrappers;
 import lombok.Getter;
 import lombok.Setter;
 import net.citizensnpcs.api.npc.NPC;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.util.Vector;
 
 @Getter
 @Setter
@@ -89,11 +93,27 @@ public class InteractData {
         this.ticksSinceDigging = 0;
     }
 
+    public void handleArmAnimation() {
+        Location loc = player.getEyeLocation();
+
+        Vector v = loc.getDirection().normalize();
+
+        for(int i = 1 ; i <= 4.25 ; i++) {
+            loc.add(v);
+            if(loc.getBlock().getType() != Material.AIR)
+                break;
+        }
+        Block targetedBlock = loc.getBlock();
+        if(!targetedBlock.isEmpty()) {
+            this.ticksSinceDigging = 0;
+        }
+    }
+
     public void handleFlying() {
         this.ticksSinceHurt++;
         this.ticksSinceSlime++;
         this.ticksSinceTeleport++;
-        this.isDigging = ticksSinceDigging < 15;
+        this.isDigging = ticksSinceDigging < 35;
         this.ticksSinceDigging++;
         this.ticksSinceBow++;
         if (ticksSinceJoin < 1000)

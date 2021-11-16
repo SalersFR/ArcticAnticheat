@@ -75,6 +75,7 @@ public class CheckManager {
                 new MotionD(data),
                 new MotionE(data),
                 new MotionF(data),
+                new MotionG(data),
 
                 // COMBAT
                 new AimA(data),

@@ -6,6 +6,7 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
 import arctic.ac.utils.PlayerUtils;
 import arctic.ac.utils.WorldUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -13,14 +14,12 @@ import org.bukkit.potion.PotionEffectType;
 
 public class MotionF extends Check {
 
-    private double motionY;
-    private boolean lastGround;
-    private int airTicks;
+    private double lastDeltaXZ;
+    private int ticksSinceJump;
 
     public MotionF(PlayerData data) {
         super(data, "Motion", "F", "movement.motion.f", "Checks if player is following some mc rules.", true);
     }
-
 
     @Override
     public void handle(Event e) {
@@ -29,23 +28,20 @@ public class MotionF extends Check {
             final MoveEvent event = (MoveEvent) e;
             final WorldUtils worldUtils = new WorldUtils();
 
-            if (this.motionY < 0.005)
-                motionY = 0.0D;
-
-            final boolean ground = event.isGround();
-            final boolean lastGround = this.lastGround;
-
-            this.lastGround = ground;
-
             final Player player = data.getPlayer();
-            final World world = player.getWorld();
 
-            final Location bukkitTo = event.getTo().toVector().toLocation(world);
-            final Location bukkitFrom = event.getFrom().toVector().toLocation(world);
+            final Location bukkitTo = event.getTo().toVector().toLocation(player.getWorld());
+            final Location bukkitFrom = event.getFrom().toVector().toLocation(player.getWorld());
 
-            if(ground)
-                airTicks = 0;
-            else airTicks++;
+            final double deltaXZ = event.getDeltaXZ();
+            final double lastDeltaXZ = this.lastDeltaXZ;
+
+            final double deltaY = event.getDeltaY();
+            this.lastDeltaXZ = deltaXZ;
+
+            final boolean jumped = worldUtils.isOnGround(bukkitFrom, -0.00001) && !worldUtils.isOnGround(bukkitTo, -0.00001) && deltaY > 0;
+
+            if(jumped) ticksSinceJump = 0;
 
             final boolean exempt = worldUtils.isInLiquid(player)
                     || worldUtils.isInLiquidVertically(player)
@@ -58,31 +54,18 @@ public class MotionF extends Check {
                     || data.getInteractData().isHurt()
                     || data.getInteractData().getTicksSinceHurt() < 20
                     || worldUtils.haveABlockNearHead(player)
-                    || airTicks >= 8
-                    || bukkitTo.add(0,-0.65D,0).getBlock().isEmpty();
+                   ;
 
-            final double deltaY = event.getDeltaY();
+            final double accelXZ = Math.abs(deltaXZ - lastDeltaXZ);
 
-            final boolean jumped = lastGround &&
-                    !ground && deltaY > 0;
+            if(!exempt && ticksSinceJump <= 2 && accelXZ <= 0.000001D) {
+                if(++buffer > 2)
+                    fail("accel=" + accelXZ);
+            } else if(buffer > 0) buffer -= 0.025D;
 
-            if(jumped)
-                jump();
+            this.ticksSinceJump++;
 
-            if(!lastGround && !ground) {
-                motionY -= 0.08F;
-                motionY *= 0.98F;
-            }
 
-            final float diff = (float) Math.abs(motionY - deltaY);
-
-            if(diff > 0.001 && !exempt) {
-                if(buffer < 3) buffer++;
-                if(buffer > 1)
-                    fail("diff=" + diff);
-            } else if(buffer > 0) buffer -= 0.2D;
-
-            debug("diff=" + diff + " mot=" + motionY + "delt=" + deltaY);
 
 
 
@@ -91,14 +74,5 @@ public class MotionF extends Check {
 
         }
     }
-    protected void jump() {
 
-        this.motionY = (double) 0.42F;
-
-        if (data.getPlayer().hasPotionEffect(PotionEffectType.JUMP)) {
-            motionY += (PlayerUtils.getPotionLevel(data.getPlayer(), PotionEffectType.JUMP) * 0.1F);
-        }
-
-
-    }
 }
