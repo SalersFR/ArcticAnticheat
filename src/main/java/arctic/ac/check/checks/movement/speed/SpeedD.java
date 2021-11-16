@@ -68,7 +68,7 @@ public class SpeedD extends Check {
             angle = angle % (Math.PI / 4);
 
             if (angle > 0.05 && angle < (Math.PI / 4 - 0.05)) {
-                //Bukkit.broadcastMessage("angle " + angle);
+                Bukkit.broadcastMessage("angle " + angle);
             }
         }
 

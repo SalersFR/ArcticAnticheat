@@ -23,7 +23,6 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.WrappedDataWatcher;
-import net.minecraft.server.v1_8_R3.PacketPlayOutNamedEntitySpawn;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
@@ -124,9 +123,8 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     }
 
 
-
     public double getX() {
-        return handle.getIntegers().read(1);
+        return handle.getIntegers().read(0);
     }
 
     public void setX(double value) {
@@ -134,7 +132,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     }
 
     public double getY() {
-        return handle.getIntegers().read(2);
+        return handle.getIntegers().read(1);
     }
 
     public void setY(double value) {
@@ -142,7 +140,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     }
 
     public double getZ() {
-        return handle.getIntegers().read(3);
+        return handle.getIntegers().read(2);
     }
 
     public void setZ(double value) {

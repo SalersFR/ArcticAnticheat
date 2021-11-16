@@ -8,6 +8,7 @@ import arctic.ac.event.client.UseEntityEvent;
 import arctic.ac.utils.ALocation;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.util.Vector;
@@ -18,16 +19,13 @@ import java.util.List;
 public class KillAuraI extends Check {
 
     public KillAuraI(PlayerData data) {
-        super(data, "KillAura", "I", "combat.killaura.i", "Checks for failrate", true);
+        super(data, "KillAura", "I", "combat.killaura.i", "Checks for failrate",true);
     }
-
     public boolean sentAttack;
     public long timeDiff;
     public double diff;
     public double dist;
     public double buffer;
-
-    //TODO recode all of this
 
     @Override
     public void handle(Event e) {
@@ -44,10 +42,10 @@ public class KillAuraI extends Check {
                     if (diff < 100 && diff != 0) {
                         buffer++;
                         if (buffer > 2) {
-                            //fail("buffer " + buffer + " diff " + diff + " reach " + dist);
+                            fail("buffer " + buffer + " diff " + diff + " reach " + dist);
                         }
-                    } else if (buffer > 0) buffer -= 0.05;
-                } else if (buffer > 0) buffer -= 0.05;
+                    } else if (buffer > 0) buffer-=0.05;
+                } else if (buffer > 0) buffer-=0.05;
             }
 
             sentAttack = true;
@@ -58,7 +56,7 @@ public class KillAuraI extends Check {
             final EntityPlayer nms = ((CraftPlayer) data.getPlayer()).getHandle();
 
             final List<ALocation> pastVectors = ray(nms.ping);
-            double diff2 = pastVectors.stream().mapToDouble(target -> yawDiff(attacker.toLocation(((CraftPlayer) data.getPlayer()).getWorld()), target.toVector().toLocation(((CraftPlayer) data.getPlayer()).getWorld()))).min().orElse(0);
+            double diff2 = pastVectors.stream().mapToDouble(target -> yawDiff(attacker.toLocation(((CraftPlayer) data.getPlayer()).getWorld()),target.toVector().toLocation(((CraftPlayer) data.getPlayer()).getWorld()))).min().orElse(0);
             this.diff = diff2;
             this.dist = pastVectors.stream().mapToDouble(target -> target.toVector().distance(attacker)).min().orElse(0);
         }
