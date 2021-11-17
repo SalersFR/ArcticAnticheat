@@ -21,6 +21,7 @@ package com.comphenix.packetwrapper;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import net.minecraft.server.v1_8_R3.PacketPlayOutEntityTeleport;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 
@@ -77,7 +78,7 @@ public class WrapperPlayServerEntityTeleport extends AbstractPacket {
     }
 
     public double getX() {
-        return handle.getIntegers().read(0);
+        return handle.getIntegers().read(1);
     }
 
     public void setX(double value) {
@@ -85,7 +86,7 @@ public class WrapperPlayServerEntityTeleport extends AbstractPacket {
     }
 
     public double getY() {
-        return handle.getIntegers().read(1);
+        return handle.getIntegers().read(2);
     }
 
     public void setY(double value) {
@@ -93,7 +94,7 @@ public class WrapperPlayServerEntityTeleport extends AbstractPacket {
     }
 
     public double getZ() {
-        return handle.getIntegers().read(2);
+        return handle.getIntegers().read(3);
     }
 
     public void setZ(double value) {
