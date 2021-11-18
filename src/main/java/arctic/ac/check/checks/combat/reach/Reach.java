@@ -54,6 +54,8 @@ public class Reach extends Check {
 
                 final double reach = collision.hitVec.distanceTo(origin) - 0.11f;
 
+                debug("reach=" + reach);
+
                 if(reach >= 3.05f) {
                     if(++buffer > (data.getNetworkProcessor().getKeepAlivePing() / 35)) {
                         fail("reach=" + reach);
