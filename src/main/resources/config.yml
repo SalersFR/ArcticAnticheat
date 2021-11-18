@@ -270,6 +270,10 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      c:
+        ban-vl: 50
+        enabled: true
+        punish: true
   player:
     badpackets:
       a:

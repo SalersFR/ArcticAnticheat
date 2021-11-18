@@ -8,6 +8,7 @@ import arctic.ac.check.checks.combat.reach.Reach;
 import arctic.ac.check.checks.combat.reach.ReachB;
 import arctic.ac.check.checks.combat.velocity.VelocityA;
 import arctic.ac.check.checks.combat.velocity.VelocityB;
+import arctic.ac.check.checks.combat.velocity.VelocityC;
 import arctic.ac.check.checks.movement.fly.FlyA;
 import arctic.ac.check.checks.movement.fly.FlyB;
 import arctic.ac.check.checks.movement.fly.FlyC;
@@ -119,6 +120,7 @@ public class CheckManager {
 
                 new VelocityA(data),
                 new VelocityB(data),
+                new VelocityC(data),
 
                 new Reach(data),
                 new ReachB(data)
