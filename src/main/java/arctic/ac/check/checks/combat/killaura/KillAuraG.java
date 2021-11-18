@@ -5,7 +5,6 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.UseEntityEvent;
 import arctic.ac.utils.MathUtils;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ public class KillAuraG extends Check {
     private long lastHit = 0;
 
     public KillAuraG(PlayerData data) {
-        super(data, "KillAura", "G", "combat.killaura.g", "Checks for recurring attacks patterns.",true);
+        super(data, "KillAura", "G", "combat.killaura.g", "Checks for recurring attacks patterns.", true);
     }
 
     @Override
@@ -40,7 +39,7 @@ public class KillAuraG extends Check {
                 if (buffer++ > maxBuffer) {
                     fail("samples=" + tickSamples.size() + " recurring=" + similarCount + " patternDetected=" + pattern);
                 }
-            } else if(buffer > 0) buffer -= 0.025D;
+            } else if (buffer > 0) buffer -= 0.025D;
 
             if (tickSamples.size() >= 60) {
                 tickSamples.clear();

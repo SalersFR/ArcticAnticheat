@@ -10,13 +10,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CinematicProcessor {
 
+    //This is the minimum rotation constant
+    private static final double CINEMATIC_CONSTANT = 7.8125E-3;
     private final PlayerData data;
     private double lastDeltaPitch, lastDeltaYaw, lastAccelPitch, lastAccelYaw;
     private int ticksSince;
-
-    //This is the minimum rotation constant
-    private static final double CINEMATIC_CONSTANT = 7.8125E-3;
-
 
     public void process(final RotationEvent event) {
 

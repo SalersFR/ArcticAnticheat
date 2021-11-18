@@ -15,7 +15,7 @@ public class SpeedA extends Check {
     private double lastDeltaXZ, lastFriction, friction;
 
     public SpeedA(PlayerData data) {
-        super(data, "Speed", "A", "movement.speed.a", "Checks if player is following minecraft's movement protocol.",true);
+        super(data, "Speed", "A", "movement.speed.a", "Checks if player is following minecraft's movement protocol.", true);
     }
 
     @Override

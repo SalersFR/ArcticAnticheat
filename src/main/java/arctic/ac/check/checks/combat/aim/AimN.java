@@ -14,7 +14,7 @@ public class AimN extends Check {
     private double lastSkewness, lastDev, lastKurtosis;
 
     public AimN(PlayerData data) {
-        super(data, "Aim", "N", "combat.aim.n", "Checks rotation legitimacy using kurtosis, deviation, and skewness.",true);
+        super(data, "Aim", "N", "combat.aim.n", "Checks rotation legitimacy using kurtosis, deviation, and skewness.", true);
     }
 
     @Override
@@ -72,7 +72,6 @@ public class AimN extends Check {
             } catch (IndexOutOfBoundsException ex) {
 
             }
-
 
 
         }

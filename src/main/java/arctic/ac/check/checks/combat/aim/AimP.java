@@ -26,7 +26,7 @@ public class AimP extends Check {
             final float gcd = (float) MathUtils.getGcd(Math.abs(deltaPitch), Math.abs(lastDeltaPitch));
 
             if (gcd == 0 && (event.getDeltaYaw() > 1.1 ||
-                    event.getDeltaPitch() > 1.1)  && (event.getDeltaPitch() < 15 && event.getDeltaYaw() < 15)
+                    event.getDeltaPitch() > 1.1) && (event.getDeltaPitch() < 15 && event.getDeltaYaw() < 15)
                     && data.getCinematicProcessor().getTicksSince() > 0) {
                 if (++buffer > 10) {
                     fail("GCD=" + gcd + ", dYaw=" + event.getDeltaYaw() + ", dPitch=" + deltaPitch);

@@ -10,10 +10,9 @@ import arctic.ac.utils.MathUtils;
 
 public class AutoclickerG extends Check {
 
-    private int ticks;
-
     private final ArcticQueue<Integer> samples = new ArcticQueue(20);
     private final ArcticQueue<Double> pastKurtosis = new ArcticQueue(3);
+    private int ticks;
 
     public AutoclickerG(PlayerData data) {
         super(data, "Autoclicker", "G", "combat.autoclicker.g", "Checks for impossibles clicking samples.", true);
@@ -35,10 +34,10 @@ public class AutoclickerG extends Check {
                     final double kurtosisVariance = MathUtils.getVariance(pastKurtosis);
                     debug("sames=" + sames + " kurtosisVariance=" + kurtosisVariance);
 
-                    if((kurtosisVariance < 1.0E-7 || Double.isNaN(kurtosisVariance) || kurtosisVariance < 1.25D) && sames > 18) {
-                        if(++buffer > 1)
+                    if ((kurtosisVariance < 1.0E-7 || Double.isNaN(kurtosisVariance) || kurtosisVariance < 1.25D) && sames > 18) {
+                        if (++buffer > 1)
                             fail("sames=" + sames + " kurtosisVariance=" + kurtosisVariance);
-                    } else if(buffer > 0) buffer -= 0.5D;
+                    } else if (buffer > 0) buffer -= 0.5D;
                 }
 
 

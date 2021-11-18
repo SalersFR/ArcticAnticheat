@@ -4,14 +4,12 @@ import arctic.ac.Arctic;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.utils.CustomUtils;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class AutoclickerGUI {

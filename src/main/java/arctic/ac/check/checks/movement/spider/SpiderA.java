@@ -5,9 +5,7 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
 import arctic.ac.utils.MathUtils;
-import arctic.ac.utils.PlayerUtils;
 import arctic.ac.utils.WorldUtils;
-import org.bukkit.World;
 
 public class SpiderA extends Check {
 

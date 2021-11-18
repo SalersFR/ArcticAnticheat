@@ -24,7 +24,7 @@ public class MotionE extends Check {
             this.lastDeltaXZ = deltaXZ;
             this.deltaXZ = event.getDeltaXZ();
 
-        } else if(e instanceof RotationEvent) {
+        } else if (e instanceof RotationEvent) {
             final WorldUtils worldUtils = new WorldUtils();
             final RotationEvent event = (RotationEvent) e;
 
@@ -33,15 +33,15 @@ public class MotionE extends Check {
 
             final double scaledAccel = accelXZ * 100;
 
-            debug("deltaYaw=" + deltaYaw + " accelXZ=" + accelXZ + " current=" + deltaXZ  + " last=" + lastDeltaXZ);
+            debug("deltaYaw=" + deltaYaw + " accelXZ=" + accelXZ + " current=" + deltaXZ + " last=" + lastDeltaXZ);
 
-            if(deltaYaw > 1.6F
+            if (deltaYaw > 1.6F
                     && deltaXZ > 0.15D
                     && scaledAccel < 0.00001
                     && !worldUtils.isCollidingWithClimbable(data.getPlayer())) {
-                if(++buffer > 3)
+                if (++buffer > 3)
                     fail("a=" + scaledAccel);
-            } else if(buffer > 0) buffer -= 0.025D;
+            } else if (buffer > 0) buffer -= 0.025D;
 
         }
     }

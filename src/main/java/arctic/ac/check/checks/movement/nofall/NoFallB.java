@@ -13,7 +13,7 @@ public class NoFallB extends Check {
 
 
     public NoFallB(PlayerData data) {
-        super(data, "NoFall", "B", "movement.nofall.b", "Checks if player is spoofing ground state.",false);
+        super(data, "NoFall", "B", "movement.nofall.b", "Checks if player is spoofing ground state.", false);
     }
 
     @Override
@@ -43,16 +43,15 @@ public class NoFallB extends Check {
                     || player.getVehicle() != null;
 
 
-            if(client && (!math || !coll) && !exempt) {
-                if(++buffer > 4)
+            if (client && (!math || !coll) && !exempt) {
+                if (++buffer > 4)
                     fail("spoofing flying ground\ncoll=" + coll + "\nmath=" + math);
-            } else if(buffer > 0) buffer -= 0.25D;
+            } else if (buffer > 0) buffer -= 0.25D;
 
-            if(math && !coll && !exempt) {
-                if(++buffer > 4)
+            if (math && !coll && !exempt) {
+                if (++buffer > 4)
                     fail("spoofing math ground\nflying=" + client);
-            } else if(buffer > 0) buffer -= 0.5D;
-
+            } else if (buffer > 0) buffer -= 0.5D;
 
 
         }

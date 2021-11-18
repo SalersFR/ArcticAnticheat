@@ -10,16 +10,15 @@ import com.comphenix.protocol.wrappers.EnumWrappers;
 
 public class KillAuraJ extends Check {
 
-    public KillAuraJ(PlayerData data) {
-        super(data, "KillAura", "J", "combat.killaura.j", "Checks for extremely high aim with high attack accuracion", true);
-    }
-
     public int swings;
     public int hits;
     public long lastHit;
     public long lastAim;
     public double aimSpeed;
     public double aimPitch;
+    public KillAuraJ(PlayerData data) {
+        super(data, "KillAura", "J", "combat.killaura.j", "Checks for extremely high aim with high attack accuracion", true);
+    }
 
     @Override
     public void handle(Event e) {
@@ -34,7 +33,7 @@ public class KillAuraJ extends Check {
                     buffer += (acc * 0.1F);
                     if (buffer > 2)
                         fail("acc " + acc);
-                } else if(buffer > 0) buffer -= 0.2D;
+                } else if (buffer > 0) buffer -= 0.2D;
             }
         }
         if (e instanceof UseEntityEvent) {

@@ -26,8 +26,8 @@ public class InteractData {
 
     private NPC entityANPC;
     private int ticksSinceHurt, ticksSinceSlime, ticksSinceTeleport, ticksSinceJoin, ticksSinceDigging, ticksSinceBow, ticksAlive;
-    private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported, cinematic,hasHitSlowDown;
-    private long lastHitPacket, lastTeleport,attackSlowDownTime = 0;
+    private boolean isDigging, isPlacing, isSprinting, isSneaking, isHurt, teleported, cinematic, hasHitSlowDown;
+    private long lastHitPacket, lastTeleport, attackSlowDownTime = 0;
 
     private Player player;
 
@@ -98,13 +98,13 @@ public class InteractData {
 
         Vector v = loc.getDirection().normalize();
 
-        for(int i = 1 ; i <= 4.25 ; i++) {
+        for (int i = 1; i <= 4.25; i++) {
             loc.add(v);
-            if(loc.getBlock().getType() != Material.AIR)
+            if (loc.getBlock().getType() != Material.AIR)
                 break;
         }
         Block targetedBlock = loc.getBlock();
-        if(!targetedBlock.isEmpty()) {
+        if (!targetedBlock.isEmpty()) {
             this.ticksSinceDigging = 0;
         }
     }

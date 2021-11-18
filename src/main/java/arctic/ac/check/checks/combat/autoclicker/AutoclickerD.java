@@ -18,7 +18,7 @@ public class AutoclickerD extends Check {
     private ArcticQueue<Integer> samples = new ArcticQueue(30);
 
     public AutoclickerD(final PlayerData data) {
-        super(data, "Autoclicker", "D", "combat.autoclicker.d", "Checks for consistency.",false);
+        super(data, "Autoclicker", "D", "combat.autoclicker.d", "Checks for consistency.", false);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class AutoclickerD extends Check {
 
                 if ((deviation < 1.525D || total <= 3) && sames > 28) {
                     if (++buffer > 3)
-                        fail( " outliers=" + outliers + " deviation=" + deviation + " sames=" + sames);
+                        fail(" outliers=" + outliers + " deviation=" + deviation + " sames=" + sames);
                 } else if (buffer > 0) buffer -= 0.25D;
             }
 

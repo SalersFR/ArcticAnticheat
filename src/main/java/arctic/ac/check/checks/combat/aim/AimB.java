@@ -11,7 +11,7 @@ public class AimB extends Check {
     private float lastDeltaPitch;
 
     public AimB(PlayerData data) {
-        super(data, "Aim", "B", "combat.aim.b","Checks for invalid GCD.", true);
+        super(data, "Aim", "B", "combat.aim.b", "Checks for invalid GCD.", true);
     }
 
     @Override

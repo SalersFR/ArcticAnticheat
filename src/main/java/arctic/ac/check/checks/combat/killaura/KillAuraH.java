@@ -13,14 +13,13 @@ import org.bukkit.util.Vector;
 
 public class KillAuraH extends Check {
 
-    public KillAuraH(PlayerData data) {
-        super(data, "KillAura", "H", "combat.killaura.h", "Checks for killaura accuration", true);
-    }
-
+    public long lastAim;
     private double aimSpeed;
     private double attacks;
     private double swings;
-    public long lastAim;
+    public KillAuraH(PlayerData data) {
+        super(data, "KillAura", "H", "combat.killaura.h", "Checks for killaura accuration", true);
+    }
 
     @Override
     public void handle(Event e) {

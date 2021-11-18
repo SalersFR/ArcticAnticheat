@@ -63,15 +63,15 @@ public class FlyA extends Check {
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
-                    || worldUtils.isOnACertainBlock(player,"stairs")
-                    || worldUtils.isOnACertainBlock(player,"ice")
+                    || worldUtils.isOnACertainBlock(player, "stairs")
+                    || worldUtils.isOnACertainBlock(player, "ice")
                     || data.getInteractData().isHurt()
                     || worldUtils.haveABlockNearHead(player);
 
             if (airTicks > 1 && Math.abs(fixedPrediction - deltaY) > 0.001D && event.getDeltaXZ() > 0.001D && !exempt && ticksPlace > 7) {
                 if (++buffer > 1)
                     fail("diff=" + Math.abs(fixedPrediction - deltaY));
-            } else if(buffer > 0) buffer -= 0.2D;
+            } else if (buffer > 0) buffer -= 0.2D;
 
             debug("diff=" + Math.abs(fixedPrediction - deltaY));
 

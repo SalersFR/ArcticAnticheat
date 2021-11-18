@@ -16,11 +16,36 @@ import java.util.List;
 
 public class FlyB extends Check {
 
-    private int airTicks;
     public int clientAirTicks;
+    private int airTicks;
 
     public FlyB(PlayerData data) {
         super(data, "Fly", "B", "movement.fly.b", "Checks if player is not taking care about gravity.", true);
+    }
+
+    public static List<Block> blocksFromTwoPoints(Location loc1, Location loc2) {
+        List<Block> blocks = new ArrayList<Block>();
+
+        int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+        int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+
+        int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+        int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+
+        int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+        int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+
+        for (int x = bottomBlockX; x <= topBlockX; x++) {
+            for (int z = bottomBlockZ; z <= topBlockZ; z++) {
+                for (int y = bottomBlockY; y <= topBlockY; y++) {
+                    Block block = loc1.getWorld().getBlockAt(x, y, z);
+
+                    blocks.add(block);
+                }
+            }
+        }
+
+        return blocks;
     }
 
     @Override
@@ -86,41 +111,13 @@ public class FlyB extends Check {
     }
 
     public boolean isNearBlocks(Location location) {
-        Location min = location.toVector().add(new Vector(0.8,-5,0.8)).toLocation(location.getWorld());
-        Location max = location.toVector().subtract(new Vector(0.8,0,0.8)).toLocation(location.getWorld());
-        for (Block block : blocksFromTwoPoints(min,max)) {
+        Location min = location.toVector().add(new Vector(0.8, -5, 0.8)).toLocation(location.getWorld());
+        Location max = location.toVector().subtract(new Vector(0.8, 0, 0.8)).toLocation(location.getWorld());
+        for (Block block : blocksFromTwoPoints(min, max)) {
             if (block.getType() != Material.AIR) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static List<Block> blocksFromTwoPoints(Location loc1, Location loc2) {
-        List<Block> blocks = new ArrayList<Block>();
-
-        int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
-        int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
-
-        int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
-        int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
-
-        int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
-        int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
-
-        for(int x = bottomBlockX; x <= topBlockX; x++)
-        {
-            for(int z = bottomBlockZ; z <= topBlockZ; z++)
-            {
-                for(int y = bottomBlockY; y <= topBlockY; y++)
-                {
-                    Block block = loc1.getWorld().getBlockAt(x, y, z);
-
-                    blocks.add(block);
-                }
-            }
-        }
-
-        return blocks;
     }
 }

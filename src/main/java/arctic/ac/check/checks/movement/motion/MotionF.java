@@ -4,13 +4,9 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
-import arctic.ac.utils.PlayerUtils;
 import arctic.ac.utils.WorldUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffectType;
 
 public class MotionF extends Check {
 
@@ -41,7 +37,7 @@ public class MotionF extends Check {
 
             final boolean jumped = worldUtils.isOnGround(bukkitFrom, -0.00001) && !worldUtils.isOnGround(bukkitTo, -0.00001) && deltaY > 0;
 
-            if(jumped) ticksSinceJump = 0;
+            if (jumped) ticksSinceJump = 0;
 
             final boolean exempt = worldUtils.isInLiquid(player)
                     || worldUtils.isInLiquidVertically(player)
@@ -49,27 +45,20 @@ public class MotionF extends Check {
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
-                    || worldUtils.isOnACertainBlock(player,"stairs")
-                    || worldUtils.isOnACertainBlock(player,"ice")
+                    || worldUtils.isOnACertainBlock(player, "stairs")
+                    || worldUtils.isOnACertainBlock(player, "ice")
                     || data.getInteractData().isHurt()
                     || data.getInteractData().getTicksSinceHurt() < 20
-                    || worldUtils.haveABlockNearHead(player)
-                   ;
+                    || worldUtils.haveABlockNearHead(player);
 
             final double accelXZ = Math.abs(deltaXZ - lastDeltaXZ);
 
-            if(!exempt && ticksSinceJump <= 2 && accelXZ <= 0.000001D && deltaXZ > 0.2D) {
-                if(++buffer > 2)
+            if (!exempt && ticksSinceJump <= 2 && accelXZ <= 0.000001D && deltaXZ > 0.2D) {
+                if (++buffer > 2)
                     fail("accel=" + accelXZ);
-            } else if(buffer > 0) buffer -= 0.025D;
+            } else if (buffer > 0) buffer -= 0.025D;
 
             this.ticksSinceJump++;
-
-
-
-
-
-
 
 
         }

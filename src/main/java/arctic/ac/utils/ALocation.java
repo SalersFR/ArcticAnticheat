@@ -49,7 +49,7 @@ public class ALocation {
     }
 
     public boolean isCollOnGround(final World world) {
-        return new WorldUtils().isCloseToGround(new Location(world,x,y,z));
+        return new WorldUtils().isCloseToGround(new Location(world, x, y, z));
     }
 
 

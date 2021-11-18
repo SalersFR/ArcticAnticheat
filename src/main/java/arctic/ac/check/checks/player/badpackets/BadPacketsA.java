@@ -13,7 +13,7 @@ public class BadPacketsA extends Check {
     private boolean sentSneak, sentSprint;
 
     public BadPacketsA(PlayerData data) {
-        super(data, "BadPackets", "A", "player.badpackets.a", "Checks for invalid sprint/sneak packets.",false);
+        super(data, "BadPackets", "A", "player.badpackets.a", "Checks for invalid sprint/sneak packets.", false);
 
     }
 

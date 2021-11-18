@@ -10,7 +10,7 @@ public class AimD extends Check {
     private float lastDeltaPitch, lastDeltaYaw;
 
     public AimD(PlayerData data) {
-        super(data, "Aim", "D", "combat.aim.d","Checks for repetitive rotations.", true);
+        super(data, "Aim", "D", "combat.aim.d", "Checks for repetitive rotations.", true);
     }
 
     @Override

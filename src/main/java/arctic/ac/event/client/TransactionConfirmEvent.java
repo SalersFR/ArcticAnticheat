@@ -14,5 +14,5 @@ public class TransactionConfirmEvent extends Event {
         this.wrapper = wrapper;
     }
 
-    
+
 }

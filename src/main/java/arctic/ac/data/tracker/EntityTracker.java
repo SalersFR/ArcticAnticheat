@@ -11,8 +11,8 @@ import java.util.HashMap;
 
 public class EntityTracker {
 
-    private PlayerData player;
     public HashMap<Integer, ReachEntity> getEntityFromId = new HashMap<>();
+    private PlayerData player;
 
     public EntityTracker(PlayerData p) {
         this.player = p;

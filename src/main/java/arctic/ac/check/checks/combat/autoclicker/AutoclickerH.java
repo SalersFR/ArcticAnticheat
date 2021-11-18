@@ -34,10 +34,10 @@ public class AutoclickerH extends Check {
 
                 debug("outliers=" + outliers + " variance=" + variance);
 
-                if(variance == outliers || variance < 2.25D && outliers <= 2) {
-                    if(++buffer > 3)
+                if (variance == outliers || variance < 2.25D && outliers <= 2) {
+                    if (++buffer > 3)
                         fail("variance=" + variance + "outliers=" + outliers);
-                } else if(buffer > 0) buffer -= 0.12D;
+                } else if (buffer > 0) buffer -= 0.12D;
 
 
             }

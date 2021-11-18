@@ -7,13 +7,12 @@ import arctic.ac.event.client.RotationEvent;
 
 public class AimS extends Check {
 
-    public AimS(PlayerData data) {
-        super(data, "Aim", "S", "combat.aim.s", "Checks for special rotations.", true);
-    }
-
     //Checks for not smoothed aimBots such as LiquidBounce.
     long lastRotated;
     double buffer;
+    public AimS(PlayerData data) {
+        super(data, "Aim", "S", "combat.aim.s", "Checks for special rotations.", true);
+    }
 
     @Override
     public void handle(Event e) {

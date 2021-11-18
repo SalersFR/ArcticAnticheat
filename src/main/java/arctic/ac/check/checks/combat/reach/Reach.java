@@ -56,11 +56,11 @@ public class Reach extends Check {
 
                 debug("reach=" + reach);
 
-                if(reach >= 3.05f) {
-                    if(++buffer > (data.getNetworkProcessor().getKeepAlivePing() / 35)) {
+                if (reach >= 3.05f) {
+                    if (++buffer > (data.getNetworkProcessor().getKeepAlivePing() / 35)) {
                         fail("reach=" + reach);
                     }
-                } else if(buffer > 0) buffer -= 0.025D;
+                } else if (buffer > 0) buffer -= 0.025D;
 
 
             }

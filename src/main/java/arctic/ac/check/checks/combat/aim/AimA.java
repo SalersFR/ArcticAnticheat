@@ -26,14 +26,14 @@ public class AimA extends Check {
             float lastDeltaPitch = this.lastDeltaPitch;
             this.lastDeltaPitch = deltaPitch;
 
-            final float sensitivity = (float) MathUtils.getSensitivity(deltaPitch,lastDeltaPitch);
+            final float sensitivity = (float) MathUtils.getSensitivity(deltaPitch, lastDeltaPitch);
 
-          
-            if(sensitivity != -66.66 && sensitivity <= -1 && deltaYaw > 4.25D && data.getCinematicProcessor().getTicksSince() > 0 && data.getCinematicProcessor().getLastAccelYaw() < 1.5 ) {
+
+            if (sensitivity != -66.66 && sensitivity <= -1 && deltaYaw > 4.25D && data.getCinematicProcessor().getTicksSince() > 0 && data.getCinematicProcessor().getLastAccelYaw() < 1.5) {
                 debug("sensitivity=" + sensitivity);
-                if(++buffer > 8)
+                if (++buffer > 8)
                     fail("sensitivity=" + sensitivity);
-            } else if(buffer > 0) buffer -= 0.75D;
+            } else if (buffer > 0) buffer -= 0.75D;
 
 
         }

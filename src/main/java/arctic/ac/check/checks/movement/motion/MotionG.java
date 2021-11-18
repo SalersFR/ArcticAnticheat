@@ -18,7 +18,7 @@ public class MotionG extends Check {
 
     @Override
     public void handle(Event e) {
-        if(e instanceof MoveEvent) {
+        if (e instanceof MoveEvent) {
             final MoveEvent event = (MoveEvent) e;
 
             final double deltaY = event.getDeltaY();
@@ -32,7 +32,7 @@ public class MotionG extends Check {
             final WorldUtils worldUtils = new WorldUtils();
 
 
-            if(event.isGround())
+            if (event.isGround())
                 this.airTicks = 0;
             else this.airTicks++;
 
@@ -42,17 +42,17 @@ public class MotionG extends Check {
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
-                    || worldUtils.isOnACertainBlock(player,"stairs")
-                    || worldUtils.isOnACertainBlock(player,"ice")
+                    || worldUtils.isOnACertainBlock(player, "stairs")
+                    || worldUtils.isOnACertainBlock(player, "ice")
                     || data.getInteractData().isHurt()
                     || worldUtils.haveABlockNearHead(player)
                     || worldUtils.isCloseToGround(player.getLocation());
 
 
-            if(accelY < 1.0E-5D && !exempt && airTicks > 6) {
-                if(++buffer > 2)
+            if (accelY < 1.0E-5D && !exempt && airTicks > 6) {
+                if (++buffer > 2)
                     fail("accel=" + accelY);
-            } else if(buffer > 0) buffer -= 0.025D;
+            } else if (buffer > 0) buffer -= 0.025D;
         }
 
     }

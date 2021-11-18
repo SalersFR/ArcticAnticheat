@@ -1,8 +1,5 @@
 package arctic.ac.commands.completion;
 
-import arctic.ac.Arctic;
-import arctic.ac.gui.SettingsGUI;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;

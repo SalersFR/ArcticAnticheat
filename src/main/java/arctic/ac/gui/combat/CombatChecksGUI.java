@@ -1,17 +1,12 @@
 package arctic.ac.gui.combat;
 
-import arctic.ac.Arctic;
 import arctic.ac.utils.CustomUtils;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CombatChecksGUI {
 
@@ -49,11 +44,11 @@ public class CombatChecksGUI {
         reach.setItemMeta(reachMeta);
         velocity.setItemMeta(velocityMeta);
 
-        this.inventory.setItem(10,aim);
-        this.inventory.setItem(11,autoclicker);
-        this.inventory.setItem(13,killaura);
-        this.inventory.setItem(15,reach);
-        this.inventory.setItem(16,velocity);
+        this.inventory.setItem(10, aim);
+        this.inventory.setItem(11, autoclicker);
+        this.inventory.setItem(13, killaura);
+        this.inventory.setItem(15, reach);
+        this.inventory.setItem(16, velocity);
 
     }
 

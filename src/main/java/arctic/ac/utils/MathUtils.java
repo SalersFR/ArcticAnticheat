@@ -28,7 +28,6 @@ public class MathUtils {
     }
 
 
-
     public boolean isScientificNotation(final Number num) {
         return num.doubleValue() < .001D;
     }

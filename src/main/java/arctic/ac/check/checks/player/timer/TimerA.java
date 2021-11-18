@@ -23,14 +23,14 @@ public class TimerA extends Check {
             if (data.getInteractData().getLastHitPacket() != 0) {
                 if (getMillis(data.getInteractData().getLastHitPacket()) < 110L) return;
             }
-            if(data.getInteractData().getTicksAlive() < 30) return;
+            if (data.getInteractData().getTicksAlive() < 30) return;
             long systemTime = System.currentTimeMillis();
             long lastTimeRate = this.lastTickTime != 0 ? this.lastTickTime : systemTime - 50;
             this.lastTickTime = systemTime;
             balance += 50.0;
             balance -= (systemTime - lastTimeRate);
 
-            if(balance < -100) balance = 0.0D;
+            if (balance < -100) balance = 0.0D;
 
 
             if (balance >= 30.0) {
@@ -50,7 +50,7 @@ public class TimerA extends Check {
         }
     }
 
-    private long getMillis(long val){
+    private long getMillis(long val) {
         return System.currentTimeMillis() - val;
     }
 }

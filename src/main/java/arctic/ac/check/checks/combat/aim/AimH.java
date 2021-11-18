@@ -5,7 +5,6 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.RotationEvent;
 import arctic.ac.utils.MathUtils;
-import org.bukkit.Bukkit;
 
 public class AimH extends Check {
 
@@ -34,7 +33,6 @@ public class AimH extends Check {
             debug("gcdDiff=" + diffGCD + " buffer=" + buffer);
 
 
-
             final float pitch = ((RotationEvent) event).getTo().getPitch();
 
             final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || deltaYaw < 3.5D;
@@ -44,11 +42,11 @@ public class AimH extends Check {
             lastDeltaPitch = deltaPitch;
             lastGCD = gcd;
 
-            if(!exempt && !exemptCombat) {
-                if(Double.toString(diffGCD).contains("E")) {
-                    if(++buffer > 8)
+            if (!exempt && !exemptCombat) {
+                if (Double.toString(diffGCD).contains("E")) {
+                    if (++buffer > 8)
                         fail("gcdDiff=" + diffGCD);
-                } else if(buffer > 0) buffer -= 0.25D;
+                } else if (buffer > 0) buffer -= 0.25D;
             }
         }
     }

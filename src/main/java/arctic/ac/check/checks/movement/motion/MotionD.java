@@ -16,7 +16,7 @@ public class MotionD extends Check {
 
 
     public MotionD(PlayerData data) {
-        super(data, "Motion", "D", "movement.motion.d", "Checks for fast falls modules.",false);
+        super(data, "Motion", "D", "movement.motion.d", "Checks for fast falls modules.", false);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MotionD extends Check {
             final boolean jumped = worldUtils.isOnGround(bukkitFrom, -0.00001) &&
                     !worldUtils.isOnGround(bukkitTo, -0.00001) && deltaY > 0;
 
-            if(event.isGround())
+            if (event.isGround())
                 this.airTicks = 0;
 
             if (jumped)
@@ -48,17 +48,17 @@ public class MotionD extends Check {
 
             if (airTicks >= ticksSinceJumped && ticksSinceJumped <= 10 && deltaY < -0.38 && !exempt) {
                 if (++buffer > 2)
-                    fail("fast fall jump\ndDY:" + deltaY + "\ntSJ:"+ticksSinceJumped);
+                    fail("fast fall jump\ndDY:" + deltaY + "\ntSJ:" + ticksSinceJumped);
 
             } else if (buffer > 0) buffer -= 0.01D;
 
-            if (airTicks > 22 && deltaY < -3.79D && !exempt ) {
+            if (airTicks > 22 && deltaY < -3.79D && !exempt) {
                 if (++buffer > 2)
                     fail("fast fall \ndDY:" + deltaY);
 
             } else if (buffer > 0) buffer -= 0.01D;
 
-            if(deltaY < -4.3275 && !exempt && airTicks > 0) {
+            if (deltaY < -4.3275 && !exempt && airTicks > 0) {
                 if (++buffer > 2)
                     fail("very fast fall \ndDY:" + deltaY);
             }

@@ -42,7 +42,7 @@ public class VelocityC extends Check {
                     if (buffer > 3.5) {
                         fail("velocity&f: " + ratio + "%" + " &9buffer&f: " + buffer);
                     }
-                } else buffer-=0.5;
+                } else buffer -= 0.5;
             }
         }
     }

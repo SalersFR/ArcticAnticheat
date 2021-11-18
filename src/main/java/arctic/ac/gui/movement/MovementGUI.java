@@ -1,6 +1,5 @@
 package arctic.ac.gui.movement;
 
-import arctic.ac.gui.combat.CombatChecksGUI;
 import arctic.ac.utils.CustomUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -45,11 +44,11 @@ public class MovementGUI {
         speed.setItemMeta(speedMeta);
         step.setItemMeta(stepMeta);
 
-        this.inventory.setItem(10,fly);
-        this.inventory.setItem(11,motion);
-        this.inventory.setItem(13,nofall);
-        this.inventory.setItem(15,speed);
-        this.inventory.setItem(16,step);
+        this.inventory.setItem(10, fly);
+        this.inventory.setItem(11, motion);
+        this.inventory.setItem(13, nofall);
+        this.inventory.setItem(15, speed);
+        this.inventory.setItem(16, step);
     }
 
     public void display(Player player) {

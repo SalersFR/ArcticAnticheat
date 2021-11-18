@@ -17,15 +17,22 @@ import java.util.List;
 
 public class KillAuraI extends Check {
 
-    public KillAuraI(PlayerData data) {
-        super(data, "KillAura", "I", "combat.killaura.i", "Checks for failrate", true);
-    }
-
     public boolean sentAttack;
     public long timeDiff;
     public double diff;
     public double dist;
     public double buffer;
+    public KillAuraI(PlayerData data) {
+        super(data, "KillAura", "I", "combat.killaura.i", "Checks for failrate", true);
+    }
+
+    public static double yawDiff(Location player, Location target) {
+        Location clonedFrom = player.clone();
+        Vector startVector = clonedFrom.toVector();
+        Vector targetVector = target.toVector();
+        clonedFrom.setDirection(targetVector.subtract(startVector));
+        return clonedFrom.getYaw();
+    }
 
     @Override
     public void handle(Event e) {
@@ -60,14 +67,6 @@ public class KillAuraI extends Check {
             this.diff = diff2;
             this.dist = pastVectors.stream().mapToDouble(target -> target.toVector().distance(attacker)).min().orElse(0);
         }
-    }
-
-    public static double yawDiff(Location player, Location target) {
-        Location clonedFrom = player.clone();
-        Vector startVector = clonedFrom.toVector();
-        Vector targetVector = target.toVector();
-        clonedFrom.setDirection(targetVector.subtract(startVector));
-        return clonedFrom.getYaw();
     }
 
     private List<ALocation> ray(final int ping) {

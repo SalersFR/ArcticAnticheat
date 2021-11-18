@@ -11,7 +11,7 @@ public class BadPacketsD extends Check {
 
 
     public BadPacketsD(PlayerData data) {
-        super(data, "BadPackets", "D", "player.badpackets.d", "Checks if player is sending action packets while sending winow click packet.",false);
+        super(data, "BadPackets", "D", "player.badpackets.d", "Checks if player is sending action packets while sending winow click packet.", false);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class BadPacketsD extends Check {
                 if (data.getInteractionData().isSprinting() || data.getInteractionData().isSneaking()) {
                     if (++buffer > 1)
                         fail();
-                } else if(buffer > 0) buffer /= 2;
+                } else if (buffer > 0) buffer /= 2;
             }
         }
     }

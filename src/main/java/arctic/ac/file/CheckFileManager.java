@@ -16,7 +16,7 @@ public class CheckFileManager {
     private FileConfiguration config = null;
     private File configFile = null;
 
-    public CheckFileManager(Arctic instance){
+    public CheckFileManager(Arctic instance) {
         this.instance = instance;
         saveDefaultConfig();
     }

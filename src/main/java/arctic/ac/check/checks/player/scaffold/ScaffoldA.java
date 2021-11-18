@@ -6,7 +6,7 @@ import arctic.ac.event.Event;
 
 public class ScaffoldA extends Check {
     public ScaffoldA(PlayerData data) {
-        super(data, "Scaffold", "A", "player.scaffold.a", "greedy pig.",true);
+        super(data, "Scaffold", "A", "player.scaffold.a", "greedy pig.", true);
     }
 
     @Override

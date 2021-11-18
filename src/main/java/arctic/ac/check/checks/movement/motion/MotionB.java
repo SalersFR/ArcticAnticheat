@@ -16,7 +16,7 @@ public class MotionB extends Check {
     private int ticksSinceIce, ticksSinceNearHead;
 
     public MotionB(PlayerData data) {
-        super(data, "Motion", "B", "movement.motion.b",  "Checks for too low jumps.",false);
+        super(data, "Motion", "B", "movement.motion.b", "Checks for too low jumps.", false);
     }
 
     @Override
@@ -52,9 +52,9 @@ public class MotionB extends Check {
                     || ticksSinceIce < 15 || ticksSinceNearHead < 15 || data.getInteractionData().getTicksSinceSlime() < 60;
 
             debug("jumped=" + jumped + " deltaY=" + deltaY + " predicted=" + predicted);
-                                                                                                    // LITERALLY SO LAZY, FIXES
-                                                                                                    // FALSE WITH TRAPDOORS &
-                                                                                                    // JUMPING, CHANGE TODO
+            // LITERALLY SO LAZY, FIXES
+            // FALSE WITH TRAPDOORS &
+            // JUMPING, CHANGE TODO
             if (jumped && deltaY < fixedPredicted && bukkitFrom.getY() % 1 == 0 && !exempt && deltaY != 0.01250003768371582) {
                 fail("d=" + deltaY + " p=" + fixedPredicted);
             }
