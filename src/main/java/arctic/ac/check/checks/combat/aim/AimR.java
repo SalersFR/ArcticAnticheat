@@ -9,7 +9,7 @@ import org.bukkit.Bukkit;
 
 public class AimR extends Check {
 
-    private float lastDeltaYaw;
+    private float lastDeltaYaw, lastDeltaPitch;
     private double avgGcdYaw;
 
     public AimR(PlayerData data) {
@@ -18,7 +18,7 @@ public class AimR extends Check {
 
     @Override
     public void handle(Event e) {
-        if(e instanceof RotationEvent) {
+        if (e instanceof RotationEvent) {
 
             final RotationEvent event = (RotationEvent) e;
 
@@ -26,22 +26,25 @@ public class AimR extends Check {
             final float lastDeltaYaw = this.lastDeltaYaw;
 
             final float deltaPitch = event.getDeltaPitch();
+            final float lastDeltaPitch = this.lastDeltaPitch;
+
+            this.lastDeltaPitch = deltaPitch;
 
             this.lastDeltaYaw = deltaYaw;
 
 
-            final double gcdYaw =  MathUtils.gcd(0x4000, (Math.abs(deltaYaw)), Math.abs(lastDeltaYaw));
+            final double gcdPitch = MathUtils.gcd(0x4000, (Math.abs(deltaPitch)), Math.abs(lastDeltaPitch));
+            final double gcdYaw = MathUtils.gcd(0x4000, (Math.abs(deltaYaw)), Math.abs(lastDeltaYaw));
 
             avgGcdYaw = ((avgGcdYaw * 14) + gcdYaw) / 15;
             final double gcdYawDev = Math.abs(gcdYaw - avgGcdYaw);
 
             debug("buffer=" + buffer + " dev=" + gcdYawDev);
 
-            if(deltaYaw > 1.25 && deltaPitch > 0.01f && gcdYawDev < 0.09 && gcdYawDev > 0.01D) {
-                if(++buffer > 5)
+            if (deltaYaw > 1.25 && deltaPitch > 0.01f && gcdYawDev < 0.09 && gcdYawDev > 0.01D && gcdPitch < 0.415D) {
+                if (++buffer > 4.275)
                     fail("gcdYaw=" + gcdYawDev);
-            } else if(buffer > 0) buffer -= 0.015D;
-
+            } else if (buffer > 0) buffer -= 0.0125D;
 
 
         }
