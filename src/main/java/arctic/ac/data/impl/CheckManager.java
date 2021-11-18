@@ -95,6 +95,7 @@ public class CheckManager {
                 new AimO(data),
                 new AimP(data),
                 new AimQ(data),
+                new AimR(data),
 
                 new AutoclickerA(data),
                 new AutoclickerB(data),

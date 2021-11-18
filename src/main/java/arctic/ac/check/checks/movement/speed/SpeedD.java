@@ -94,6 +94,7 @@ public class SpeedD extends Check {
         }
         return false;
     }
+
     public static List<Block> blocksFromTwoPoints(Location loc1, Location loc2) {
         List<Block> blocks = new ArrayList<Block>();
 

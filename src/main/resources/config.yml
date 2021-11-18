@@ -1,4 +1,4 @@
-prefix: "&3Arctic &r&7/"
+prefix: ""
 flag-message: "%prefix% &b%player% &7flagged &b%check% &7(&3Type %type%&7) (&b%vl%&7/&b%maxvl%&7)"
 flag-message-verbose: "%prefix%  &b%player% &7[&e%ping%ms&7] &7flagged &3%check% &7(%type%&7) &fx%vl% &7[TPS=%tps%]"
 ban-command: "kick %player% %prefix%  &bDetected for cheating"
@@ -254,6 +254,10 @@ checks:
         enabled: true
         punish: true
       q:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      r:
         ban-vl: 50
         enabled: true
         punish: true

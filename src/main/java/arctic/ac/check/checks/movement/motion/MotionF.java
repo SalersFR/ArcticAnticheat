@@ -58,7 +58,7 @@ public class MotionF extends Check {
 
             final double accelXZ = Math.abs(deltaXZ - lastDeltaXZ);
 
-            if(!exempt && ticksSinceJump <= 2 && accelXZ <= 0.000001D) {
+            if(!exempt && ticksSinceJump <= 2 && accelXZ <= 0.000001D && deltaXZ > 0.2D) {
                 if(++buffer > 2)
                     fail("accel=" + accelXZ);
             } else if(buffer > 0) buffer -= 0.025D;
