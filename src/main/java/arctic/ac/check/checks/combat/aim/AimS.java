@@ -11,7 +11,7 @@ public class AimS extends Check {
     long lastRotated;
     double buffer;
     public AimS(PlayerData data) {
-        super(data, "Aim", "S", "combat.aim.s", "Checks for special rotations.", true);
+        super(data, "Aim", "S", "combat.aim.s", "Checks for robot-like rotations.", true);
     }
 
     @Override
