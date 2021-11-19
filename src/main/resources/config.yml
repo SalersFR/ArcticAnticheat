@@ -306,3 +306,7 @@ checks:
         ban-vl: 500
         enabled: true
         punish: true
+      b:
+        ban-vl: 500
+        enabled: true
+        punish: true

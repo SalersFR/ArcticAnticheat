@@ -27,6 +27,7 @@ import arctic.ac.check.checks.player.badpackets.BadPacketsC;
 import arctic.ac.check.checks.player.badpackets.BadPacketsD;
 import arctic.ac.check.checks.player.scaffold.ScaffoldA;
 import arctic.ac.check.checks.player.timer.TimerA;
+import arctic.ac.check.checks.player.timer.TimerB;
 import arctic.ac.data.PlayerData;
 
 import java.util.Arrays;
@@ -50,6 +51,7 @@ public class CheckManager {
 
 
                 new TimerA(data),
+                new TimerB(data),
 
                 new ScaffoldA(data),
 
