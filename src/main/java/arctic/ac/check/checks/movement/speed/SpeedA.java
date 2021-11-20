@@ -10,7 +10,6 @@ import org.bukkit.potion.PotionEffectType;
 
 public class SpeedA extends Check {
 
-    private boolean wasOnGround;
     private int air, ground;
     private double lastDeltaXZ, lastFriction, friction;
 
@@ -26,8 +25,7 @@ public class SpeedA extends Check {
             final MoveEvent event = (MoveEvent) e;
 
             boolean onGround = event.isGround();
-            boolean wasOnGround = this.wasOnGround;
-            this.wasOnGround = onGround;
+
 
             air = onGround ? 0 : Math.min(air + 1, 20);
             ground = onGround ? Math.min(ground + 1, 20) : 0;
@@ -77,8 +75,8 @@ public class SpeedA extends Check {
             if (data.getInteractData().getTicksSinceBow() < 11)
                 prediction += 0.49D;
 
-            final boolean exempt = data.getInteractionData().isHurt() ||
-                    new WorldUtils().isOnACertainBlock(data.getPlayer(), "ice") || data.getInteractData().getTicksSinceHurt() < 140
+            final boolean exempt = data.getInteractionData().getTicksSinceHurt() < 10 ||
+                    new WorldUtils().isOnACertainBlock(data.getPlayer(), "ice") || data.getVelocityData().getVelocityTicks() <= 3
                     || data.getInteractionData().isTeleported() ||
                     new WorldUtils().isOnACertainBlock(data.getPlayer(), "door");
 
