@@ -2,6 +2,7 @@ package arctic.ac.utils;
 
 import com.google.common.collect.Lists;
 import lombok.experimental.UtilityClass;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -77,6 +78,16 @@ public class MathUtils {
         return b <= limit ? a : MathUtils.gcd(limit, b, a % b);
     }
 
+    public double gcdFromAList(ArrayList<Float> list,double currDelta) {
+        //For each delta
+        double var1 = currDelta;
+        for (float num : list) {
+            var1 = gcd(0x4000,num,var1);
+        }
+
+        return var1;
+    }
+
 
     // Taken from https://github.com/ElevatedDev/Frequency
 
@@ -99,6 +110,17 @@ public class MathUtils {
         final double finalSens = sensStepTwo * 200;
 
         return finalSens;
+    }
+
+    public double average(ArrayList<Float> list) {
+        double sum = 0;
+        double size = list.size();
+
+        for (double var1 : list) {
+            sum+=var1;
+        }
+
+        return sum / size;
     }
 
 
