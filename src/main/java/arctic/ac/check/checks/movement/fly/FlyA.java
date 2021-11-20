@@ -67,7 +67,7 @@ public class FlyA extends Check {
                     || worldUtils.isOnACertainBlock(player, "ice")
                     || data.getInteractData().isHurt()
                     || worldUtils.haveABlockNearHead(player)
-                    || data.getVelocityData().getVelocityTicks() <= 2;
+                    || data.getVelocityData().getVelocityTicks() <= 7;
 
             final double threshold = airTicks > 7 ? 0.001 : 0.01;
 
