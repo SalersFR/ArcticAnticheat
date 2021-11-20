@@ -21,7 +21,7 @@ public class TimerA extends Check {
 
         if (e instanceof FlyingEvent) {
             if (data.getInteractData().getLastHitPacket() != 0) {
-                if (getMillis(data.getInteractData().getLastHitPacket()) < 110L) return;
+                if (getMillis(data.getInteractData().getLastHitPacket()) < 110L || data.getInteractData().isHurt()) return;
             }
             if (data.getInteractData().getTicksAlive() < 30) return;
             long systemTime = System.currentTimeMillis();
@@ -30,7 +30,7 @@ public class TimerA extends Check {
             balance += 50.0;
             balance -= (systemTime - lastTimeRate);
 
-            if (balance < -100) balance = 0.0D;
+            if (balance < -135) balance = 0.0D;
 
 
             if (balance >= 30.0) {

@@ -100,6 +100,7 @@ public class CheckManager {
                 new AimQ(data),
                 new AimR(data),
                 new AimS(data),
+                new AimT(data),
 
                 new AutoclickerA(data),
                 new AutoclickerB(data),

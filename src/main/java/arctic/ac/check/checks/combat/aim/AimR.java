@@ -28,9 +28,7 @@ public class AimR extends Check {
             final float lastDeltaPitch = this.lastDeltaPitch;
 
             this.lastDeltaPitch = deltaPitch;
-
             this.lastDeltaYaw = deltaYaw;
-
 
             final double gcdPitch = MathUtils.gcd(0x4000, (Math.abs(deltaPitch)), Math.abs(lastDeltaPitch));
             final double gcdYaw = MathUtils.gcd(0x4000, (Math.abs(deltaYaw)), Math.abs(lastDeltaYaw));

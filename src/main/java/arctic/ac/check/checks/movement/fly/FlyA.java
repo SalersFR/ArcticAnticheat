@@ -66,10 +66,13 @@ public class FlyA extends Check {
                     || worldUtils.isOnACertainBlock(player, "stairs")
                     || worldUtils.isOnACertainBlock(player, "ice")
                     || data.getInteractData().isHurt()
-                    || worldUtils.haveABlockNearHead(player);
+                    || worldUtils.haveABlockNearHead(player)
+                    || data.getVelocityData().getVelocityTicks() <= 2;
 
-            if (airTicks > 1 && Math.abs(fixedPrediction - deltaY) > 0.001D && event.getDeltaXZ() > 0.001D && !exempt && ticksPlace > 7) {
-                if (++buffer > 1)
+            final double threshold = airTicks > 7 ? 0.001 : 0.01;
+
+            if (airTicks > 1 && Math.abs(fixedPrediction - deltaY) > threshold && event.getDeltaXZ() > 0.001D && !exempt && ticksPlace > 7) {
+                if (++buffer > 1.4D)
                     fail("diff=" + Math.abs(fixedPrediction - deltaY));
             } else if (buffer > 0) buffer -= 0.2D;
 
