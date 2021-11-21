@@ -24,7 +24,7 @@ public class TimerB extends Check {
 
             if (event.getPacketType().equals(PacketType.Play.Client.KEEP_ALIVE)) {
                 final int diff = Math.abs(41 - packets);
-                if (diff >= 6 && data.getInteractData().getTicksAlive() > 120) {
+                if (diff >= 7 && data.getInteractData().getTicksAlive() > 120 && diff != 41) {
                     buffer += (diff * 0.1F);
                     if (buffer > 3) {
                         fail("diff=" + diff);

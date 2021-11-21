@@ -73,7 +73,8 @@ public class FlyB extends Check {
                     || player.getFallDistance() > 10.0F
                     || event.isGround()
                     || nearGround
-                    || player.isInsideVehicle();
+                    || player.isInsideVehicle()
+                    || worldUtils.isOnACertainBlock(player, "door");
 
             final boolean exemptV2 = worldUtils.isInLiquid(player)
                     || worldUtils.isCollidingWithClimbable(player)
@@ -83,7 +84,8 @@ public class FlyB extends Check {
                     || clientAirTicks < 11
                     || player.getFallDistance() > 10.0F
                     || event.isGround()
-                    || player.isInsideVehicle();
+                    || player.isInsideVehicle()
+                    || worldUtils.isOnACertainBlock(player, "door");;
 
 
             if (worldUtils.isCloseToGround(data.getBukkitPlayerFromUUID().getLocation())) {

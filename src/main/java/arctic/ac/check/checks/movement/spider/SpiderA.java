@@ -7,6 +7,8 @@ import arctic.ac.event.client.MoveEvent;
 import arctic.ac.utils.MathUtils;
 import arctic.ac.utils.WorldUtils;
 
+import java.util.Locale;
+
 public class SpiderA extends Check {
 
     private double deltaY, lastDeltaY, lastLastDeltaY;
@@ -34,15 +36,18 @@ public class SpiderA extends Check {
                     || new WorldUtils().isCollidingWithClimbable(data.getPlayer())
                     || new WorldUtils().isCollidingWithWeb(data.getPlayer())
                     || new WorldUtils().isCloseToGround(data.getPlayer().getLocation())
-                    || new WorldUtils().isOnACertainBlock(data.getPlayer(), "stairs");
+                    || new WorldUtils().isOnACertainBlock(data.getPlayer(), "stairs")
+                    || data.getPlayer().getLocation().add(0,-0.1,0).getBlock().getType().
+                    toString().toLowerCase(Locale.ROOT).contains("web");
 
 
             debug("dY=" + deltaY + " LdY=" + lastDeltaY + " LLdY=" + lastLastDeltaY + " LLLdY=" + lastLastLastDeltaY);
+
             if (MathUtils.areAllEqual(deltaY, lastDeltaY, lastLastDeltaY, lastLastLastDeltaY) && !exempt && deltaY > 0) {
                 if (++buffer > 5.0) {
                     fail("allDY=" + deltaY);
                 }
-            } else if (buffer > 0) buffer -= 0.1;
+            } else if (buffer > 0) buffer -= 0.25;
         }
     }
 }

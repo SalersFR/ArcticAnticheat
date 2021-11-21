@@ -39,7 +39,7 @@ public class AimQ extends Check {
                     fail("modPitch: " + modulusResPitch + ", modYaw: " + modulusResYaw +
                             ", dYaw: " + deltaYaw + ", dPitch: " + deltaPitch);
                 }
-            } else if (buffer > 0) buffer -= 1;
+            } else if (buffer > 0) buffer--;
         }
     }
 }

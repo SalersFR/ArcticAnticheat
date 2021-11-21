@@ -39,7 +39,7 @@ public class VelocityC extends Check {
 
                 double ratio = deltaXZ / (predictedVelocity - 0.13);
 
-                if (ratio < 1) {
+                if (Math.abs(ratio) < 0.98F) {
                     buffer++;
                     if (buffer > 3.5) {
                         fail("velocity&f: " + ratio + "%" + " &9buffer&f: " + buffer);

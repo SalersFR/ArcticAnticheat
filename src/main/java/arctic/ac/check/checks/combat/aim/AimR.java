@@ -38,7 +38,7 @@ public class AimR extends Check {
 
             debug("buffer=" + buffer + " dev=" + gcdYawDev);
 
-            if (deltaYaw > 1.25 && deltaPitch > 0.01f && gcdYawDev < 0.09 && gcdYawDev > 0.01D && gcdPitch < 0.415D) {
+            if (deltaYaw > 1.25 && deltaPitch > 0.01f && gcdYawDev < 0.09 && gcdYawDev > 0.01D && gcdPitch < 0.435D) {
                 if (++buffer > 4.275)
                     fail("gcdYaw=" + gcdYawDev);
             } else if (buffer > 0) buffer -= 0.0125D;

@@ -32,7 +32,7 @@ public class AimC extends Check {
 
             debug("deltaPitch=" + deltaPitch + " yawAccel=" + yawAccel + " buffer=" + buffer + " exempt=" + exempt);
 
-            if (yawAccel > 30.01D && Math.abs(deltaPitch) < 0.0001 && !exempt) {
+            if ((yawAccel > 25.01D || (deltaYaw > 30.f && lastDeltaYaw > 15.f)) && Math.abs(deltaPitch) < 0.0001 && !exempt) {
                 if (++this.buffer > 7) {
                     fail("deltaPitch=" + deltaPitch);
                 }
