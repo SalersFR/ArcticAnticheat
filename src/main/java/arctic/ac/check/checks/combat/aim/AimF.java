@@ -36,7 +36,7 @@ public class AimF extends Check {
             debug("accel=" + accel + " deltaPitch=" + deltaPitch + " lastDeltaPitch=" + lastDeltaPitch + " exempt=" + exempt);
 
             if (!exempt && !exemptCombat) {
-                if (accel <= 0.001F && deltaYaw > 7.2D) {
+                if (accel <= 0.001F && (deltaYaw > 9.2D || (deltaYaw > 6.25 && deltaPitch > 0.125))) {
                     if (++buffer > 5) {
                         buffer /= 2;
                         fail("accel=" + accel + " dp=" + deltaPitch);
