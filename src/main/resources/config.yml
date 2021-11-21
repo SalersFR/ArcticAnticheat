@@ -273,10 +273,6 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
-      t:
-        ban-vl: 50
-        enabled: true
-        punish: true
     velocity:
       a:
         ban-vl: 50

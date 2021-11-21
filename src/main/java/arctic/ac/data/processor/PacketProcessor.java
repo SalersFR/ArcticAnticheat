@@ -191,6 +191,17 @@ public class PacketProcessor {
                     checks.handle(transactionConfirmEvent);
                 }
             }
+        } else if(event.getPacketType() == PacketType.Play.Client.BLOCK_PLACE) {
+
+            final WrapperPlayClientBlockPlace wrapper = new WrapperPlayClientBlockPlace(event.getPacket());
+            final BlockPlaceEvent blockPlaceEvent = new BlockPlaceEvent(wrapper);
+
+            for(Check checks : data.getChecks()) {
+                if(checks.isEnabled() && !exempt)
+                    checks.handle(blockPlaceEvent);
+
+            }
+
         }
 
     }

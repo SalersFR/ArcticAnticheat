@@ -112,7 +112,18 @@ public class MathUtils {
         return finalSens;
     }
 
-    public double average(ArrayList<Float> list) {
+    public double averageFloat(ArrayList<Float> list) {
+        double sum = 0;
+        double size = list.size();
+
+        for (double var1 : list) {
+            sum+=var1;
+        }
+
+        return sum / size;
+    }
+
+    public double averageInt(ArcticQueue<Integer> list) {
         double sum = 0;
         double size = list.size();
 

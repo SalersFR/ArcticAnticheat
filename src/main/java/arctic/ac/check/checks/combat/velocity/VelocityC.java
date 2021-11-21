@@ -33,7 +33,9 @@ public class VelocityC extends Check {
             int velocityTicks = data.getVelocityData().getVelocityTicks();
 
             if (velocityTicks <= 1 && !exempt) {
-                double predictedVelocity = Math.sqrt((data.getVelocityData().getOriginalVelocityX() * data.getVelocityData().getOriginalVelocityX()) + (data.getVelocityData().getOriginalVelocityZ() * data.getVelocityData().getOriginalVelocityZ()));
+                double predictedVelocity = Math.sqrt((data.getVelocityData().getOriginalVelocityX() *
+                        data.getVelocityData().getOriginalVelocityX()) + (data.getVelocityData().getOriginalVelocityZ() *
+                        data.getVelocityData().getOriginalVelocityZ()));
 
                 double ratio = deltaXZ / (predictedVelocity - 0.13);
 

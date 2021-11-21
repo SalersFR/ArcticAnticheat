@@ -6,13 +6,12 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.ArmAnimationEvent;
 import arctic.ac.event.client.FlyingEvent;
 import arctic.ac.utils.ArcticQueue;
-import arctic.ac.utils.EvictingList;
 import arctic.ac.utils.MathUtils;
 
 public class AutoclickerA extends Check {
 
-    private ArcticQueue samples = new ArcticQueue<Integer>(60);
-    private EvictingList<Double> pastDiffs = new EvictingList<>(15);
+    private ArcticQueue<Integer> samples = new ArcticQueue<Integer>(20);
+
 
     private int ticks;
 
@@ -22,7 +21,7 @@ public class AutoclickerA extends Check {
 
 
     public AutoclickerA(PlayerData data) {
-        super(data, "Autoclicker", "A", "combat.autoclicker.a", "Checks for mistake in clicker randomization", true);
+        super(data, "Autoclicker", "A", "combat.autoclicker.a", "Checks for too low randomization.", true);
     }
 
     @Override
@@ -30,35 +29,23 @@ public class AutoclickerA extends Check {
         if (e instanceof ArmAnimationEvent) {
             if (data.getInteractionData().isDigging()) return;
 
-            if (samples.size() >= 60) {
+            if (samples.size() >= 20) {
 
-                final double kurtosis = MathUtils.getKurtosis(samples);
                 final double stdDeviation = MathUtils.getStandardDeviation(samples);
 
-                final double diff = Math.abs(kurtosis - stdDeviation);
+                if (stdDeviation < 1.2) {
+                    buffer += (1.2 - stdDeviation);
+                    if (buffer > 3.25)
+                        fail("std=" + stdDeviation);
+                } else if (buffer > 0) buffer -= (float) (10 / 3D);
 
-
-                debug("diff=" + diff);
-
-
-                if (pastDiffs.size() > 6) {
-
-                    if (pastDiffs.contains(diff)) {
-                        if (++buffer > 1.1D) {
-                            fail("diff=" + diff);
-                        }
-                    } else if (buffer > 0) buffer -= 0.025D;
-
-
-                }
-
-                pastDiffs.add(diff);
+                debug("std=" + stdDeviation + " buffer=" + buffer);
 
 
             }
 
 
-            if (ticks < 5)
+            if (ticks < 7)
                 samples.add(ticks);
 
 

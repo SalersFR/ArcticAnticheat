@@ -33,10 +33,12 @@ public class AimT extends Check {
 
             final double consist = Math.abs(gcdYaw - gcdPitch);
 
-            if (consist < 0.005 && (deltaYaw > 2.75f || (deltaPitch != 0.0f && deltaYaw > 1.25f)) && !Double.toString(consist).contains("E") && Math.abs(event.getTo().getPitch()) != 90 && Math.abs(event.getFrom().getPitch()) != 90) {
+            if (consist < 0.005 && (deltaYaw > 2.75f || (deltaPitch != 0.0f && deltaYaw > 1.25f)) &&
+                    !Double.toString(consist).contains("E") && Math.abs(event.getTo().getPitch()) != 90 &&
+                    Math.abs(event.getFrom().getPitch()) != 90) {
 
                 buffer += (0.25 + (consist * 50f));
-                if (consist == 0.0f) buffer *= 0.1f;
+                if (consist == 0.0f || data.getCinematicProcessor().getTicksSince() <= 1) buffer *= 0.2f;
 
                 if (buffer > 1.5)
                     fail("const=" + consist);
