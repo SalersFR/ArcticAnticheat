@@ -84,6 +84,7 @@ public class PacketProcessor {
             final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getYaw(), wrapper.getPitch(), wrapper.getOnGround());
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
+            final PositionEvent positionEvent = new PositionEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getYaw(), wrapper.getPitch(), wrapper.getOnGround());
 
             if (data.getTarget() != null)
                 data.getEntityTracker().interpolate(data.getTarget().getEntityId());
@@ -98,6 +99,7 @@ public class PacketProcessor {
                 if (checks.isEnabled() && !exempt) {
                     checks.handle(moveEvent);
                     checks.handle(rotationEvent);
+                    checks.handle(positionEvent);
                     checks.handle(flyingEvent);
                 }
             }

@@ -4,6 +4,7 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
+import arctic.ac.event.client.PositionEvent;
 import arctic.ac.event.client.RotationEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -58,8 +59,8 @@ public class SpeedD extends Check {
     @Override
     public void handle(Event e) {
 
-        if (e instanceof MoveEvent) {
-            MoveEvent move = (MoveEvent) e;
+        if (e instanceof PositionEvent) {
+            PositionEvent move = (PositionEvent) e;
 
             Vector motion = move.getTo().toVector().setY(0).subtract(move.getFrom().toVector().setY(0));
             Vector lastMotion = this.lastMotion;
@@ -84,7 +85,7 @@ public class SpeedD extends Check {
 
             boolean inBlocks = isNearBlocks(move.getTo().toVector().toLocation(data.getPlayer().getWorld()));
 
-            final float yaw = this.yaw;
+            final float yaw = move.getYaw();
             final double yawRadians = Math.toRadians(yaw);
 
             if (attackSlowDown) {
