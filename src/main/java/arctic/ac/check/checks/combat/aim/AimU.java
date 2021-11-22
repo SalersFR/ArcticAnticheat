@@ -36,7 +36,7 @@ public class AimU extends Check {
             } else {
                 buffer++;
                 if (buffer > 2) {
-                    fail("gcd " + gcd + " buffer " + buffer);
+                    fail("gcd " + gcd + "  buffer  " + buffer);
                 }
             }
         }
