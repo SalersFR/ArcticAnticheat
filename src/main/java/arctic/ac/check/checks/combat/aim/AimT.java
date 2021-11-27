@@ -41,7 +41,7 @@ public class AimT extends Check {
                 buffer += (0.25 + (consist * 50f));
                 if (consist == 0.0f || data.getCinematicProcessor().getTicksSince() <= 1) buffer *= 0.2f;
 
-                if (buffer > 1.5)
+                if (buffer > 2)
                     fail("const=" + consist);
             } else if (buffer > 0) buffer -= 0.001;
 
