@@ -38,7 +38,7 @@ public class TimerA extends Check {
 
             if (balance >= 100) {
                 fail("bal " + balance);
-                balance = 0;
+                balance = 0.0;
             }
 
 
