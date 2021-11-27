@@ -7,6 +7,9 @@ import arctic.ac.event.client.ArmAnimationEvent;
 import arctic.ac.event.client.RotationEvent;
 import arctic.ac.event.client.UseEntityEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers;
+import net.minecraft.server.v1_8_R3.EntityPlayer;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.util.Vector;
 
 public class KillAuraJ extends Check {
 
@@ -29,7 +32,7 @@ public class KillAuraJ extends Check {
                 hits = 0;
                 swings = 0;
 
-                if (acc > 10) {
+                if (acc > 9) {
                     buffer += (acc * 0.1F);
                     if (buffer > 2)
                         fail("acc " + acc);
@@ -48,20 +51,37 @@ public class KillAuraJ extends Check {
             boolean aiming = System.currentTimeMillis() - lastAim < 60;
             boolean highSpeed = aimSpeed + aimPitch > 12 && aiming;
 
+            final EntityPlayer nms = ((CraftPlayer) data.getPlayer()).getHandle();
+            int ping = nms.ping;
+
+            Vector to;
+            Vector from;
+            boolean close = false;
+
+            try {
+                to = (data.getPastEntityLocations().get((ping / 50)).toVector());
+                from = (data.getPastEntityLocations().get(5 + (ping / 50)).toVector());
+
+                double dist = to.distance(from);
+                if (dist < 0.4) close = true;
+
+            } catch (IndexOutOfBoundsException exception) {
+            }
+
             if (hitDelay > 10 * 50) {
                 swings--;
                 return;
             }
 
-            if (!highSpeed) return;
+            if (!highSpeed && !close) return;
 
             hits++;
-        }
-        if (e instanceof RotationEvent) {
-            RotationEvent rot = (RotationEvent) e;
-            aimSpeed = ((aimSpeed * 4) + rot.getDeltaYaw()) / 5;
-            aimPitch = ((aimPitch * 4) + rot.getDeltaPitch()) / 5;
-            lastAim = System.currentTimeMillis();
+            if (e instanceof RotationEvent) {
+                RotationEvent rot = (RotationEvent) e;
+                aimSpeed = ((aimSpeed * 4) + rot.getDeltaYaw()) / 5;
+                aimPitch = ((aimPitch * 4) + rot.getDeltaPitch()) / 5;
+                lastAim = System.currentTimeMillis();
+            }
         }
     }
 }

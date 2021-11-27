@@ -27,7 +27,7 @@ public class TimerB extends Check {
                 if (diff >= 7 && data.getInteractData().getTicksAlive() > 120 && diff != 41) {
                     buffer += (diff * 0.1F);
                     if (buffer > 3) {
-                        fail("diff=" + diff);
+                        //fail("diff=" + diff);
                     }
                 } else if (buffer > 0) buffer -= 0.2D;
 

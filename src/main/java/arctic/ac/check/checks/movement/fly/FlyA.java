@@ -72,8 +72,9 @@ public class FlyA extends Check {
             final double threshold = airTicks > 7 ? 0.001 : 0.01;
 
             if (airTicks > 1 && Math.abs(fixedPrediction - deltaY) > threshold && event.getDeltaXZ() > 0.001D && !exempt && ticksPlace > 7) {
-                if (++buffer > 1.4D)
-                    fail("diff=" + Math.abs(fixedPrediction - deltaY));
+                if (++buffer > 1.4D) {
+                    //fail("diff=" + Math.abs(fixedPrediction - deltaY));
+                }
             } else if (buffer > 0) buffer -= 0.2D;
 
             debug("diff=" + Math.abs(fixedPrediction - deltaY));

@@ -32,8 +32,9 @@ public class AimT extends Check {
             final double gcdPitch = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
 
             final double consist = Math.abs(gcdYaw - gcdPitch);
+            boolean attacking = System.currentTimeMillis() - data.getInteractData().getLastHitPacket() < 50 * 1.5;
 
-            if (consist < 0.005 && (deltaYaw > 2.75f || (deltaPitch != 0.0f && deltaYaw > 1.25f)) &&
+            if (consist < 0.005 && (deltaYaw > 2.75f || (deltaPitch != 0.0f && deltaYaw > 1.25f) && attacking) &&
                     !Double.toString(consist).contains("E") && Math.abs(event.getTo().getPitch()) != 90 &&
                     Math.abs(event.getFrom().getPitch()) != 90) {
 
