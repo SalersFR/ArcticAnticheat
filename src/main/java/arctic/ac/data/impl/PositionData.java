@@ -17,6 +17,9 @@ public class PositionData {
     private long lastTeleport;
     private PlayerData data;
 
+    private long lastTeleported;
+    private boolean teleporting;
+
     public PositionData(PlayerData data) {
         this.player = data.getPlayer();
         this.data = data;

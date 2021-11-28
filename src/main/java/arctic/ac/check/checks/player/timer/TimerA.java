@@ -6,10 +6,16 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
 import arctic.ac.event.server.ServerPositionEvent;
 
+import java.awt.*;
+
 public class TimerA extends Check {
 
     private long lastTickTime;
     private double balance;
+    private double lastRate;
+    private double buffer;
+    private double buffer3;
+    private double buffer2;
 
 
     public TimerA(PlayerData data) {
@@ -30,16 +36,40 @@ public class TimerA extends Check {
             balance += 50.0;
             balance -= (systemTime - lastTimeRate);
 
-            if (balance < -135) balance = 0.0D;
+            if (balance >= 100) {
+                fail("bal " + balance);
+                balance = 0.0;
+            }
 
 
-            if (balance >= 30.0) {
-                if (++buffer > 10) {
-                    fail("balance=" + balance);
-                    balance = 0.0D;
+            double rate = (systemTime - lastTimeRate);
+            double lastRate = this.lastRate;
+            this.lastRate = rate;
+
+            double avgRate = Math.abs(rate - lastRate);
+
+
+            if (rate < 10 ) return;
+
+            if (buffer2 > 0) buffer2-=0.001;
+            if (avgRate < 5 && rate > 5) {
+                if (rate < 45 || rate > 70) {
+                    buffer++;
+                    if (buffer > 4) {
+                        buffer2++;
+                        if (buffer2 > 20) {
+                            fail("rate " + rate +" avgRate " + avgRate);
+                        }
+                    }
+                } else {
+                    if (buffer > 0) {
+                        buffer -= 0.25;
+                    }
                 }
             } else {
-                buffer -= (buffer > 0) ? 2 : 0;
+                if (buffer > 0) {
+                    buffer -= 0.25;
+                }
             }
 
             debug("balance=" + balance);

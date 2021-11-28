@@ -5,6 +5,7 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.RotationEvent;
 import arctic.ac.utils.MathUtils;
+import org.bukkit.Bukkit;
 
 public class AimA extends Check {
 
@@ -26,7 +27,6 @@ public class AimA extends Check {
             this.lastDeltaPitch = deltaPitch;
 
             final float sensitivity = (float) MathUtils.getSensitivity(deltaPitch, lastDeltaPitch);
-
 
             if (sensitivity != -66.66 && sensitivity <= -1 && deltaYaw > 6.25D && data.getCinematicProcessor().getTicksSince() >
                     35 && data.getCinematicProcessor().getLastAccelYaw() < 1.5 && deltaPitch != 0.0f) {

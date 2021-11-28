@@ -33,16 +33,16 @@ public class AimT extends Check {
             final double gcdPitch = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
 
             final double consist = Math.abs(gcdYaw - gcdPitch);
+            boolean attacking = System.currentTimeMillis() - data.getInteractData().getLastHitPacket() < 50 * 1.5;
 
-
-            if (consist < 0.005 && ((deltaYaw > 4.575f && deltaPitch != 0.0f) || (Math.abs(deltaPitch) >= 0.325f && deltaYaw > 2.25f)) &&
+            if (consist < 0.005 && (deltaYaw > 2.75f || (deltaPitch != 0.0f && deltaYaw > 1.25f) && attacking) &&
                     !Double.toString(consist).contains("E") && Math.abs(event.getTo().getPitch()) != 90 &&
                     Math.abs(event.getFrom().getPitch()) != 90) {
 
                 buffer += (0.25 + (consist * 50f));
                 if (consist == 0.0f || data.getCinematicProcessor().getTicksSince() <= 1) buffer *= 0.2f;
 
-                if (buffer > 2.75)
+                if (buffer > 2)
                     fail("const=" + consist);
             } else if (buffer > 0) buffer -= 0.001;
 

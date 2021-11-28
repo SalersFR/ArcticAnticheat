@@ -12,9 +12,11 @@ import arctic.ac.check.checks.combat.velocity.VelocityC;
 import arctic.ac.check.checks.movement.fly.FlyA;
 import arctic.ac.check.checks.movement.fly.FlyB;
 import arctic.ac.check.checks.movement.fly.FlyC;
+import arctic.ac.check.checks.movement.fly.FlyD;
 import arctic.ac.check.checks.movement.motion.*;
 import arctic.ac.check.checks.movement.nofall.NoFallA;
 import arctic.ac.check.checks.movement.nofall.NoFallB;
+import arctic.ac.check.checks.movement.nofall.NoFallC;
 import arctic.ac.check.checks.movement.speed.SpeedA;
 import arctic.ac.check.checks.movement.speed.SpeedB;
 import arctic.ac.check.checks.movement.speed.SpeedC;
@@ -58,6 +60,7 @@ public class CheckManager {
                 new FlyA(data),
                 new FlyB(data),
                 new FlyC(data),
+                new FlyD(data),
 
                 new SpiderA(data),
 
@@ -70,6 +73,7 @@ public class CheckManager {
 
                 new NoFallA(data),
                 new NoFallB(data),
+                new NoFallC(data),
 
                 new MotionA(data),
                 new MotionB(data),
@@ -100,6 +104,7 @@ public class CheckManager {
                 new AimR(data),
                 new AimS(data),
                 new AimT(data),
+                new AimU(data),
 
                 new AutoclickerA(data),
                 new AutoclickerB(data),

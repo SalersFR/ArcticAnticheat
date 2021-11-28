@@ -12,6 +12,7 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.GameMode;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
 @RequiredArgsConstructor
 public class PacketProcessor {
@@ -48,6 +49,10 @@ public class PacketProcessor {
 
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
+
+            long ping = ((CraftPlayer) data.getPlayer()).getHandle().ping;
+            ping = Math.min(1000,ping);
+            data.getPosData().setTeleporting(System.currentTimeMillis() - data.getPosData().getLastTeleported() < ping + 200);
 
             data.getInteractData().handleFlying();
             data.getVelocityData().handleFlying();
@@ -248,6 +253,7 @@ public class PacketProcessor {
 
             final ServerPositionEvent serverPositionEvent = new ServerPositionEvent(wrapper);
 
+            data.getPosData().setLastTeleported(System.currentTimeMillis());
 
             for (Check checks : data.getChecks()) {
                 if (checks.isEnabled() && !exempt)

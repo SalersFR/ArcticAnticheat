@@ -24,6 +24,11 @@ checks:
         enabled: true
         punish: true
         setback: true
+      d:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: true
     spider:
       a:
         ban-vl: 10
@@ -64,6 +69,11 @@ checks:
         punish: true
         setback: false
       b:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: false
+      c:
         ban-vl: 10
         enabled: true
         punish: true
