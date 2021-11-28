@@ -36,8 +36,8 @@ public class FlyD extends Check {
             if (data.getPosData().isTeleporting()) return;
 
             if (airTicks >= 3 && !onGroundV2 && Math.abs(predictedMotionY) >= 0.005D) {
-                if (!Check(motionY,predictedMotionY)) {
-                    buffer+=10;
+                if (!check(motionY, predictedMotionY)) {
+                    buffer += 10;
                     if (buffer > 30) {
                         fail("motionY " + motionY + " predicted " + predictedMotionY);
                     }
@@ -48,7 +48,7 @@ public class FlyD extends Check {
         }
     }
 
-    public static boolean Check(double d1, double d2) {
+    public static boolean check(double d1, double d2) {
         return Math.abs(d1 - d2) < 0.001;
     }
 }

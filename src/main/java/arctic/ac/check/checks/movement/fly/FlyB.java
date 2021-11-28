@@ -69,10 +69,12 @@ public class FlyB extends Check {
                     || worldUtils.isNearBoat(player)
                     || worldUtils.isCollidingWithWeb(player)
                     || worldUtils.isAtEdgeOfABlock(player)
-                    || airTicks < 11
+                    || airTicks < 19
                     || player.getFallDistance() > 10.0F
+                    /**
                     || event.isGround()
                     || nearGround
+                     **/
                     || player.isInsideVehicle()
                     || worldUtils.isOnACertainBlock(player, "door");
 
@@ -98,15 +100,17 @@ public class FlyB extends Check {
 
             debug("deltaY=" + deltaY + " motionY=" + motionY + " resultY=" + resultY + " exempt=" + exempt);
 
-            if (resultY > 1.0D && !exempt) {
+            final boolean wrong = resultY > 1.5 || resultY < -0.85;
+
+            if (wrong && !exempt) {
                 if (++buffer > 1) {
-                    //fail("resultY=" + resultY + " way1");
+                    fail("resultY=" + resultY + " way1");
                 }
             } else if (buffer > 0) buffer -= 0.05D;
 
-            if (resultY > 1.0D && !exemptV2) {
+            if (wrong && !exemptV2) {
                 if (++buffer > 1) {
-                    //fail("resultY=" + resultY + " way2");
+                    fail("resultY=" + resultY + " way2");
                 }
             } else if (buffer > 0) buffer -= 0.05D;
         }

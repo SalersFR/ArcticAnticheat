@@ -9,7 +9,7 @@ import org.bukkit.Bukkit;
 
 public class AimU extends Check {
 
-    private float lastDeltaPitch, lastDeltaYaw;
+    private float lastDeltaPitch;
     private double buffer;
 
     public AimU(PlayerData data) {
@@ -24,6 +24,9 @@ public class AimU extends Check {
             float deltaYaw = e.getDeltaYaw();
             float deltaPitch = e.getDeltaPitch();
 
+            float lastDeltaPitch = this.lastDeltaPitch;
+            this.lastDeltaPitch = deltaPitch;
+
             double gcd = MathUtils.getGcd(deltaPitch,lastDeltaPitch);
 
             boolean validPitch = true;
@@ -31,11 +34,13 @@ public class AimU extends Check {
             if (deltaPitch == 0 && gcd > 0.6 && deltaYaw > 3) validPitch = false;
             if (deltaYaw == 0 && deltaPitch > 0.1 && gcd > 0.3) validYaw = false;
 
+            boolean attacking = System.currentTimeMillis() - data.getInteractData().getLastHitPacket() < 50 * 1.5;
+
             if (validPitch && validYaw) {
                 if (buffer > 0) buffer-=0.05;
             } else {
                 buffer++;
-                if (buffer > 5) {
+                if (buffer > 5 && attacking) {
                     fail("gcd " + gcd + "  buffer  " + buffer);
                 }
             }

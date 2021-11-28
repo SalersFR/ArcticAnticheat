@@ -6,6 +6,10 @@ import arctic.ac.gui.combat.CombatChecksGUI;
 import arctic.ac.gui.combat.impl.*;
 import arctic.ac.gui.movement.MovementGUI;
 import arctic.ac.gui.movement.impl.*;
+import arctic.ac.gui.player.PlayerGUI;
+import arctic.ac.gui.player.impl.BadPacketsGUI;
+import arctic.ac.gui.player.impl.ScaffoldGUI;
+import arctic.ac.gui.player.impl.TimerGUI;
 import arctic.ac.utils.CustomUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -49,6 +53,10 @@ public class InventoryClickSettings implements Listener {
         final NoFallGUI nofallGUI = new NoFallGUI().createNewGUI();
         final SpeedGUI speedGUI = new SpeedGUI().createNewGUI();
         final StepGUI stepGUI = new StepGUI().createNewGUI();
+        final BadPacketsGUI badPacketsGUI = new BadPacketsGUI().createNewGUI();
+        final TimerGUI timerGUI = new TimerGUI().createNewGUI();
+        final ScaffoldGUI scaffoldGUI = new ScaffoldGUI().createNewGUI();
+
 
         if (invName.equalsIgnoreCase(settingsName)) {
             event.setCancelled(true);
@@ -77,9 +85,15 @@ public class InventoryClickSettings implements Listener {
                 gui.setItems();
                 gui.display(player);
             } else if (event.getSlot() == 15) {
-                player.closeInventory();
 
                 // OPEN PLAYER INVENTORY
+                PlayerGUI playerGUI = new PlayerGUI().createNewGUI();
+
+                playerGUI.setItems();
+                playerGUI.display(player);
+
+
+
             }
         } else if (invName.equalsIgnoreCase(combatName)) {
             event.setCancelled(true);
@@ -139,6 +153,29 @@ public class InventoryClickSettings implements Listener {
                     stepGUI.display(player);
                     break;
             }
+        } else if(invName.equalsIgnoreCase(playerName)) {
+            event.setCancelled(true);
+            ItemStack item = event.getCurrentItem();
+            ItemMeta meta = item.getItemMeta();
+
+            player.updateInventory();
+            switch (meta.getDisplayName()) {
+                case "§bTimer Checks":
+                    timerGUI.setItems(player);
+                    timerGUI.display(player);
+                    break;
+                case "§bBadPackets Checks":
+                    badPacketsGUI.setItems(player);
+                    badPacketsGUI.display(player);
+                    break;
+                case "§bScaffold Checks":
+                    scaffoldGUI.setItems(player);
+                    scaffoldGUI.display(player);
+                    break;
+
+            }
+
+
         }
 
         // &r &7» Enabled: &b✓
@@ -261,6 +298,20 @@ public class InventoryClickSettings implements Listener {
                 stepGUI.setItems(player);
                 stepGUI.display(player);
                 break;
+            case "Timer Checks":
+                timerGUI.setItems(player);
+                timerGUI.display(player);
+                break;
+            case "BadPackets Checks":
+                badPacketsGUI.setItems(player);
+                badPacketsGUI.display(player);
+                break;
+            case "Scaffold Checks":
+                scaffoldGUI.setItems(player);
+                scaffoldGUI.display(player);
+                break;
+
+
         }
     }
 }

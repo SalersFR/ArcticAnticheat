@@ -6,10 +6,14 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
 import arctic.ac.utils.PlayerUtils;
 import arctic.ac.utils.WorldUtils;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
 public class MotionA extends Check {
+
+    private int ticksSinceIce, ticksSinceNearHead;
 
     public MotionA(PlayerData data) {
         super(data, "Motion", "A", "movement.motion.a", "Checks for too high jumps.", false);
@@ -18,41 +22,46 @@ public class MotionA extends Check {
     @Override
     public void handle(Event e) {
         if (e instanceof MoveEvent) {
-
             final MoveEvent event = (MoveEvent) e;
 
+            final World world = data.getBukkitPlayerFromUUID().getWorld();
+
+            final WorldUtils worldUtils = new WorldUtils();
             final double deltaY = event.getDeltaY();
 
-            double jumpLimit = 0.42F;
+            final Location bukkitTo = event.getTo().toVector().toLocation(world);
+            final Location bukkitFrom = event.getFrom().toVector().toLocation(world);
 
             final Player player = data.getPlayer();
 
-            if (player.hasPotionEffect(PotionEffectType.JUMP)) {
-                jumpLimit += (PlayerUtils.getPotionLevel(player, PotionEffectType.JUMP)) * 0.1F;
+            final boolean jumped = worldUtils.isOnGround(bukkitFrom, -0.00001) && !worldUtils.isOnGround(bukkitTo, -0.00001) && deltaY > 0;
+
+            if (worldUtils.isOnACertainBlock(player, "ice"))
+                ticksSinceIce = 0;
+
+            final double predicted = 0.42F;
+            final double fixedPredicted = player.hasPotionEffect(PotionEffectType.JUMP) ? predicted
+                    + ((PlayerUtils.getPotionLevel(player, PotionEffectType.JUMP)) * 0.1F) : predicted;
+
+            if (worldUtils.blockNearHead(bukkitTo)) {
+                this.ticksSinceNearHead = 0;
             }
 
-            final WorldUtils worldUtils = new WorldUtils();
+            final boolean exempt = worldUtils.blockNearHead(bukkitTo) || worldUtils.isCollidingWithClimbable(player)
+                    || data.getInteractData().isTeleported() || data.getInteractionData().getTicksSinceHurt() < 40
+                    || ticksSinceIce < 15 || ticksSinceNearHead < 15 || data.getInteractionData().getTicksSinceSlime() < 60;
 
-            final boolean exempt = worldUtils.isInLiquid(player)
-                    || worldUtils.isCollidingWithClimbable(player)
-                    || worldUtils.isNearBoat(player)
-                    || worldUtils.isCollidingWithWeb(player)
-                    || worldUtils.isAtEdgeOfABlock(player)
-                    || player.getFallDistance() > 10.0F
-                    || event.isGround()
-                    || data.getInteractionData().getTicksSinceSlime() < 120
-                    || data.getInteractData().isHurt()
-                    || data.getInteractData().getTicksSinceHurt() < 40
-                    || data.getPlayer().getLocation().add(0, -0.999, 0).getBlock().toString().toLowerCase().contains("slime")
-                    || data.getPlayer().getLocation().add(0, -0.999, 0).getBlock().toString().toLowerCase().contains("piston");
+            debug("jumped=" + jumped + " deltaY=" + deltaY + " predicted=" + predicted);
+            // LITERALLY SO LAZY, FIXES
+            // FALSE WITH TRAPDOORS &
+            // JUMPING, CHANGE TODO
+            if (jumped && deltaY > fixedPredicted && bukkitFrom.getY() % 1 == 0 && !exempt) {
+                fail("d=" + deltaY + " p=" + fixedPredicted);
+            }
 
-            debug("exempt=" + exempt + " limit=" + jumpLimit + " deltaY=" + deltaY);
 
-            if (deltaY > jumpLimit && !exempt) {
-                if (++buffer > 1) {
-                    fail("deltaY=" + deltaY);
-                }
-            } else if (buffer > 0) buffer *= 0.99D;
+            this.ticksSinceIce++;
+            this.ticksSinceNearHead++;
 
 
         }
