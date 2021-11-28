@@ -62,6 +62,11 @@ checks:
         enabled: true
         punish: true
         setback: true
+      b:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: true
     nofall:
       a:
         ban-vl: 10
