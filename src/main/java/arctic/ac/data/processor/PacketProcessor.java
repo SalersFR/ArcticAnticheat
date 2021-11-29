@@ -6,6 +6,7 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.client.*;
 import arctic.ac.event.server.ServerPositionEvent;
 import arctic.ac.event.server.ServerVelocityEvent;
+import arctic.ac.utils.PlayerUtils;
 import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
 import io.github.retrooper.packetevents.event.impl.PacketPlaySendEvent;
 import io.github.retrooper.packetevents.packettype.PacketType;
@@ -59,7 +60,7 @@ public class PacketProcessor {
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
-            long ping = ((CraftPlayer) data.getPlayer()).getHandle().ping;
+            long ping = PlayerUtils.getPing(data);
             ping = Math.min(1000, ping);
             data.getPosData().setTeleporting(System.currentTimeMillis() - data.getPosData().getLastTeleported() < ping + 200);
 
@@ -274,7 +275,7 @@ public class PacketProcessor {
             data.getEntityTracker().relMove(packet.getEntityId(), packet.getDeltaX(), packet.getDeltaY(), packet.getDeltaZ());
         } else if (event.getPacketId() == PacketType.Play.Server.NAMED_ENTITY_SPAWN) {
             final WrappedPacketOutNamedEntitySpawn packet = new WrappedPacketOutNamedEntitySpawn(event.getNMSPacket());
-            data.getEntityTracker().teleport(packet.getEntityId(), packet.getPosition().x, packet.getPosition().y, packet.getPosition().z);
+            data.getEntityTracker().addEntity(packet.getEntityId(), packet.getPosition().x, packet.getPosition().y, packet.getPosition().z);
         }
 
 

@@ -1,9 +1,12 @@
 package arctic.ac.utils;
 
+import arctic.ac.data.PlayerData;
 import lombok.experimental.UtilityClass;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.lang.reflect.InvocationTargetException;
 
 @UtilityClass
 public class PlayerUtils {
@@ -15,5 +18,18 @@ public class PlayerUtils {
             }
         }
         return 0;
+    }
+
+    public final int getPing(PlayerData data) {
+        Object entityPlayer = " ";
+        int ping = -1;
+        try {
+            entityPlayer = data.getPlayer().getClass().getMethod("getHandle").invoke(data.getPlayer());
+            ping = (int) entityPlayer.getClass().getField("ping").get(entityPlayer);
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+                | SecurityException | NoSuchFieldException e) {
+
+        }
+        return ping;
     }
 }

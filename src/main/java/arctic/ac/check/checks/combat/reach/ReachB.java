@@ -5,8 +5,6 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.UseEntityEvent;
 import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
@@ -43,9 +41,8 @@ public class ReachB extends Check {
 
                 data.setTarget((LivingEntity) event.getTarget());
 
-                final EntityPlayer nms = ((CraftPlayer) data.getPlayer()).getHandle();
 
-                final List<Vector> pastVectors = ray(nms.ping);
+                final List<Vector> pastVectors = ray(data.getNetworkProcessor().getKeepAlivePing());
 
                 final Vector attacker = data.getBukkitPlayerFromUUID().getEyeLocation().toVector();
 
