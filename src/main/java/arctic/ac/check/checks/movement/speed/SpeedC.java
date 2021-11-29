@@ -85,7 +85,7 @@ public class SpeedC extends Check {
             }
 
             boolean nearBlocks = isNearBlocks(e.getTo().toVector().toLocation(data.getPlayer().getWorld()));
-            boolean velocityTaken = data.getVelocityData().getVelocityTicks() < 3;
+            boolean velocityTaken = data.getVelocityData().getVelocityTicks() <= 7;
             boolean attackSlowDown = data.getInteractData().isHasHitSlowDown();
             boolean check = airTicks >= 3; //near blocks
             checkForFlying(data.getPlayer());

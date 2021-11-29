@@ -36,7 +36,7 @@ public class AimT extends Check {
 
             if (consist < 0.005 && (deltaYaw > 2.75f || (deltaPitch != 0.0f && deltaYaw > 1.25f) && attacking) &&
                     !Double.toString(consist).contains("E") && Math.abs(event.getTo().getPitch()) != 90 &&
-                    Math.abs(event.getFrom().getPitch()) != 90 && deltaYaw < 150) {
+                    Math.abs(event.getFrom().getPitch()) != 90 && (deltaYaw < 65 && lastDeltaYaw < 62.5)) {
 
                 buffer += (0.25 + (consist * 50f));
                 if (consist == 0.0f || data.getCinematicProcessor().getTicksSince() <= 1) buffer *= 0.2f;

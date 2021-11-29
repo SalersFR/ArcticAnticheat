@@ -49,13 +49,13 @@ public class MotionB extends Check {
 
             final boolean exempt = worldUtils.blockNearHead(bukkitTo) || worldUtils.isCollidingWithClimbable(player)
                     || data.getInteractData().isTeleported() || data.getInteractionData().getTicksSinceHurt() < 40
-                    || ticksSinceIce < 15 || ticksSinceNearHead < 15 || data.getInteractionData().getTicksSinceSlime() < 60;
+                    || ticksSinceIce < 15 || ticksSinceNearHead < 15 || data.getInteractionData().getTicksSinceSlime() < 60 || Math.abs(0.01250003768371582 - deltaY) < 0.000001;
 
             debug("jumped=" + jumped + " deltaY=" + deltaY + " predicted=" + predicted);
             // LITERALLY SO LAZY, FIXES
             // FALSE WITH TRAPDOORS &
             // JUMPING, CHANGE TODO
-            if (jumped && deltaY < fixedPredicted && bukkitFrom.getY() % 1 == 0 && !exempt && deltaY != 0.01250003768371582) {
+            if (jumped && deltaY < fixedPredicted && bukkitFrom.getY() % 1 == 0 && !exempt) {
                 fail("d=" + deltaY + " p=" + fixedPredicted);
             }
 
