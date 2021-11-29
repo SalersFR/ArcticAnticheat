@@ -97,9 +97,12 @@ public class SpeedD extends Check {
             double angle = angle(look, moveDir);
             angle = angle % (Math.PI / 4);
 
-            if (angle > 0.05 && angle < (Math.PI / 4 - 0.05) && move.getDeltaXZ() > 0.045) {
-                Bukkit.broadcastMessage("angle " + angle);
-            }
+            if (angle > 0.5 && angle < (Math.PI / 4 - 0.05) && move.getDeltaXZ() > 0.045) {
+                if(++buffer > 7)
+                    fail("angle=" + angle);
+            } else if(buffer > 0) buffer -= 0.3333343D;
+
+            debug("angle=" + angle + " buffer" + buffer);
         }
 
 

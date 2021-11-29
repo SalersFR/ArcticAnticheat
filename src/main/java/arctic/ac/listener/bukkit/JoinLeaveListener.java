@@ -58,7 +58,7 @@ public class JoinLeaveListener implements Listener, PluginMessageListener {
             final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData((Player) event.getEntity());
             if (data == null) return;
 
-            data.getInteractData().onBow();
+            Arctic.INSTANCE.getDataThread().execute(() -> data.getInteractData().onBow());
 
         }
     }
@@ -69,6 +69,7 @@ public class JoinLeaveListener implements Listener, PluginMessageListener {
             final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData((Player) event.getEntity());
             if (data == null) return;
 
+            Arctic.INSTANCE.getDataThread().execute(() -> data.getInteractData().onEDBE());
             data.getInteractData().onEDBE();
         } else if (event.getEntity() instanceof Item) {
             Item item = (Item) event.getEntity();
@@ -110,7 +111,6 @@ public class JoinLeaveListener implements Listener, PluginMessageListener {
 
     @EventHandler
     public void onItemPickup(PlayerPickupItemEvent event) {
-        Player player = event.getPlayer();
 
         if (!(event.getItem().getItemStack().getData().getData() == (short) DyeColor.RED.getData())) return;
         if (event.getItem().getItemStack().getItemMeta().getDisplayName() == null) return;

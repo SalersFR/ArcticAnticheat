@@ -3,6 +3,7 @@ package arctic.ac.data.processor;
 import arctic.ac.Arctic;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
+import arctic.ac.event.Event;
 import arctic.ac.event.client.*;
 import arctic.ac.event.server.ServerPositionEvent;
 import arctic.ac.event.server.ServerVelocityEvent;
@@ -23,7 +24,6 @@ import io.github.retrooper.packetevents.packetwrappers.play.out.namedentityspawn
 import io.github.retrooper.packetevents.packetwrappers.play.out.position.WrappedPacketOutPosition;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.GameMode;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
 @RequiredArgsConstructor
 public class PacketProcessor {
@@ -35,23 +35,7 @@ public class PacketProcessor {
 
         data.getPosData().setLastPacket(event.getPacketId());
 
-        final boolean bypass = data.getPlayer().hasPermission(Arctic.INSTANCE.getConfig().getString("bypass-permission")) &&
-                Arctic.INSTANCE.getConfig().getBoolean("bypass-enabled");
-
-        final boolean exempt = data.getPlayer().getGameMode() == GameMode.CREATIVE
-                || data.getPlayer().getAllowFlight()
-                || data.getPlayer().getGameMode() == GameMode.SPECTATOR
-                || data.getInteractionData().isTeleported()
-                || bypass
-                || data.getInteractData().getTicksSinceTeleport() < 10
-                || data.getSetbackProcessor().getTicksSince() < 4;
-
-        data.getNetworkProcessor().handleIn(event);
-
-        for(Check check : data.getChecks()) {
-            if(!exempt && check.isEnabled())
-                check.handle(new PacketReceiveEvent(event));
-        }
+       handleChecks(new PacketReceiveEvent(event));
 
 
         if (event.getPacketId() == PacketType.Play.Client.LOOK) {
@@ -72,12 +56,9 @@ public class PacketProcessor {
             if (data.getTarget() != null)
                 data.getEntityTracker().interpolate(data.getTarget().getEntityId());
 
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt) {
-                    checks.handle(rotationEvent);
-                    checks.handle(flyingEvent);
-                }
-            }
+            handleChecks(flyingEvent);
+            handleChecks(rotationEvent);
+
         } else if (event.getPacketId() == PacketType.Play.Client.FLYING) {
 
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
@@ -87,11 +68,7 @@ public class PacketProcessor {
             if (data.getTarget() != null)
                 data.getEntityTracker().interpolate(data.getTarget().getEntityId());
 
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt) {
-                    checks.handle(flyingEvent);
-                }
-            }
+            handleChecks(flyingEvent);
 
         } else if (event.getPacketId() == PacketType.Play.Client.POSITION_LOOK) {
             final WrappedPacketInFlying wrapper = new WrappedPacketInFlying(event.getNMSPacket());
@@ -111,14 +88,11 @@ public class PacketProcessor {
             data.getVelocityData().handleFlying();
             data.getSetbackProcessor().handle(moveEvent);
 
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt) {
-                    checks.handle(moveEvent);
-                    checks.handle(rotationEvent);
-                    checks.handle(positionEvent);
-                    checks.handle(flyingEvent);
-                }
-            }
+            handleChecks(moveEvent);
+            handleChecks(flyingEvent);
+            handleChecks(rotationEvent);
+            handleChecks(positionEvent);
+
         } else if (event.getPacketId() == PacketType.Play.Client.POSITION) {
             final WrappedPacketInFlying wrapper = new WrappedPacketInFlying(event.getNMSPacket());
 
@@ -132,14 +106,9 @@ public class PacketProcessor {
             data.getVelocityData().handleFlying();
             data.getSetbackProcessor().handle(moveEvent);
 
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt) {
-                    checks.handle(moveEvent);
-                    checks.handle(flyingEvent);
-                }
+            handleChecks(moveEvent);
+            handleChecks(flyingEvent);
 
-
-            }
         } else if (event.getPacketId() == PacketType.Play.Client.USE_ENTITY) {
             final WrappedPacketInUseEntity wrapper = new WrappedPacketInUseEntity(event.getNMSPacket());
 
@@ -150,19 +119,13 @@ public class PacketProcessor {
             }
             data.getInteractionData().setLastHitPacket(System.currentTimeMillis());
 
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt)
-                    checks.handle(useEntityEvent);
-            }
+            handleChecks(useEntityEvent);
+
         } else if (event.getPacketId() == PacketType.Play.Client.ARM_ANIMATION) {
 
             final ArmAnimationEvent armAnimationEvent = new ArmAnimationEvent();
 
-
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt)
-                    checks.handle(armAnimationEvent);
-            }
+            handleChecks(armAnimationEvent);
 
             //data.getInteractData().handleArmAnimation();
 
@@ -183,11 +146,7 @@ public class PacketProcessor {
 
             final EntityActionEvent entityActionEvent = new EntityActionEvent(wrapper);
 
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt) {
-                    checks.handle(entityActionEvent);
-                }
-            }
+            handleChecks(entityActionEvent);
 
 
         } else if (event.getPacketId() == PacketType.Play.Client.TRANSACTION) {
@@ -200,21 +159,14 @@ public class PacketProcessor {
             if (data.getTarget() != null)
                 data.getEntityTracker().handleTransaction(data.getTarget().getEntityId(), wrapper.getActionNumber());
 
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt) {
-                    checks.handle(transactionConfirmEvent);
-                }
-            }
+            handleChecks(transactionConfirmEvent);
+
         } else if (event.getPacketId() == PacketType.Play.Client.BLOCK_PLACE) {
 
             final WrappedPacketInBlockPlace wrapper = new WrappedPacketInBlockPlace(event.getNMSPacket());
             final BlockPlaceEvent blockPlaceEvent = new BlockPlaceEvent(wrapper);
 
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt)
-                    checks.handle(blockPlaceEvent);
-
-            }
+            handleChecks(blockPlaceEvent);
 
         }
 
@@ -223,17 +175,6 @@ public class PacketProcessor {
     public void handleSending(PacketPlaySendEvent event) {
 
         if (data == null) return;
-
-        final boolean bypass = data.getPlayer().hasPermission(Arctic.INSTANCE.getConfig().getString("bypass-permission")) &&
-                Arctic.INSTANCE.getConfig().getBoolean("bypass-enabled");
-
-        final boolean exempt = data.getPlayer().getGameMode() == GameMode.CREATIVE
-                || data.getPlayer().getAllowFlight()
-                || data.getPlayer().getGameMode() == GameMode.SPECTATOR
-                || data.getInteractionData().isTeleported()
-                || bypass
-                || data.getInteractData().getTicksSinceTeleport() < 10
-                || data.getSetbackProcessor().getTicksSince() < 4;
 
         data.getNetworkProcessor().handleOut(event);
 
@@ -245,10 +186,8 @@ public class PacketProcessor {
 
             data.getVelocityData().handleVelocity(serverVelocityEvent);
 
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt)
-                    checks.handle(serverVelocityEvent);
-            }
+            handleChecks(serverVelocityEvent);
+
         } else if (event.getPacketId() == PacketType.Play.Server.POSITION) {
 
             final WrappedPacketOutPosition wrapper = new WrappedPacketOutPosition(event.getNMSPacket());
@@ -257,10 +196,7 @@ public class PacketProcessor {
 
             data.getPosData().setLastTeleported(System.currentTimeMillis());
 
-            for (Check checks : data.getChecks()) {
-                if (checks.isEnabled() && !exempt)
-                    checks.handle(serverPositionEvent);
-            }
+            handleChecks(serverPositionEvent);
 
 
         } else if (event.getPacketId() == PacketType.Play.Server.ENTITY_TELEPORT) {
@@ -280,5 +216,27 @@ public class PacketProcessor {
 
 
     }
+
+    private void handleChecks(final Event e) {
+
+        final boolean bypass = data.getPlayer().hasPermission(Arctic.INSTANCE.getConfig().getString("bypass-permission")) &&
+                Arctic.INSTANCE.getConfig().getBoolean("bypass-enabled");
+
+        final boolean exempt = data.getPlayer().getGameMode() == GameMode.CREATIVE
+                || data.getPlayer().getAllowFlight()
+                || data.getPlayer().getGameMode() == GameMode.SPECTATOR
+                || data.getInteractionData().isTeleported()
+                || bypass
+                || data.getInteractData().getTicksSinceTeleport() < 10
+                || data.getSetbackProcessor().getTicksSince() < 4;
+
+        for (Check checks : data.getChecks()) {
+            if (checks.isEnabled() && !exempt) {
+                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(e));
+
+            }
+        }
+    }
+
 }
 

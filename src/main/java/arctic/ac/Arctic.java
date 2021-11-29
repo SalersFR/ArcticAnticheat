@@ -15,9 +15,13 @@ import arctic.ac.listener.packet.PacketHandler;
 import arctic.ac.utils.CustomUtils;
 import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.utils.server.ServerVersion;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Arctic extends JavaPlugin {
 
@@ -25,6 +29,16 @@ public class Arctic extends JavaPlugin {
     private PlayerDataManager dataManager = new PlayerDataManager();
 
     private CheckFileManager checkFileManager;
+
+    @Getter
+    private ExecutorService checksThread = Executors.newSingleThreadExecutor();
+
+    @Getter
+    private ExecutorService alertThread = Executors.newSingleThreadExecutor();
+
+    @Getter
+    private ExecutorService dataThread = Executors.newSingleThreadExecutor();
+
 
     private boolean citizensEnabled;
 

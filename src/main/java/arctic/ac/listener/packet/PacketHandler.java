@@ -14,7 +14,7 @@ public class PacketHandler extends PacketListenerDynamic {
 
         if (data == null) return;
 
-        data.getPacketProcessor().handleReceive(event);
+        Arctic.INSTANCE.getDataThread().execute(() -> data.getPacketProcessor().handleReceive(event));
     }
 
     @Override
@@ -23,7 +23,7 @@ public class PacketHandler extends PacketListenerDynamic {
 
         if (data == null) return;
 
-        data.getPacketProcessor().handleSending(event);
+        Arctic.INSTANCE.getDataThread().execute(() -> data.getPacketProcessor().handleSending(event));
     }
 
 
