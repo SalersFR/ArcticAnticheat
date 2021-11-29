@@ -5,12 +5,12 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.data.tracker.ReachEntity;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.UseEntityEvent;
+import arctic.ac.utils.ABox;
 import arctic.ac.utils.ALocation;
 import arctic.ac.utils.MathHelper;
 import arctic.ac.utils.mc.AxisAlignedBB;
 import arctic.ac.utils.mc.MovingObjectPosition;
 import arctic.ac.utils.mc.Vec3;
-
 import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
@@ -53,7 +53,17 @@ public class Reach extends Check {
 
                 final MovingObjectPosition collision = targetBox.calculateIntercept(origin, look);
 
-                final double reach = collision.hitVec.distanceTo(origin) - 0.11f;
+                double reach = 3.0D;
+
+                if(collision != null && collision.hitVec != null)
+                    reach = collision.hitVec.distanceTo(origin) - 0.11f;
+
+                else {
+                    final ABox victimBox = new ABox(reachEntity.getX(), reachEntity.getY(), reachEntity.getZ());
+                    final Vector attacker = new Vector(origin.xCoord, origin.yCoord, origin.zCoord);
+                    reach = victimBox.distanceXZ(attacker.getX(), attacker.getZ()) - 0.425D;
+
+                }
 
                 debug("reach=" + reach);
 
