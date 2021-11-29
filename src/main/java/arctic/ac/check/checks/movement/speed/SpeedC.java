@@ -22,6 +22,7 @@ public class SpeedC extends Check {
     private Vector motion = new Vector(0, 0, 0);
     private double airTicks;
     private boolean stillFlying;
+
     public SpeedC(PlayerData data) {
         super(data, "Speed", "C", "movement.speed.c", "Checks if player is following minecraft's movement protocol in air.", true);
     }

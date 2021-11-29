@@ -10,7 +10,8 @@ import arctic.ac.utils.MathHelper;
 import arctic.ac.utils.mc.AxisAlignedBB;
 import arctic.ac.utils.mc.MovingObjectPosition;
 import arctic.ac.utils.mc.Vec3;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
@@ -38,7 +39,7 @@ public class Reach extends Check {
 
             final UseEntityEvent event = (UseEntityEvent) e;
 
-            if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+            if (event.getAction() == WrappedPacketInUseEntity.EntityUseAction.ATTACK) {
 
                 final ReachEntity reachEntity = data.getEntityTracker().getEntityFromId.get(event.getTarget().getEntityId());
                 final ALocation aLocation = data.getLocation();

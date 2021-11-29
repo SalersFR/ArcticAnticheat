@@ -9,8 +9,8 @@ import arctic.ac.utils.MathUtils;
 
 public class ScaffoldA extends Check {
 
-    private long lastTime;
     private final ArcticQueue<Integer> samples = new ArcticQueue<>(30);
+    private long lastTime;
 
     public ScaffoldA(PlayerData data) {
         super(data, "Scaffold", "A", "player.scaffold.a", "Checks for proper delay between block places.", true);

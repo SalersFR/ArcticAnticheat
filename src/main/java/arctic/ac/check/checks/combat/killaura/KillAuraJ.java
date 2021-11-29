@@ -6,7 +6,7 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.ArmAnimationEvent;
 import arctic.ac.event.client.RotationEvent;
 import arctic.ac.event.client.UseEntityEvent;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.util.Vector;
@@ -19,6 +19,7 @@ public class KillAuraJ extends Check {
     public long lastAim;
     public double aimSpeed;
     public double aimPitch;
+
     public KillAuraJ(PlayerData data) {
         super(data, "KillAura", "J", "combat.killaura.j", "Checks for extremely high aim with high attack accuracion", true);
     }
@@ -41,7 +42,7 @@ public class KillAuraJ extends Check {
         }
         if (e instanceof UseEntityEvent) {
             UseEntityEvent attack = (UseEntityEvent) e;
-            if (!attack.getAction().equals(EnumWrappers.EntityUseAction.ATTACK)) return;
+            if (!attack.getAction().equals(WrappedPacketInUseEntity.EntityUseAction.ATTACK)) return;
 
             long hit = System.currentTimeMillis();
             long lastHit = this.lastHit;

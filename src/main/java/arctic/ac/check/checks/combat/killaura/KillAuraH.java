@@ -6,7 +6,7 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.ArmAnimationEvent;
 import arctic.ac.event.client.RotationEvent;
 import arctic.ac.event.client.UseEntityEvent;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.util.Vector;
@@ -17,6 +17,7 @@ public class KillAuraH extends Check {
     private double aimSpeed;
     private double attacks;
     private double swings;
+
     public KillAuraH(PlayerData data) {
         super(data, "KillAura", "H", "combat.killaura.h", "Checks for killaura accuration", true);
     }
@@ -25,7 +26,7 @@ public class KillAuraH extends Check {
     public void handle(Event e) {
         if (e instanceof UseEntityEvent) {
             UseEntityEvent attack = (UseEntityEvent) e;
-            if (attack.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+            if (attack.getAction() == WrappedPacketInUseEntity.EntityUseAction.ATTACK) {
 
                 //Attack
                 boolean aiming = System.currentTimeMillis() - lastAim < 60;

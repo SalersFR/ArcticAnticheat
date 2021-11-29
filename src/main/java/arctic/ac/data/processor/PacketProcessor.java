@@ -6,10 +6,20 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.client.*;
 import arctic.ac.event.server.ServerPositionEvent;
 import arctic.ac.event.server.ServerVelocityEvent;
-import com.comphenix.packetwrapper.*;
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
+import io.github.retrooper.packetevents.event.impl.PacketPlaySendEvent;
+import io.github.retrooper.packetevents.packettype.PacketType;
+import io.github.retrooper.packetevents.packetwrappers.play.in.blockdig.WrappedPacketInBlockDig;
+import io.github.retrooper.packetevents.packetwrappers.play.in.blockplace.WrappedPacketInBlockPlace;
+import io.github.retrooper.packetevents.packetwrappers.play.in.entityaction.WrappedPacketInEntityAction;
+import io.github.retrooper.packetevents.packetwrappers.play.in.flying.WrappedPacketInFlying;
+import io.github.retrooper.packetevents.packetwrappers.play.in.transaction.WrappedPacketInTransaction;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
+import io.github.retrooper.packetevents.packetwrappers.play.out.entity.WrappedPacketOutEntity;
+import io.github.retrooper.packetevents.packetwrappers.play.out.entityteleport.WrappedPacketOutEntityTeleport;
+import io.github.retrooper.packetevents.packetwrappers.play.out.entityvelocity.WrappedPacketOutEntityVelocity;
+import io.github.retrooper.packetevents.packetwrappers.play.out.namedentityspawn.WrappedPacketOutNamedEntitySpawn;
+import io.github.retrooper.packetevents.packetwrappers.play.out.position.WrappedPacketOutPosition;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.GameMode;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
@@ -19,10 +29,10 @@ public class PacketProcessor {
 
     private final PlayerData data;
 
-    public void handleReceive(PacketEvent event) {
+    public void handleReceive(PacketPlayReceiveEvent event) {
         if (data == null) return;
 
-        data.getPosData().setLastPacket(event.getPacketType());
+        data.getPosData().setLastPacket(event.getPacketId());
 
         final boolean bypass = data.getPlayer().hasPermission(Arctic.INSTANCE.getConfig().getString("bypass-permission")) &&
                 Arctic.INSTANCE.getConfig().getBoolean("bypass-enabled");
@@ -37,21 +47,20 @@ public class PacketProcessor {
 
         data.getNetworkProcessor().handleIn(event);
 
-        for (Check checks : data.getChecks()) {
-            if (checks.isEnabled() && !exempt) {
-                checks.handle(new arctic.ac.event.client.PacketEvent(event));
-            }
+        for(Check check : data.getChecks()) {
+            if(!exempt && check.isEnabled())
+                check.handle(new PacketReceiveEvent(event));
         }
 
 
-        if (event.getPacketType() == PacketType.Play.Client.LOOK) {
-            final WrapperPlayClientLook wrapper = new WrapperPlayClientLook(event.getPacket());
+        if (event.getPacketId() == PacketType.Play.Client.LOOK) {
+            final WrappedPacketInFlying wrapper = new WrappedPacketInFlying(event.getNMSPacket());
 
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             long ping = ((CraftPlayer) data.getPlayer()).getHandle().ping;
-            ping = Math.min(1000,ping);
+            ping = Math.min(1000, ping);
             data.getPosData().setTeleporting(System.currentTimeMillis() - data.getPosData().getLastTeleported() < ping + 200);
 
             data.getInteractData().handleFlying();
@@ -68,7 +77,7 @@ public class PacketProcessor {
                     checks.handle(flyingEvent);
                 }
             }
-        } else if (event.getPacketType() == PacketType.Play.Client.FLYING) {
+        } else if (event.getPacketId() == PacketType.Play.Client.FLYING) {
 
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
@@ -83,13 +92,14 @@ public class PacketProcessor {
                 }
             }
 
-        } else if (event.getPacketType() == PacketType.Play.Client.POSITION_LOOK) {
-            final WrapperPlayClientPositionLook wrapper = new WrapperPlayClientPositionLook(event.getPacket());
+        } else if (event.getPacketId() == PacketType.Play.Client.POSITION_LOOK) {
+            final WrappedPacketInFlying wrapper = new WrappedPacketInFlying(event.getNMSPacket());
 
-            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getYaw(), wrapper.getPitch(), wrapper.getOnGround());
+            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getYaw(), wrapper.getPitch(), wrapper.isOnGround());
             final RotationEvent rotationEvent = new RotationEvent(data, wrapper.getYaw(), wrapper.getPitch());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
-            final PositionEvent positionEvent = new PositionEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), wrapper.getYaw(), wrapper.getPitch(), wrapper.getOnGround());
+            final PositionEvent positionEvent = new PositionEvent(data, wrapper.getX(), wrapper.getY(),
+                    wrapper.getZ(), wrapper.getYaw(), wrapper.getPitch(), wrapper.isOnGround());
 
             if (data.getTarget() != null)
                 data.getEntityTracker().interpolate(data.getTarget().getEntityId());
@@ -108,10 +118,10 @@ public class PacketProcessor {
                     checks.handle(flyingEvent);
                 }
             }
-        } else if (event.getPacketType() == PacketType.Play.Client.POSITION) {
-            final WrapperPlayClientPosition wrapper = new WrapperPlayClientPosition(event.getPacket());
+        } else if (event.getPacketId() == PacketType.Play.Client.POSITION) {
+            final WrappedPacketInFlying wrapper = new WrappedPacketInFlying(event.getNMSPacket());
 
-            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), 0, 0, wrapper.getOnGround());
+            final MoveEvent moveEvent = new MoveEvent(data, wrapper.getX(), wrapper.getY(), wrapper.getZ(), 0, 0, wrapper.isOnGround());
             final FlyingEvent flyingEvent = new FlyingEvent(System.currentTimeMillis());
 
             if (data.getTarget() != null)
@@ -129,12 +139,12 @@ public class PacketProcessor {
 
 
             }
-        } else if (event.getPacketType() == PacketType.Play.Client.USE_ENTITY) {
-            final WrapperPlayClientUseEntity wrapper = new WrapperPlayClientUseEntity(event.getPacket());
+        } else if (event.getPacketId() == PacketType.Play.Client.USE_ENTITY) {
+            final WrappedPacketInUseEntity wrapper = new WrappedPacketInUseEntity(event.getNMSPacket());
 
             final UseEntityEvent useEntityEvent = new UseEntityEvent(wrapper, data.getBukkitPlayerFromUUID().getWorld());
 
-            if (wrapper.getTarget(event) != null) {
+            if (wrapper.getEntity() != null) {
                 data.getInteractData().handleUseEntity(wrapper);
             }
             data.getInteractionData().setLastHitPacket(System.currentTimeMillis());
@@ -143,10 +153,9 @@ public class PacketProcessor {
                 if (checks.isEnabled() && !exempt)
                     checks.handle(useEntityEvent);
             }
-        } else if (event.getPacketType() == PacketType.Play.Client.ARM_ANIMATION) {
-            final WrapperPlayClientArmAnimation wrapper = new WrapperPlayClientArmAnimation(event.getPacket());
+        } else if (event.getPacketId() == PacketType.Play.Client.ARM_ANIMATION) {
 
-            final ArmAnimationEvent armAnimationEvent = new ArmAnimationEvent(data, wrapper);
+            final ArmAnimationEvent armAnimationEvent = new ArmAnimationEvent();
 
 
             for (Check checks : data.getChecks()) {
@@ -158,20 +167,17 @@ public class PacketProcessor {
 
 
             // PLAYER DATA
-        } else if (event.getPacketType() == PacketType.Play.Client.BLOCK_DIG) {
+        } else if (event.getPacketId() == PacketType.Play.Client.BLOCK_DIG) {
 
-            final WrapperPlayClientBlockDig wrapper = new WrapperPlayClientBlockDig(event.getPacket());
-            final boolean isSolid = wrapper.getLocation().toLocation(event.getPlayer().getWorld()).getBlock().getType().isSolid();
-
-            if (isSolid && wrapper.getStatus() != EnumWrappers.PlayerDigType.STOP_DESTROY_BLOCK) {
-                data.getInteractionData().handleDigging();
-            }
+            final WrappedPacketInBlockDig wrapper = new WrappedPacketInBlockDig(event.getNMSPacket());
 
 
-        } else if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
+            data.getInteractionData().handleDigging();
 
-            final WrapperPlayClientEntityAction wrapper = new WrapperPlayClientEntityAction(event.getPacket());
 
+        } else if (event.getPacketId() == PacketType.Play.Client.ENTITY_ACTION) {
+
+            final WrappedPacketInEntityAction wrapper = new WrappedPacketInEntityAction(event.getNMSPacket());
             data.getInteractData().handleActionPacket(wrapper);
 
             final EntityActionEvent entityActionEvent = new EntityActionEvent(wrapper);
@@ -183,9 +189,9 @@ public class PacketProcessor {
             }
 
 
-        } else if (event.getPacketType() == PacketType.Play.Client.TRANSACTION) {
+        } else if (event.getPacketId() == PacketType.Play.Client.TRANSACTION) {
 
-            final WrapperPlayClientTransaction wrapper = new WrapperPlayClientTransaction(event.getPacket());
+            final WrappedPacketInTransaction wrapper = new WrappedPacketInTransaction(event.getNMSPacket());
             final TransactionConfirmEvent transactionConfirmEvent = new TransactionConfirmEvent(wrapper);
 
             data.getVelocityData().handleTransaction(wrapper);
@@ -198,13 +204,13 @@ public class PacketProcessor {
                     checks.handle(transactionConfirmEvent);
                 }
             }
-        } else if(event.getPacketType() == PacketType.Play.Client.BLOCK_PLACE) {
+        } else if (event.getPacketId() == PacketType.Play.Client.BLOCK_PLACE) {
 
-            final WrapperPlayClientBlockPlace wrapper = new WrapperPlayClientBlockPlace(event.getPacket());
+            final WrappedPacketInBlockPlace wrapper = new WrappedPacketInBlockPlace(event.getNMSPacket());
             final BlockPlaceEvent blockPlaceEvent = new BlockPlaceEvent(wrapper);
 
-            for(Check checks : data.getChecks()) {
-                if(checks.isEnabled() && !exempt)
+            for (Check checks : data.getChecks()) {
+                if (checks.isEnabled() && !exempt)
                     checks.handle(blockPlaceEvent);
 
             }
@@ -213,7 +219,7 @@ public class PacketProcessor {
 
     }
 
-    public void handleSending(PacketEvent event) {
+    public void handleSending(PacketPlaySendEvent event) {
 
         if (data == null) return;
 
@@ -231,13 +237,8 @@ public class PacketProcessor {
         data.getNetworkProcessor().handleOut(event);
 
 
-        for (Check checks : data.getChecks()) {
-            if (checks.isEnabled() && !exempt) {
-                checks.handle(new arctic.ac.event.client.PacketEvent(event));
-            }
-        }
-        if (event.getPacketType() == PacketType.Play.Server.ENTITY_VELOCITY) {
-            final WrapperPlayServerEntityVelocity wrapper = new WrapperPlayServerEntityVelocity(event.getPacket());
+        if (event.getPacketId() == PacketType.Play.Server.ENTITY_VELOCITY) {
+            final WrappedPacketOutEntityVelocity wrapper = new WrappedPacketOutEntityVelocity(event.getNMSPacket());
 
             final ServerVelocityEvent serverVelocityEvent = new ServerVelocityEvent(wrapper);
 
@@ -247,9 +248,9 @@ public class PacketProcessor {
                 if (checks.isEnabled() && !exempt)
                     checks.handle(serverVelocityEvent);
             }
-        } else if (event.getPacketType() == PacketType.Play.Server.POSITION) {
+        } else if (event.getPacketId() == PacketType.Play.Server.POSITION) {
 
-            final WrapperPlayServerPosition wrapper = new WrapperPlayServerPosition(event.getPacket());
+            final WrappedPacketOutPosition wrapper = new WrappedPacketOutPosition(event.getNMSPacket());
 
             final ServerPositionEvent serverPositionEvent = new ServerPositionEvent(wrapper);
 
@@ -261,19 +262,19 @@ public class PacketProcessor {
             }
 
 
-        } else if (event.getPacketType() == PacketType.Play.Server.ENTITY_TELEPORT) {
-            final WrapperPlayServerEntityTeleport packet = new WrapperPlayServerEntityTeleport(event.getPacket());
+        } else if (event.getPacketId() == PacketType.Play.Server.ENTITY_TELEPORT) {
+            final WrappedPacketOutEntityTeleport packet = new WrappedPacketOutEntityTeleport(event.getNMSPacket());
             data.getInteractData().handleOutTeleport(packet);
-            data.getEntityTracker().teleport(packet.getEntityID(), packet.getX(), packet.getY(), packet.getZ());
-        } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE) {
-            final WrapperPlayServerRelEntityMove packet = new WrapperPlayServerRelEntityMove(event.getPacket());
-            data.getEntityTracker().relMove(packet.getEntityID(), packet.getDx(), packet.getDy(), packet.getDz());
-        } else if (event.getPacketType() == PacketType.Play.Server.REL_ENTITY_MOVE_LOOK) {
-            final WrapperPlayServerRelEntityMoveLook packet = new WrapperPlayServerRelEntityMoveLook(event.getPacket());
-            data.getEntityTracker().relMove(packet.getEntityID(), packet.getDx(), packet.getDy(), packet.getDz());
-        } else if (event.getPacketType() == PacketType.Play.Server.NAMED_ENTITY_SPAWN) {
-            final WrapperPlayServerNamedEntitySpawn packet = new WrapperPlayServerNamedEntitySpawn(event.getPacket());
-            data.getEntityTracker().addEntity(packet.getEntityID(), packet.getX(), packet.getY(), packet.getZ());
+            data.getEntityTracker().teleport(packet.getEntityId(), packet.getPosition().x, packet.getPosition().y, packet.getPosition().z);
+        } else if (event.getPacketId() == PacketType.Play.Server.REL_ENTITY_MOVE) {
+            final WrappedPacketOutEntity.WrappedPacketOutRelEntityMove packet = new WrappedPacketOutEntity.WrappedPacketOutRelEntityMove(event.getNMSPacket());
+            data.getEntityTracker().relMove(packet.getEntityId(), packet.getDeltaX(), packet.getDeltaY(), packet.getDeltaZ());
+        } else if (event.getPacketId() == PacketType.Play.Server.REL_ENTITY_MOVE_LOOK) {
+            final WrappedPacketOutEntity.WrappedPacketOutRelEntityMoveLook packet = new WrappedPacketOutEntity.WrappedPacketOutRelEntityMoveLook(event.getNMSPacket());
+            data.getEntityTracker().relMove(packet.getEntityId(), packet.getDeltaX(), packet.getDeltaY(), packet.getDeltaZ());
+        } else if (event.getPacketId() == PacketType.Play.Server.NAMED_ENTITY_SPAWN) {
+            final WrappedPacketOutNamedEntitySpawn packet = new WrappedPacketOutNamedEntitySpawn(event.getNMSPacket());
+            data.getEntityTracker().teleport(packet.getEntityId(), packet.getPosition().x, packet.getPosition().y, packet.getPosition().z);
         }
 
 

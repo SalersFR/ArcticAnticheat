@@ -3,10 +3,9 @@ package arctic.ac.data.impl;
 import arctic.ac.Arctic;
 import arctic.ac.data.PlayerData;
 import arctic.ac.utils.WorldUtils;
-import com.comphenix.packetwrapper.WrapperPlayClientEntityAction;
-import com.comphenix.packetwrapper.WrapperPlayClientUseEntity;
-import com.comphenix.packetwrapper.WrapperPlayServerEntityTeleport;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.entityaction.WrappedPacketInEntityAction;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
+import io.github.retrooper.packetevents.packetwrappers.play.out.entityteleport.WrappedPacketOutEntityTeleport;
 import lombok.Getter;
 import lombok.Setter;
 import net.citizensnpcs.api.npc.NPC;
@@ -56,7 +55,7 @@ public class InteractData {
         this.lastHitPacket = l;
     }
 
-    public void handleActionPacket(WrapperPlayClientEntityAction wrapper) {
+    public void handleActionPacket(WrappedPacketInEntityAction wrapper) {
         switch (wrapper.getAction()) {
             case START_SPRINTING:
                 this.isSprinting = true;
@@ -73,17 +72,17 @@ public class InteractData {
         }
     }
 
-    public void handleUseEntity(WrapperPlayClientUseEntity wrapper) {
-        if (wrapper.getType() == EnumWrappers.EntityUseAction.ATTACK) {
-            this.target = wrapper.getTarget(data.getPlayer().getWorld());
+    public void handleUseEntity(WrappedPacketInUseEntity wrapper) {
+        if (wrapper.getAction() == WrappedPacketInUseEntity.EntityUseAction.ATTACK) {
+            this.target = wrapper.getEntity();
             hasHitSlowDown = true;
             attackSlowDownTime = System.currentTimeMillis();
         }
 
-        if (wrapper.getTarget(data.getPlayer().getWorld()) == null) return;
+        if (wrapper.getEntity() == null) return;
 
         if (target.getType() == EntityType.PLAYER) {
-            PlayerData target = Arctic.INSTANCE.getDataManager().getPlayerData((Player) wrapper.getTarget(data.getPlayer().getWorld()));
+            PlayerData target = Arctic.INSTANCE.getDataManager().getPlayerData((Player) wrapper.getEntity());
             if (target == null) return;
             target.getInteractData().setTicksSinceHurt(0);
         }
@@ -133,8 +132,8 @@ public class InteractData {
 
     }
 
-    public void handleOutTeleport(WrapperPlayServerEntityTeleport wrapper) {
-        if (wrapper.getEntityID() == data.getPlayer().getEntityId()) {
+    public void handleOutTeleport(WrappedPacketOutEntityTeleport wrapper) {
+        if (wrapper.getEntityId() == data.getPlayer().getEntityId()) {
             this.ticksSinceTeleport = 0;
             this.lastTeleport = System.currentTimeMillis();
 

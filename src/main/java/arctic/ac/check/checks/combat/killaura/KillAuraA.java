@@ -5,7 +5,7 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
 import arctic.ac.event.client.UseEntityEvent;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 
 public class KillAuraA extends Check {
 
@@ -25,7 +25,7 @@ public class KillAuraA extends Check {
         } else if (e instanceof UseEntityEvent) {
             final UseEntityEvent event = (UseEntityEvent) e;
 
-            if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+            if (event.getAction() == WrappedPacketInUseEntity.EntityUseAction.ATTACK) {
                 final long delta = Math.abs(System.currentTimeMillis() - this.lastFlying);
 
                 average = ((average * 14) + delta) / 15;

@@ -37,7 +37,7 @@ public class SpiderA extends Check {
                     || new WorldUtils().isCollidingWithWeb(data.getPlayer())
                     || new WorldUtils().isCloseToGround(data.getPlayer().getLocation())
                     || new WorldUtils().isOnACertainBlock(data.getPlayer(), "stairs")
-                    || data.getPlayer().getLocation().add(0,-0.1,0).getBlock().getType().
+                    || data.getPlayer().getLocation().add(0, -0.1, 0).getBlock().getType().
                     toString().toLowerCase(Locale.ROOT).contains("web");
 
 

@@ -1,15 +1,16 @@
 package arctic.ac.data.processor;
 
 import arctic.ac.data.PlayerData;
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.events.PacketEvent;
+import io.github.retrooper.packetevents.PacketEvents;
+import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
+import io.github.retrooper.packetevents.event.impl.PacketPlaySendEvent;
+import io.github.retrooper.packetevents.packettype.PacketType;
+import io.github.retrooper.packetevents.packetwrappers.play.in.transaction.WrappedPacketInTransaction;
+import io.github.retrooper.packetevents.packetwrappers.play.out.transaction.WrappedPacketOutTransaction;
+import io.github.retrooper.packetevents.utils.player.ClientVersion;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-
-import java.lang.reflect.InvocationTargetException;
 
 @Getter
 @Setter
@@ -20,28 +21,25 @@ public class NetworkProcessor {
     private short transactionID = 2000;
     private long lastTransactionSent, lastTransactionConfirm, lastKeepAliveSent, lastKeepAliveConfirm, lastFlying; //confirm = PlayIn , sent = PlayOut
     private int transactionPing, keepAlivePing;
-    private int clientVersion;
+    private ClientVersion clientVersion;
     private String clientBrand;
 
     private long time() {
         return System.currentTimeMillis();
     }
 
-    public void handleIn(final PacketEvent event) {
+    public void handleIn(final PacketPlayReceiveEvent event) {
 
-        final PacketType type = event.getPacketType();
-        final PacketContainer packet = event.getPacket();
+        final byte type = event.getPacketId();
 
-        if (type.equals(PacketType.Play.Client.FLYING) ||
-                type.equals(PacketType.Play.Client.POSITION) ||
-                type.equals(PacketType.Play.Client.LOOK) ||
-                type.equals(PacketType.Play.Client.POSITION_LOOK)) {
 
-            final PacketContainer transactionPacket = new PacketContainer(PacketType.Play.Server.TRANSACTION);
+        if (type == PacketType.Play.Client.FLYING ||
+                type == PacketType.Play.Client.POSITION ||
+                type == PacketType.Play.Client.LOOK ||
+                type == PacketType.Play.Client.POSITION_LOOK) {
 
-            transactionPacket.getBooleans().write(0, false);
-            transactionPacket.getShorts().write(0, this.transactionID);
-            transactionPacket.getIntegers().write(0, 0);
+            PacketEvents.get().getPlayerUtils().sendPacket(data.getPlayer(),
+                    new WrappedPacketOutTransaction(0, transactionID, false));
 
             transactionID--;
             this.lastTransactionSent = time();
@@ -50,33 +48,29 @@ public class NetworkProcessor {
             if (transactionID <= 1200)
                 transactionID = 2000;
 
-            try {
-                ProtocolLibrary.getProtocolManager().sendServerPacket(data.getPlayer(), transactionPacket);
-            } catch (InvocationTargetException exception) {
-                exception.printStackTrace();
-            }
 
-        } else if (type.equals(PacketType.Play.Client.TRANSACTION)) {
-            if (packet.getShorts().read(0).equals(this.transactionID)) {
+        } else if (type == PacketType.Play.Client.TRANSACTION) {
+            final WrappedPacketInTransaction packet = new WrappedPacketInTransaction(event.getNMSPacket());
+            if (packet.getActionNumber() == transactionID) {
                 this.lastTransactionConfirm = time();
                 this.transactionPing = (int) (this.lastTransactionConfirm - this.lastTransactionSent);
             }
 
-        } else if (type.equals(PacketType.Play.Client.KEEP_ALIVE)) {
+        } else if (type == PacketType.Play.Client.KEEP_ALIVE) {
             this.lastKeepAliveConfirm = time();
             this.keepAlivePing = (int) (this.lastKeepAliveConfirm - this.lastTransactionSent);
         }
     }
 
-    public void handleOut(final PacketEvent event) {
-        final PacketType type = event.getPacketType();
-        final PacketContainer packet = event.getPacket();
+    public void handleOut(final PacketPlaySendEvent event) {
+        final byte type = event.getPacketId();
 
-        if (type.equals(PacketType.Play.Server.TRANSACTION)) {
+
+        if (type == PacketType.Play.Server.TRANSACTION) {
             this.lastTransactionSent = time();
 
 
-        } else if (type.equals(PacketType.Play.Server.KEEP_ALIVE)) {
+        } else if (type == PacketType.Play.Server.KEEP_ALIVE) {
             this.lastKeepAliveSent = time();
         }
 

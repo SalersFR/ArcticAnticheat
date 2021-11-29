@@ -5,7 +5,6 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
 import arctic.ac.utils.WorldUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class VelocityC extends Check {

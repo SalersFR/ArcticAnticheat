@@ -1,18 +1,18 @@
 package arctic.ac.event.client;
 
 import arctic.ac.event.Event;
-import com.comphenix.packetwrapper.WrapperPlayClientBlockPlace;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.blockplace.WrappedPacketInBlockPlace;
+import io.github.retrooper.packetevents.utils.player.Hand;
 import lombok.Getter;
 
 @Getter
 public class BlockPlaceEvent extends Event {
 
-    private final EnumWrappers.Hand hand;
+    private final Hand hand;
     private final long time;
 
-    public BlockPlaceEvent(final WrapperPlayClientBlockPlace wrapper) {
+    public BlockPlaceEvent(final WrappedPacketInBlockPlace wrapper) {
         this.hand = wrapper.getHand();
-        this.time = wrapper.getTimestamp();
+        this.time = System.currentTimeMillis();
     }
 }

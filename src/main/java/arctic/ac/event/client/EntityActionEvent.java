@@ -1,16 +1,15 @@
 package arctic.ac.event.client;
 
 import arctic.ac.event.Event;
-import com.comphenix.packetwrapper.WrapperPlayClientEntityAction;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.entityaction.WrappedPacketInEntityAction;
 import lombok.Getter;
 
 @Getter
 public class EntityActionEvent extends Event {
 
-    private EnumWrappers.PlayerAction action;
+    private WrappedPacketInEntityAction.PlayerAction action;
 
-    public EntityActionEvent(WrapperPlayClientEntityAction wrapper) {
+    public EntityActionEvent(WrappedPacketInEntityAction wrapper) {
         this.action = wrapper.getAction();
     }
 

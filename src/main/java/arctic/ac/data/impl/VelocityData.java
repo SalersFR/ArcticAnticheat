@@ -2,15 +2,12 @@ package arctic.ac.data.impl;
 
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.server.ServerVelocityEvent;
-import com.comphenix.packetwrapper.WrapperPlayClientTransaction;
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.PacketContainer;
+import io.github.retrooper.packetevents.PacketEvents;
+import io.github.retrooper.packetevents.packetwrappers.play.in.transaction.WrappedPacketInTransaction;
+import io.github.retrooper.packetevents.packetwrappers.play.out.transaction.WrappedPacketOutTransaction;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.util.Vector;
-
-import java.lang.reflect.InvocationTargetException;
 
 @Getter
 @Setter
@@ -58,7 +55,7 @@ public class VelocityData {
         ++velocityTicks;
     }
 
-    public void handleTransaction(WrapperPlayClientTransaction wrapper) {
+    public void handleTransaction(WrappedPacketInTransaction wrapper) {
         if (wrapper.getActionNumber() == velocityID) {
             velocityY = originalVelocityY = velocity.getY();
             velocityX = originalVelocityX = velocity.getX();
@@ -78,16 +75,8 @@ public class VelocityData {
             velocity = new Vector(x, y, z);
             velocityID--;
 
-            PacketContainer packet = new PacketContainer(PacketType.Play.Server.TRANSACTION);
-            packet.getBooleans().write(0, false);
-            packet.getShorts().write(0, velocityID);
-            packet.getIntegers().write(0, 0);
-
-            try {
-                ProtocolLibrary.getProtocolManager().sendServerPacket(data.getPlayer(), packet);
-            } catch (InvocationTargetException exception) {
-                exception.printStackTrace();
-            }
+            PacketEvents.get().getPlayerUtils().sendPacket(data.getPlayer(),
+                    new WrappedPacketOutTransaction(0, velocityID, false));
 
             if (velocityID <= -1) {
                 velocityID = 900;

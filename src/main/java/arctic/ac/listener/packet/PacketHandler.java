@@ -2,44 +2,28 @@ package arctic.ac.listener.packet;
 
 import arctic.ac.Arctic;
 import arctic.ac.data.PlayerData;
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.PacketAdapter;
-import com.comphenix.protocol.events.PacketEvent;
+import io.github.retrooper.packetevents.event.PacketListenerDynamic;
+import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
+import io.github.retrooper.packetevents.event.impl.PacketPlaySendEvent;
 
-public class PacketHandler {
+public class PacketHandler extends PacketListenerDynamic {
 
-    public PacketHandler() {
+    @Override
+    public void onPacketPlayReceive(PacketPlayReceiveEvent event) {
+        final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
-        final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
-        for (PacketType types : PacketType.values()) {
-            if (types.isSupported()) {
-                manager.addPacketListener(new PacketAdapter(Arctic.INSTANCE, types) {
-                    @Override
-                    public void onPacketReceiving(PacketEvent event) {
+        if (data == null) return;
 
-                        final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+        data.getPacketProcessor().handleReceive(event);
+    }
 
-                        if (data == null) return;
+    @Override
+    public void onPacketPlaySend(PacketPlaySendEvent event) {
+        final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
-                        data.getPacketProcessor().handleReceive(event);
-                    }
+        if (data == null) return;
 
-                    @Override
-                    public void onPacketSending(PacketEvent event) {
-
-                        final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
-
-                        if (data == null) return;
-
-                        data.getPacketProcessor().handleSending(event);
-                    }
-                });
-
-
-            }
-        }
+        data.getPacketProcessor().handleSending(event);
     }
 
 

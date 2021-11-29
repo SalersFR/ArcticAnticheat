@@ -6,7 +6,7 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.ArmAnimationEvent;
 import arctic.ac.event.client.UseEntityEvent;
 import arctic.ac.utils.ALocation;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
@@ -22,6 +22,7 @@ public class KillAuraI extends Check {
     public double diff;
     public double dist;
     public double buffer;
+
     public KillAuraI(PlayerData data) {
         super(data, "KillAura", "I", "combat.killaura.i", "Checks for failrate", true);
     }
@@ -38,7 +39,7 @@ public class KillAuraI extends Check {
     public void handle(Event e) {
         if (e instanceof UseEntityEvent) {
             UseEntityEvent attack = (UseEntityEvent) e;
-            if (!attack.getAction().equals(EnumWrappers.EntityUseAction.ATTACK)) return;
+            if (!attack.getAction().equals(WrappedPacketInUseEntity.EntityUseAction.ATTACK)) return;
 
             sentAttack = false;
         }

@@ -2,7 +2,7 @@ package arctic.ac.listener.bukkit;
 
 import arctic.ac.Arctic;
 import arctic.ac.data.PlayerData;
-import com.comphenix.protocol.ProtocolLibrary;
+import io.github.retrooper.packetevents.PacketEvents;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -94,7 +94,7 @@ public class JoinLeaveListener implements Listener, PluginMessageListener {
             PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(player);
             if (data == null) return;
             data.getNetworkProcessor().setClientBrand(new String(message, "UTF-8").substring(1));
-            data.getNetworkProcessor().setClientVersion(ProtocolLibrary.getProtocolManager().getProtocolVersion(player));
+            data.getNetworkProcessor().setClientVersion(PacketEvents.get().getPlayerUtils().getClientVersion(player));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

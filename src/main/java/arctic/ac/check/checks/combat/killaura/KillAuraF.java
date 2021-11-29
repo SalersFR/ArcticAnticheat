@@ -4,11 +4,11 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
-import arctic.ac.event.client.PacketEvent;
+import arctic.ac.event.client.PacketReceiveEvent;
 import arctic.ac.event.client.UseEntityEvent;
-import com.comphenix.packetwrapper.WrapperPlayClientBlockPlace;
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+
+import io.github.retrooper.packetevents.packettype.PacketType;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 
 public class KillAuraF extends Check {
 
@@ -32,15 +32,14 @@ public class KillAuraF extends Check {
             this.sentClose = false;
             this.sentAttack = false;
             this.sentInteract = false;
-        } else if (e instanceof PacketEvent) {
+        } else if (e instanceof PacketReceiveEvent) {
 
-            final PacketEvent event = (PacketEvent) e;
+            final PacketReceiveEvent event = (PacketReceiveEvent) e;
 
             if (event.getPacketType() == PacketType.Play.Client.CLOSE_WINDOW) {
                 this.sentClose = true;
             } else if (event.getPacketType() == PacketType.Play.Client.BLOCK_PLACE) {
 
-                final WrapperPlayClientBlockPlace wrapper = new WrapperPlayClientBlockPlace(event.getContainer());
 
                 if (this.sentUseEntity & !this.sentInteract) {
                     fail("attack & interact");
@@ -57,15 +56,15 @@ public class KillAuraF extends Check {
             }
 
 
-            if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+            if (event.getAction() == WrappedPacketInUseEntity.EntityUseAction.ATTACK) {
                 this.sentAttack = true;
             }
 
-            if (event.getAction() == EnumWrappers.EntityUseAction.INTERACT) {
+            if (event.getAction() == WrappedPacketInUseEntity.EntityUseAction.INTERACT) {
                 this.sentInteract = true;
             }
 
-            if (event.getAction() == EnumWrappers.EntityUseAction.INTERACT_AT) {
+            if (event.getAction() == WrappedPacketInUseEntity.EntityUseAction.INTERACT_AT) {
                 this.interactAt = true;
             }
 

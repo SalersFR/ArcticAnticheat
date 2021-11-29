@@ -10,6 +10,7 @@ public class AimS extends Check {
     //Checks for not smoothed aimBots such as LiquidBounce.
     long lastRotated;
     double buffer;
+
     public AimS(PlayerData data) {
         super(data, "Aim", "S", "combat.aim.s", "Checks for robot-like rotations.", true);
     }

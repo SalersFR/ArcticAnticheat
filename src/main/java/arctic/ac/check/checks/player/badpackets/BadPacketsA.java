@@ -6,7 +6,7 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.EntityActionEvent;
 import arctic.ac.event.client.FlyingEvent;
 import arctic.ac.event.client.UseEntityEvent;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 
 public class BadPacketsA extends Check {
 
@@ -39,7 +39,7 @@ public class BadPacketsA extends Check {
 
             final UseEntityEvent event = (UseEntityEvent) e;
 
-            if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+            if (event.getAction() == WrappedPacketInUseEntity.EntityUseAction.ATTACK) {
                 if ((sentSprint || sentSneak)) {
                     fail("sent sprint & sneak packet in the same tick");
                 }

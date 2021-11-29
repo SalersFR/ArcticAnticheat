@@ -6,7 +6,7 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.ArmAnimationEvent;
 import arctic.ac.event.client.UseEntityEvent;
 import arctic.ac.utils.ArcticQueue;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 import org.bukkit.Location;
 
 public class KillAuraE extends Check {
@@ -26,7 +26,7 @@ public class KillAuraE extends Check {
 
             final UseEntityEvent event = (UseEntityEvent) e;
 
-            if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+            if (event.getAction() == WrappedPacketInUseEntity.EntityUseAction.ATTACK) {
                 this.attacks++;
                 this.pastHittedLocations.add(event.getTarget().getLocation());
 

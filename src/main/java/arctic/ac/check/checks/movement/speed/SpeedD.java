@@ -3,9 +3,7 @@ package arctic.ac.check.checks.movement.speed;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
-import arctic.ac.event.client.MoveEvent;
 import arctic.ac.event.client.PositionEvent;
-import arctic.ac.event.client.RotationEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -99,15 +97,12 @@ public class SpeedD extends Check {
             double angle = angle(look, moveDir);
             angle = angle % (Math.PI / 4);
 
-            if (angle > 0.05 && angle < (Math.PI / 4 - 0.05)) {
+            if (angle > 0.05 && angle < (Math.PI / 4 - 0.05) && move.getDeltaXZ() > 0.045) {
                 Bukkit.broadcastMessage("angle " + angle);
             }
         }
 
-        if (e instanceof RotationEvent) {
-            RotationEvent rot = (RotationEvent) e;
-            yaw = rot.getTo().getYaw();
-        }
+
     }
 
     public boolean isNearBlocks(Location location) {
