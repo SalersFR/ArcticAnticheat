@@ -130,6 +130,7 @@ public class CheckManager {
                 new KillAuraI(data),
                 new KillAuraJ(data),
                 new KillAuraK(data),
+                new KillAuraL(data),
 
                 new VelocityA(data),
                 new VelocityB(data),

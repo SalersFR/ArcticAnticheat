@@ -3,6 +3,8 @@ package arctic.ac.check.checks.combat.killaura;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
+import arctic.ac.event.client.MoveEvent;
+import arctic.ac.event.client.RotationEvent;
 import arctic.ac.event.client.UseEntityEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -11,9 +13,13 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KillAuraK extends Check {
-    public KillAuraK(final PlayerData data) {
-        super(data, "KillAura", "K", "combat.killaura.k", "Checks for attack angle.", true);
+public class KillAuraL extends Check {
+
+    private double motionXZ;
+    private double deltaYaw;
+
+    public KillAuraL(final PlayerData data) {
+        super(data, "KillAura", "L", "combat.killaura.l", "Checks for consistent attack angle.", true);
     }
 
     @Override
@@ -42,14 +48,19 @@ public class KillAuraK extends Check {
 
             debug("dist=" + distance + " angle=" + angle);
 
-            if (distance > 1.25 && angle > 35) {
-                buffer += angle;
-                if (buffer >= 450)
-                    fail("angle=" + angle);
+            if(motionXZ > 0.16 && distance > 1.05D && angle <= 1 && deltaYaw > 6.f) {
+                buffer += Math.abs(2 - angle);
+                if(buffer > 10)
+                    fail("angle");
+                } else if(buffer > 0) buffer -= (10 / 3D);
 
-            } else if (buffer >= 10) buffer -= 15;
 
 
+
+        } else if(e instanceof MoveEvent) {
+            motionXZ = ((MoveEvent) e).getDeltaXZ();
+        } else if(e instanceof RotationEvent) {
+            deltaYaw = ((RotationEvent) e).getDeltaYaw();
         }
     }
 

@@ -62,7 +62,7 @@ public class PredictionA extends Check {
                 float angleTo = (float) Math.toDegrees(angle);
 
                 Vector predictedMotion = getPredMotion(e.getTo(),angleTo,e.getTo().getYaw(),move.distance(new Vector(0,0,0)),data.getPlayer().getWorld());
-                Bukkit.broadcastMessage("offSet " + predictedMotion.distance(motion));
+                //Bukkit.broadcastMessage("offSet " + predictedMotion.distance(motion));
             }
         }
     }

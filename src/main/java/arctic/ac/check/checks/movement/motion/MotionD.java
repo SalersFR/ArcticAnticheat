@@ -34,7 +34,7 @@ public class MotionD extends Check {
             final Location bukkitFrom = event.getFrom().toVector().toLocation(world);
 
             final boolean exempt = worldUtils.isInLiquid(player) || worldUtils.isCollidingWithClimbable(player)
-                    || worldUtils.isCollidingWithWeb(player) || worldUtils.isOnACertainBlock(player, "door");
+                    || worldUtils.isCollidingWithWeb(player) || worldUtils.isOnACertainBlock(player, "door") || data.getVelocityData().getVelocityTicks() <= 7;
             ;
 
             final boolean jumped = worldUtils.isOnGround(bukkitFrom, -0.00001) &&

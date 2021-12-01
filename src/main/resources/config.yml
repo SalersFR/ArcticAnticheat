@@ -203,6 +203,10 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      l:
+        ban-vl: 50
+        enabled: true
+        punish: true
     reach:
       a:
         ban-vl: 10
