@@ -97,10 +97,21 @@ public class SpeedD extends Check {
             double angle = angle(look, moveDir);
             angle = angle % (Math.PI / 4);
 
+            //TODO handlePlacing
+            boolean placing = false;
+
             if (angle > 0.5 && angle < (Math.PI / 4 - 0.05) && move.getDeltaXZ() > 0.045) {
-                if(++buffer > 7)
-                    fail("angle=" + angle);
-            } else if(buffer > 0) buffer -= 0.3333343D;
+                if (data.getBukkitPlayerFromUUID().isSprinting() || placing) {
+                    buffer++;
+                } else buffer+=0.05;
+                if (buffer > 4) {
+                    //fail("strafe " + angle + " buffer " + buffer);
+                }
+            } else if (buffer > 0) {
+                if (data.getBukkitPlayerFromUUID().isSprinting() || placing) {
+                    buffer -= 0.01;
+                } else buffer-=1;
+            }
 
             debug("angle=" + angle + " buffer" + buffer);
         }
