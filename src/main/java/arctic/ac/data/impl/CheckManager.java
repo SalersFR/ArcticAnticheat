@@ -17,6 +17,7 @@ import arctic.ac.check.checks.movement.motion.*;
 import arctic.ac.check.checks.movement.nofall.NoFallA;
 import arctic.ac.check.checks.movement.nofall.NoFallB;
 import arctic.ac.check.checks.movement.nofall.NoFallC;
+import arctic.ac.check.checks.movement.predictions.PredictionA;
 import arctic.ac.check.checks.movement.speed.SpeedA;
 import arctic.ac.check.checks.movement.speed.SpeedB;
 import arctic.ac.check.checks.movement.speed.SpeedC;
@@ -68,6 +69,7 @@ public class CheckManager {
                 new SpeedB(data),
                 new SpeedC(data),
                 new SpeedD(data),
+                new PredictionA(data),
 
                 new StepA(data),
 
