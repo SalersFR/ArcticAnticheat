@@ -1,88 +1,44 @@
 package arctic.ac.check.checks.combat.killaura;
 
+
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
-import arctic.ac.event.client.ArmAnimationEvent;
-import arctic.ac.event.client.RotationEvent;
 import arctic.ac.event.client.UseEntityEvent;
-import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
-import org.bukkit.util.Vector;
+import io.github.retrooper.packetevents.utils.vector.Vector3d;
+import org.bukkit.entity.Player;
+
 
 public class KillAuraJ extends Check {
 
-    public int swings;
-    public int hits;
-    public long lastHit;
-    public long lastAim;
-    public double aimSpeed;
-    public double aimPitch;
 
     public KillAuraJ(PlayerData data) {
-        super(data, "KillAura", "J", "combat.killaura.j", "Checks for extremely high aim with high attack accuracion", true);
+        super(data, "KillAura", "J", "combat.killaura.j", "Checks for hitboxes glitch.", true);
     }
 
     @Override
     public void handle(Event e) {
-        if (e instanceof ArmAnimationEvent) {
-            swings++;
-            if (swings >= 38) {
-                int acc = hits;
-                hits = 0;
-                swings = 0;
-
-                if (acc > 9) {
-                    buffer += (acc * 0.1F);
-                    if (buffer > 2)
-                        fail("acc " + acc);
-                } else if (buffer > 0) buffer -= 0.2D;
-            }
-        }
         if (e instanceof UseEntityEvent) {
-            UseEntityEvent attack = (UseEntityEvent) e;
-            if (!attack.getAction().equals(WrappedPacketInUseEntity.EntityUseAction.ATTACK)) return;
+            final UseEntityEvent event = (UseEntityEvent) e;
 
-            long hit = System.currentTimeMillis();
-            long lastHit = this.lastHit;
-            double hitDelay = hit - lastHit;
-            this.lastHit = hit;
+            if (event.getWrapper().getTarget().isPresent()) {
+                final Vector3d vec3D = event.getWrapper().getTarget().get();
 
-            boolean aiming = System.currentTimeMillis() - lastAim < 60;
-            boolean highSpeed = aimSpeed + aimPitch > 12 && aiming;
+                debug("x=" + Math.abs(vec3D.getX()) + " y=" + Math.abs(vec3D.getY()) + " z=" + Math.abs(vec3D.getZ()));
 
-            final EntityPlayer nms = ((CraftPlayer) data.getPlayer()).getHandle();
-            int ping = nms.ping;
+                if (Math.abs(vec3D.getX()) > 0.4f || Math.abs(vec3D.getY()) > 1.902 || Math.abs(vec3D.getZ()) > 0.4f
+                        && event.getTarget() instanceof Player) {
+                    if (++buffer > 0)
+                        fail();
 
-            Vector to;
-            Vector from;
-            boolean close = false;
+                } else if (buffer > 0) buffer -= 0.025D;
 
-            try {
-                to = (data.getPastEntityLocations().get((ping / 50)).toVector());
-                from = (data.getPastEntityLocations().get(5 + (ping / 50)).toVector());
 
-                double dist = to.distance(from);
-                if (dist < 0.4) close = true;
-
-            } catch (IndexOutOfBoundsException exception) {
             }
 
-            if (hitDelay > 10 * 50) {
-                swings--;
-                return;
-            }
 
-            if (!highSpeed && !close) return;
-
-            hits++;
-            if (e instanceof RotationEvent) {
-                RotationEvent rot = (RotationEvent) e;
-                aimSpeed = ((aimSpeed * 4) + rot.getDeltaYaw()) / 5;
-                aimPitch = ((aimPitch * 4) + rot.getDeltaPitch()) / 5;
-                lastAim = System.currentTimeMillis();
-            }
         }
     }
+
+
 }
