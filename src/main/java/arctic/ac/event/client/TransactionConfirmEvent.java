@@ -1,16 +1,16 @@
 package arctic.ac.event.client;
 
 import arctic.ac.event.Event;
-import com.comphenix.packetwrapper.WrapperPlayClientTransaction;
+import io.github.retrooper.packetevents.packetwrappers.play.in.transaction.WrappedPacketInTransaction;
 import lombok.Getter;
 
 @Getter
 public class TransactionConfirmEvent extends Event {
 
 
-    private final WrapperPlayClientTransaction wrapper;
+    private final WrappedPacketInTransaction wrapper;
 
-    public TransactionConfirmEvent(WrapperPlayClientTransaction wrapper) {
+    public TransactionConfirmEvent(WrappedPacketInTransaction wrapper) {
         this.wrapper = wrapper;
     }
 

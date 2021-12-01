@@ -16,6 +16,10 @@ public class FlyD extends Check {
         super(data, "Fly", "D", "movement.fly.d", "Checks for jumping while being in the air.", true);
     }
 
+    public static boolean check(double d1, double d2) {
+        return Math.abs(d1 - d2) < 0.001;
+    }
+
     @Override
     public void handle(Event event) {
         if (event instanceof MoveEvent) {
@@ -46,9 +50,5 @@ public class FlyD extends Check {
                 }
             }
         }
-    }
-
-    public static boolean check(double d1, double d2) {
-        return Math.abs(d1 - d2) < 0.001;
     }
 }

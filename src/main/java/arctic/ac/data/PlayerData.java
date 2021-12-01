@@ -12,6 +12,7 @@ import arctic.ac.data.processor.PacketProcessor;
 import arctic.ac.data.processor.SetbackProcessor;
 import arctic.ac.data.tracker.EntityTracker;
 import arctic.ac.utils.ALocation;
+import arctic.ac.utils.APosition;
 import arctic.ac.utils.ARotation;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,6 +48,8 @@ public class PlayerData {
 
     @Setter
     private ARotation rotation;
+    @Setter
+    private APosition position;
 
     public PlayerData(Player player) {
         this.checkManager = new CheckManager(this);

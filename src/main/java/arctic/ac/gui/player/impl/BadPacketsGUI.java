@@ -3,7 +3,6 @@ package arctic.ac.gui.player.impl;
 import arctic.ac.Arctic;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
-import arctic.ac.gui.movement.impl.FlyGUI;
 import arctic.ac.utils.CustomUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

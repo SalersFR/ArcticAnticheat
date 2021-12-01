@@ -5,7 +5,7 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.MoveEvent;
 import arctic.ac.event.client.UseEntityEvent;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 import org.bukkit.entity.EntityType;
 
 public class KillAuraB extends Check {
@@ -55,7 +55,7 @@ public class KillAuraB extends Check {
 
             final UseEntityEvent event = (UseEntityEvent) e;
 
-            if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+            if (event.getAction() == WrappedPacketInUseEntity.EntityUseAction.ATTACK) {
                 this.ticksSinceLastAttack = 0;
 
 

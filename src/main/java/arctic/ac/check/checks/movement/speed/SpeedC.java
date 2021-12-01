@@ -22,6 +22,7 @@ public class SpeedC extends Check {
     private Vector motion = new Vector(0, 0, 0);
     private double airTicks;
     private boolean stillFlying;
+
     public SpeedC(PlayerData data) {
         super(data, "Speed", "C", "movement.speed.c", "Checks if player is following minecraft's movement protocol in air.", true);
     }
@@ -84,7 +85,7 @@ public class SpeedC extends Check {
             }
 
             boolean nearBlocks = isNearBlocks(e.getTo().toVector().toLocation(data.getPlayer().getWorld()));
-            boolean velocityTaken = data.getVelocityData().getVelocityTicks() < 3;
+            boolean velocityTaken = data.getVelocityData().getVelocityTicks() <= 7;
             boolean attackSlowDown = data.getInteractData().isHasHitSlowDown();
             boolean check = airTicks >= 3; //near blocks
             checkForFlying(data.getPlayer());

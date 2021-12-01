@@ -6,8 +6,6 @@ import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
 import arctic.ac.event.server.ServerPositionEvent;
 
-import java.awt.*;
-
 public class TimerA extends Check {
 
     private long lastTickTime;
@@ -27,7 +25,8 @@ public class TimerA extends Check {
 
         if (e instanceof FlyingEvent) {
             if (data.getInteractData().getLastHitPacket() != 0) {
-                if (getMillis(data.getInteractData().getLastHitPacket()) < 110L || data.getInteractData().isHurt()) return;
+                if (getMillis(data.getInteractData().getLastHitPacket()) < 110L || data.getInteractData().isHurt())
+                    return;
             }
             if (data.getInteractData().getTicksAlive() < 30) return;
             long systemTime = System.currentTimeMillis();
@@ -49,16 +48,16 @@ public class TimerA extends Check {
             double avgRate = Math.abs(rate - lastRate);
 
 
-            if (rate < 10 ) return;
+            if (rate < 10) return;
 
-            if (buffer2 > 0) buffer2-=0.001;
+            if (buffer2 > 0) buffer2 -= 0.001;
             if (avgRate < 5 && rate > 5) {
                 if (rate < 45 || rate > 70) {
                     buffer++;
                     if (buffer > 4) {
                         buffer2++;
                         if (buffer2 > 20) {
-                            fail("rate " + rate +" avgRate " + avgRate);
+                            fail("rate " + rate + " avgRate " + avgRate);
                         }
                     }
                 } else {

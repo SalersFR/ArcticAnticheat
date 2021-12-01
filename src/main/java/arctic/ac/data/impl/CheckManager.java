@@ -24,6 +24,7 @@ import arctic.ac.check.checks.movement.speed.SpeedC;
 import arctic.ac.check.checks.movement.speed.SpeedD;
 import arctic.ac.check.checks.movement.spider.SpiderA;
 import arctic.ac.check.checks.movement.step.StepA;
+import arctic.ac.check.checks.movement.step.StepB;
 import arctic.ac.check.checks.player.badpackets.*;
 import arctic.ac.check.checks.player.scaffold.ScaffoldA;
 import arctic.ac.check.checks.player.timer.TimerA;
@@ -72,6 +73,7 @@ public class CheckManager {
                 new PredictionA(data),
 
                 new StepA(data),
+                new StepB(data),
 
                 new NoFallA(data),
                 new NoFallB(data),

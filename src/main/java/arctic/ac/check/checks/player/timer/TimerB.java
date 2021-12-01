@@ -4,8 +4,9 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.FlyingEvent;
-import arctic.ac.event.client.PacketEvent;
-import com.comphenix.protocol.PacketType;
+import arctic.ac.event.client.PacketReceiveEvent;
+import io.github.retrooper.packetevents.packettype.PacketType;
+
 
 public class TimerB extends Check {
 
@@ -19,10 +20,10 @@ public class TimerB extends Check {
 
     @Override
     public void handle(Event e) {
-        if (e instanceof PacketEvent) {
-            final PacketEvent event = (PacketEvent) e;
+        if (e instanceof PacketReceiveEvent) {
+            final PacketReceiveEvent event = (PacketReceiveEvent) e;
 
-            if (event.getPacketType().equals(PacketType.Play.Client.KEEP_ALIVE)) {
+            if (event.getPacketType() == PacketType.Play.Client.KEEP_ALIVE) {
                 final int diff = Math.abs(41 - packets);
                 if (diff >= 7 && data.getInteractData().getTicksAlive() > 120 && diff != 41) {
                     buffer += (diff * 0.1F);

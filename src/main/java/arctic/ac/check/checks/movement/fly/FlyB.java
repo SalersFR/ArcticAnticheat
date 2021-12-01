@@ -72,8 +72,8 @@ public class FlyB extends Check {
                     || airTicks < 19
                     || player.getFallDistance() > 10.0F
                     /**
-                    || event.isGround()
-                    || nearGround
+                     || event.isGround()
+                     || nearGround
                      **/
                     || player.isInsideVehicle()
                     || worldUtils.isOnACertainBlock(player, "door");
@@ -87,7 +87,8 @@ public class FlyB extends Check {
                     || player.getFallDistance() > 10.0F
                     || event.isGround()
                     || player.isInsideVehicle()
-                    || worldUtils.isOnACertainBlock(player, "door");;
+                    || worldUtils.isOnACertainBlock(player, "door");
+            ;
 
 
             if (worldUtils.isCloseToGround(data.getBukkitPlayerFromUUID().getLocation())) {

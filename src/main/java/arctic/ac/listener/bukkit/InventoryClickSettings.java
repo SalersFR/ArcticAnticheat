@@ -93,7 +93,6 @@ public class InventoryClickSettings implements Listener {
                 playerGUI.display(player);
 
 
-
             }
         } else if (invName.equalsIgnoreCase(combatName)) {
             event.setCancelled(true);
@@ -153,7 +152,7 @@ public class InventoryClickSettings implements Listener {
                     stepGUI.display(player);
                     break;
             }
-        } else if(invName.equalsIgnoreCase(playerName)) {
+        } else if (invName.equalsIgnoreCase(playerName)) {
             event.setCancelled(true);
             ItemStack item = event.getCurrentItem();
             ItemMeta meta = item.getItemMeta();

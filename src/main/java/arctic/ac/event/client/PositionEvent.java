@@ -2,22 +2,22 @@ package arctic.ac.event.client;
 
 import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
-import arctic.ac.utils.ALocation;
+import arctic.ac.utils.APosition;
 import lombok.Getter;
 
 @Getter
 public class PositionEvent extends Event {
 
-    private ALocation to, from;
+    private APosition to, from;
     private double deltaX, deltaY, deltaZ, deltaXZ;
     private boolean ground;
     private float pitch;
     private float yaw;
 
     public PositionEvent(PlayerData data, double x, double y, double z, float yaw, float pitch, boolean ground) {
-        this.from = data.getLocation();
-        this.to = new ALocation(x, y, z, yaw, pitch);
-        data.setLocation(this.to);
+        this.from = data.getPosition();
+        this.to = new APosition(x, y, z, yaw, pitch);
+        data.setPosition(this.to);
 
         if (to == null || from == null) return;
 

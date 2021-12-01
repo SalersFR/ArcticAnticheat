@@ -16,12 +16,12 @@ public class BadPacketsE extends Check {
 
     @Override
     public void handle(Event e) {
-        if(e instanceof FlyingEvent) {
-            if(++this.ticks >= 21) {
-                if(++buffer > 0)
+        if (e instanceof FlyingEvent) {
+            if (++this.ticks >= 21) {
+                if (++buffer > 0)
                     fail("ticks=" + ticks);
-            } else if(buffer > 0) buffer -= 0.0025D;
-        } else if(e instanceof MoveEvent) {
+            } else if (buffer > 0) buffer -= 0.0025D;
+        } else if (e instanceof MoveEvent) {
             this.ticks = 0;
         }
     }

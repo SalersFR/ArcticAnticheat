@@ -2,7 +2,6 @@ package arctic.ac.utils;
 
 import com.google.common.collect.Lists;
 import lombok.experimental.UtilityClass;
-import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -78,11 +77,11 @@ public class MathUtils {
         return b <= limit ? a : MathUtils.gcd(limit, b, a % b);
     }
 
-    public double gcdFromAList(ArrayList<Float> list,double currDelta) {
+    public double gcdFromAList(ArrayList<Float> list, double currDelta) {
         //For each delta
         double var1 = currDelta;
         for (float num : list) {
-            var1 = gcd(0x4000,num,var1);
+            var1 = gcd(0x4000, num, var1);
         }
 
         return var1;
@@ -117,7 +116,7 @@ public class MathUtils {
         double size = list.size();
 
         for (double var1 : list) {
-            sum+=var1;
+            sum += var1;
         }
 
         return sum / size;
@@ -128,7 +127,7 @@ public class MathUtils {
         double size = list.size();
 
         for (double var1 : list) {
-            sum+=var1;
+            sum += var1;
         }
 
         return sum / size;

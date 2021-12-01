@@ -1,10 +1,8 @@
 name: Arctic
 main: arctic.ac.Arctic
 version: 0.0.1
-authors: [ Salers,xWand,ExDiggers,Aamber ]
+authors: [ Salers,xWand,ExDiggers,Crafticat]
 load: POSTWORLD
-depend:
-  - ProtocolLib
 softdepend: [ Citizens ]
 
 commands:

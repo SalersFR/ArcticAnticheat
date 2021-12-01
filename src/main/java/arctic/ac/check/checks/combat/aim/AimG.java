@@ -35,7 +35,7 @@ public class AimG extends Check {
 
             if (data.getCinematicProcessor().getTicksSince() < 10) return;
 
-            if (Math.min(this.lastPitchAtan, Math.atan(pitch)) == this.result && gcd < 0x20000 && gcd > 0 && event.getDeltaYaw() < 125) {
+            if (Math.min(this.lastPitchAtan, Math.atan(pitch)) == this.result && gcd < 0x20000 && gcd > 0 && event.getDeltaYaw() < 105) {
                 if (this.buffer < 15) buffer++;
 
                 if (this.buffer > 2)

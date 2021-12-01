@@ -181,7 +181,7 @@ public class WorldUtils {
         final int var2 = MathUtils.floor(location.getY());
         final int var3 = MathUtils.floor(location.getZ());
         final Block var4 = new Location(location.getWorld(), var1, var2, var3).getBlock();
-        return var4.getType() == Material.WEB;
+        return var4.getType() == Material.WEB || player.getLocation().getBlock().getType() == Material.WEB;
     }
 
     /**

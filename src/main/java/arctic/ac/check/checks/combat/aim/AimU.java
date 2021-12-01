@@ -5,7 +5,6 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.RotationEvent;
 import arctic.ac.utils.MathUtils;
-import org.bukkit.Bukkit;
 
 public class AimU extends Check {
 
@@ -27,7 +26,7 @@ public class AimU extends Check {
             float lastDeltaPitch = this.lastDeltaPitch;
             this.lastDeltaPitch = deltaPitch;
 
-            double gcd = MathUtils.getGcd(deltaPitch,lastDeltaPitch);
+            double gcd = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
 
             boolean validPitch = true;
             boolean validYaw = true;
@@ -37,7 +36,7 @@ public class AimU extends Check {
             boolean attacking = System.currentTimeMillis() - data.getInteractData().getLastHitPacket() < 50 * 1.5;
 
             if (validPitch && validYaw) {
-                if (buffer > 0) buffer-=0.05;
+                if (buffer > 0) buffer -= 0.05;
             } else {
                 buffer++;
                 if (buffer > 5 && attacking) {

@@ -1,29 +1,29 @@
 package arctic.ac.event.server;
 
 import arctic.ac.event.Event;
-import com.comphenix.packetwrapper.WrapperPlayServerEntityVelocity;
+import io.github.retrooper.packetevents.packetwrappers.play.out.entityvelocity.WrappedPacketOutEntityVelocity;
+import lombok.Getter;
+
 
 public class ServerVelocityEvent extends Event {
 
-    private final WrapperPlayServerEntityVelocity wrapper;
+    @Getter
+    private final WrappedPacketOutEntityVelocity wrapper;
     private final double x, y, z;
     private final int entityID;
 
-    public ServerVelocityEvent(WrapperPlayServerEntityVelocity wrapper) {
+    public ServerVelocityEvent(WrappedPacketOutEntityVelocity wrapper) {
         this.wrapper = wrapper;
 
         this.x = wrapper.getVelocityX();
         this.y = wrapper.getVelocityY();
         this.z = wrapper.getVelocityZ();
 
-        this.entityID = wrapper.getEntityID();
+        this.entityID = wrapper.getEntityId();
 
 
     }
 
-    public WrapperPlayServerEntityVelocity getWrapper() {
-        return wrapper;
-    }
 
     public double getX() {
         return x;

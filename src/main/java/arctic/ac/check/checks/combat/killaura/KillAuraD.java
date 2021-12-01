@@ -5,7 +5,8 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.ArmAnimationEvent;
 import arctic.ac.event.client.UseEntityEvent;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
+
 
 public class KillAuraD extends Check {
 
@@ -25,7 +26,7 @@ public class KillAuraD extends Check {
 
             debug("attacksWithoutSwing" + attacksWithoutSwing);
 
-            if (event.getAction() == EnumWrappers.EntityUseAction.ATTACK) {
+            if (event.getAction() == WrappedPacketInUseEntity.EntityUseAction.ATTACK) {
                 if (++this.attacksWithoutSwing > 3) {
                     fail("attacks=" + attacksWithoutSwing);
                 }

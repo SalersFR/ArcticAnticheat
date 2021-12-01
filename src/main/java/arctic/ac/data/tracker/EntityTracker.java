@@ -1,12 +1,10 @@
 package arctic.ac.data.tracker;
 
 import arctic.ac.data.PlayerData;
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.PacketContainer;
+import io.github.retrooper.packetevents.PacketEvents;
+import io.github.retrooper.packetevents.packetwrappers.play.out.transaction.WrappedPacketOutTransaction;
 import org.bukkit.util.Vector;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 public class EntityTracker {
@@ -45,10 +43,9 @@ public class EntityTracker {
 
     public void sendTransaction(int id, Vector loc) {
 
-        final PacketContainer packet = new PacketContainer(PacketType.Play.Server.TRANSACTION);
+        PacketEvents.get().getPlayerUtils().sendPacket(player.getPlayer(),
+                new WrappedPacketOutTransaction(id, getEntityFromId.get(id).getTransactionID(), false));
 
-        packet.getBooleans().write(0, false);
-        packet.getShorts().write(0, getEntityFromId.get(id).getTransactionID());
 
         getEntityFromId.get(id).getTransactionTimes().put(getEntityFromId.get(id).getTransactionID(), loc);
 
@@ -57,13 +54,7 @@ public class EntityTracker {
         if (getEntityFromId.get(id).getTransactionID() >= -10)
             getEntityFromId.get(id).setTransactionID((short) -900);
 
-        packet.getIntegers().write(0, id);
 
-        try {
-            ProtocolLibrary.getProtocolManager().sendServerPacket(player.getPlayer(), packet);
-        } catch (InvocationTargetException exception) {
-            exception.printStackTrace();
-        }
     }
 
     public void interpolate(int id) {

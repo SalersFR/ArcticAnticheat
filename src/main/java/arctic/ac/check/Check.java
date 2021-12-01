@@ -73,7 +73,8 @@ public abstract class Check {
                 alertMSG.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + data.getPlayer().getName()));
 
                 TextComponent prefixComp = new TextComponent(prefix);
-                prefixComp.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(CustomUtils.translate("&b&lArctic &r&bCheat Detection")).create()));
+                prefixComp.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(CustomUtils.translate("&b&lArctic &r&bCheat Detection")).create()));
                 player.spigot().sendMessage(prefixComp, alertMSG);
             } else if (player.hasPermission("alerts.see") && player.hasMetadata("ALERTS_ON_VERBOSE")) {
                 final String fromConfig = Arctic.INSTANCE.getConfig().getString("flag-message-verbose").
@@ -81,7 +82,7 @@ public abstract class Check {
                         replace("%vl%", "" + vl).
                         replace("%type%", type).
                         replace("%check%", name).
-                        replace("%ping%", ((CraftPlayer) data.getBukkitPlayerFromUUID()).getHandle().ping + "").
+                        replace("%ping%", data.getNetworkProcessor().getKeepAlivePing() + "").
                         replace("%tps%", MinecraftServer.getServer().recentTps[0] + "").
                         replace("%prefix%", prefix);
 

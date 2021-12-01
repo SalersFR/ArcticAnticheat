@@ -33,6 +33,24 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <minimizeJar>true</minimizeJar>
+                            <finalName>ArcticAnticheat-${project.version}</finalName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <repositories>
@@ -63,6 +81,10 @@
             <id>bintray.kotlin.eap</id>
             <name>Bintray Kotlin EAP Repository</name>
             <url>https://dl.bintray.com/kotlin/kotlin-eap</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
@@ -113,9 +135,9 @@
 
 
         <dependency>
-            <groupId>com.comphenix.protocol</groupId>
-            <artifactId>ProtocolLib</artifactId>
-            <version>4.6.0</version>
+            <groupId>com.github.retrooper</groupId>
+            <artifactId>packetevents</artifactId>
+            <version>1.8-pre-17</version>
         </dependency>
 
 

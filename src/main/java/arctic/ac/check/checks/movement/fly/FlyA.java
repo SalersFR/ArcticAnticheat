@@ -42,10 +42,10 @@ public class FlyA extends Check {
                     || worldUtils.haveABlockNearHead(player)
                     || data.getVelocityData().getVelocityTicks() <= 7;
 
-            if(data.getPlayer().getVelocity().getY() == -0.078400001525878 && !exempt && airTicks >= 21) {
-                if(++buffer > 3)
+            if (data.getPlayer().getVelocity().getY() == -0.078400001525878 && !exempt && airTicks >= 21) {
+                if (++buffer > 3)
                     fail("mY=0.078400001525878");
-            } else if(buffer > 0) buffer -= 0.2D;
+            } else if (buffer > 0) buffer -= 0.2D;
 
 
             this.ticksPlace++;
