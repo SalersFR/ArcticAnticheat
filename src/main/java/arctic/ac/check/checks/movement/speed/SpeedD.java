@@ -113,7 +113,7 @@ public class SpeedD extends Check {
                 } else buffer-=1;
             }
 
-            debug("angle=" + angle + " buffer" + buffer);
+            //debug("angle=" + angle + " buffer" + buffer);
         }
 
 
