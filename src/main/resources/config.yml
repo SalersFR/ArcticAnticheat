@@ -56,6 +56,11 @@ checks:
         enabled: true
         punish: true
         setback: true
+      x:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: true
     step:
       a:
         ban-vl: 10
