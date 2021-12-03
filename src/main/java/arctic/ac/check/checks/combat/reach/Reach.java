@@ -17,6 +17,8 @@ import org.bukkit.util.Vector;
 
 public class Reach extends Check {
 
+    private long lastHit;
+
 
     public Reach(PlayerData data) {
         super(data, "Reach", "A", "combat.reach.a", "Checking reach using interpolation and relmoves.", true);
@@ -35,7 +37,10 @@ public class Reach extends Check {
     public void handle(Event e) {
         if (e instanceof UseEntityEvent) {
 
-            if (data.getInteractData().getTarget() == null) return;
+            if (this.lastHit == 0 || (System.currentTimeMillis() - lastHit) > 10000L)
+                this.lastHit = System.currentTimeMillis();
+
+            if (data.getInteractData().getTarget() == null /**System.currentTimeMillis() - lastHit**/) return;
 
             final UseEntityEvent event = (UseEntityEvent) e;
 
@@ -55,15 +60,18 @@ public class Reach extends Check {
 
                 double reach = 3.0D;
 
-                if(collision != null && collision.hitVec != null)
+                if (collision != null && collision.hitVec != null)
                     reach = collision.hitVec.distanceTo(origin) - 0.11f;
 
                 else {
                     final ABox victimBox = new ABox(reachEntity.getX(), reachEntity.getY(), reachEntity.getZ());
                     final Vector attacker = new Vector(origin.xCoord, origin.yCoord, origin.zCoord);
-                    reach = victimBox.distanceXZ(attacker.getX(), attacker.getZ()) - 0.425D;
+                    reach = victimBox.distanceXZ(attacker.getX(), attacker.getZ()) - 0.42525D;
 
                 }
+
+                if (reach > 6.0D) return;
+
 
                 debug("reach=" + reach);
 
@@ -72,6 +80,8 @@ public class Reach extends Check {
                         fail("reach=" + reach);
                     }
                 } else if (buffer > 0) buffer -= 0.025D;
+
+                this.lastHit = System.currentTimeMillis();
 
 
             }

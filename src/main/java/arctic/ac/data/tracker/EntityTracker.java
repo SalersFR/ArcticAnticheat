@@ -22,18 +22,18 @@ public class EntityTracker {
 
     public void relMove(int id, final double x, final double y, double z) {
         //TODO send Transaction
-        sendTransaction(id, new Vector(getEntityFromId.get(id).getX() + (x / 32), getEntityFromId.get(id).getY()
-                + (y / 32), getEntityFromId.get(id).getZ() + (z / 32)));
+        sendTransaction(id, new Vector(getEntityFromId.get(id).getX() + (x), getEntityFromId.get(id).getY()
+                + (y), getEntityFromId.get(id).getZ() + (z)));
     }
 
     public void teleport(int id, final double x, final double y, final double z) {
 
-        double relX = (x / 32);
-        double relY = (y / 32);
-        double relZ = (z / 32);
-        getEntityFromId.get(id).setNewX(x / 32);
-        getEntityFromId.get(id).setNewY(y / 32);
-        getEntityFromId.get(id).setNewZ(z / 32);
+        double relX = (x);
+        double relY = (y);
+        double relZ = (z);
+        getEntityFromId.get(id).setNewX(x);
+        getEntityFromId.get(id).setNewY(y);
+        getEntityFromId.get(id).setNewZ(z);
 
         getEntityFromId.get(id).setInterpolationSteps(1);
 
@@ -60,9 +60,9 @@ public class EntityTracker {
     public void interpolate(int id) {
         if (getEntityFromId.get(id).getInterpolationSteps() > 0) {
 
-            getEntityFromId.get(id).setX(getEntityFromId.get(id).getX() + (getEntityFromId.get(id).getNewX()) / getEntityFromId.get(id).getInterpolationSteps());
-            getEntityFromId.get(id).setY(getEntityFromId.get(id).getY() + (getEntityFromId.get(id).getNewY()) / getEntityFromId.get(id).getInterpolationSteps());
-            getEntityFromId.get(id).setZ(getEntityFromId.get(id).getZ() + (getEntityFromId.get(id).getNewZ()) / getEntityFromId.get(id).getInterpolationSteps());
+            getEntityFromId.get(id).setX(getEntityFromId.get(id).getX() + (getEntityFromId.get(id).getNewX() - getEntityFromId.get(id).getX() ) / getEntityFromId.get(id).getInterpolationSteps());
+            getEntityFromId.get(id).setY(getEntityFromId.get(id).getY() + (getEntityFromId.get(id).getNewY() - getEntityFromId.get(id).getY()) / getEntityFromId.get(id).getInterpolationSteps());
+            getEntityFromId.get(id).setZ(getEntityFromId.get(id).getZ() + (getEntityFromId.get(id).getNewZ() - getEntityFromId.get(id).getZ()) / getEntityFromId.get(id).getInterpolationSteps());
 
             getEntityFromId.get(id).setInterpolationSteps(getEntityFromId.get(id).getInterpolationSteps() - 1);
         }
