@@ -33,7 +33,7 @@ public class AimU extends Check {
             if (deltaPitch == 0 && gcd > 0.8 && deltaYaw > 3 && Math.abs(e.getTo().getPitch()) != 90 && Math.abs(e.getFrom().getPitch()) != 90) validPitch = false;
             if (deltaYaw == 0 && deltaPitch > 0.1 && gcd > 0.4 && Math.abs(e.getTo().getPitch()) != 90 && Math.abs(e.getFrom().getPitch()) != 90) validYaw = false;
 
-            boolean attacking = System.currentTimeMillis() - data.getInteractData().getLastHitPacket() < 50 * 1.5;
+            boolean attacking = System.currentTimeMillis() - data.getInteractData().getLastHitPacket() < 50 * 4;
 
             if (validPitch && validYaw) {
                 if (buffer > 0) buffer -= 0.05;
