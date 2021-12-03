@@ -88,6 +88,7 @@ public class CheckManager {
                 new MotionE(data),
                 new MotionF(data),
                 new MotionG(data),
+                new MotionH(data),
 
                 // COMBAT
                 new AimA(data),
