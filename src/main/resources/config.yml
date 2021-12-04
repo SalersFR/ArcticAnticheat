@@ -212,6 +212,14 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      m:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      n:
+        ban-vl: 50
+        enabled: true
+        punish: true
     reach:
       a:
         ban-vl: 10
