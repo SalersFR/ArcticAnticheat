@@ -5,6 +5,7 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.event.Event;
 import arctic.ac.event.client.RotationEvent;
 import arctic.ac.utils.MathUtils;
+import org.bukkit.Bukkit;
 
 public class AimT extends Check {
 
@@ -40,6 +41,8 @@ public class AimT extends Check {
 
                 buffer += (0.25 + (consist * 50f));
                 if (consist == 0.0f || data.getCinematicProcessor().getTicksSince() <= 1) buffer *= 0.2f;
+
+                Bukkit.broadcastMessage("TickDelay " + data.getInteractData().getLastHitPacket());
 
                 if (buffer > 3.25)
                     fail("const=" + consist);

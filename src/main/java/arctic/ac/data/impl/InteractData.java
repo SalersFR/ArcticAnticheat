@@ -77,6 +77,7 @@ public class InteractData {
             this.target = wrapper.getEntity();
             hasHitSlowDown = true;
             attackSlowDownTime = System.currentTimeMillis();
+            setLastHitPacket(System.currentTimeMillis());
         }
 
         if (wrapper.getEntity() == null) return;
