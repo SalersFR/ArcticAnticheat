@@ -47,7 +47,7 @@ public class AimS extends Check {
                 }
             } else if (buffer > 0) buffer -= 0.025;
 
-            if (diff > 90 && diff < 400 && gcd < 100 && speed > 10) {
+            if (diff > 90 && diff < 400 && gcd < 10 && speed > 10) {
                 buffer2++;
                 if (buffer2 > 3) {
                     fail("buffer " + buffer2 + " gcd " + gcd + " diff " + diff +" speed " + speed);
