@@ -42,8 +42,6 @@ public class AimT extends Check {
                 buffer += (0.25 + (consist * 50f));
                 if (consist == 0.0f || data.getCinematicProcessor().getTicksSince() <= 1) buffer *= 0.2f;
 
-                Bukkit.broadcastMessage("TickDelay " + data.getInteractData().getLastHitPacket());
-
                 if (buffer > 3.25)
                     fail("const=" + consist);
             } else if (buffer > 0) buffer -= 0.002;
