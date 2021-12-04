@@ -8,36 +8,30 @@ import arctic.ac.utils.WorldUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class MotionF extends Check {
+public class MotionH extends Check {
 
-    private double lastDeltaXZ;
-    private int ticksSinceJump;
+    private double lastDeltaY;
 
-    public MotionF(PlayerData data) {
-        super(data, "Motion", "F", "movement.motion.f", "Checks for invalid xz axis accel.", true);
+    public MotionH(PlayerData data) {
+        super(data, "Motion", "H", "movement.motion.h", "Checks for invalid y movement while being near ground.", true);
     }
 
     @Override
     public void handle(Event e) {
         if (e instanceof MoveEvent) {
-
             final MoveEvent event = (MoveEvent) e;
-            final WorldUtils worldUtils = new WorldUtils();
+
+            final double deltaY = event.getDeltaY();
+            final double lastDeltaY = this.lastDeltaY;
+
+            this.lastDeltaY = deltaY;
 
             final Player player = data.getPlayer();
 
             final Location bukkitTo = event.getTo().toVector().toLocation(player.getWorld());
             final Location bukkitFrom = event.getFrom().toVector().toLocation(player.getWorld());
 
-            final double deltaXZ = event.getDeltaXZ();
-            final double lastDeltaXZ = this.lastDeltaXZ;
-
-            final double deltaY = event.getDeltaY();
-            this.lastDeltaXZ = deltaXZ;
-
-            final boolean jumped = worldUtils.isOnGround(bukkitFrom, -0.00001) && !worldUtils.isOnGround(bukkitTo, -0.00001) && deltaY > 0;
-
-            if (jumped) ticksSinceJump = 0;
+            final WorldUtils worldUtils = new WorldUtils();
 
             final boolean exempt = worldUtils.isInLiquid(player)
                     || worldUtils.isInLiquidVertically(player)
@@ -48,20 +42,25 @@ public class MotionF extends Check {
                     || worldUtils.isOnACertainBlock(player, "stairs")
                     || worldUtils.isOnACertainBlock(player, "ice")
                     || data.getInteractData().isHurt()
-                    || data.getInteractData().getTicksSinceHurt() < 20
                     || worldUtils.haveABlockNearHead(player);
 
-            final double accelXZ = Math.abs(deltaXZ - lastDeltaXZ);
 
-            if (!exempt && ticksSinceJump <= 2 && accelXZ <= 0.000001D && deltaXZ > 0.2D) {
-                if (++buffer > 2)
-                    fail("accel=" + accelXZ);
-            } else if (buffer > 0) buffer -= 0.025D;
+            if (deltaY < 0 && Math.abs(deltaY) == lastDeltaY && lastDeltaY > 0.2F && worldUtils.isCloseToGround(bukkitFrom) &&
+                    worldUtils.isCloseToGround(bukkitTo) && !exempt) {
+                if (++buffer > 0)
+                    fail("same pos/neg motion\ndelta=" + deltaY + " last=" + lastDeltaY);
 
-            this.ticksSinceJump++;
+            } else if (buffer > 0) buffer -= 0.0025D;
 
+            if (deltaY <= 0.42f && lastDeltaY >= 0.42f && worldUtils.isCloseToGround(bukkitFrom) &&
+                    worldUtils.isCloseToGround(bukkitTo) && !exempt) {
+                if (++buffer > 0)
+                    fail("jump (or higher) reversed motion\ndelta=" + deltaY + " last=" + lastDeltaY);
+
+            } else if (buffer > 0) buffer -= 0.0025D;
 
         }
     }
 
 }
+

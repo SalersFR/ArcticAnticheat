@@ -80,6 +80,9 @@ public class InteractData {
             setLastHitPacket(System.currentTimeMillis());
         }
 
+        this.lastHitPacket = System.currentTimeMillis();
+
+
         if (wrapper.getEntity() == null) return;
 
         if (target.getType() == EntityType.PLAYER) {

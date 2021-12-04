@@ -29,6 +29,7 @@ import arctic.ac.check.checks.player.badpackets.*;
 import arctic.ac.check.checks.player.scaffold.ScaffoldA;
 import arctic.ac.check.checks.player.timer.TimerA;
 import arctic.ac.check.checks.player.timer.TimerB;
+import arctic.ac.check.checks.player.timer.TimerC;
 import arctic.ac.data.PlayerData;
 
 import java.util.Arrays;
@@ -55,6 +56,7 @@ public class CheckManager {
 
                 new TimerA(data),
                 new TimerB(data),
+                new TimerC(data),
 
                 new ScaffoldA(data),
 
@@ -86,6 +88,7 @@ public class CheckManager {
                 new MotionE(data),
                 new MotionF(data),
                 new MotionG(data),
+                new MotionH(data),
 
                 // COMBAT
                 new AimA(data),
@@ -131,6 +134,8 @@ public class CheckManager {
                 new KillAuraJ(data),
                 new KillAuraK(data),
                 new KillAuraL(data),
+                new KillAuraM(data),
+                new KillAuraN(data),
 
                 new VelocityA(data),
                 new VelocityB(data),

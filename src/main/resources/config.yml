@@ -124,6 +124,11 @@ checks:
         enabled: true
         punish: true
         setback: false
+      h:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: false
   combat:
     autoclicker:
       a:
@@ -204,6 +209,14 @@ checks:
         enabled: true
         punish: true
       l:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      m:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      n:
         ban-vl: 50
         enabled: true
         punish: true
@@ -343,6 +356,10 @@ checks:
         enabled: true
         punish: true
       b:
+        ban-vl: 500
+        enabled: true
+        punish: true
+      c:
         ban-vl: 500
         enabled: true
         punish: true
