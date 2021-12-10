@@ -39,7 +39,7 @@ public class FlyD extends Check {
             if (data.getPlayer().getAllowFlight()) return;
             if (data.getPosData().isTeleporting()) return;
 
-            if (airTicks >= 3 && !onGroundV2 && Math.abs(predictedMotionY) >= 0.005D) {
+            if (airTicks >= 5 && !onGroundV2 && Math.abs(predictedMotionY) >= 0.005D) {
                 if (!check(motionY, predictedMotionY)) {
                     buffer += 10;
                     if (buffer > 30) {
