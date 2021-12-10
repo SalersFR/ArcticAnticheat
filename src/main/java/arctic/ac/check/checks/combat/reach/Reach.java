@@ -60,23 +60,30 @@ public class Reach extends Check {
 
                 double reach = 3.0D;
 
-                if (collision != null && collision.hitVec != null)
+                boolean ray = false;
+
+                if (collision != null && collision.hitVec != null) {
                     reach = collision.hitVec.distanceTo(origin) - 0.11f;
+                    ray = true;
+                }
 
                 else {
                     final ABox victimBox = new ABox(reachEntity.getX(), reachEntity.getY(), reachEntity.getZ());
                     final Vector attacker = new Vector(origin.xCoord, origin.yCoord, origin.zCoord);
                     reach = victimBox.distanceXZ(attacker.getX(), attacker.getZ()) - 0.42525D;
+                    ray = false;
 
                 }
+
+                final float threshold = (float) (ray ? 3.05 : 3.1);
 
                 if (reach > 6.0D) return;
 
 
                 debug("reach=" + reach);
 
-                if (reach >= 3.05f) {
-                    if (++buffer > (data.getNetworkProcessor().getKeepAlivePing() / 35)) {
+                if (reach >= threshold) {
+                    if (++buffer > ((data.getNetworkProcessor().getKeepAlivePing() / 35) + 1.25)) {
                         fail("reach=" + reach);
                     }
                 } else if (buffer > 0) buffer -= 0.025D;
