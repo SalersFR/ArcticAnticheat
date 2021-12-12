@@ -20,7 +20,8 @@ public class AimD extends Check {
             final double gcd = rotationProcessor.getExpandedGcdPitch();
 
             final boolean exempt = !(pitch < 82.5F && pitch > -82.5F) || rotationProcessor.getDeltaYaw() < 3.5D
-                    || rotationProcessor.getPitchAccel() == 0.0F || rotationProcessor.getTicksSinceCinematic() <= 10;
+                    || rotationProcessor.getPitchAccel() == 0.0F ||
+                    rotationProcessor.getTicksSinceCinematic() <= 10 || rotationProcessor.getDeltaPitch() == 0 || rotationProcessor.getLastDeltaPitch() == 0;
 
             if (!exempt) {
                 if (gcd < 131072L) {

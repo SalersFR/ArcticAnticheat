@@ -32,11 +32,8 @@ public class RotationProcessor extends Processor {
         if(event.getPacketType() == PacketType.IN_LOOK || event.getPacketType() == PacketType.IN_POSITION_LOOK) {
             final WrappedInFlying wrapper = new WrappedInFlying(event.getPacket());
 
-            lastYaw = yaw;
-            lastPitch = pitch;
-
-            deltaYaw = Math.abs(yaw % 360 - lastYaw % 360) % 360;
-            deltaPitch = Math.abs(pitch - lastPitch);
+            lastYaw = this.yaw;
+            lastPitch = this.pitch;
 
             this.yaw = wrapper.getYaw();
             this.pitch = wrapper.getPitch();
@@ -44,17 +41,20 @@ public class RotationProcessor extends Processor {
             lastDeltaYaw = deltaYaw;
             lastDeltaPitch = deltaPitch;
 
-            lastYawAccel = this.yawAccel;
-            yawAccel = Math.abs(deltaYaw - lastDeltaYaw);
+            deltaYaw = Math.abs(yaw - lastYaw) % 360F;
+            deltaPitch = Math.abs(pitch - lastPitch);
 
+            lastYawAccel = this.yawAccel;
             lastPitchAccel = this.pitchAccel;
+
+            yawAccel = Math.abs(deltaYaw - lastDeltaYaw);
             pitchAccel = Math.abs(deltaPitch - lastDeltaPitch);
 
             gcdYaw = MathUtils.getGcd(deltaYaw , lastDeltaYaw);
             gcdPitch = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
 
-            expandedGcdYaw = (long) MathUtils.getGcd(deltaYaw * MathUtils.EXPANDER, lastDeltaYaw * MathUtils.EXPANDER);
-            expandedGcdPitch = (long) MathUtils.getGcd(deltaPitch * MathUtils.EXPANDER, lastDeltaPitch * MathUtils.EXPANDER);
+            expandedGcdYaw = (long) MathUtils.gcd(0x4000, (Math.abs(deltaYaw) * MathUtils.EXPANDER), (Math.abs(lastDeltaYaw) * MathUtils.EXPANDER));
+            expandedGcdPitch = (long) MathUtils.gcd(0x4000, (Math.abs(deltaPitch) * MathUtils.EXPANDER), (Math.abs(lastDeltaPitch) * MathUtils.EXPANDER));
 
             sensitivity = (int) MathUtils.getSensitivity(deltaPitch, lastDeltaPitch);
             handleCinematic();
