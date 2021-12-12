@@ -18,7 +18,7 @@ public class RotationProcessor extends Processor {
             lastDeltaYaw, lastDeltaPitch,
             yawAccel, pitchAccel,
             lastYawAccel, lastPitchAccel;
-    private double gcdYaw, gcdPitch;
+    private double gcdYaw, gcdPitch, absGcdPitch, absGcdYaw;
     private long expandedGcdYaw, expandedGcdPitch;
     private int sensitivity, ticksSinceCinematic;
 
@@ -52,6 +52,9 @@ public class RotationProcessor extends Processor {
 
             gcdYaw = MathUtils.getGcd(deltaYaw , lastDeltaYaw);
             gcdPitch = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
+
+            absGcdYaw = MathUtils.getGcd(Math.abs(deltaYaw) , Math.abs(lastDeltaYaw));
+            absGcdPitch = MathUtils.getGcd(Math.abs(deltaPitch) , Math.abs(lastDeltaPitch));
 
             expandedGcdYaw = (long) MathUtils.gcd(0x4000, (Math.abs(deltaYaw) * MathUtils.EXPANDER), (Math.abs(lastDeltaYaw) * MathUtils.EXPANDER));
             expandedGcdPitch = (long) MathUtils.gcd(0x4000, (Math.abs(deltaPitch) * MathUtils.EXPANDER), (Math.abs(lastDeltaPitch) * MathUtils.EXPANDER));

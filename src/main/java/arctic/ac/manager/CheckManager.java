@@ -41,7 +41,15 @@ public class CheckManager {
                 new AimC1(data),
                 new AimD(data),
                 new AimE(data),
-                new AimE1(data)
+                new AimE1(data),
+                new AimF(data),
+                new AimF1(data),
+                new AimG(data),
+                new AimG1(data),
+                new AimH(data),
+                new AimI(data),
+                new AimJ(data),
+                new AimJ1(data)
         );
     }
 }
