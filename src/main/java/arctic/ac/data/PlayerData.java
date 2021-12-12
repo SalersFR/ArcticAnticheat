@@ -88,6 +88,7 @@ public class PlayerData {
         rotationProcessor.handleIn(event);
         movementProcessor.handleIn(event);
         collisionProcessor.handleIn(event);
+        clickProcessor.handleIn(event);
 
         //check handling
         final boolean bypass = getPlayer().hasPermission(Arctic.INSTANCE.getConfig().getString("bypass-permission")) &&

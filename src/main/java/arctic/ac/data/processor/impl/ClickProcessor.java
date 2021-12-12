@@ -8,13 +8,14 @@ import arctic.ac.utils.Pair;
 import eu.salers.salty.event.impl.SaltyPacketInReceiveEvent;
 import eu.salers.salty.event.impl.SaltyPacketOutSendEvent;
 import eu.salers.salty.packet.type.PacketType;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class ClickProcessor extends Processor {
 
     private int ticks, outliers, sames;
-    private boolean ableToCheck;
     private double kurtosis, deviation, variance, skewness;
     private final ArcticQueue<Integer> samples = new ArcticQueue<>(25);
 
@@ -39,7 +40,7 @@ public class ClickProcessor extends Processor {
                 this.sames = MathUtils.getSames(samples);
             }
 
-            this.ableToCheck = this.samples.size() == 25;
+
 
             this.samples.add(ticks);
 
@@ -59,5 +60,9 @@ public class ClickProcessor extends Processor {
     @Override
     public void handleOut(SaltyPacketOutSendEvent event) {
 
+    }
+
+    public boolean isAbleToCheck() {
+        return samples.size() == 25;
     }
 }
