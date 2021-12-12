@@ -5,10 +5,12 @@ import arctic.ac.data.PlayerData;
 import arctic.ac.data.processor.impl.RotationProcessor;
 import eu.salers.salty.packet.type.PacketType;
 
-public class AimA extends Check {
+public class AimA1 extends Check {
 
-    public AimA(PlayerData data) {
-        super(data, "Aim", "A", "combat.aim.a", "Checks for a valid sensitivity.", true);
+    private int lastSensitivity;
+
+    public AimA1(PlayerData data) {
+        super(data, "Aim", "A1", "combat.aim.a", "Checks for a valid sensitivity.", true);
     }
 
     @Override
@@ -17,14 +19,18 @@ public class AimA extends Check {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
 
             final boolean exempt = rotationProcessor.getDeltaYaw() < 3.2F || rotationProcessor.getDeltaYaw() > 67.25f;
+            final int sensitivity = rotationProcessor.getSensitivity();
 
             debug("sens=" + rotationProcessor.getSensitivity() + " exempt=" + exempt + " buffer=" + buffer);
 
-            if (!exempt && rotationProcessor.getSensitivity() >= 405 && rotationProcessor.getYawAccel() <= 5 && rotationProcessor.getDeltaPitch() <= 6.75F) {
-                if (++buffer > 10) {
+            if (!exempt && sensitivity >= 125 && rotationProcessor.getYawAccel() <= 5 &&
+                    rotationProcessor.getDeltaPitch() <= 6.75F && sensitivity == lastSensitivity) {
+                if (++buffer > 16) {
                     fail("buffer=" + buffer);
                 }
-            } else if (buffer > 0) buffer -= 0.065;
+            } else if (buffer > 0) buffer -= 0.2;
+
+            this.lastSensitivity = sensitivity;
         }
 
     }

@@ -8,7 +8,7 @@ import eu.salers.salty.packet.type.PacketType;
 public class AimB extends Check {
 
     public AimB(PlayerData data) {
-        super(data, "Aim", "B", "combat.aim.a", "Checks for consistent rotations (gcd).", true);
+        super(data, "Aim", "B", "combat.aim.b", "Checks for consistent rotations (gcd).", true);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class AimB extends Check {
 
             final double consist = Math.abs(rotationProcessor.getGcdYaw() - rotationProcessor.getGcdPitch());
 
-            debug("consist=" + consist);
+            debug("consist=" + consist + " buffer=" + buffer);
 
             if (consist < 0.005 && (deltaYaw > 2.75f || (deltaPitch != 0.0f && deltaYaw > 1.25f)) &&
                     !Double.toString(consist).contains("E") && Math.abs(rotationProcessor.getPitch()) != 90 &&

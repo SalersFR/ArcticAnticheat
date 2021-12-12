@@ -36,14 +36,14 @@ public class RotationProcessor extends Processor {
         if(event.getPacketType() == PacketType.IN_LOOK || event.getPacketType() == PacketType.IN_POSITION_LOOK) {
             final WrappedInFlying wrapper = new WrappedInFlying(event.getPacket());
 
-            this.yaw = wrapper.getYaw();
-            this.pitch = wrapper.getPitch();
+            lastYaw = yaw;
+            lastPitch = pitch;
 
             deltaYaw = Math.abs(yaw % 360 - lastYaw % 360) % 360;
             deltaPitch = Math.abs(pitch - lastPitch);
 
-            lastYaw = yaw;
-            lastPitch = pitch;
+            this.yaw = wrapper.getYaw();
+            this.pitch = wrapper.getPitch();
 
             lastDeltaYaw = deltaYaw;
             lastDeltaPitch = deltaPitch;
