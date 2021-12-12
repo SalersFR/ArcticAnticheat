@@ -7,14 +7,13 @@ import arctic.ac.commands.impl.AlertsCommand;
 import arctic.ac.commands.impl.ArcticCommand;
 import arctic.ac.commands.impl.ArcticInfoCommand;
 import arctic.ac.commands.impl.DebugCommand;
-import arctic.ac.data.PlayerDataManager;
-import arctic.ac.file.CheckFileManager;
+import arctic.ac.manager.PlayerDataManager;
+import arctic.ac.manager.CheckFileManager;
 import arctic.ac.listener.bukkit.InventoryClickSettings;
 import arctic.ac.listener.bukkit.JoinLeaveListener;
 import arctic.ac.listener.packet.PacketHandler;
 import arctic.ac.utils.CustomUtils;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.utils.server.ServerVersion;
+import eu.salers.salty.SaltyAPI;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -46,13 +45,7 @@ public class Arctic extends JavaPlugin {
     public void onLoad() {
         CustomUtils.consoleLog("&bLoading Arctic b1-BETA");
 
-        PacketEvents.create(this).getSettings()
-                .bStats(true)
-                .checkForUpdates(false)
-                .compatInjector(false)
-                .fallbackServerVersion(ServerVersion.v_1_8_8);
 
-        PacketEvents.get().load();
     }
 
     @Override
@@ -68,8 +61,6 @@ public class Arctic extends JavaPlugin {
         registerEvents();
         registerCommands();
 
-        PacketEvents.get().init();
-        PacketEvents.get().registerListener(new PacketHandler());
 
 
         // Changes
@@ -85,6 +76,9 @@ public class Arctic extends JavaPlugin {
         }
 
         CustomUtils.consoleLog("&bSuccessfully enabled.");
+
+        SaltyAPI.get().load(this);
+        SaltyAPI.get().getEventManager().registerListener(new PacketHandler());
     }
 
 
@@ -92,6 +86,7 @@ public class Arctic extends JavaPlugin {
     public void onDisable() {
         INSTANCE = null;
         this.dataManager = null;
+        SaltyAPI.get().disable(this);
     }
 
     public PlayerDataManager getDataManager() {
@@ -101,7 +96,7 @@ public class Arctic extends JavaPlugin {
     private void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new JoinLeaveListener(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryClickSettings(), this);
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, "MC|Brand", new JoinLeaveListener());
+
 
     }
 

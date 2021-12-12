@@ -2,18 +2,19 @@ package arctic.ac.check;
 
 import arctic.ac.Arctic;
 import arctic.ac.data.PlayerData;
-import arctic.ac.event.Event;
 import arctic.ac.utils.CustomUtils;
+import eu.salers.salty.packet.type.PacketType;
+import eu.salers.salty.packet.wrappers.play.in.WrappedInPacket;
+import eu.salers.salty.packet.wrappers.play.out.WrappedOutPacket;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.minecraft.server.v1_8_R3.MinecraftServer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -39,7 +40,8 @@ public abstract class Check {
 
     }
 
-    public abstract void handle(Event e);
+    public abstract void handle(final Object packet, final PacketType packetType);
+
 
     protected void fail() {
         fail("Not any Information provided.");
@@ -50,8 +52,6 @@ public abstract class Check {
 
         final String loweredName = this.configName.toLowerCase();
 
-        if (loweredName.contains("movement") && this.isSetback())
-            data.getSetbackProcessor().setback();
 
         final String prefix = CustomUtils.translate(Arctic.INSTANCE.getConfig().getString("prefix"));
 
@@ -82,9 +82,8 @@ public abstract class Check {
                         replace("%vl%", "" + vl).
                         replace("%type%", type).
                         replace("%check%", name).
-                        replace("%ping%", data.getNetworkProcessor().getKeepAlivePing() + "").
-                        replace("%tps%", MinecraftServer.getServer().recentTps[0] + "").
-                        replace("%prefix%", prefix);
+                        //replace("%ping%", data.getNetworkProcessor().getKeepAlivePing() + "").
+                                replace("%prefix%", prefix);
 
                 final TextComponent alertMSG = new TextComponent(ChatColor.translateAlternateColorCodes('&', fromConfig));
 

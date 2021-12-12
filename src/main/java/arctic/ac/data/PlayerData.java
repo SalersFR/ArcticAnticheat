@@ -2,20 +2,19 @@ package arctic.ac.data;
 
 import arctic.ac.Arctic;
 import arctic.ac.check.Check;
-import arctic.ac.data.impl.CheckManager;
-import arctic.ac.data.impl.InteractData;
-import arctic.ac.data.impl.PositionData;
-import arctic.ac.data.impl.VelocityData;
-import arctic.ac.data.processor.CinematicProcessor;
-import arctic.ac.data.processor.NetworkProcessor;
-import arctic.ac.data.processor.PacketProcessor;
-import arctic.ac.data.processor.SetbackProcessor;
-import arctic.ac.data.tracker.EntityTracker;
+import arctic.ac.data.processor.impl.ClickProcessor;
+import arctic.ac.data.processor.impl.CollisionProcessor;
+import arctic.ac.data.processor.impl.MovementProcessor;
+import arctic.ac.data.processor.impl.RotationProcessor;
+import arctic.ac.manager.CheckManager;
 import arctic.ac.utils.ALocation;
 import arctic.ac.utils.APosition;
 import arctic.ac.utils.ARotation;
+import eu.salers.salty.event.impl.SaltyPacketInReceiveEvent;
+import eu.salers.salty.event.impl.SaltyPacketOutSendEvent;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -28,41 +27,31 @@ import java.util.List;
 public class PlayerData {
 
     private final CheckManager checkManager;
-    private final InteractData interactData;
-    private final PositionData posData;
-    private final VelocityData velocityData;
-    private final EntityTracker entityTracker;
-    private final PacketProcessor packetProcessor;
-    private final CinematicProcessor cinematicProcessor;
-    private final SetbackProcessor setbackProcessor;
-    private final NetworkProcessor networkProcessor;
+
     private final Player player;
     private final List<ALocation> pastEntityLocations;
+
+    private final RotationProcessor rotationProcessor;
+    private final MovementProcessor movementProcessor;
+    private final CollisionProcessor collisionProcessor;
+    private final ClickProcessor clickProcessor;
 
     @Setter
     private LivingEntity target;
 
-
     @Setter
     private ALocation location;
 
-    @Setter
-    private ARotation rotation;
-    @Setter
-    private APosition position;
 
     public PlayerData(Player player) {
         this.checkManager = new CheckManager(this);
-        this.interactData = new InteractData(this);
-        this.posData = new PositionData(this);
-        this.velocityData = new VelocityData(this);
-        this.entityTracker = new EntityTracker(this);
-        this.packetProcessor = new PacketProcessor(this);
-        this.cinematicProcessor = new CinematicProcessor(this);
-        this.setbackProcessor = new SetbackProcessor(this);
-        this.networkProcessor = new NetworkProcessor(this);
         this.pastEntityLocations = new ArrayList<>();
         this.player = player;
+
+        this.rotationProcessor = new RotationProcessor(this);
+        this.movementProcessor = new MovementProcessor(this);
+        this.collisionProcessor = new CollisionProcessor(this);
+        this.clickProcessor = new ClickProcessor(this);
 
         new BukkitRunnable() {
 
@@ -94,7 +83,51 @@ public class PlayerData {
         return this.player;
     }
 
-    public InteractData getInteractionData() {
-        return this.interactData;
+    public void handleReceive(final SaltyPacketInReceiveEvent event) {
+
+        rotationProcessor.handleIn(event);
+        movementProcessor.handleIn(event);
+        collisionProcessor.handleIn(event);
+
+        //check handling
+        final boolean bypass = getPlayer().hasPermission(Arctic.INSTANCE.getConfig().getString("bypass-permission")) &&
+                Arctic.INSTANCE.getConfig().getBoolean("bypass-enabled");
+
+        final boolean exempt = getPlayer().getGameMode() == GameMode.CREATIVE
+                || getPlayer().getAllowFlight()
+                || getPlayer().getGameMode() == GameMode.SPECTATOR
+                || bypass;
+
+        for (Check checks : getChecks()) {
+            if (checks.isEnabled() && !exempt) {
+                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(event.getPacket(), event.getPacketType()));
+
+            }
+        }
     }
+
+
+
+    public void handleSending(final SaltyPacketOutSendEvent event) {
+
+        movementProcessor.handleOut(event);
+
+        //check handling
+        final boolean bypass = getPlayer().hasPermission(Arctic.INSTANCE.getConfig().getString("bypass-permission")) &&
+                Arctic.INSTANCE.getConfig().getBoolean("bypass-enabled");
+
+        final boolean exempt = getPlayer().getGameMode() == GameMode.CREATIVE
+                || getPlayer().getAllowFlight()
+                || getPlayer().getGameMode() == GameMode.SPECTATOR
+                || bypass;
+
+        for (Check checks : getChecks()) {
+            if (checks.isEnabled() && !exempt) {
+                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(event.getPacket(), event.getPacketType()));
+
+            }
+        }
+    }
+
+
 }

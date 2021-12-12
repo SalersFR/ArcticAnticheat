@@ -4,12 +4,10 @@ import arctic.ac.Arctic;
 import arctic.ac.data.PlayerData;
 import arctic.ac.utils.CustomUtils;
 import arctic.ac.utils.PlayerUtils;
-import io.github.retrooper.packetevents.utils.player.ClientVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class ArcticInfoCommand implements CommandExecutor {
@@ -35,17 +33,11 @@ public class ArcticInfoCommand implements CommandExecutor {
                 return true;
             }
 
-            ClientVersion clientVersion = targetData.getNetworkProcessor().getClientVersion();
-            String version = clientVersion.name();
 
             player.sendMessage(CustomUtils.translate("&7&m--------&r &bInformation &7&m--------&r"));
             player.sendMessage(CustomUtils.translate("&r &7» Name: &b" + target.getName()));
             player.sendMessage(CustomUtils.translate("&r &7» Ping"));
             player.sendMessage(CustomUtils.translate("&r &r &7»» NMS: &b" + PlayerUtils.getPing(targetData)));
-            player.sendMessage(CustomUtils.translate("&r &r &7»» Transaction: &b" + targetData.getNetworkProcessor().getTransactionPing()));
-            player.sendMessage(CustomUtils.translate("&r &r &7»» Keep Alive: &b" + targetData.getNetworkProcessor().getKeepAlivePing()));
-            player.sendMessage(CustomUtils.translate("&r &7» Client: &b" + targetData.getNetworkProcessor().getClientBrand())); // TODO: Get Client
-            player.sendMessage(CustomUtils.translate("&r &7» Version: &b" + version + " (" + version + ")")); // TODO: Get version
             player.sendMessage(CustomUtils.translate("&7&m---------------------------&r"));
 
 

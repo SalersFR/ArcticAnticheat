@@ -2,29 +2,30 @@ package arctic.ac.listener.packet;
 
 import arctic.ac.Arctic;
 import arctic.ac.data.PlayerData;
-import io.github.retrooper.packetevents.event.PacketListenerDynamic;
-import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
-import io.github.retrooper.packetevents.event.impl.PacketPlaySendEvent;
+import eu.salers.salty.event.impl.SaltyPacketInReceiveEvent;
+import eu.salers.salty.event.impl.SaltyPacketOutSendEvent;
+import eu.salers.salty.event.listener.SaltyPacketListener;
 
-public class PacketHandler extends PacketListenerDynamic {
+public class PacketHandler extends SaltyPacketListener {
+
 
     @Override
-    public void onPacketPlayReceive(PacketPlayReceiveEvent event) {
+    public void onPacketInReceive(SaltyPacketInReceiveEvent event) {
         final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
-        if (data == null) return;
+        if(data == null) return;
 
-        Arctic.INSTANCE.getDataThread().execute(() -> data.getPacketProcessor().handleReceive(event));
+        Arctic.INSTANCE.getDataThread().execute(() -> data.handleReceive(event));
+
+
     }
 
     @Override
-    public void onPacketPlaySend(PacketPlaySendEvent event) {
+    public void onPacketOutSend(SaltyPacketOutSendEvent event) {
         final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
-        if (data == null) return;
+        if(data == null) return;
 
-        Arctic.INSTANCE.getDataThread().execute(() -> data.getPacketProcessor().handleSending(event));
+        Arctic.INSTANCE.getDataThread().execute(() -> data.handleSending(event));
     }
-
-
 }
