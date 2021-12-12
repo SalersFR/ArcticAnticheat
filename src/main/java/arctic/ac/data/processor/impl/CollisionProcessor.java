@@ -13,9 +13,9 @@ import org.bukkit.Location;
 @Getter
 public class CollisionProcessor extends Processor {
 
-    private int collisionAirTicks, clientAirTicks, mathAirTicks, collisionGroundTicks, clientGroundTicks, mathGroundTicks;
+    private int collisionAirTicks, clientAirTicks, mathAirTicks, collisionGroundTicks, clientGroundTicks, mathGroundTicks, slimeTicks, iceTicks;
 
-    private boolean collisionGround, clientGround, mathGround , web, climbable, liquid, nearBoat;
+    private boolean collisionGround, clientGround, mathGround , web, climbable, liquid, nearBoat, blockNearHead;
 
     public CollisionProcessor(PlayerData data) {
         super(data);
@@ -59,10 +59,21 @@ public class CollisionProcessor extends Processor {
                 mathGroundTicks = 0;
             }
 
+            if(worldUtils.isOnACertainBlock(getData().getPlayer(), "slime"))
+                slimeTicks = 0;
+            else
+            slimeTicks++;
+
+            if(worldUtils.isOnACertainBlock(getData().getPlayer(), "ice"))
+                iceTicks = 0;
+            else
+                iceTicks++;
+
             web = worldUtils.isCollidingWithWeb(getData().getPlayer());
             liquid = worldUtils.isInLiquid(getData().getPlayer());
             climbable = worldUtils.isCollidingWithClimbable(getData().getPlayer());
             nearBoat = worldUtils.isNearBoat(getData().getPlayer());
+            blockNearHead = worldUtils.blockNearHead(location) || worldUtils.haveABlockNearHead(getData().getPlayer());
         }
     }
 

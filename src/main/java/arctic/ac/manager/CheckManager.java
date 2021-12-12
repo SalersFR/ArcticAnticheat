@@ -5,6 +5,7 @@ import arctic.ac.check.impl.combat.aim.*;
 import arctic.ac.check.impl.movement.fly.FlyA;
 import arctic.ac.check.impl.movement.fly.FlyB;
 import arctic.ac.check.impl.movement.fly.FlyC;
+import arctic.ac.check.impl.movement.motion.MotionA;
 import arctic.ac.check.impl.movement.speed.SpeedA;
 import arctic.ac.data.PlayerData;
 import lombok.Getter;
@@ -26,6 +27,8 @@ public class CheckManager {
                 new FlyB(data),
                 new FlyC(data),
                 new SpeedA(data),
+                new MotionA(data),
+
 
                 new AimA(data),
                 new AimA1(data),

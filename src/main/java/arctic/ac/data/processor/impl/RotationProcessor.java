@@ -9,10 +9,6 @@ import eu.salers.salty.packet.type.PacketType;
 import eu.salers.salty.packet.wrappers.play.in.impl.WrappedInFlying;
 import lombok.Getter;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Consumer;
-
 @Getter
 public class RotationProcessor extends Processor {
 
