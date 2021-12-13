@@ -21,7 +21,6 @@ public class AimI extends Check {
 
             this.lastRotated = now;
 
-
             final double delta = data.getRotationProcessor().getDeltaYaw();
             final long diff = now - before;
 

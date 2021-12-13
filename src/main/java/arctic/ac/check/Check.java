@@ -4,13 +4,10 @@ import arctic.ac.Arctic;
 import arctic.ac.data.PlayerData;
 import arctic.ac.utils.CustomUtils;
 import eu.salers.salty.packet.type.PacketType;
-import eu.salers.salty.packet.wrappers.play.in.WrappedInPacket;
-import eu.salers.salty.packet.wrappers.play.out.WrappedOutPacket;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -180,6 +177,10 @@ public abstract class Check {
 
     public boolean isSetback() {
         return Arctic.INSTANCE.getConfig().getBoolean("checks." + this.getConfigName() + ".setback");
+    }
+
+    protected boolean isFlyingPacket(final PacketType type) {
+        return type == PacketType.IN_FLYING || type == PacketType.IN_POSITION_LOOK || type == PacketType.IN_POSITION || type == PacketType.IN_LOOK;
     }
 
 

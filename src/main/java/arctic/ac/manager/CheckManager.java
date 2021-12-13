@@ -2,8 +2,9 @@ package arctic.ac.manager;
 
 import arctic.ac.check.Check;
 import arctic.ac.check.impl.combat.aim.*;
-import arctic.ac.check.impl.combat.autoclicker.AutoclickerA;
-import arctic.ac.check.impl.combat.autoclicker.AutoclickerA1;
+import arctic.ac.check.impl.combat.autoclicker.*;
+import arctic.ac.check.impl.combat.killaura.KillAuraA;
+import arctic.ac.check.impl.combat.killaura.KillAuraB;
 import arctic.ac.check.impl.movement.fly.FlyA;
 import arctic.ac.check.impl.movement.fly.FlyB;
 import arctic.ac.check.impl.movement.fly.FlyC;
@@ -32,8 +33,14 @@ public class CheckManager {
                 new MotionA(data),
 
 
+                new KillAuraA(data),
+                new KillAuraB(data),
                 new AutoclickerA(data),
                 new AutoclickerA1(data),
+                new AutoclickerB(data),
+                new AutoclickerC(data),
+                new AutoclickerD(data),
+                new AutoclickerE(data),
                 new AimA(data),
                 new AimA1(data),
                 new AimB(data),

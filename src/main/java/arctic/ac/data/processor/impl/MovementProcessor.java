@@ -2,6 +2,7 @@ package arctic.ac.data.processor.impl;
 
 import arctic.ac.data.PlayerData;
 import arctic.ac.data.processor.Processor;
+import arctic.ac.utils.MathUtils;
 import eu.salers.salty.event.impl.SaltyPacketInReceiveEvent;
 import eu.salers.salty.event.impl.SaltyPacketOutSendEvent;
 import eu.salers.salty.packet.type.PacketType;
@@ -42,7 +43,7 @@ public class MovementProcessor extends Processor {
             deltaX = this.x - lastX;
             deltaY = this.y - lastY;
             deltaZ = this.z - lastZ;
-            deltaXZ = Math.hypot(deltaX, deltaZ);
+            deltaXZ = MathUtils.hypot(deltaX, deltaZ);
 
             this.teleported = (System.currentTimeMillis() - lastTeleport) <= 500L;
         }

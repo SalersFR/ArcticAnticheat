@@ -2,10 +2,7 @@ package arctic.ac.data;
 
 import arctic.ac.Arctic;
 import arctic.ac.check.Check;
-import arctic.ac.data.processor.impl.ClickProcessor;
-import arctic.ac.data.processor.impl.CollisionProcessor;
-import arctic.ac.data.processor.impl.MovementProcessor;
-import arctic.ac.data.processor.impl.RotationProcessor;
+import arctic.ac.data.processor.impl.*;
 import arctic.ac.manager.CheckManager;
 import arctic.ac.utils.ALocation;
 import arctic.ac.utils.APosition;
@@ -35,6 +32,7 @@ public class PlayerData {
     private final MovementProcessor movementProcessor;
     private final CollisionProcessor collisionProcessor;
     private final ClickProcessor clickProcessor;
+    private final CombatProcessor combatProcessor;
 
     @Setter
     private LivingEntity target;
@@ -52,6 +50,7 @@ public class PlayerData {
         this.movementProcessor = new MovementProcessor(this);
         this.collisionProcessor = new CollisionProcessor(this);
         this.clickProcessor = new ClickProcessor(this);
+        this.combatProcessor = new CombatProcessor(this);
 
         new BukkitRunnable() {
 
@@ -89,6 +88,7 @@ public class PlayerData {
         movementProcessor.handleIn(event);
         collisionProcessor.handleIn(event);
         clickProcessor.handleIn(event);
+        combatProcessor.handleIn(event);
 
         //check handling
         final boolean bypass = getPlayer().hasPermission(Arctic.INSTANCE.getConfig().getString("bypass-permission")) &&
