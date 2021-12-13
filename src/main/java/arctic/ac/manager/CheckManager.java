@@ -9,7 +9,10 @@ import arctic.ac.check.impl.movement.fly.FlyA;
 import arctic.ac.check.impl.movement.fly.FlyB;
 import arctic.ac.check.impl.movement.fly.FlyC;
 import arctic.ac.check.impl.movement.motion.MotionA;
+import arctic.ac.check.impl.movement.motion.MotionB;
+import arctic.ac.check.impl.movement.motion.MotionC;
 import arctic.ac.check.impl.movement.speed.SpeedA;
+import arctic.ac.check.impl.player.timer.TimerA;
 import arctic.ac.data.PlayerData;
 import lombok.Getter;
 
@@ -26,11 +29,16 @@ public class CheckManager {
     public CheckManager(PlayerData data) {
         this.data = data;
         checks = Arrays.asList(
+
+                new TimerA(data),
+
                 new FlyA(data),
                 new FlyB(data),
                 new FlyC(data),
                 new SpeedA(data),
                 new MotionA(data),
+                new MotionB(data),
+                new MotionC(data),
 
 
                 new KillAuraA(data),

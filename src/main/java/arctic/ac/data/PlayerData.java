@@ -9,6 +9,7 @@ import arctic.ac.utils.APosition;
 import arctic.ac.utils.ARotation;
 import eu.salers.salty.event.impl.SaltyPacketInReceiveEvent;
 import eu.salers.salty.event.impl.SaltyPacketOutSendEvent;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.GameMode;
@@ -20,7 +21,7 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+@Data
 public class PlayerData {
 
     private final CheckManager checkManager;
@@ -33,6 +34,8 @@ public class PlayerData {
     private final CollisionProcessor collisionProcessor;
     private final ClickProcessor clickProcessor;
     private final CombatProcessor combatProcessor;
+
+    private long join;
 
     @Setter
     private LivingEntity target;

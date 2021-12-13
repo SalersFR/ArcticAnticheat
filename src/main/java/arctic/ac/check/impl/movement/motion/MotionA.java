@@ -28,6 +28,8 @@ public class MotionA extends Check {
             final double fixedPrediction = data.getPlayer().hasPotionEffect(PotionEffectType.JUMP)
                     ? predicted + PlayerUtils.getPotionLevel(data.getPlayer(), PotionEffectType.JUMP) : predicted;
 
+            //FIXME : EXEMPT FROM VELOCITY
+
             final boolean exempt = collisionProcessor.isBlockNearHead() || collisionProcessor.getSlimeTicks() <= 35 ||
                     Math.abs(0.01250003768371582 - deltaY) < 0.000001 || collisionProcessor.isClimbable() || collisionProcessor.getIceTicks() <= 12;
 
