@@ -11,6 +11,7 @@ import arctic.ac.check.impl.movement.fly.FlyC;
 import arctic.ac.check.impl.movement.motion.MotionA;
 import arctic.ac.check.impl.movement.motion.MotionB;
 import arctic.ac.check.impl.movement.motion.MotionC;
+import arctic.ac.check.impl.movement.motion.MotionD;
 import arctic.ac.check.impl.movement.speed.SpeedA;
 import arctic.ac.check.impl.player.timer.TimerA;
 import arctic.ac.data.PlayerData;
@@ -39,6 +40,7 @@ public class CheckManager {
                 new MotionA(data),
                 new MotionB(data),
                 new MotionC(data),
+                new MotionD(data),
 
 
                 new KillAuraA(data),
@@ -64,7 +66,8 @@ public class CheckManager {
                 new AimH(data),
                 new AimI(data),
                 new AimJ(data),
-                new AimJ1(data)
+                new AimJ1(data),
+                new AimK(data)
         );
     }
 }

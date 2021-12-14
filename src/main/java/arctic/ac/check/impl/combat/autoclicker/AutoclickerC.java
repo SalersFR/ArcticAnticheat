@@ -8,7 +8,7 @@ import eu.salers.salty.packet.type.PacketType;
 public class AutoclickerC extends Check {
 
     public AutoclickerC(PlayerData data) {
-        super(data, "Autoclicker", "C", "combat.autoclickerca", "Checks for poor clicker randomization.", true);
+        super(data, "Autoclicker", "C", "combat.autoclicker.c", "Checks for poor clicker randomization.", true);
     }
 
     @Override
