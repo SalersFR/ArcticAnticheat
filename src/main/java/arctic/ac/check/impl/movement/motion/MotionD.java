@@ -36,13 +36,13 @@ public class MotionD extends Check {
             //FIXME : EXEMPT FROM VELOCITY
 
             if (deltaY < 0 && Math.abs(deltaY) == lastDeltaY && lastDeltaY > 0.2F
-                    && collisionProcessor.getCollisionGroundTicks() >= 1 && !exempt) {
+                    && collisionProcessor.getClientGroundTicks() >= 1 && !exempt) {
                 if (++buffer > 0)
                     fail("same pos/neg motion\ndelta=" + deltaY + " last=" + lastDeltaY);
 
             } else if (buffer > 0) buffer -= 0.0025D;
 
-            if (deltaY <= 0.42f && lastDeltaY >= 0.42f && collisionProcessor.getCollisionGroundTicks() >= 1 && !exempt) {
+            if (deltaY <= 0.42f && lastDeltaY >= 0.42f && collisionProcessor.getClientGroundTicks() >= 1 && !exempt) {
                 if (++buffer > 0)
                     fail("jump (or higher) reversed motion\ndelta=" + deltaY + " last=" + lastDeltaY);
 
