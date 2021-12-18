@@ -14,7 +14,7 @@ public class FlyC extends Check {
 
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_POSITION_LOOK || packetType == PacketType.IN_POSITION) {
 
             final MovementProcessor movementProcessor = data.getMovementProcessor();

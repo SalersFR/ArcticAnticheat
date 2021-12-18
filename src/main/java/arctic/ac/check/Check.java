@@ -37,7 +37,7 @@ public abstract class Check {
 
     }
 
-    public abstract void handle(final Object packet, final PacketType packetType);
+    public abstract void handle(final Object packet, final PacketType packetType, final long time);
 
 
     protected void fail() {

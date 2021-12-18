@@ -102,7 +102,7 @@ public class PlayerData {
 
         for (Check checks : getChecks()) {
             if (checks.isEnabled() && !exempt) {
-                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(event.getPacket(), event.getPacketType()));
+                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(event.getPacket(), event.getPacketType(), event.getTime()));
 
             }
         }
@@ -125,7 +125,7 @@ public class PlayerData {
 
         for (Check checks : getChecks()) {
             if (checks.isEnabled() && !exempt) {
-                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(event.getPacket(), event.getPacketType()));
+                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(event.getPacket(), event.getPacketType(), event.getTime()));
 
             }
         }

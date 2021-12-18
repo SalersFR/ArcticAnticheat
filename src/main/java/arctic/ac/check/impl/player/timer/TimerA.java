@@ -6,8 +6,8 @@ import eu.salers.salty.packet.type.PacketType;
 
 public class TimerA extends Check {
 
-    private long lastFlying;
-    private double balance;
+    private long lastFlying = System.currentTimeMillis();
+    private double balance = -1;
 
 
     public TimerA(PlayerData data) {
@@ -15,34 +15,29 @@ public class TimerA extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (isFlyingPacket(packetType)) {
 
-            long systemTime = System.currentTimeMillis();
-            long lastTimeRate = this.lastFlying != 0 ? this.lastFlying : systemTime - 50;
-            this.lastFlying = systemTime;
-            balance += 48.25; //don't ask.
-            balance -= (systemTime - lastTimeRate);
+            long diff = time - lastFlying;
+            balance += 50 - diff;
 
-            if (Math.abs(balance) > 125 || (System.currentTimeMillis() - data.getJoin()) < 500L) balance = -50.0D;
+            if (data.getMovementProcessor().isTeleported()) balance -= 50.0D;
 
-            debug("balance=" + balance + " buffer=" + buffer);
+            debug("balance=" + balance + " tpTicks=" + data.getMovementProcessor().getTeleportTicks());
 
-            if(balance > 30) {
-                buffer += balance;
+            if (balance < -125) balance += 10;
 
-                if(buffer >= 525) {
-                    fail("balance=" + balance);
-                }
-            } else if(buffer > 0) buffer -= 25;
+            if (balance < -3000) balance = -120;
 
+            if (balance > 50) {
+                if (++buffer > 6)
+                    balance -= 50.0D;
+                fail("balance=" + balance);
+            } else if(buffer > 0) buffer -= 0.1D;
 
 
+            this.lastFlying = time;
 
-
-
-        } else if (packetType == PacketType.OUT_POSITION) {
-            balance -= 50.0D;
 
         }
 

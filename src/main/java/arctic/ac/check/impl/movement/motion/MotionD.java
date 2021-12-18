@@ -17,7 +17,7 @@ public class MotionD extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_POSITION_LOOK || packetType == PacketType.IN_POSITION) {
 
             final MovementProcessor movementProcessor = data.getMovementProcessor();
@@ -37,16 +37,19 @@ public class MotionD extends Check {
 
             if (deltaY < 0 && Math.abs(deltaY) == lastDeltaY && lastDeltaY > 0.2F
                     && collisionProcessor.getClientGroundTicks() >= 1 && !exempt) {
-                if (++buffer > 0)
+                if(deltaY == 0.5 || lastDeltaY == 0.5) buffer = 0;
+                if (++buffer > 0.75)
                     fail("same pos/neg motion\ndelta=" + deltaY + " last=" + lastDeltaY);
 
             } else if (buffer > 0) buffer -= 0.0025D;
 
             if (deltaY <= 0.42f && lastDeltaY >= 0.42f && collisionProcessor.getClientGroundTicks() >= 1 && !exempt) {
-                if (++buffer > 0)
+                if(deltaY == 0.5 || lastDeltaY == 0.5) buffer = 0;
+                if(deltaY == 0) buffer /= 2;
+                if (++buffer > 1.25)
                     fail("jump (or higher) reversed motion\ndelta=" + deltaY + " last=" + lastDeltaY);
 
-            } else if (buffer > 0) buffer -= 0.0025D;
+            } else if (buffer > 0) buffer -= 0.005D;
 
         }
 

@@ -12,14 +12,14 @@ public class FlyD extends Check {
         super(data, "Fly", "D", "movement.fly.d", "Checks rounded movement values.", false);
     }
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_POSITION_LOOK || packetType == PacketType.IN_POSITION) {
 
             final MovementProcessor movementProcessor = data.getMovementProcessor();
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
 
             final double deltaY = Math.abs(movementProcessor.getDeltaY());
-            final double mod = deltaY % 1.0D;
+
 
 
             final boolean midAir = collisionProcessor.getCollisionAirTicks() > 12 || collisionProcessor.getClientAirTicks() > 13;
@@ -27,11 +27,13 @@ public class FlyD extends Check {
             final boolean exempt = collisionProcessor.isNearBoat() || collisionProcessor.isLiquid()
                     || collisionProcessor.isWeb() || collisionProcessor.isClimbable();
 
-            debug("delta=" + deltaY + " mod=" + mod);
+            final boolean round = deltaY % 1.D == 0 || deltaY % 1.5 == 0 || deltaY % 0.5 == 0;
 
-            if (mod == 0 && midAir && !exempt) {
+            debug("delta=" + deltaY);
+
+            if (round && midAir && !exempt && deltaY > 0) {
                 if (++buffer > 3.25)
-                    fail("delta=" + deltaY + " mod=" + mod);
+                    fail("delta=" + deltaY);
 
             } else if (buffer > 0) buffer -= 0.1D;
 

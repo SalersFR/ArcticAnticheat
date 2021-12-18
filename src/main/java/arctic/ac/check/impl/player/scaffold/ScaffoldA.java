@@ -14,7 +14,7 @@ public class ScaffoldA extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if(packetType == PacketType.IN_HELD_ITEM_SLOT) {
             final WrappedInHeldItemSlot wrapped = new WrappedInHeldItemSlot(packet);
             final int slot = wrapped.getSlot();

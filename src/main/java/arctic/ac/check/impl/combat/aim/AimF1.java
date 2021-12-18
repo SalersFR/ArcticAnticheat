@@ -13,7 +13,7 @@ public class AimF1 extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_LOOK || packetType == PacketType.IN_POSITION_LOOK) {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
 
@@ -36,8 +36,8 @@ public class AimF1 extends Check {
                 if (++buffer > 13) {
                     fail("modPitch: " + modulusResPitch + ", modYaw: " + modulusResYaw +
                             ", dYaw: " + deltaYaw + ", dPitch: " + deltaPitch);
-                } else if (buffer > 0) buffer -= 0.5D;
-            }
+                }
+            } else if (buffer > 0) buffer -= 0.5D;
 
             debug("modPitch: " + modulusResPitch + ", modYaw: " + modulusResYaw +
                     ", dYaw: " + deltaYaw + ", dPitch: " + deltaPitch + " b=" + buffer);
