@@ -27,7 +27,7 @@ public class AutoclickerE extends Check {
 
             if(outliersDiff <= 1) {
                 buffer += (2 - outliersDiff);
-                if(buffer > 5.25)
+                if(buffer > 7.25)
                     fail("diff=" + outliersDiff);
             } else if(buffer > 0) buffer -= 0.2D;
 

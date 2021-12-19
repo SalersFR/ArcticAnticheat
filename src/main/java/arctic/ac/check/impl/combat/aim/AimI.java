@@ -16,13 +16,11 @@ public class AimI extends Check {
     public void handle(Object packet, PacketType packetType, long time) {
         if(packetType == PacketType.IN_LOOK || packetType == PacketType.IN_POSITION_LOOK) {
 
-            final long now = System.currentTimeMillis();
             final long before = lastRotated;
-
-            this.lastRotated = now;
+            this.lastRotated = time;
 
             final double delta = data.getRotationProcessor().getDeltaYaw();
-            final long diff = now - before;
+            final long diff = time - before;
 
             debug("diff=" + diff + " delta=" + delta + " buffer=" + buffer);
             if (diff > 250 && diff < 400) {

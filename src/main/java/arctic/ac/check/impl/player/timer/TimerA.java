@@ -30,7 +30,7 @@ public class TimerA extends Check {
             if (balance < -3000) balance = -120;
 
             if (balance > 50) {
-                if (++buffer > 6)
+                if (++buffer > 12)
                     balance -= 50.0D;
                 fail("balance=" + balance);
             } else if(buffer > 0) buffer -= 0.1D;
