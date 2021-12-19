@@ -47,8 +47,7 @@ public class ClickProcessor extends Processor {
 
             ticks = 0;
 
-        } else if (event.getPacketType() == PacketType.IN_FLYING || event.getPacketType() == PacketType.IN_POSITION
-                || event.getPacketType() == PacketType.IN_POSITION_LOOK || event.getPacketType() == PacketType.IN_LOOK) {
+        } else if (isFlyingPacket(event.getPacketType())) {
             ticks++;
             placeTicks++;
 
@@ -66,7 +65,7 @@ public class ClickProcessor extends Processor {
 
     }
 
-    public boolean isAbleToCheck() {
-        return samples.size() == 25;
+    public boolean isNotAbleToCheck() {
+        return samples.size() != 25;
     }
 }

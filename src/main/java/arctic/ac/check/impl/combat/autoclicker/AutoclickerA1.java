@@ -17,7 +17,7 @@ public class AutoclickerA1 extends Check {
     public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_ARM_ANIMATION) {
             final ClickProcessor clickProcessor = data.getClickProcessor();
-            if (!clickProcessor.isAbleToCheck()) return;
+            if (clickProcessor.isNotAbleToCheck()) return;
 
             final double deviation = clickProcessor.getDeviation();
 

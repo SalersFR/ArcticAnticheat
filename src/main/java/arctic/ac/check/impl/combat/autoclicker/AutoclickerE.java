@@ -3,7 +3,6 @@ package arctic.ac.check.impl.combat.autoclicker;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.data.processor.impl.ClickProcessor;
-import arctic.ac.manager.CheckManager;
 import eu.salers.salty.packet.type.PacketType;
 
 public class AutoclickerE extends Check {
@@ -18,7 +17,7 @@ public class AutoclickerE extends Check {
     public void handle(Object packet, PacketType packetType, long time) {
         if(packetType == PacketType.IN_ARM_ANIMATION) {
             final ClickProcessor clickProcessor = data.getClickProcessor();
-            if(!clickProcessor.isAbleToCheck()) return;
+            if (clickProcessor.isNotAbleToCheck()) return;
 
             final int outliers = clickProcessor.getOutliers();
             final int outliersDiff = Math.abs(outliers - lastOutliers);

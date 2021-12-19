@@ -5,7 +5,6 @@ import arctic.ac.data.processor.Processor;
 import arctic.ac.utils.MathUtils;
 import eu.salers.salty.event.impl.SaltyPacketInReceiveEvent;
 import eu.salers.salty.event.impl.SaltyPacketOutSendEvent;
-import eu.salers.salty.packet.type.PacketType;
 import eu.salers.salty.packet.wrappers.play.in.impl.WrappedInFlying;
 import lombok.Getter;
 
@@ -29,38 +28,73 @@ public class RotationProcessor extends Processor {
 
     @Override
     public void handleIn(SaltyPacketInReceiveEvent event) {
-        if(event.getPacketType() == PacketType.IN_LOOK || event.getPacketType() == PacketType.IN_POSITION_LOOK) {
+        if (isFlyingPacket(event.getPacketType())) {
             final WrappedInFlying wrapper = new WrappedInFlying(event.getPacket());
 
-            lastYaw = this.yaw;
-            lastPitch = this.pitch;
+            if (wrapper.isHasLook()) {
 
-            this.yaw = wrapper.getYaw();
-            this.pitch = wrapper.getPitch();
+                lastYaw = this.yaw;
+                lastPitch = this.pitch;
 
-            lastDeltaYaw = deltaYaw;
-            lastDeltaPitch = deltaPitch;
+                this.yaw = wrapper.getYaw();
+                this.pitch = wrapper.getPitch();
 
-            deltaYaw = Math.abs(yaw - lastYaw) % 360F;
-            deltaPitch = Math.abs(pitch - lastPitch);
+                lastDeltaYaw = deltaYaw;
+                lastDeltaPitch = deltaPitch;
 
-            lastYawAccel = this.yawAccel;
-            lastPitchAccel = this.pitchAccel;
+                deltaYaw = Math.abs(yaw - lastYaw) % 360F;
+                deltaPitch = Math.abs(pitch - lastPitch);
 
-            yawAccel = Math.abs(deltaYaw - lastDeltaYaw);
-            pitchAccel = Math.abs(deltaPitch - lastDeltaPitch);
+                lastYawAccel = this.yawAccel;
+                lastPitchAccel = this.pitchAccel;
 
-            gcdYaw = MathUtils.getGcd(deltaYaw , lastDeltaYaw);
-            gcdPitch = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
+                yawAccel = Math.abs(deltaYaw - lastDeltaYaw);
+                pitchAccel = Math.abs(deltaPitch - lastDeltaPitch);
 
-            absGcdYaw = MathUtils.getGcd(Math.abs(deltaYaw) , Math.abs(lastDeltaYaw));
-            absGcdPitch = MathUtils.getGcd(Math.abs(deltaPitch) , Math.abs(lastDeltaPitch));
+                gcdYaw = MathUtils.getGcd(deltaYaw, lastDeltaYaw);
+                gcdPitch = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
 
-            expandedGcdYaw = (long) MathUtils.gcd(0x4000, (Math.abs(deltaYaw) * MathUtils.EXPANDER), (Math.abs(lastDeltaYaw) * MathUtils.EXPANDER));
-            expandedGcdPitch = (long) MathUtils.gcd(0x4000, (Math.abs(deltaPitch) * MathUtils.EXPANDER), (Math.abs(lastDeltaPitch) * MathUtils.EXPANDER));
+                absGcdYaw = MathUtils.getGcd(Math.abs(deltaYaw), Math.abs(lastDeltaYaw));
+                absGcdPitch = MathUtils.getGcd(Math.abs(deltaPitch), Math.abs(lastDeltaPitch));
 
-            sensitivity = (int) MathUtils.getSensitivity(deltaPitch, lastDeltaPitch);
-            handleCinematic();
+                expandedGcdYaw = (long) MathUtils.gcd(0x4000, (Math.abs(deltaYaw) * MathUtils.EXPANDER), (Math.abs(lastDeltaYaw) * MathUtils.EXPANDER));
+                expandedGcdPitch = (long) MathUtils.gcd(0x4000, (Math.abs(deltaPitch) * MathUtils.EXPANDER), (Math.abs(lastDeltaPitch) * MathUtils.EXPANDER));
+
+                sensitivity = (int) MathUtils.getSensitivity(deltaPitch, lastDeltaPitch);
+                handleCinematic();
+
+            } else {
+
+                lastYaw = this.yaw;
+                lastPitch = this.pitch;
+
+                this.yaw = wrapper.getYaw();
+                this.pitch = wrapper.getPitch();
+
+                lastDeltaYaw = deltaYaw;
+                lastDeltaPitch = deltaPitch;
+
+                deltaYaw = 0;
+                deltaPitch = 0;
+
+                lastYawAccel = this.yawAccel;
+                lastPitchAccel = this.pitchAccel;
+
+                yawAccel = Math.abs(deltaYaw - lastDeltaYaw);
+                pitchAccel = Math.abs(deltaPitch - lastDeltaPitch);
+
+                gcdYaw = MathUtils.getGcd(deltaYaw, lastDeltaYaw);
+                gcdPitch = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
+
+                absGcdYaw = MathUtils.getGcd(Math.abs(deltaYaw), Math.abs(lastDeltaYaw));
+                absGcdPitch = MathUtils.getGcd(Math.abs(deltaPitch), Math.abs(lastDeltaPitch));
+
+                expandedGcdYaw = (long) MathUtils.gcd(0x4000, (Math.abs(deltaYaw) * MathUtils.EXPANDER), (Math.abs(lastDeltaYaw) * MathUtils.EXPANDER));
+                expandedGcdPitch = (long) MathUtils.gcd(0x4000, (Math.abs(deltaPitch) * MathUtils.EXPANDER), (Math.abs(lastDeltaPitch) * MathUtils.EXPANDER));
+
+                sensitivity = (int) MathUtils.getSensitivity(deltaPitch, lastDeltaPitch);
+                handleCinematic();
+            }
 
 
         }
@@ -90,11 +124,7 @@ public class RotationProcessor extends Processor {
         }
 
 
-
     }
-
-
-
 
 
 }

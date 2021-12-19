@@ -30,8 +30,8 @@ public class AimG1 extends Check {
             if (gcd == 0.0 && check) {
                 if (++buffer > 10) {
                     fail("gcd=" + gcd);
-                } else if (buffer > 0) buffer -= 0.25D;
-            }
+                }
+            } else if (buffer > 0) buffer -= 0.25D;
         }
 
 
