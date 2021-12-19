@@ -3,7 +3,7 @@ main: arctic.ac.Arctic
 version: 0.0.1
 authors: [ Salers,xWand,ExDiggers,Crafticat]
 load: POSTWORLD
-softdepend: [ Citizens ]
+softdepend: [ Citizens]
 
 commands:
   arctic:
