@@ -76,7 +76,8 @@ public class CheckManager {
                 new AimI(data),
                 new AimJ(data),
                 new AimJ1(data),
-                new AimK(data)
+                new AimK(data),
+                new AimL(data)
         );
     }
 }
