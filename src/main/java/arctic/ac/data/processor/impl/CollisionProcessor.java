@@ -15,7 +15,7 @@ public class CollisionProcessor extends Processor {
 
     private int collisionAirTicks, clientAirTicks, mathAirTicks, collisionGroundTicks, clientGroundTicks, mathGroundTicks, slimeTicks, iceTicks;
 
-    private boolean collisionGround, clientGround, mathGround , web, climbable, liquid, nearBoat, blockNearHead;
+    private boolean collisionGround, clientGround, mathGround, web, climbable, liquid, nearBoat, blockNearHead;
 
     public CollisionProcessor(PlayerData data) {
         super(data);
@@ -23,7 +23,7 @@ public class CollisionProcessor extends Processor {
 
     @Override
     public void handleIn(SaltyPacketInReceiveEvent event) {
-        if(event.getPacketType() == PacketType.IN_POSITION || event.getPacketType() == PacketType.IN_POSITION_LOOK) {
+        if (event.getPacketType() == PacketType.IN_POSITION || event.getPacketType() == PacketType.IN_POSITION_LOOK) {
             final WrappedInFlying wrapper = new WrappedInFlying(event.getPacket());
 
             final Location location = new Location(getData().getPlayer().getWorld(), getData().getMovementProcessor()
@@ -32,10 +32,10 @@ public class CollisionProcessor extends Processor {
             final WorldUtils worldUtils = new WorldUtils();
 
             collisionGround = worldUtils.isOnGround(location, -0.00001);
-            clientGround = wrapper.isOnGround();
-            mathGround = location.getY() % (1 / 64) < .000001;
+            clientGround = wrapper.isOnGround(); //player.isOnGround()
+            mathGround = (getData().getPlayer().getLocation().getY() % (1 / 64)) <= .0001D;
 
-            if(collisionGround) {
+            if (collisionGround) {
                 collisionAirTicks = 0;
                 collisionGroundTicks++;
             } else {
@@ -43,7 +43,7 @@ public class CollisionProcessor extends Processor {
                 collisionGroundTicks = 0;
             }
 
-            if(clientGround) {
+            if (clientGround) {
                 clientAirTicks = 0;
                 clientGroundTicks++;
             } else {
@@ -51,7 +51,7 @@ public class CollisionProcessor extends Processor {
                 clientGroundTicks = 0;
             }
 
-            if(mathGround) {
+            if (mathGround) {
                 mathAirTicks = 0;
                 mathGroundTicks++;
             } else {
@@ -59,12 +59,12 @@ public class CollisionProcessor extends Processor {
                 mathGroundTicks = 0;
             }
 
-            if(worldUtils.isOnACertainBlock(getData().getPlayer(), "slime"))
+            if (worldUtils.isOnACertainBlock(getData().getPlayer(), "slime"))
                 slimeTicks = 0;
             else
-            slimeTicks++;
+                slimeTicks++;
 
-            if(worldUtils.isOnACertainBlock(getData().getPlayer(), "ice"))
+            if (worldUtils.isOnACertainBlock(getData().getPlayer(), "ice"))
                 iceTicks = 0;
             else
                 iceTicks++;

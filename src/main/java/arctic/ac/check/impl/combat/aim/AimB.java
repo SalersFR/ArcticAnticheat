@@ -12,7 +12,7 @@ public class AimB extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_LOOK || packetType == PacketType.IN_POSITION_LOOK) {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
 
@@ -27,7 +27,7 @@ public class AimB extends Check {
 
             if (consist < 0.005 && (deltaYaw > 2.75f || (deltaPitch != 0.0f && deltaYaw > 1.25f)) &&
                     !Double.toString(consist).contains("E") && Math.abs(rotationProcessor.getPitch()) != 90 &&
-                    Math.abs(rotationProcessor.getPitch()) != 90 && (deltaYaw < 65 && lastDeltaYaw < 62.5)) {
+                    Math.abs(rotationProcessor.getPitch()) != 90 && (deltaYaw < 65 && lastDeltaYaw < 62.5) && deltaPitch < 20) {
 
                 buffer += (0.25 + (consist * 50f));
                 if (consist == 0.0f || data.getRotationProcessor().getTicksSinceCinematic() <= 1) buffer *= 0.2f;

@@ -3,6 +3,7 @@ package arctic.ac.utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
 @Getter
@@ -16,6 +17,7 @@ public class APosition {
     public Vector toVector() {
         return new Vector(x, y, z);
     }
+
 
 
 }

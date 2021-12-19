@@ -17,6 +17,8 @@ public class JoinLeaveListener implements Listener {
 
         final PlayerData data = Arctic.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
+        data.setJoin(System.currentTimeMillis());
+
 
         if (event.getPlayer().hasPermission("alerts.see") && event.getPlayer().hasPermission("alerts.command")) {
             if (event.getPlayer().hasMetadata("ALERTS_ON_NORMAL") || event.getPlayer().hasMetadata("ALERTS_ON_VERBOSE"))

@@ -12,7 +12,7 @@ public class AimG1 extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_LOOK || packetType == PacketType.IN_POSITION_LOOK) {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
 
@@ -30,8 +30,8 @@ public class AimG1 extends Check {
             if (gcd == 0.0 && check) {
                 if (++buffer > 10) {
                     fail("gcd=" + gcd);
-                } else if (buffer > 0) buffer -= 0.25D;
-            }
+                }
+            } else if (buffer > 0) buffer -= 0.25D;
         }
 
 

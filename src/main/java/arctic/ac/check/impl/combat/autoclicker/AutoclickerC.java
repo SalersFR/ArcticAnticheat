@@ -8,14 +8,14 @@ import eu.salers.salty.packet.type.PacketType;
 public class AutoclickerC extends Check {
 
     public AutoclickerC(PlayerData data) {
-        super(data, "Autoclicker", "C", "combat.autoclickerca", "Checks for poor clicker randomization.", true);
+        super(data, "Autoclicker", "C", "combat.autoclicker.c", "Checks for poor clicker randomization.", true);
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_ARM_ANIMATION) {
             final ClickProcessor clickProcessor = data.getClickProcessor();
-            if (!clickProcessor.isAbleToCheck()) return;
+            if (clickProcessor.isNotAbleToCheck()) return;
 
             final double deviation = clickProcessor.getDeviation();
             final int outliers = clickProcessor.getOutliers();

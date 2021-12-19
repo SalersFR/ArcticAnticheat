@@ -7,6 +7,7 @@ import arctic.ac.manager.CheckManager;
 import arctic.ac.utils.ALocation;
 import eu.salers.salty.event.impl.SaltyPacketInReceiveEvent;
 import eu.salers.salty.event.impl.SaltyPacketOutSendEvent;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.GameMode;
@@ -18,7 +19,7 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+@Data
 public class PlayerData {
 
     private final CheckManager checkManager;
@@ -34,8 +35,8 @@ public class PlayerData {
     private final TransactionHandler transactionHandler;
     private final WorldTracker worldTracker;
 
-    @Setter
-    private LivingEntity target;
+    private long join;
+
 
     @Setter
     private ALocation location;
@@ -58,8 +59,8 @@ public class PlayerData {
 
             @Override
             public void run() {
-                if (target != null) {
-                    final Vector eye = target.getEyeLocation().toVector();
+                if (combatProcessor.getTarget() != null) {
+                    final Vector eye = combatProcessor.getTarget().getLocation().toVector();
                     pastEntityLocations.add(new ALocation(eye.getX(), eye.getY(), eye.getZ()));
                     if (pastEntityLocations.size() >= 20) {
                         pastEntityLocations.clear();
@@ -103,7 +104,7 @@ public class PlayerData {
 
         for (Check checks : getChecks()) {
             if (checks.isEnabled() && !exempt) {
-                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(event.getPacket(), event.getPacketType()));
+                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(event.getPacket(), event.getPacketType(), event.getTime()));
 
             }
         }
@@ -126,7 +127,7 @@ public class PlayerData {
 
         for (Check checks : getChecks()) {
             if (checks.isEnabled() && !exempt) {
-                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(event.getPacket(), event.getPacketType()));
+                Arctic.INSTANCE.getChecksThread().execute(() -> checks.handle(event.getPacket(), event.getPacketType(), event.getTime()));
 
             }
         }

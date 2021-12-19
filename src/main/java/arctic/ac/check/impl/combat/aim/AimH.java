@@ -14,7 +14,7 @@ public class AimH extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_LOOK || packetType == PacketType.IN_POSITION_LOOK) {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
 
@@ -25,7 +25,7 @@ public class AimH extends Check {
 
             debug("gcd=" + gcd + " buffer=" + buffer + " exempt=" + !check);
 
-            if (Math.min(this.lastPitchAtan, Math.atan(pitch)) == this.result && gcd < 0x20000 && gcd > 0 && check) {
+            if (Math.min(this.lastPitchAtan, Math.atan(pitch)) == this.result && gcd < 0x20000 && gcd > 0 && check && rotationProcessor.getDeltaPitch() < 20) {
                 if (this.buffer < 15) buffer++;
 
                 if (this.buffer > 3.25)

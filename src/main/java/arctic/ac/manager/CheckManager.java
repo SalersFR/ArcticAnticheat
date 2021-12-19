@@ -8,8 +8,15 @@ import arctic.ac.check.impl.combat.killaura.KillAuraB;
 import arctic.ac.check.impl.movement.fly.FlyA;
 import arctic.ac.check.impl.movement.fly.FlyB;
 import arctic.ac.check.impl.movement.fly.FlyC;
-import arctic.ac.check.impl.movement.motion.MotionA;
+import arctic.ac.check.impl.movement.fly.FlyD;
+import arctic.ac.check.impl.movement.motion.*;
+import arctic.ac.check.impl.movement.nofall.NoFallA;
+import arctic.ac.check.impl.movement.nofall.NoFallA1;
+import arctic.ac.check.impl.movement.nofall.NoFallA2;
 import arctic.ac.check.impl.movement.speed.SpeedA;
+import arctic.ac.check.impl.player.scaffold.ScaffoldA;
+import arctic.ac.check.impl.player.scaffold.ScaffoldA1;
+import arctic.ac.check.impl.player.timer.TimerA;
 import arctic.ac.data.PlayerData;
 import lombok.Getter;
 
@@ -26,11 +33,23 @@ public class CheckManager {
     public CheckManager(PlayerData data) {
         this.data = data;
         checks = Arrays.asList(
+
+                new TimerA(data),
+                new ScaffoldA(data),
+                new ScaffoldA1(data),
                 new FlyA(data),
                 new FlyB(data),
                 new FlyC(data),
+                new FlyD(data),
                 new SpeedA(data),
                 new MotionA(data),
+                new MotionB(data),
+                new MotionC(data),
+                new MotionD(data),
+                new MotionE(data),
+                new NoFallA(data),
+                new NoFallA1(data),
+                new NoFallA2(data),
 
 
                 new KillAuraA(data),
@@ -56,7 +75,9 @@ public class CheckManager {
                 new AimH(data),
                 new AimI(data),
                 new AimJ(data),
-                new AimJ1(data)
+                new AimJ1(data),
+                new AimK(data),
+                new AimL(data)
         );
     }
 }

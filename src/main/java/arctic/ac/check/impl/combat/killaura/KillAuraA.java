@@ -16,7 +16,7 @@ public class KillAuraA extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_USE_ENTITY) {
             final WrappedInUseEntity wrapped = new WrappedInUseEntity(packet);
             if (wrapped.getUseAction() == WrappedInUseEntity.UseEntityAction.ATTACK) {

@@ -15,10 +15,10 @@ public class AutoclickerD extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_ARM_ANIMATION) {
             final ClickProcessor clickProcessor = data.getClickProcessor();
-            if (!clickProcessor.isAbleToCheck()) return;
+            if (clickProcessor.isNotAbleToCheck()) return;
 
             final double kurtosis = clickProcessor.getKurtosis();
             final double difference = MathUtils.hypot(kurtosis, lastKurtosis);

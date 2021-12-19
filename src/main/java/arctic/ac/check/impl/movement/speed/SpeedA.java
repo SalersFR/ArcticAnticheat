@@ -19,25 +19,25 @@ public class SpeedA extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_POSITION || packetType == PacketType.IN_POSITION_LOOK) {
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
             final MovementProcessor movementProcessor = data.getMovementProcessor();
 
-            boolean onGround = collisionProcessor.isClientGround();
+            final boolean onGround = collisionProcessor.isClientGround();
 
 
             air = onGround ? 0 : Math.min(air + 1, 20);
             ground = onGround ? Math.min(ground + 1, 20) : 0;
 
             // deltas
-            double deltaXZ = movementProcessor.getDeltaXZ();
-            double lastDeltaXZ = movementProcessor.getLastDeltaXZ();
+            final double deltaXZ = movementProcessor.getDeltaXZ();
+            final double lastDeltaXZ = movementProcessor.getLastDeltaXZ();
 
 
             // landMovementFactor
-            float speed = PlayerUtils.getPotionLevel(data.getBukkitPlayerFromUUID(), PotionEffectType.SPEED);
-            float slow = PlayerUtils.getPotionLevel(data.getBukkitPlayerFromUUID(), PotionEffectType.SLOW);
+            final float speed = PlayerUtils.getPotionLevel(data.getBukkitPlayerFromUUID(), PotionEffectType.SPEED);
+            final float slow = PlayerUtils.getPotionLevel(data.getBukkitPlayerFromUUID(), PotionEffectType.SLOW);
             double d = 0.10000000149011612;
             d += d * 0.20000000298023224 * speed;
             d += d * -0.15000000596046448 * slow;
@@ -71,6 +71,8 @@ public class SpeedA extends Check {
                 prediction += landMovementFactor * 1.25;
 
             debug("pred=" + prediction + " deltaXZ=" + deltaXZ);
+
+            //FIXME : EXEMPT FROM VELOCITY
 
             final boolean exempt =
                             new WorldUtils().isOnACertainBlock(data.getPlayer(), "ice")

@@ -6,30 +6,34 @@ import arctic.ac.data.processor.impl.CollisionProcessor;
 import arctic.ac.data.processor.impl.MovementProcessor;
 import eu.salers.salty.packet.type.PacketType;
 
-public class FlyB extends Check {
-    public FlyB(PlayerData data) {
-        super(data, "Fly", "B", "movement.fly.b", "Checks for accel.", false);
-    }
+public class FlyD extends Check {
 
+    public FlyD(PlayerData data) {
+        super(data, "Fly", "D", "movement.fly.d", "Checks rounded movement values.", false);
+    }
     @Override
     public void handle(Object packet, PacketType packetType, long time) {
-        if(packetType == PacketType.IN_POSITION_LOOK || packetType == PacketType.IN_POSITION) {
+        if (packetType == PacketType.IN_POSITION_LOOK || packetType == PacketType.IN_POSITION) {
 
             final MovementProcessor movementProcessor = data.getMovementProcessor();
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
 
-            final double accel = Math.abs(movementProcessor.getDeltaY() - movementProcessor.getLastDeltaY());
-            final boolean midAir = collisionProcessor.getCollisionAirTicks() > 11 && collisionProcessor.getClientAirTicks() > 9;
+            final double deltaY = Math.abs(movementProcessor.getDeltaY());
+
+
+
+            final boolean midAir = collisionProcessor.getCollisionAirTicks() > 12 || collisionProcessor.getClientAirTicks() > 13;
 
             final boolean exempt = collisionProcessor.isNearBoat() || collisionProcessor.isLiquid()
                     || collisionProcessor.isWeb() || collisionProcessor.isClimbable();
 
-            debug("accel=" + accel);
+            final boolean round = deltaY % 1.D == 0 || deltaY % 1.5 == 0 || deltaY % 0.5 == 0;
 
+            debug("delta=" + deltaY);
 
-            if (midAir && !exempt && accel <= 1.0E-5) {
+            if (round && midAir && !exempt && deltaY > 0) {
                 if (++buffer > 3.25)
-                    fail("accel=" + accel);
+                    fail("delta=" + deltaY);
 
             } else if (buffer > 0) buffer -= 0.1D;
 

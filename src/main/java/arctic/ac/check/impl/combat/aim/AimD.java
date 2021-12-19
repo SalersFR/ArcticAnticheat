@@ -12,7 +12,7 @@ public class AimD extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if(packetType == PacketType.IN_LOOK || packetType == PacketType.IN_POSITION_LOOK) {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
 
@@ -23,7 +23,7 @@ public class AimD extends Check {
                     || rotationProcessor.getPitchAccel() == 0.0F ||
                     rotationProcessor.getTicksSinceCinematic() <= 10 || rotationProcessor.getDeltaPitch() == 0 || rotationProcessor.getLastDeltaPitch() == 0;
 
-            if (!exempt) {
+            if (!exempt && rotationProcessor.getDeltaPitch() < 20) {
                 if (gcd < 131072L) {
                     if (buffer < 15) buffer++;
 

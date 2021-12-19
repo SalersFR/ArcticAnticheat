@@ -3,9 +3,7 @@ package arctic.ac.check.impl.combat.autoclicker;
 import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.data.processor.impl.ClickProcessor;
-import arctic.ac.gui.player.impl.BadPacketsGUI;
 import eu.salers.salty.packet.type.PacketType;
-import org.bukkit.Bukkit;
 
 public class AutoclickerA extends Check {
 
@@ -14,10 +12,10 @@ public class AutoclickerA extends Check {
     }
 
     @Override
-    public void handle(Object packet, PacketType packetType) {
+    public void handle(Object packet, PacketType packetType, long time) {
         if (packetType == PacketType.IN_ARM_ANIMATION) {
             final ClickProcessor clickProcessor = data.getClickProcessor();
-            if (!clickProcessor.isAbleToCheck()) return;
+            if (clickProcessor.isNotAbleToCheck()) return;
 
             final double deviation = clickProcessor.getDeviation();
 
