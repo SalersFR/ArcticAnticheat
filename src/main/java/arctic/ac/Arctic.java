@@ -7,11 +7,11 @@ import arctic.ac.commands.impl.AlertsCommand;
 import arctic.ac.commands.impl.ArcticCommand;
 import arctic.ac.commands.impl.ArcticInfoCommand;
 import arctic.ac.commands.impl.DebugCommand;
-import arctic.ac.manager.PlayerDataManager;
-import arctic.ac.manager.CheckFileManager;
 import arctic.ac.listener.bukkit.InventoryClickSettings;
 import arctic.ac.listener.bukkit.JoinLeaveListener;
 import arctic.ac.listener.packet.PacketHandler;
+import arctic.ac.manager.CheckFileManager;
+import arctic.ac.manager.PlayerDataManager;
 import arctic.ac.utils.CustomUtils;
 import eu.salers.salty.SaltyAPI;
 import lombok.Getter;
@@ -60,7 +60,6 @@ public class Arctic extends JavaPlugin {
         CustomUtils.consoleLog("&bRegistering events and listeners...");
         registerEvents();
         registerCommands();
-
 
 
         // Changes
