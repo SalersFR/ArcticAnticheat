@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.github.SalersFR</groupId>
             <artifactId>SaltyProtocol</artifactId>
-            <version>build-6.11</version>
+            <version>build-6.12</version>
         </dependency>
     </dependencies>
 </project>

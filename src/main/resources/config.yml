@@ -88,6 +88,11 @@ checks:
         enabled: true
         punish: true
         setback: false
+      d:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: false
     motion:
       a:
         ban-vl: 10
