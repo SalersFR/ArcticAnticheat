@@ -25,15 +25,12 @@ public class TimerA extends Check {
 
             debug("balance=" + balance + " tpTicks=" + data.getMovementProcessor().getTeleportTicks());
 
-            if (balance < -125) balance += 10;
 
-            if (balance < -3000) balance = -120;
 
             if (balance > 50) {
-                if (++buffer > 12)
-                    balance -= 50.0D;
+                balance -= 50.0D;
                 fail("balance=" + balance);
-            } else if(buffer > 0) buffer -= 0.1D;
+            }
 
 
             this.lastFlying = time;

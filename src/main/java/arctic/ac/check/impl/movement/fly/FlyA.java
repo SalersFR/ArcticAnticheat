@@ -10,12 +10,12 @@ import eu.salers.salty.packet.type.PacketType;
 public class FlyA extends Check {
 
     public FlyA(PlayerData data) {
-        super(data, "Fly","A","movement.fly.a","Checks if player is following normal fall motion.", false);
+        super(data, "Fly", "A", "movement.fly.a", "Checks if player is following normal fall motion.", false);
     }
 
     @Override
     public void handle(Object packet, PacketType packetType, long time) {
-        if(packetType == PacketType.IN_POSITION_LOOK || packetType == PacketType.IN_POSITION) {
+        if (packetType == PacketType.IN_POSITION_LOOK || packetType == PacketType.IN_POSITION) {
 
             final MovementProcessor movementProcessor = data.getMovementProcessor();
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
@@ -32,10 +32,11 @@ public class FlyA extends Check {
             if (data.getPlayer().getAllowFlight()) return;
             if (movementProcessor.isTeleported()) return;
 
+            if (Math.abs(predictedMotionY) <= 0.005) predictedMotionY = 0;
+
             debug("predicted=" + predictedMotionY + " delta=" + motionY);
 
-            if (collisionProcessor.getClientAirTicks() >= 5 && !onGroundV2 && Math.abs(predictedMotionY) >= 0.005D
-                    && movementProcessor.getTeleportTicks() > 21) {
+            if (collisionProcessor.getClientAirTicks() >= 5 && !onGroundV2 && movementProcessor.getTeleportTicks() > 1) {
                 if (!check(motionY, predictedMotionY)) {
                     buffer += 10;
                     if (buffer > 30) {

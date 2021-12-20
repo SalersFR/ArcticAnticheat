@@ -33,6 +33,7 @@ public class PlayerData {
     private final ClickProcessor clickProcessor;
     private final CombatProcessor combatProcessor;
     private final TransactionHandler transactionHandler;
+    private final StatusProcessor statusProcessor;
     private final WorldTracker worldTracker;
 
     private long join;
@@ -53,7 +54,9 @@ public class PlayerData {
         this.clickProcessor = new ClickProcessor(this);
         this.combatProcessor = new CombatProcessor(this);
         this.transactionHandler = new TransactionHandler(this);
+        this.statusProcessor = new StatusProcessor(this);
         this.worldTracker = new WorldTracker(this);
+
 
         new BukkitRunnable() {
 

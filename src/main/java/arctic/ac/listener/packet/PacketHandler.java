@@ -25,10 +25,7 @@ public class PacketHandler extends SaltyPacketListener {
         if(data == null) return;
 
         Arctic.INSTANCE.getDataThread().execute(() -> data.handleReceive(event));
-        if (event.getPacketType().equals(PacketType.IN_TRANSACTION)) {
-            WrappedInTransaction wrapper = new WrappedInTransaction(event.getPacket());
-            data.getTransactionHandler().onTransaction(data,wrapper.getActionId());
-        }
+
         if (event.getPacketType().equals(PacketType.IN_BLOCK_PLACE)) {
             WrappedInBlockPlace wrapper = new WrappedInBlockPlace(event.getPacket());
             data.getWorldTracker().place(new Location(data.getPlayer().getWorld(), wrapper.getBlockX(),wrapper.getBlockY(),wrapper.getBlockZ()).getBlock());

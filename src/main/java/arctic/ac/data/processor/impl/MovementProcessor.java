@@ -51,7 +51,6 @@ public class MovementProcessor extends Processor {
             deltaZ = this.z - lastZ;
             deltaXZ = MathUtils.hypot(deltaX, deltaZ);
 
-            //credits to androbal
             if(!wrapper.isOnGround() && wrapper.isHasPos() && wrapper.isHasLook()) {
                 for(final Vector tpVecs : teleportVecs) {
                     if(tpVecs.distance(new Vector(x,y,z)) <= 1.0E-6) {
@@ -79,7 +78,7 @@ public class MovementProcessor extends Processor {
     }
 
     public boolean isTeleported() {
-        return teleportTicks <= 5;
+        return teleportTicks <= 1;
     }
 
 

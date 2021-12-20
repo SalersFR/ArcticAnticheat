@@ -2,6 +2,7 @@ package arctic.ac.manager;
 
 
 import arctic.ac.data.PlayerData;
+import lombok.Getter;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -13,6 +14,7 @@ public class PlayerDataManager {
     /**
      * Data cache
      **/
+    @Getter
     private final Map<Player, PlayerData> uuidPlayerDataMap = new ConcurrentHashMap<>();
 
     /**
