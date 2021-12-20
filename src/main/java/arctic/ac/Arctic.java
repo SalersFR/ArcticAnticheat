@@ -13,6 +13,7 @@ import arctic.ac.listener.packet.PacketHandler;
 import arctic.ac.manager.CheckFileManager;
 import arctic.ac.manager.PlayerDataManager;
 import arctic.ac.utils.CustomUtils;
+import dev.thomazz.pledge.api.Pledge;
 import eu.salers.salty.SaltyAPI;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -38,6 +39,9 @@ public class Arctic extends JavaPlugin {
     @Getter
     private ExecutorService dataThread = Executors.newSingleThreadExecutor();
 
+    @Getter
+    private Pledge pledge;
+
 
     private boolean citizensEnabled;
 
@@ -60,6 +64,10 @@ public class Arctic extends JavaPlugin {
         CustomUtils.consoleLog("&bRegistering events and listeners...");
         registerEvents();
         registerCommands();
+
+        this.pledge = Pledge.build().events(true).range(1000, 30000);
+
+        this.pledge.start(this);
 
 
         // Changes
