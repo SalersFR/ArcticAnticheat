@@ -13,6 +13,7 @@ import arctic.ac.check.impl.movement.motion.*;
 import arctic.ac.check.impl.movement.nofall.NoFallA;
 import arctic.ac.check.impl.movement.nofall.NoFallA1;
 import arctic.ac.check.impl.movement.nofall.NoFallA2;
+import arctic.ac.check.impl.movement.nofall.NoFallA3;
 import arctic.ac.check.impl.movement.speed.SpeedA;
 import arctic.ac.check.impl.player.scaffold.ScaffoldA;
 import arctic.ac.check.impl.player.scaffold.ScaffoldA1;
@@ -50,6 +51,7 @@ public class CheckManager {
                 new NoFallA(data),
                 new NoFallA1(data),
                 new NoFallA2(data),
+                new NoFallA3(data),
 
 
                 new KillAuraA(data),

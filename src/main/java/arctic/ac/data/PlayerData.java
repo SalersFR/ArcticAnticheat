@@ -5,8 +5,6 @@ import arctic.ac.check.Check;
 import arctic.ac.data.processor.impl.*;
 import arctic.ac.manager.CheckManager;
 import arctic.ac.utils.ALocation;
-import arctic.ac.utils.APosition;
-import arctic.ac.utils.ARotation;
 import eu.salers.salty.event.impl.SaltyPacketInReceiveEvent;
 import eu.salers.salty.event.impl.SaltyPacketOutSendEvent;
 import lombok.Data;
@@ -34,6 +32,8 @@ public class PlayerData {
     private final CollisionProcessor collisionProcessor;
     private final ClickProcessor clickProcessor;
     private final CombatProcessor combatProcessor;
+    private final TransactionHandler transactionHandler;
+    private final WorldTracker worldTracker;
 
     private long join;
 
@@ -52,6 +52,8 @@ public class PlayerData {
         this.collisionProcessor = new CollisionProcessor(this);
         this.clickProcessor = new ClickProcessor(this);
         this.combatProcessor = new CombatProcessor(this);
+        this.transactionHandler = new TransactionHandler(this);
+        this.worldTracker = new WorldTracker(this);
 
         new BukkitRunnable() {
 
@@ -75,7 +77,7 @@ public class PlayerData {
     }
 
     /**
-     * Getting a bukkit player from a uuid
+     * Getting a bukkit player from an uuid
      *
      * @return the player reliated to the uuid
      */

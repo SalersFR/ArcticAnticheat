@@ -85,6 +85,7 @@
             <groupId>com.github.SalersFR</groupId>
             <artifactId>SaltyProtocol</artifactId>
             <version>build-6.12</version>
+
         </dependency>
         <dependency>
             <groupId>dev.thomazz</groupId>
