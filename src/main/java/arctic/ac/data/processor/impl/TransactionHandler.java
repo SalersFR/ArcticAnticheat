@@ -45,7 +45,7 @@ public class TransactionHandler {
     }
 
     public void handleReceive(final TransactionEvent event) {
-        transactionMap.get(event.getTransactionPair().getId1()).forEach(Runnable::run);
+        transactionMap.getOrDefault(event.getTransactionPair().getId1(), new ArrayList<Runnable>()).forEach(Runnable::run);
         transactionMap.remove(event.getTransactionPair().getId1());
     }
 
