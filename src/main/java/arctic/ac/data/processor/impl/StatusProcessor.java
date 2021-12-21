@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Getter
-public class StatusProcessor extends Processor {
+public class    StatusProcessor extends Processor {
 
     private final List<ArcticPotionEffect> potionEffects = new LinkedList<>();
     private final List<GameMode> possibleGamemodes = new LinkedList<>();
@@ -36,7 +36,7 @@ public class StatusProcessor extends Processor {
 
             if (wrapped.getEntityId() != getData().getPlayer().getEntityId()) return;
 
-            getData().getTransactionHandler().preTransaction(() ->
+            getData().getTransactionHandler().postTransaction(() ->
                     potionEffects.add(new ArcticPotionEffect(wrapped.getAmplifier(), wrapped.getEffectType())));
 
 

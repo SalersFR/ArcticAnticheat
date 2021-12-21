@@ -118,6 +118,7 @@ public class PlayerData {
     public void handleSending(final SaltyPacketOutSendEvent event) {
 
         movementProcessor.handleOut(event);
+        statusProcessor.handleOut(event);
 
         //check handling
         final boolean bypass = getPlayer().hasPermission(Arctic.INSTANCE.getConfig().getString("bypass-permission")) &&

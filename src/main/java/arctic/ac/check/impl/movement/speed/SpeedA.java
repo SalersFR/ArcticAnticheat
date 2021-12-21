@@ -4,10 +4,13 @@ import arctic.ac.check.Check;
 import arctic.ac.data.PlayerData;
 import arctic.ac.data.processor.impl.CollisionProcessor;
 import arctic.ac.data.processor.impl.MovementProcessor;
+import arctic.ac.utils.ArcticPotionEffect;
 import arctic.ac.utils.PlayerUtils;
 import arctic.ac.utils.WorldUtils;
 import eu.salers.salty.packet.type.PacketType;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.Optional;
 
 public class SpeedA extends Check {
 
@@ -36,8 +39,16 @@ public class SpeedA extends Check {
 
 
             // landMovementFactor
-            final float speed = PlayerUtils.getPotionLevel(data.getBukkitPlayerFromUUID(), PotionEffectType.SPEED);
-            final float slow = PlayerUtils.getPotionLevel(data.getBukkitPlayerFromUUID(), PotionEffectType.SLOW);
+
+            final Optional<ArcticPotionEffect> speedEffect = data.getStatusProcessor().getPotionEffects().stream().filter(effect ->
+                    effect.getType() == PotionEffectType.SPEED).findAny();
+
+            final Optional<ArcticPotionEffect> slowEffect = data.getStatusProcessor().getPotionEffects().stream().filter(effect ->
+                    effect.getType() == PotionEffectType.SLOW).findAny();
+
+            final int speed = speedEffect.map(ArcticPotionEffect::getLevel).orElse(0);
+            final int slow = slowEffect.map(ArcticPotionEffect::getLevel).orElse(0);
+
             double d = 0.10000000149011612;
             d += d * 0.20000000298023224 * speed;
             d += d * -0.15000000596046448 * slow;

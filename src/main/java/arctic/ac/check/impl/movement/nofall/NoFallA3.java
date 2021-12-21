@@ -27,7 +27,7 @@ public class NoFallA3 extends Check {
 
 
             if (onGround && !serverSideGround) {
-                data.getPlayer().sendMessage("GroundSpoofing");
+                fail();
             }
         }
 

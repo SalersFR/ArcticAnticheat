@@ -10,6 +10,7 @@ import arctic.ac.commands.impl.DebugCommand;
 import arctic.ac.listener.bukkit.InventoryClickSettings;
 import arctic.ac.listener.bukkit.JoinLeaveListener;
 import arctic.ac.listener.packet.PacketHandler;
+import arctic.ac.listener.packet.TransactionListeners;
 import arctic.ac.manager.CheckFileManager;
 import arctic.ac.manager.PlayerDataManager;
 import arctic.ac.utils.CustomUtils;
@@ -66,8 +67,8 @@ public class Arctic extends JavaPlugin {
         registerCommands();
 
         this.pledge = Pledge.build().events(true).range(1000, 30000);
-
         this.pledge.start(this);
+        this.pledge.addListener(new TransactionListeners());
 
 
         // Changes
