@@ -8,7 +8,7 @@ import dev.arctic.anticheat.packet.Packet;
 public class AimJ1 extends Check {
     
     public AimJ1(PlayerData data) {
-        super(data, "Aim", "J1", "combat.aim.j", "Checks for same rotation (pitch).", true);
+        super(data, "Aim", "J1", "combat.aim.j1", "Checks for same rotation (pitch).", true);
     }
 
     @Override

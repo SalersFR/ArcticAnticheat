@@ -9,7 +9,7 @@ import dev.arctic.anticheat.utilities.MathUtils;
 public class AimF1 extends Check {
 
     public AimF1(PlayerData data) {
-        super(data, "Aim", "F1", "combat.aim.f", "Checks for gcd-fix modules.", true);
+        super(data, "Aim", "F1", "combat.aim.f1", "Checks for gcd-fix modules.", true);
     }
 
     @Override

@@ -46,7 +46,7 @@ public class Packet extends PacketContainer {
 
 
     public boolean isAttack() {
-        return isSending() && isUseEntity() && getEntityUseActions().read(0) == EnumWrappers.EntityUseAction.ATTACK;
+        return isReceiving() && isUseEntity() && getEntityUseActions().read(0) == EnumWrappers.EntityUseAction.ATTACK;
     }
 
     public boolean isAcceptTeleport() {

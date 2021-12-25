@@ -11,6 +11,7 @@ import dev.arctic.anticheat.listener.InventoryClickSettings;
 import dev.arctic.anticheat.listener.PlayerListener;
 import dev.arctic.anticheat.manager.PlayerDataManager;
 import dev.arctic.anticheat.listener.PacketListener;
+import dev.arctic.anticheat.manager.TicksManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 
@@ -27,6 +28,7 @@ public class Arctic {
 
     private final ExecutorService checkService = Executors.newSingleThreadExecutor();
     private final ExecutorService dataService = Executors.newSingleThreadExecutor();
+    private final TicksManager ticksManager = new TicksManager();
 
     public static void createInstance() {
         instance = new Arctic();
@@ -47,6 +49,8 @@ public class Arctic {
 
         registerCommands();
         registerEvents();
+
+        ticksManager.runTaskTimer(plugin, 0L,1L);
 
 
         new PacketListener(plugin);

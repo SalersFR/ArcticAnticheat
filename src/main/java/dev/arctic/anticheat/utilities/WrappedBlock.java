@@ -5,11 +5,14 @@ import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.material.Stairs;
+
+import java.util.Locale;
 
 @Getter
 public class WrappedBlock {
 
-    private boolean loaded, water, lava, solid, ice, slime, soulSand, web, piston, fence, fenceGate, wall, door;
+    private boolean loaded, water, lava, solid, ice, slime, soulSand, web, piston, fence, fenceGate, wall, door, slab, stairs;
     private String name;
     private Material material;
     private double x, y, z;
@@ -61,6 +64,8 @@ public class WrappedBlock {
                     || material == Material.SPRUCE_DOOR
                     || material == Material.JUNGLE_DOOR
                     || material == Material.DARK_OAK_DOOR;
+            slab = block.toString().toLowerCase(Locale.ROOT).contains("slab");
+            stairs = block instanceof Stairs;
         }
     }
 }

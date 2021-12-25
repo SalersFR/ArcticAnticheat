@@ -54,14 +54,23 @@ checks:
         enabled: true
         punish: true
         setback: false
-      b: {}
+      a1:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: false
     nofall:
       a:
         ban-vl: 10
         enabled: true
         punish: true
         setback: false
-      b:
+      a1:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: false
+      a2:
         ban-vl: 10
         enabled: true
         punish: true
@@ -101,6 +110,10 @@ checks:
   combat:
     autoclicker:
       a:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      a1:
         ban-vl: 50
         enabled: true
         punish: true
@@ -158,13 +171,14 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
-      h: {}
-      i: {}
-      j: {}
-      k: {}
-      l: {}
-      m: {}
-      n: {}
+      i:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      i1:
+        ban-vl: 50
+        enabled: true
+        punish: true
     reach:
       a:
         ban-vl: 10
@@ -179,11 +193,19 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      a1:
+        ban-vl: 50
+        enabled: true
+        punish: true
       b:
         ban-vl: 50
         enabled: true
         punish: true
       c:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      c1:
         ban-vl: 50
         enabled: true
         punish: true
@@ -195,11 +217,23 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      e1:
+        ban-vl: 50
+        enabled: true
+        punish: true
       f:
         ban-vl: 50
         enabled: true
         punish: true
+      f1:
+        ban-vl: 50
+        enabled: true
+        punish: true
       g:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      g1:
         ban-vl: 50
         enabled: true
         punish: true
@@ -215,7 +249,15 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      j1:
+        ban-vl: 50
+        enabled: true
+        punish: true
       k:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      k1:
         ban-vl: 50
         enabled: true
         punish: true
@@ -249,12 +291,6 @@ checks:
         punish: true
       c:
         enabled: false
-    aima:
-      '1':
-        enabled: true
-    aimk:
-      '1':
-        enabled: true
   player:
     badpackets:
       a:

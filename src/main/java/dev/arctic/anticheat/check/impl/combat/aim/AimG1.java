@@ -8,7 +8,7 @@ import dev.arctic.anticheat.packet.Packet;
 public class AimG1 extends Check {
 
     public AimG1(PlayerData data) {
-        super(data, "Aim", "G1", "combat.aim.g", "Checks for too small gcd.", true);
+        super(data, "Aim", "G1", "combat.aim.g1", "Checks for too small gcd.", true);
     }
 
     @Override

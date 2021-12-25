@@ -30,10 +30,12 @@ public class MotionA extends Check {
             final boolean slime = collisionProcessor.isOnSlime() || collisionProcessor.isLastOnSlime() || collisionProcessor.isLastOnGroundSlime();
             final boolean jumped = deltaY > 0 && collisionProcessor.isLastMathOnGround() && !collisionProcessor.isMathOnGround();
 
-            final boolean exempt = slime || collisionProcessor.isInWater() || collisionProcessor.isInLava() || collisionProcessor.isBonkingHead();
+            final boolean exempt = slime || collisionProcessor.isInWater() || collisionProcessor.isInLava() ||
+                    collisionProcessor.isBonkingHead()  ||collisionProcessor.isNearPiston() ||
+                    collisionProcessor.isLastNearPiston() || Math.abs(0.0125 - deltaY) <= 0.001;;
 
             if(!exempt && jumped && deltaY != fixedPrediction) {
-                if(++buffer > 0.75)
+                if(++buffer > 1.75)
                     fail("delta=" + deltaY + " pred=" + fixedPrediction);
 
             } else if(buffer > 0) buffer -= 0.1D;

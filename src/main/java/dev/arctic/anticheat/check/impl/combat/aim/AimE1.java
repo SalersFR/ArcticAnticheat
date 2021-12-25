@@ -8,7 +8,7 @@ import dev.arctic.anticheat.packet.Packet;
 public class AimE1 extends Check {
 
     public AimE1(PlayerData data) {
-        super(data, "Aim", "E1", "combat.aim.e", "Checks for rounded rots values (pitch).", true);
+        super(data, "Aim", "E1", "combat.aim.e1", "Checks for rounded rots values (pitch).", true);
     }
 
     @Override

@@ -1,12 +1,15 @@
 package dev.arctic.anticheat.data;
 
+import com.comphenix.protocol.wrappers.Pair;
 import dev.arctic.anticheat.Arctic;
 import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.data.processors.impl.*;
 import dev.arctic.anticheat.packet.event.PacketEvent;
 import dev.arctic.anticheat.manager.CheckManager;
+import dev.arctic.anticheat.utilities.EvictingList;
 import lombok.Data;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 
@@ -25,6 +28,9 @@ public class PlayerData {
     private final CollisionProcessor collisionProcessor;
     private final RotationProcessor rotationProcessor;
     private final MovementProcessor movementProcessor;
+    private final VelocityProcessor velocityProcessor;
+    private final EvictingList<Pair<Location, Integer>> targetLocations = new EvictingList<Pair<Location, Integer>>(40, false);
+
 
 
     public PlayerData(final Player player) {
@@ -44,6 +50,7 @@ public class PlayerData {
         this.transactionProcessor = new TransactionProcessor(this);
         this.actionProcessor = new ActionProcessor(this);
         this.combatProcessor = new CombatProcessor(this);
+        this.velocityProcessor = new VelocityProcessor(this);
     }
 
     public void handle(PacketEvent event) {
@@ -57,9 +64,11 @@ public class PlayerData {
             clickProcessor.handleReceive(event);
             actionProcessor.handleReceive(event);
             combatProcessor.handleReceive(event);
+            velocityProcessor.handleReceive(event);
         } else if(event.getPacket().isSending()) {
             collisionProcessor.handleSending(event);
             connectionProcessor.handleSending(event);
+            velocityProcessor.handleSending(event);
         }
 
         final boolean bypass = getPlayer().hasPermission(Arctic.getInstance().getPlugin().getConfig().getString("bypass-permission")) &&

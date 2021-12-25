@@ -10,7 +10,7 @@ import dev.arctic.anticheat.packet.Packet;
 public class AutoclickerA1 extends Check {
 
     public AutoclickerA1(PlayerData data) {
-        super(data, "Autoclicker", "A1", "combat.autoclicker.a", "Checks for poor clicker randomization.", true);
+        super(data, "Autoclicker", "A1", "combat.autoclicker.a1", "Checks for poor clicker randomization.", true);
     }
 
     @Override

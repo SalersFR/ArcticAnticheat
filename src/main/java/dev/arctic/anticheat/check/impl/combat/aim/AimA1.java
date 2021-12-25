@@ -10,7 +10,7 @@ public class AimA1 extends Check {
     private int lastSensitivity;
 
     public AimA1(PlayerData data) {
-        super(data, "Aim", "A1", "combat.aim.a", "Checks for invalid sensitivity.", true);
+        super(data, "Aim", "A1", "combat.aim.a1", "Checks for invalid sensitivity.", true);
     }
 
     @Override

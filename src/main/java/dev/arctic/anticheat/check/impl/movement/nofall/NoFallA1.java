@@ -8,7 +8,7 @@ import dev.arctic.anticheat.packet.Packet;
 public class NoFallA1 extends Check {
 
     public NoFallA1(PlayerData data) {
-        super(data, "NoFall", "A1", "movement.nofall.a", "Checks if player is spoofing ground state.", false);
+        super(data, "NoFall", "A1", "movement.nofall.a1", "Checks if player is spoofing ground state.", false);
     }
 
     @Override

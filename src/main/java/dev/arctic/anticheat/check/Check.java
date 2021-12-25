@@ -55,11 +55,11 @@ public abstract class Check {
             if (player.hasPermission("alerts.see")  /** && player.hasMetadata("ALERTS_ON_NORMAL") **/) {
                 final String fromConfig = ChatColor.translateAlternateColorCodes('&',
                         Arctic.getInstance().getPlugin().getConfig().getString("flag-message").
-                        replace("%player%", data.getPlayer().getName()).
-                        replace("%vl%", "" + ((int) vl)).
-                        replace("%maxvl%", "" + getBanVL()).
-                        replace("%type%", type).
-                        replace("%check%", name));
+                                replace("%player%", data.getPlayer().getName()).
+                                replace("%vl%", "" + ((int) vl)).
+                                replace("%maxvl%", "" + getBanVL()).
+                                replace("%type%", type).
+                                replace("%check%", name));
                 final TextComponent alertMSG = new TextComponent(fromConfig);
 
                 alertMSG.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.
@@ -78,8 +78,8 @@ public abstract class Check {
                         replace("%vl%", "" + vl).
                         replace("%type%", type).
                         replace("%check%", name).
-                        //replace("%ping%", data.getNetworkProcessor().getKeepAlivePing() + "").
-                                replace("%prefix%", prefix);
+                        replace("%ping%", data.getConnectionProcessor().getKeepAlivePing() + "").
+                        replace("%prefix%", prefix);
 
                 final TextComponent alertMSG = new TextComponent(ChatColor.translateAlternateColorCodes('&', fromConfig));
 

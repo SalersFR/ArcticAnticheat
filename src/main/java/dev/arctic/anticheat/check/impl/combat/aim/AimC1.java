@@ -8,7 +8,7 @@ import dev.arctic.anticheat.packet.Packet;
 public class AimC1 extends Check {
 
     public AimC1(PlayerData data) {
-        super(data, "Aim", "C1", "combat.aim.c", "Checks for smooth rotations (pitch).", true);
+        super(data, "Aim", "C1", "combat.aim.c1", "Checks for smooth rotations (pitch).", true);
     }
 
     @Override

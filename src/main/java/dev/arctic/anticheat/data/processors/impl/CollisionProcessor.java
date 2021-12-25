@@ -5,10 +5,7 @@ import com.comphenix.protocol.wrappers.EnumWrappers;
 import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.data.processors.Processor;
 import dev.arctic.anticheat.packet.event.PacketEvent;
-import dev.arctic.anticheat.utilities.ArcticLocation;
-import dev.arctic.anticheat.utilities.BoundingBox;
-import dev.arctic.anticheat.utilities.ServerUtil;
-import dev.arctic.anticheat.utilities.WrappedBlock;
+import dev.arctic.anticheat.utilities.*;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -35,9 +32,9 @@ public class CollisionProcessor extends Processor {
             nearVehicle, nearBoat, nearPiston, bonkingHead, teleporting, placing,
             lastClientOnGround, lastMathOnGround, lastCollisionOnGround,
             lastOnIce, lastOnSlime, lastOnSoulSand, lastOnClimbable, lastNearPiston,
-            lastInWeb, lastInWater, lastInLava, lastInVehicle,
+            lastInWeb, lastInWater, lastInLava, lastInVehicle, nearSlab, nearStairs,
             lastNearVehicle, lastNearBoat, lastBonkingHead, lastTeleporting,
-            lastOnGroundSlime, lastOnGroundIce, lastPlacing;
+            lastOnGroundSlime, lastOnGroundIce, lastPlacing, lastNearSlab, lastNearStairs;
 
     private ArcticLocation teleportLocation;
     private boolean sentTeleport;
@@ -56,6 +53,8 @@ public class CollisionProcessor extends Processor {
 
 
             final ArcticLocation location = data.getMovementProcessor().getLocation();
+
+            final Location bukkitLocation = location.toLoc(data.getPlayer().getWorld());
 
             boundingBox = new BoundingBox(location).expand(0, 0.01, 0);
 
@@ -100,6 +99,8 @@ public class CollisionProcessor extends Processor {
             inWater = blockCollisions.stream().anyMatch(WrappedBlock::isWater) && data.getPlayer().getLocation().getBlock().isLiquid();
             inLava = blockCollisions.stream().anyMatch(WrappedBlock::isLava) && data.getPlayer().getLocation().getBlock().isLiquid();
             nearPiston = blockCollisions.stream().anyMatch(WrappedBlock::isPiston);
+            nearSlab = blockCollisions.stream().anyMatch(WrappedBlock::isSlab);
+            nearStairs = blockCollisions.stream().anyMatch(WrappedBlock::isStairs);
 
             int flooredX = NumberConversions.floor(x);
             int flooredY = NumberConversions.floor(y);
@@ -118,7 +119,8 @@ public class CollisionProcessor extends Processor {
             nearVehicle = entityCollisions.stream().anyMatch(entity -> entity instanceof Vehicle);
             nearBoat = entityCollisions.stream().anyMatch(entity -> entity instanceof Boat);
 
-            bonkingHead = bonkingCollisions.stream().anyMatch(WrappedBlock::isSolid);
+            bonkingHead = bonkingCollisions.stream().anyMatch(WrappedBlock::isSolid) || LocationUtils.blockNearHead(bukkitLocation)
+                    || LocationUtils.haveABlockNearHead(data.getPlayer());
 
             teleporting = placing =  false;
 
@@ -197,6 +199,8 @@ public class CollisionProcessor extends Processor {
         lastBonkingHead = bonkingHead;
         lastTeleporting = teleporting;
         lastPlacing = placing;
+        lastNearSlab = nearSlab;
+        lastNearStairs = nearStairs;
     }
 
     @Override

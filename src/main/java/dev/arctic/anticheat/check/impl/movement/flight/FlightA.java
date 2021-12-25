@@ -28,7 +28,7 @@ public class FlightA extends Check {
             final double fixedPrediction = Math.abs(prediction) <= 0.005 ? 0 : prediction;
 
 
-            final boolean inAir = collisionProcessor.getCollisionAirTicks() >= 5 && collisionProcessor.getMathAirTicks() > 5;
+            final boolean inAir = collisionProcessor.getClientAirTicks() >= 6;
 
             final boolean exempt = collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead()
                     || collisionProcessor.isOnClimbable() || collisionProcessor.isLastOnClimbable() || collisionProcessor

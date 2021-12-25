@@ -76,10 +76,23 @@ public class SpeedA extends Check {
             //FIXME : EXEMPT FROM VELOCITY
 
             final boolean exempt = collisionProcessor.getFenceCollisions()
-                    .stream().anyMatch(block -> block.isFence() || block.isFenceGate() || block.isWall() || block.isDoor());
+                    .stream().anyMatch(block -> block.isFence() || block.isFenceGate() || block.isWall() || block.isDoor()) ||
+                    collisionProcessor.isNearSlab() || collisionProcessor.isNearStairs();
+
+            if(collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead())
+                prediction += 0.4D;
+
+            if(collisionProcessor.isOnIce() || collisionProcessor.isLastOnIce()) {
+                prediction += 0.525D;
+            }
+
+            //stairs & slab accounting:
+            if(movementProcessor.getDeltaY() == 0.5D)
+                prediction += 0.25D;
 
             // flag
             if (deltaXZ > prediction && !exempt) {
+                if(movementProcessor.getDeltaY() == 0) buffer -= 0.5D;
                 if (++this.buffer > 3)
                     fail("limit=" + prediction + " delta=" + deltaXZ);
             } else if (this.buffer > 0) buffer -= 0.025D;

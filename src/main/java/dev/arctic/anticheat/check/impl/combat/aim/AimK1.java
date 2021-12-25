@@ -8,7 +8,7 @@ import dev.arctic.anticheat.packet.Packet;
 public class AimK1 extends Check {
 
     public AimK1(PlayerData data) {
-        super(data, "Aim", "K1", "combat.aim.k", "Checks impossible small rots (pitch).", true);
+        super(data, "Aim", "K1", "combat.aim.k1", "Checks impossible small rots (pitch).", true);
 
     }
 

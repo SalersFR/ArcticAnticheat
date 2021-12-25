@@ -3,8 +3,8 @@ package dev.arctic.anticheat.manager;
 import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.check.impl.combat.aim.*;
 import dev.arctic.anticheat.check.impl.combat.autoclicker.*;
-import dev.arctic.anticheat.check.impl.combat.killaura.KillAuraA;
-import dev.arctic.anticheat.check.impl.combat.killaura.KillAuraB;
+import dev.arctic.anticheat.check.impl.combat.killaura.*;
+import dev.arctic.anticheat.check.impl.combat.velocity.VelocityA;
 import dev.arctic.anticheat.check.impl.movement.flight.FlightA;
 import dev.arctic.anticheat.check.impl.movement.flight.FlightB;
 import dev.arctic.anticheat.check.impl.movement.flight.FlightC;
@@ -13,6 +13,8 @@ import dev.arctic.anticheat.check.impl.movement.nofall.NoFallA;
 import dev.arctic.anticheat.check.impl.movement.nofall.NoFallA1;
 import dev.arctic.anticheat.check.impl.movement.nofall.NoFallA2;
 import dev.arctic.anticheat.check.impl.movement.speed.SpeedA;
+import dev.arctic.anticheat.check.impl.movement.step.StepA;
+import dev.arctic.anticheat.check.impl.movement.step.StepA1;
 import dev.arctic.anticheat.check.impl.player.badpackets.BadPacketsA;
 import dev.arctic.anticheat.check.impl.player.badpackets.BadPacketsB;
 import dev.arctic.anticheat.check.impl.player.badpackets.BadPacketsC;
@@ -50,9 +52,21 @@ public class CheckManager {
                 new MotionD(playerData),
                 new MotionE(playerData),
                 new MotionF(playerData),
+                new StepA(playerData),
+                new StepA1(playerData),
 
+
+                new VelocityA(playerData),
                 new KillAuraA(playerData),
                 new KillAuraB(playerData),
+                new KillAuraC(playerData),
+                new KillAuraD(playerData),
+                new KillAuraE(playerData),
+                new KillAuraF(playerData),
+                new KillAuraG(playerData),
+                new KillAuraH(playerData),
+                new KillAuraI(playerData),
+                new KillAuraI1(playerData),
                 new AutoclickerA(playerData),
                 new AutoclickerA1(playerData),
                 new AutoclickerB(playerData),
