@@ -90,12 +90,18 @@ public class SpeedA extends Check {
             if(movementProcessor.getDeltaY() == 0.5D)
                 prediction += 0.25D;
 
+            if(movementProcessor.getDeltaY() == 0.0D) {
+                //random accounting idfk
+                if(deltaXZ > prediction)
+                    prediction += 0.05;
+            }
+
             // flag
             if (deltaXZ > prediction && !exempt) {
                 if(movementProcessor.getDeltaY() == 0) buffer -= 0.5D;
-                if (++this.buffer > 3)
+                if ((this.buffer += ((Math.abs(prediction - deltaXZ) * 25)))  > 6)
                     fail("limit=" + prediction + " delta=" + deltaXZ);
-            } else if (this.buffer > 0) buffer -= 0.025D;
+            } else if (this.buffer > 0) buffer -= 0.05D;
         }
     }
 
