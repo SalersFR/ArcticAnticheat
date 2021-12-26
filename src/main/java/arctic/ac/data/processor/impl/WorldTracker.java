@@ -26,6 +26,7 @@ public class WorldTracker {
 
     public void place(Block block) {
         addBlocks.add(block);
+        data.getPlayer().sendMessage("blockPlace");
         data.getTransactionHandler().todoTransition(new Runnable() {
             @Override
             public void run() {

@@ -25,9 +25,7 @@ public class NoFallA3 extends Check {
             boolean onGround = wrapper.isOnGround();
             boolean serverSideGround = data.getWorldTracker().onGround(pos,0.6,0,0.51,world);
 
-            data.getPlayer().sendMessage("Tick test");
             if (onGround && !serverSideGround) {
-                data.getPlayer().sendMessage("GroundSpoofing");
             }
         }
 
