@@ -1,114 +1,97 @@
-prefix: ""
-flag-message: "%prefix% &b%player% &7flagged &b%check% &7(&3Type %type%&7) (&b%vl%&7/&b%maxvl%&7)"
-flag-message-verbose: "%prefix%  &b%player% &7[&e%ping%ms&7] &7flagged &3%check% &7(%type%&7) &fx%vl% &7[TPS=%tps%]"
-ban-command: "kick %player% %prefix%  &bDetected for cheating"
-
+#it will be used as default for alerts
+prefix: '&7[&3&lArctic&7]'
+flag-message: '&b%player% &7has failed &b%check% &7(&bType %type%&7) &7[&3%vl%&7/&3%maxvl%&7]'
+flag-message-verbose: '%prefix%  &b%player% &7[&e%ping%ms&7] &7flagged &3%check% &7(%type%&7)
+  &fx%vl% &7[TPS=%tps%]'
+ban-command: kick %player% %prefix%  &bDetected for cheating
 bypass-enabled: false
 bypass-permission: arctic.bypass
-
 checks:
   movement:
-    fly:
+    flight:
       a:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
+        setback: false
       b:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
+        setback: false
       c:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
+        setback: false
       d:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
-    spider:
-      a:
-        ban-vl: 10
-        enabled: true
-        punish: true
-        setback: true
+        setback: false
     speed:
       a:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
+        setback: false
       b:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
+        setback: false
       c:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
+        setback: false
       d:
-        ban-vl: 10
-        enabled: true
-        punish: true
-        setback: true
-      x:
-        ban-vl: 10
-        enabled: true
-        punish: true
-        setback: true
+        enabled: false
+      x: {}
     step:
       a:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
-      b:
+        setback: false
+      a1:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
+        setback: false
     nofall:
       a:
         ban-vl: 10
         enabled: true
         punish: true
         setback: false
-      b:
+      a1:
         ban-vl: 10
         enabled: true
         punish: true
         setback: false
-      c:
+      a2:
         ban-vl: 10
         enabled: true
         punish: true
         setback: false
-      d:
-        ban-vl: 10
-        enabled: true
-        punish: true
-        setback: false
+      c: {}
     motion:
       a:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
+        setback: false
       b:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
+        setback: false
       c:
         ban-vl: 10
         enabled: true
         punish: true
-        setback: true
+        setback: false
       d:
         ban-vl: 10
         enabled: true
@@ -120,16 +103,6 @@ checks:
         punish: true
         setback: false
       f:
-        ban-vl: 10
-        enabled: true
-        punish: true
-        setback: false
-      g:
-        ban-vl: 10
-        enabled: true
-        punish: true
-        setback: false
-      h:
         ban-vl: 10
         enabled: true
         punish: true
@@ -140,6 +113,10 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      a1:
+        ban-vl: 50
+        enabled: true
+        punish: true
       b:
         ban-vl: 50
         enabled: true
@@ -164,10 +141,7 @@ checks:
         ban-vl: 50
         enabled: true
         punish: false
-      h:
-        ban-vl: 50
-        enabled: true
-        punish: false
+      h: {}
     killaura:
       a:
         ban-vl: 10
@@ -197,38 +171,18 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
-      h:
-        ban-vl: 50
-        enabled: true
-        punish: true
       i:
         ban-vl: 50
         enabled: true
         punish: true
-      j:
-        ban-vl: 50
-        enabled: true
-        punish: true
-      k:
-        ban-vl: 50
-        enabled: true
-        punish: true
-      l:
-        ban-vl: 50
-        enabled: true
-        punish: true
-      m:
-        ban-vl: 50
-        enabled: true
-        punish: true
-      n:
+      i1:
         ban-vl: 50
         enabled: true
         punish: true
     reach:
       a:
         ban-vl: 10
-        enabled: true
+        enabled: false
         punish: true
       b:
         ban-vl: 10
@@ -239,11 +193,19 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      a1:
+        ban-vl: 50
+        enabled: true
+        punish: true
       b:
         ban-vl: 50
         enabled: true
         punish: true
       c:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      c1:
         ban-vl: 50
         enabled: true
         punish: true
@@ -255,11 +217,23 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      e1:
+        ban-vl: 50
+        enabled: true
+        punish: true
       f:
         ban-vl: 50
         enabled: true
         punish: true
+      f1:
+        ban-vl: 50
+        enabled: true
+        punish: true
       g:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      g1:
         ban-vl: 50
         enabled: true
         punish: true
@@ -275,7 +249,15 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
+      j1:
+        ban-vl: 50
+        enabled: true
+        punish: true
       k:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      k1:
         ban-vl: 50
         enabled: true
         punish: true
@@ -291,34 +273,13 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
-      o:
-        ban-vl: 50
-        enabled: true
-        punish: true
-      p:
-        ban-vl: 50
-        enabled: true
-        punish: true
-      q:
-        ban-vl: 50
-        enabled: true
-        punish: true
-      r:
-        ban-vl: 50
-        enabled: true
-        punish: true
-      s:
-        ban-vl: 50
-        enabled: true
-        punish: true
-      t:
-        ban-vl: 50
-        enabled: true
-        punish: true
-      u:
-        ban-vl: 50
-        enabled: true
-        punish: true
+      o: {}
+      p: {}
+      q: {}
+      r: {}
+      s: {}
+      t: {}
+      u: {}
     velocity:
       a:
         ban-vl: 50
@@ -329,9 +290,7 @@ checks:
         enabled: true
         punish: true
       c:
-        ban-vl: 50
-        enabled: true
-        punish: true
+        enabled: false
   player:
     badpackets:
       a:
@@ -360,11 +319,5 @@ checks:
         ban-vl: 500
         enabled: true
         punish: true
-      b:
-        ban-vl: 500
-        enabled: true
-        punish: true
-      c:
-        ban-vl: 500
-        enabled: true
-        punish: true
+      b: {}
+      c: {}
