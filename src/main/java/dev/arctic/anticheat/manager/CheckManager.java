@@ -67,6 +67,8 @@ public class CheckManager {
                 new KillAuraH(playerData),
                 new KillAuraI(playerData),
                 new KillAuraI1(playerData),
+                new KillAuraI2(playerData),
+                new KillAuraJ(playerData),
                 new AutoclickerA(playerData),
                 new AutoclickerA1(playerData),
                 new AutoclickerB(playerData),
