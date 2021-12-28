@@ -15,20 +15,6 @@ public class KillAuraJ extends Check {
 
     @Override
     public void handle(Packet packet, long time) {
-        if (packet.isUseEntity()) {
-            if (data.getCombatProcessor().getTarget() != null) {
-                Vector vec = data.getCombatProcessor().getTarget().getLocation().toVector();
-
-                debug("x=" + Math.abs(vec.getX()) + " y=" + Math.abs(vec.getY()) + " z=" + Math.abs(vec.getZ()));
-
-                if (Math.abs(vec.getX()) > 0.4f || Math.abs(vec.getY()) > 1.902 || Math.abs(vec.getZ()) > 0.4f
-                        && data.getCombatProcessor().getTarget() instanceof Player) {
-                    if (++buffer > 0)
-                        fail();
-
-                } else if (buffer > 0) buffer -= 0.025D;
-
-            }
-        }
+        // TODO
     }
 }
