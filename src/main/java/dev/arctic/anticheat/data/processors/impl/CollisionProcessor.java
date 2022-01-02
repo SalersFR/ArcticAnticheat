@@ -29,10 +29,10 @@ public class CollisionProcessor extends Processor {
     private boolean clientOnGround, mathOnGround, collisionOnGround,
             onIce, onSlime, onSoulSand, onClimbable,
             inWeb, inWater, inLava, inVehicle,
-            nearVehicle, nearBoat, nearPiston, bonkingHead, teleporting, placing,
+            nearVehicle, nearBoat, nearPiston, nearCarpet, bonkingHead, teleporting, placing,
             lastClientOnGround, lastMathOnGround, lastCollisionOnGround,
             lastOnIce, lastOnSlime, lastOnSoulSand, lastOnClimbable, lastNearPiston,
-            lastInWeb, lastInWater, lastInLava, lastInVehicle, nearSlab, nearStairs,
+            lastNearCarpet, lastInWeb, lastInWater, lastInLava, lastInVehicle, nearSlab, nearStairs,
             lastNearVehicle, lastNearBoat, lastBonkingHead, lastTeleporting,
             lastOnGroundSlime, lastOnGroundIce, lastPlacing, lastNearSlab, lastNearStairs;
 
@@ -99,6 +99,7 @@ public class CollisionProcessor extends Processor {
             inWater = blockCollisions.stream().anyMatch(WrappedBlock::isWater) && data.getPlayer().getLocation().getBlock().isLiquid();
             inLava = blockCollisions.stream().anyMatch(WrappedBlock::isLava) && data.getPlayer().getLocation().getBlock().isLiquid();
             nearPiston = blockCollisions.stream().anyMatch(WrappedBlock::isPiston);
+            nearCarpet = blockCollisions.stream().anyMatch(WrappedBlock::isCarpet);
             nearSlab = blockCollisions.stream().anyMatch(WrappedBlock::isSlab);
             nearStairs = blockCollisions.stream().anyMatch(WrappedBlock::isStairs);
 
@@ -201,6 +202,7 @@ public class CollisionProcessor extends Processor {
         lastPlacing = placing;
         lastNearSlab = nearSlab;
         lastNearStairs = nearStairs;
+        lastNearCarpet = nearCarpet;
     }
 
     @Override

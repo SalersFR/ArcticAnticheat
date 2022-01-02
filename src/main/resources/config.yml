@@ -47,7 +47,7 @@ checks:
         setback: false
       d:
         enabled: false
-      x: {}
+      x: { }
     step:
       a:
         ban-vl: 10
@@ -75,7 +75,7 @@ checks:
         enabled: true
         punish: true
         setback: false
-      c: {}
+      c: { }
     motion:
       a:
         ban-vl: 10
@@ -141,7 +141,7 @@ checks:
         ban-vl: 50
         enabled: true
         punish: false
-      h: {}
+      h: { }
     killaura:
       a:
         ban-vl: 10
@@ -176,6 +176,14 @@ checks:
         enabled: true
         punish: true
       i1:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      i2:
+        ban-vl: 50
+        enabled: true
+        punish: true
+      j:
         ban-vl: 50
         enabled: true
         punish: true
@@ -273,13 +281,13 @@ checks:
         ban-vl: 50
         enabled: true
         punish: true
-      o: {}
-      p: {}
-      q: {}
-      r: {}
-      s: {}
-      t: {}
-      u: {}
+      o: { }
+      p: { }
+      q: { }
+      r: { }
+      s: { }
+      t: { }
+      u: { }
     velocity:
       a:
         ban-vl: 50
@@ -319,5 +327,5 @@ checks:
         ban-vl: 500
         enabled: true
         punish: true
-      b: {}
-      c: {}
+      b: { }
+      c: { }
