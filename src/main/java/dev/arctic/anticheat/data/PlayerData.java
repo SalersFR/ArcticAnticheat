@@ -65,6 +65,7 @@ public class PlayerData {
             actionProcessor.handleReceive(event);
             combatProcessor.handleReceive(event);
             velocityProcessor.handleReceive(event);
+            transactionProcessor.handleReceive(event);
         } else if(event.getPacket().isSending()) {
             collisionProcessor.handleSending(event);
             connectionProcessor.handleSending(event);
