@@ -19,6 +19,10 @@ public class KillAuraI1 extends Check {
     @Override
     public void handle(Packet packet, long time) {
         if(packet.isUseEntity()) {
+
+            //checks if he is attacking
+            if(data.getCombatProcessor().getHitTicks() > 1) return;
+
             final Player damager = data.getPlayer();
             final Entity victim = data.getCombatProcessor().getTarget();
 

@@ -21,7 +21,7 @@ public class ReachA extends Check {
     public void handle(Packet packet, long time) {
         if (packet.isFlying()) {
             final CombatProcessor combatProcessor = data.getCombatProcessor();
-            if (combatProcessor.getHitTicks() <= 1 && combatProcessor.getTarget().getEntityId() == combatProcessor.getLastTarget().getEntityId()) {
+            if (combatProcessor.getHitTicks() == 1 && combatProcessor.getTarget().getEntityId() == combatProcessor.getLastTarget().getEntityId()) {
                 final int totalTicks = Arctic.getInstance().getTicksManager().getTotalTicks();
                 final int ticksMS = data.getConnectionProcessor().getKeepAlivePing() / 50;
 
@@ -29,7 +29,7 @@ public class ReachA extends Check {
 
 
                 //credits to medusa xD
-                final double distance = data.getTargetLocations().stream()
+                double distance = data.getTargetLocations().stream()
                         .filter(pair -> Math.abs(totalTicks - pair.getSecond() - ticksMS) < 3)
                         .mapToDouble(pair -> {
 
@@ -52,6 +52,10 @@ public class ReachA extends Check {
                         }).min().orElse(0);
 
                 debug("reach=" + (distance > 3.05 ? "&c" : "") + (float) distance + " buffer=" + buffer);
+
+                //don't ask
+                if(data.getMovementProcessor().getDeltaXZ() <= 0.125)
+                    distance -= 0.125f;
 
 
                 if (distance > 3.05) {

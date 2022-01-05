@@ -13,6 +13,7 @@ import dev.arctic.anticheat.manager.PlayerDataManager;
 import dev.arctic.anticheat.listener.PacketListener;
 import dev.arctic.anticheat.manager.TicksManager;
 import lombok.Getter;
+import net.jitse.npclib.NPCLib;
 import org.bukkit.Bukkit;
 
 import java.util.concurrent.ExecutorService;
@@ -30,9 +31,12 @@ public class Arctic {
     private final ExecutorService dataService = Executors.newSingleThreadExecutor();
     private final TicksManager ticksManager = new TicksManager();
 
+    private NPCLib npcLibInstance;
+
     public static void createInstance() {
         instance = new Arctic();
     }
+
 
     public static Arctic getInstance() {
         return instance;
@@ -51,6 +55,8 @@ public class Arctic {
         registerEvents();
 
         ticksManager.runTaskTimer(plugin, 0L,1L);
+
+        npcLibInstance = new NPCLib(plugin);
 
 
         new PacketListener(plugin);

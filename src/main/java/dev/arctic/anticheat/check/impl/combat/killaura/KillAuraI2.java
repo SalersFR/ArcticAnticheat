@@ -16,7 +16,7 @@ public class KillAuraI2 extends Check {
     private double deltaYaw;
 
     public KillAuraI2(final PlayerData data) {
-        super(data, "KillAura", "L", "combat.killaura.l", "Checks for consistent attack angle.", true);
+        super(data, "KillAura", "I2", "combat.killaura.i2", "Checks for consistent attack angle.", true);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class KillAuraI2 extends Check {
 
             if(motionXZ > 0.16 && distance > 1.05D && angle <= 1 && deltaYaw > 6.f) {
                 buffer += Math.abs(2 - angle);
-                if(buffer > 10)
+                if(buffer > 12.25)
                     fail("angle");
             } else if(buffer > 0) buffer -= (10 / 3D);
 
