@@ -11,7 +11,7 @@ public class AutoclickerE extends Check {
     private int lastOutliers;
 
     public AutoclickerE(PlayerData data) {
-        super(data, "Autoclicker", "E", "combat.autoclicker.e", "Checks for low outliers.", true);
+        super(data, "Autoclicker", "E", "combat.autoclicker.e", "Checks for low outliers & consistency.", true);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class AutoclickerE extends Check {
 
             debug("diff=" + outliersDiff + " buffer=" + buffer);
 
-            if(outliersDiff <= 1) {
+            if(outliersDiff <= 1 && clickProcessor.getSames() >= 17 && clickProcessor.getDeviation() <= 20.5D) {
                 buffer += (2 - outliersDiff);
                 if(buffer > 7.25)
                     fail("diff=" + outliersDiff);

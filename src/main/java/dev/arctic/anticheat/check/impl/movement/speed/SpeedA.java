@@ -77,7 +77,8 @@ public class SpeedA extends Check {
 
             final boolean exempt = collisionProcessor.getFenceCollisions()
                     .stream().anyMatch(block -> block.isFence() || block.isFenceGate() || block.isWall() || block.isDoor()) ||
-                    collisionProcessor.isNearSlab() || collisionProcessor.isNearStairs();
+                    collisionProcessor.isNearSlab() || collisionProcessor.isNearStairs() || data.getVelocityProcessor().getVelTicks() <= 8
+                    || (data.getJoined() - System.currentTimeMillis()) <= 1000L;
 
             if(collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead())
                 prediction += 0.4D;
@@ -99,7 +100,7 @@ public class SpeedA extends Check {
             // flag
             if (deltaXZ > prediction && !exempt) {
                 if(movementProcessor.getDeltaY() == 0) buffer -= 0.5D;
-                if ((this.buffer += ((Math.abs(prediction - deltaXZ) * 25)))  > 6)
+                if (++this.buffer >= 9)
                     fail("limit=" + prediction + " delta=" + deltaXZ);
             } else if (this.buffer > 0) buffer -= 0.05D;
         }

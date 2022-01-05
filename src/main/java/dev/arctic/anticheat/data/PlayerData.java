@@ -30,6 +30,7 @@ public class PlayerData {
     private final MovementProcessor movementProcessor;
     private final VelocityProcessor velocityProcessor;
     private final EvictingList<Pair<Location, Integer>> targetLocations = new EvictingList<Pair<Location, Integer>>(40, false);
+    private long joined;
 
 
 

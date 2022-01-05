@@ -15,7 +15,9 @@ public class PlayerDataManager {
     }
 
     public void add(final Player player) {
-        playerDataMap.put(player, new PlayerData(player));
+        final PlayerData data = new PlayerData(player);
+        data.setJoined(System.currentTimeMillis());
+        playerDataMap.put(player, data);
     }
 
     public boolean has(final Player player) {

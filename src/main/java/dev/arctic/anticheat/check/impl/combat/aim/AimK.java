@@ -19,7 +19,7 @@ public class AimK extends Check {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
             final double deltaYaw = rotationProcessor.getDeltaYaw();
 
-            if(deltaYaw <= 1.0E-8 && rotationProcessor.getTicksSinceCinematic() > 3 && deltaYaw > 0) {
+            if(deltaYaw <= 1.0E-6 && rotationProcessor.getTicksSinceCinematic() > 3 && deltaYaw > 0) {
                 if(++buffer > 1)
                     fail("delta=" + rotationProcessor.getDeltaYaw());
 
