@@ -58,7 +58,7 @@ public class ReachA extends Check {
                     if (++buffer > 3.5) {
                         fail("reach=" + (float) distance);
                     }
-                } else if (buffer > 0 && distance >= 0.185) buffer -= (distance * 0.064);
+                } else if (buffer > 0 && distance >= 0.185) buffer -= (distance * 0.0064);
 
             }
         }
