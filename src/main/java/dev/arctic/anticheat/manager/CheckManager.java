@@ -14,7 +14,6 @@ import dev.arctic.anticheat.check.impl.movement.nofall.NoFallA;
 import dev.arctic.anticheat.check.impl.movement.nofall.NoFallA1;
 import dev.arctic.anticheat.check.impl.movement.nofall.NoFallA2;
 import dev.arctic.anticheat.check.impl.movement.speed.SpeedA;
-import dev.arctic.anticheat.check.impl.movement.speed.SpeedB;
 import dev.arctic.anticheat.check.impl.movement.step.StepA;
 import dev.arctic.anticheat.check.impl.movement.step.StepA1;
 import dev.arctic.anticheat.check.impl.player.badpackets.BadPacketsA;
@@ -45,7 +44,6 @@ public class CheckManager {
                 new FlightB(playerData),
                 new FlightC(playerData),
                 new SpeedA(playerData),
-                new SpeedB(playerData),
                 new NoFallA(playerData),
                 new NoFallA1(playerData),
                 new NoFallA2(playerData),

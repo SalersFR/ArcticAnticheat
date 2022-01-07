@@ -10,18 +10,15 @@ import dev.arctic.anticheat.packet.event.PacketEvent;
 import dev.arctic.anticheat.utilities.ArcticLocation;
 import dev.arctic.anticheat.utilities.MathUtils;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
+
 public class MovementProcessor extends Processor {
 
     private double deltaX, deltaZ, deltaXZ, deltaY, lastDeltaX, lastDeltaY,lastDeltaZ, lastDeltaXZ;
     private double lastX, lastY, lastZ;
     private double x = 0, y = 0, z = 0;
     private boolean pos, lastPos;
-    private boolean slowDown;
-    private long lastAttackSlowDown;
     private ArcticLocation location = new ArcticLocation(x,y,z);
 
 
@@ -84,9 +81,7 @@ public class MovementProcessor extends Processor {
             lastPos = pos;
             pos = true;
 
-            if (data.getActionProcessor().isSprinting() && System.currentTimeMillis() - lastAttackSlowDown > 40) {
-                slowDown = false;
-            }
+
         } else if(event.getPacket().isFlying()) {
             lastPos = pos;
             pos = false;
