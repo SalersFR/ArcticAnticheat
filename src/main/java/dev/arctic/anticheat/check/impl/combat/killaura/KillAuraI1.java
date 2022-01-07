@@ -19,6 +19,10 @@ public class KillAuraI1 extends Check {
     @Override
     public void handle(Packet packet, long time) {
         if(packet.isUseEntity()) {
+
+            //checks if he is attacking
+            if(data.getCombatProcessor().getHitTicks() > 1) return;
+
             final Player damager = data.getPlayer();
             final Entity victim = data.getCombatProcessor().getTarget();
 
@@ -52,12 +56,13 @@ public class KillAuraI1 extends Check {
 
             debug("dist=" + distance + " angle=" + angle + " buffer=" + buffer);
 
-            if (distance > 1.25 && angle <= 3 && Math.abs(angle - lastAngle) <= 1 && data.getRotationProcessor().
-                    getDeltaYaw() > 3.f && data.getMovementProcessor().getDeltaXZ() > 0.15) {
+            if (distance > 1.55 && angle <= 3 && Math.abs(angle - lastAngle) <= 1 && data.getRotationProcessor().
+                    getDeltaYaw() > 5.f && data.getMovementProcessor().getDeltaXZ() > 0.1525
+                    && data.getRotationProcessor().getDeltaPitch() >= 0.2f) {
                 buffer += Math.abs(2 - angle);
-                if(buffer > 15)
+                if(buffer > 20)
                     fail("angle=" + angle);
-            } else if(buffer > 0) buffer -= 0.05;
+            } else if(buffer > 0) buffer -= 0.1D;
 
             this.lastAngle = angle;
         }

@@ -71,13 +71,14 @@ public class SpeedA extends Check {
             if (friction < lastFriction)
                 prediction += landMovementFactor * 1.25;
 
-            debug("pred=" + prediction + " deltaXZ=" + deltaXZ);
 
-            //FIXME : EXEMPT FROM VELOCITY
 
             final boolean exempt = collisionProcessor.getFenceCollisions()
                     .stream().anyMatch(block -> block.isFence() || block.isFenceGate() || block.isWall() || block.isDoor()) ||
-                    collisionProcessor.isNearSlab() || collisionProcessor.isNearStairs();
+                    collisionProcessor.isNearSlab() || collisionProcessor.isNearStairs()
+                    || collisionProcessor.isLastTeleporting() || collisionProcessor.isTeleporting();
+
+            debug("limit=" + prediction + "\ndelta=" + deltaXZ + "\nexempt=" + exempt);
 
             if(collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead())
                 prediction += 0.4D;
@@ -96,10 +97,14 @@ public class SpeedA extends Check {
                     prediction += 0.05;
             }
 
+            //join fix
+            if(deltaXZ >= 15)
+                return;
+
             // flag
             if (deltaXZ > prediction && !exempt) {
-                if(movementProcessor.getDeltaY() == 0) buffer -= 0.5D;
-                if ((this.buffer += ((Math.abs(prediction - deltaXZ) * 25)))  > 6)
+                if(movementProcessor.getDeltaY() == 0) buffer -= 0.2D;
+                if (buffer >= 5)
                     fail("limit=" + prediction + " delta=" + deltaXZ);
             } else if (this.buffer > 0) buffer -= 0.05D;
         }

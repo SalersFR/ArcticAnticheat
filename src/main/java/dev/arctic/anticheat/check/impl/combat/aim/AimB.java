@@ -23,6 +23,10 @@ public class AimB extends Check {
 
             final double consist = Math.abs(rotationProcessor.getGcdYaw() - rotationProcessor.getGcdPitch());
 
+            if(rotationProcessor.getTicksSinceCinematic() <= 8) return;
+
+
+
             debug("consist=" + consist + " buffer=" + buffer);
 
             if (consist < 0.005 && (deltaYaw > 2.75f || (deltaPitch != 0.0f && deltaYaw > 1.25f)) &&
@@ -30,9 +34,9 @@ public class AimB extends Check {
                     Math.abs(rotationProcessor.getPitch()) != 90 && (deltaYaw < 65 && lastDeltaYaw < 62.5) && deltaPitch < 20) {
 
                 buffer += (0.25 + (consist * 50f));
-                if (consist == 0.0f || data.getRotationProcessor().getTicksSinceCinematic() <= 1) buffer *= 0.2f;
+                if (consist == 0.0f || data.getRotationProcessor().getTicksSinceCinematic() <= 2) buffer *= 0.2f;
 
-                if (buffer > 3.75)
+                if (buffer > 4.75)
                     fail("const=" + consist);
             } else if (buffer > 0) buffer -= 0.00225;
         }

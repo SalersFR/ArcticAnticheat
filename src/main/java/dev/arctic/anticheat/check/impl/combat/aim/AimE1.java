@@ -20,6 +20,7 @@ public class AimE1 extends Check {
             final boolean isRound = deltaPitch % 0.5 == 0 || deltaPitch % 1 == 0 || deltaPitch % 1.5 == 0;
 
             if(deltaPitch > 0.1 && isRound) {
+                if(deltaPitch == 180.0) buffer -= 0.75D;
                 if(++buffer > 1)
                     fail("delta=" + deltaPitch);
             } else if(buffer > 0) buffer -= 0.02D;

@@ -12,7 +12,7 @@ import java.util.Locale;
 @Getter
 public class WrappedBlock {
 
-    private boolean loaded, water, lava, solid, ice, slime, soulSand, web, piston, fence, fenceGate, wall, door, slab, stairs;
+    private boolean loaded, water, lava, solid, ice, slime, soulSand, web, piston, fence, fenceGate, wall, door, slab, stairs, carpet;
     private String name;
     private Material material;
     private double x, y, z;
@@ -43,6 +43,7 @@ public class WrappedBlock {
                     || material == Material.PISTON_EXTENSION
                     || material == Material.PISTON_MOVING_PIECE
                     || material == Material.PISTON_STICKY_BASE;
+            carpet = material == Material.CARPET;
             fence = material == Material.FENCE
                     || material == Material.ACACIA_FENCE
                     || material == Material.BIRCH_FENCE

@@ -18,7 +18,7 @@ public class AimG extends Check {
             final double gcd = rotationProcessor.getAbsGcdPitch();
 
             if (gcd < 0.01 && gcd != 0 && (rotationProcessor.getDeltaPitch() < 15 && rotationProcessor.getDeltaYaw() < 15)
-                    && rotationProcessor.getTicksSinceCinematic() > 3) {
+                    && rotationProcessor.getTicksSinceCinematic() > 21) {
                 if (++buffer > 10) {
                     fail("GCD=" + gcd);
                 }

@@ -30,6 +30,7 @@ public class PlayerData {
     private final MovementProcessor movementProcessor;
     private final VelocityProcessor velocityProcessor;
     private final EvictingList<Pair<Location, Integer>> targetLocations = new EvictingList<Pair<Location, Integer>>(40, false);
+    private long joined;
 
 
 
@@ -65,6 +66,7 @@ public class PlayerData {
             actionProcessor.handleReceive(event);
             combatProcessor.handleReceive(event);
             velocityProcessor.handleReceive(event);
+            transactionProcessor.handleReceive(event);
         } else if(event.getPacket().isSending()) {
             collisionProcessor.handleSending(event);
             connectionProcessor.handleSending(event);

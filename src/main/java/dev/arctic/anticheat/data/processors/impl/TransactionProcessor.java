@@ -8,6 +8,7 @@ import dev.arctic.anticheat.Arctic;
 import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.data.processors.Processor;
 import dev.arctic.anticheat.packet.event.PacketEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.lang.reflect.InvocationTargetException;
@@ -38,6 +39,7 @@ public class TransactionProcessor extends Processor {
         packet.getShorts().write(0, transactionID);
         packet.getIntegers().write(0, 0);
 
+
         try {
             ProtocolLibrary.getProtocolManager().sendServerPacket(data.getPlayer(), packet);
         } catch (InvocationTargetException exception) {
@@ -47,9 +49,10 @@ public class TransactionProcessor extends Processor {
 
 
     public void onTransaction(final PacketEvent event) {
-        if(event.getPacket().isInTransaction()) {
+        if (event.getPacket().isInTransaction()) {
             final WrapperPlayClientTransaction packet = new WrapperPlayClientTransaction(event.getPacket());
             final short id = packet.getActionNumber();
+
 
             if (id > 0)
                 return;

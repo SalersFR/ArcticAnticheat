@@ -53,6 +53,15 @@ public class BoundingBox {
         this.maxZ = max.getZ();
     }
 
+    public BoundingBox(final Vector location) {
+        this.minX = location.getX() - 0.3D;
+        this.minY = location.getY();
+        this.minZ = location.getZ() - 0.3D;
+        this.maxX = location.getX() + 0.3D;
+        this.maxY = location.getY() + 1.8D;
+        this.maxZ = location.getZ() + 0.3D;
+    }
+
     public BoundingBox(final Player player) {
         this.minX = player.getLocation().getX() - 0.3D;
         this.minY = player.getLocation().getY();

@@ -5,6 +5,7 @@ import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.data.processors.Processor;
 import dev.arctic.anticheat.packet.event.PacketEvent;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 
 @Getter
 public class VelocityProcessor extends Processor {
@@ -46,6 +47,7 @@ public class VelocityProcessor extends Processor {
                 final double x = packet.getVelocityX();
                 final double y = packet.getVelocityY();
                 final double z = packet.getVelocityZ();
+
 
                 data.getTransactionProcessor().todoTransaction(() -> {
                     originalY = y;
