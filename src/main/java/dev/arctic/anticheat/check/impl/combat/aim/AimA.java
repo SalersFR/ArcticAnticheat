@@ -17,10 +17,11 @@ public class AimA extends Check {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
 
             final boolean exempt = rotationProcessor.getDeltaYaw() < 3.2F || rotationProcessor.getDeltaYaw() > 67.25f;
+            final int sensitivity = rotationProcessor.getCalcSensitivity();
 
-            debug("sens=" + rotationProcessor.getSensitivity() + " exempt=" + exempt + " buffer=" + buffer);
+            debug("sens=" + sensitivity + " exempt=" + exempt + " buffer=" + buffer);
 
-            if (!exempt && rotationProcessor.getSensitivity() >= 405 && rotationProcessor.getYawAccel() <= 5 && rotationProcessor.getDeltaPitch() <= 6.75F) {
+            if (!exempt && sensitivity >= 405 && rotationProcessor.getYawAccel() <= 5 && rotationProcessor.getDeltaPitch() <= 6.75F) {
                 if (++buffer > 10) {
                     fail("buffer=" + buffer);
                 }

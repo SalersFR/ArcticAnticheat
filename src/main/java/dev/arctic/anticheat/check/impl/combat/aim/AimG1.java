@@ -21,7 +21,7 @@ public class AimG1 extends Check {
 
             final double gcd = rotationProcessor.getAbsGcdPitch();
 
-            final boolean check =  ((deltaYaw > 1.1 && deltaPitch != 0.0f) ||
+            final boolean check = ((deltaYaw > 1.1 && deltaPitch != 0.0f) ||
                     deltaPitch > 0.7f) && (deltaYaw < 15 && deltaPitch < 15) && rotationProcessor.getTicksSinceCinematic() > 0;
 
 

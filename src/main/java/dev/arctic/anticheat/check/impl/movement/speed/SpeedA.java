@@ -78,7 +78,7 @@ public class SpeedA extends Check {
                     collisionProcessor.isNearSlab() || collisionProcessor.isNearStairs()
                     || collisionProcessor.isLastTeleporting() || collisionProcessor.isTeleporting();
 
-            debug("limit=" + prediction + "\ndelta=" + deltaXZ + "\nexempt=" + exempt);
+            debug("limit=" + prediction + "\ndelta=" + deltaXZ + "\nexempt=" + exempt + "\nbuffer=" + buffer);
 
             if(collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead())
                 prediction += 0.4D;
@@ -104,7 +104,7 @@ public class SpeedA extends Check {
             // flag
             if (deltaXZ > prediction && !exempt) {
                 if(movementProcessor.getDeltaY() == 0) buffer -= 0.2D;
-                if (buffer >= 5)
+                if (++buffer >= 5)
                     fail("limit=" + prediction + " delta=" + deltaXZ);
             } else if (this.buffer > 0) buffer -= 0.05D;
         }

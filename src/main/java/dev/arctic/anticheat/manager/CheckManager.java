@@ -78,6 +78,7 @@ public class CheckManager {
                 new AutoclickerE(playerData),
                 new AimA(playerData),
                 new AimA1(playerData),
+                new AimA2(playerData),
                 new AimB(playerData),
                 new AimC(playerData),
                 new AimC1(playerData),

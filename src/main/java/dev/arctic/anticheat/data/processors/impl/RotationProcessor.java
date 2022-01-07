@@ -10,6 +10,10 @@ import dev.arctic.anticheat.packet.event.PacketEvent;
 import dev.arctic.anticheat.utilities.MathUtils;
 import lombok.Getter;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Consumer;
+
 
 @Getter
 
@@ -21,9 +25,10 @@ public class RotationProcessor extends Processor {
             lastDeltaYaw, lastDeltaPitch,
             yawAccel, pitchAccel,
             lastYawAccel, lastPitchAccel;
-    private double gcdYaw, gcdPitch, absGcdPitch, absGcdYaw;
+    private double gcdYaw, gcdPitch, absGcdPitch, absGcdYaw, sensVerbose;
     private long expandedGcdYaw, expandedGcdPitch;
-    private int sensitivity, ticksSinceCinematic;
+    private int sensitivity, calcSensitivity, ticksSinceCinematic;
+    private final Set<Integer> candidates = new HashSet<>();
 
     public RotationProcessor(PlayerData data) {
         super(data);
@@ -62,8 +67,7 @@ public class RotationProcessor extends Processor {
             expandedGcdYaw = (long) MathUtils.gcd(0x4000, (Math.abs(deltaYaw) * MathUtils.EXPANDER), (Math.abs(lastDeltaYaw) * MathUtils.EXPANDER));
             expandedGcdPitch = (long) MathUtils.gcd(0x4000, (Math.abs(deltaPitch) * MathUtils.EXPANDER), (Math.abs(lastDeltaPitch) * MathUtils.EXPANDER));
 
-            this.sensitivity = (int) MathUtils.getSensitivity(deltaPitch, lastDeltaPitch);
-
+            processSensitivity(this);
             handleCinematic();
 
         }
@@ -75,7 +79,7 @@ public class RotationProcessor extends Processor {
             final WrapperPlayClientPositionLook wrapped = new WrapperPlayClientPositionLook(packet);
             this.yaw = wrapped.getYaw();
             this.pitch = wrapped.getPitch();
-        } else if(packet.isLook()) {
+        } else if (packet.isLook()) {
             final WrapperPlayClientLook wrapped = new WrapperPlayClientLook(packet);
             this.yaw = wrapped.getYaw();
             this.pitch = wrapped.getPitch();
@@ -103,7 +107,7 @@ public class RotationProcessor extends Processor {
         final boolean exponentialYaw = String.valueOf(accelAccelYaw).contains("E");
         final boolean exponentialPitch = String.valueOf(accelAccelPitch).contains("E");
 
-        if (sensitivity < 100 && (exponentialPitch || exponentialYaw || invalidYaw || invalidPitch)) {
+        if (sensitivity == -1 && (exponentialPitch || exponentialYaw || invalidYaw || invalidPitch)) {
             this.ticksSinceCinematic = 0;
 
         }
@@ -111,10 +115,70 @@ public class RotationProcessor extends Processor {
 
     }
 
+
     private void handleOtherFlying(final Packet packet) {
-        if(packet.getType() == PacketType.Play.Client.FLYING || packet.isPosition()) {
+        if (packet.getType() == PacketType.Play.Client.FLYING || packet.isPosition()) {
             deltaYaw = 0;
             deltaPitch = 0;
+        }
+    }
+
+    private void processSensitivity(final RotationProcessor rotationProcessor) {
+
+        final float pitch = rotationProcessor.getPitch();
+        final float lPitch = rotationProcessor.getLastPitch();
+
+        final float yaw = rotationProcessor.getYaw();
+        final float lYaw = rotationProcessor.getLastYaw();
+
+        if (Math.abs(pitch) != 90.0f) {
+            float distanceY = pitch - lPitch;
+            double error = Math.max(Math.abs(pitch), Math.abs(lPitch)) * 3.814697265625E-6;
+            computeSensitivity(distanceY, error);
+        }
+
+        float distanceX = circularDistance(yaw, lYaw);
+        double error = Math.max(Math.abs(yaw), Math.abs(lYaw)) * 3.814697265625E-6;
+        computeSensitivity(distanceX, error);
+
+        if (candidates.size() == 1) {
+            calcSensitivity = candidates.iterator().next();
+            sensitivity = 200 * calcSensitivity / 143;
+        } else {
+            sensitivity = -1;
+            forEach(candidates::add);
+        }
+    }
+
+    public void computeSensitivity(double delta, double error) {
+        double start = delta - error;
+        double end = delta + error;
+        forEach(s -> {
+            double f0 = ((double) s / 142.0) * 0.6 + 0.2;
+            double f = (f0 * f0 * f0 * 8.0) * 0.15;
+            int pStart = (int) Math.ceil(start / f);
+            int pEnd = (int) Math.floor(end / f);
+            if (pStart <= pEnd) {
+                for (int p = pStart; p <= pEnd; p++) {
+                    double d = p * f;
+                    if (!(d >= start && d <= end)) {
+                        candidates.remove(s);
+                    }
+                }
+            } else {
+                candidates.remove(s);
+            }
+        });
+    }
+
+    public float circularDistance(float a, float b) {
+        float d = Math.abs(a % 360.0f - b % 360.0f);
+        return d < 180.0f ? d : 360.0f - d;
+    }
+
+    public void forEach(Consumer<Integer> consumer) {
+        for (int s = 0; s <= 143; s++) {
+            consumer.accept(s);
         }
     }
 

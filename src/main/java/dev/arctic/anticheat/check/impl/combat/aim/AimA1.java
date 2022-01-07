@@ -19,7 +19,7 @@ public class AimA1 extends Check {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
 
             final boolean exempt = rotationProcessor.getDeltaYaw() < 3.2F || rotationProcessor.getDeltaYaw() > 67.25f;
-            final int sensitivity = rotationProcessor.getSensitivity();
+            final int sensitivity = rotationProcessor.getCalcSensitivity();
 
             debug("sens=" + rotationProcessor.getSensitivity() + " exempt=" + exempt + " buffer=" + buffer);
 
