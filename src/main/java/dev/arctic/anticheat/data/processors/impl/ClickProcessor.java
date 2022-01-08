@@ -15,7 +15,7 @@ import java.util.List;
 public class ClickProcessor extends Processor {
 
     private int ticks, outliers, sames, placeTicks;
-    private double kurtosis, deviation, variance, skewness;
+    private double kurtosis, deviation, variance, skewness, cps, entropy;
     private final EvictingList<Integer> samples = new EvictingList<>(20, true);
 
     public ClickProcessor(PlayerData data) {
@@ -33,6 +33,8 @@ public class ClickProcessor extends Processor {
                 this.deviation = MathUtils.getStandardDeviation(samples);
                 this.variance = MathUtils.getVariance(samples);
                 this.skewness = MathUtils.getSkewness(samples);
+                this.cps = MathUtils.getCps(samples);
+                this.entropy = MathUtils.getEntropy(samples);
 
                 this.sames = MathUtils.getSames(samples);
             }

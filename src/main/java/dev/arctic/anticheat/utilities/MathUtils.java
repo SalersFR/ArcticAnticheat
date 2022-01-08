@@ -28,6 +28,25 @@ public class MathUtils {
         return (div + remainder - a);
     }
 
+    public static double getEntropy(EvictingList<Integer> values) {
+        if (values.isEmpty()) {
+            return -1.0;
+        }//from  w  w  w  .  j  ava 2s  . c om
+
+        double noOfTerms = 0;
+        for (Number frequency : values) {
+            noOfTerms += frequency.doubleValue();
+        }
+
+        double entropy = 0.0;
+        for (Number frequency : values) {
+            double currentProbability = frequency.doubleValue() / noOfTerms;
+            entropy += -currentProbability * Math.log(currentProbability) / Math.log(2);
+        }
+
+        return entropy;
+    }
+
 
     public boolean isScientificNotation(final Number num) {
         return num.doubleValue() < .001D;
@@ -50,6 +69,17 @@ public class MathUtils {
         }
         return true;
     }
+    /**
+     *
+     * @param data - The sample of clicks you want to get the cps from
+     * @return - The cps using the average as a method of calculation
+     */
+    public double getCps(final Collection<? extends Number> data) {
+        final double average = data.stream().mapToDouble(Number::doubleValue).average().orElse(0.0);
+
+        return 20 / average;
+    }
+
 
 
     public double getGcd(final double a, final double b) {

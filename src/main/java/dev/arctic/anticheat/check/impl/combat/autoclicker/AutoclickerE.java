@@ -25,7 +25,8 @@ public class AutoclickerE extends Check {
 
             debug("diff=" + outliersDiff + " buffer=" + buffer);
 
-            if(outliersDiff <= 1 && clickProcessor.getSames() >= 17 && clickProcessor.getDeviation() <= 20.5D) {
+            if(outliersDiff <= 1 && clickProcessor.getSames() >= 17 && clickProcessor.getDeviation() <= 20.5D
+                    && clickProcessor.getCps() >= 12.25) {
                 buffer += (2 - outliersDiff);
                 if(buffer > 7.25)
                     fail("diff=" + outliersDiff);
