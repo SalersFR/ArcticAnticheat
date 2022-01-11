@@ -153,6 +153,17 @@ public class MathUtils {
         return sum / size;
     }
 
+    public double averageLong(ArrayList<Long> list) {
+        double sum = 0;
+        double size = list.size();
+
+        for (double var1 : list) {
+            sum += var1;
+        }
+
+        return sum / size;
+    }
+
     public double averageInt(EvictingList<Integer> list) {
         double sum = 0;
         double size = list.size();

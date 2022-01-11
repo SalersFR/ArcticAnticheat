@@ -39,6 +39,10 @@ public class Packet extends PacketContainer {
                 || getType() == PacketType.Play.Client.POSITION_LOOK);
     }
 
+    public boolean isUseItem() {
+        return isReceiving() && getType() == PacketType.Play.Client.USE_ITEM;
+    }
+
     public boolean isPosition() {
         return isReceiving()
                 && (getType() == PacketType.Play.Client.POSITION);

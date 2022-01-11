@@ -16,11 +16,10 @@ import dev.arctic.anticheat.check.impl.movement.nofall.NoFallA2;
 import dev.arctic.anticheat.check.impl.movement.speed.SpeedA;
 import dev.arctic.anticheat.check.impl.movement.step.StepA;
 import dev.arctic.anticheat.check.impl.movement.step.StepA1;
-import dev.arctic.anticheat.check.impl.player.badpackets.BadPacketsA;
-import dev.arctic.anticheat.check.impl.player.badpackets.BadPacketsB;
-import dev.arctic.anticheat.check.impl.player.badpackets.BadPacketsC;
+import dev.arctic.anticheat.check.impl.player.badpackets.*;
 import dev.arctic.anticheat.check.impl.player.scaffold.ScaffoldA;
 import dev.arctic.anticheat.check.impl.player.scaffold.ScaffoldA1;
+import dev.arctic.anticheat.check.impl.player.scaffold.ScaffoldB;
 import dev.arctic.anticheat.check.impl.player.timer.TimerA;
 import dev.arctic.anticheat.data.PlayerData;
 
@@ -35,9 +34,12 @@ public class CheckManager {
 
                 new ScaffoldA(playerData),
                 new ScaffoldA1(playerData),
+                new ScaffoldB(playerData),
                 new BadPacketsA(playerData),
                 new BadPacketsB(playerData),
                 new BadPacketsC(playerData),
+                new BadPacketsD(playerData),
+                new BadPacketsE(playerData),
                 new TimerA(playerData),
 
                 new FlightA(playerData),
