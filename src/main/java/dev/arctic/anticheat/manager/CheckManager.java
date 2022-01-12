@@ -40,6 +40,8 @@ public class CheckManager {
                 new BadPacketsC(playerData),
                 new BadPacketsD(playerData),
                 new BadPacketsE(playerData),
+                //new BadPacketsF(playerData),
+                new BadPacketsG(playerData),
                 new TimerA(playerData),
 
                 new FlightA(playerData),

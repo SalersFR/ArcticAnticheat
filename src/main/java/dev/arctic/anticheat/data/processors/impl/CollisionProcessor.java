@@ -56,17 +56,20 @@ public class CollisionProcessor extends Processor {
 
             final Location bukkitLocation = location.toLoc(data.getPlayer().getWorld());
 
-            boundingBox = new BoundingBox(location).expand(0, 0.01, 0);
 
-            blockCollisions = boundingBox.getBlocks(data.getPlayer());
+            data.getTransactionProcessor().todoTransaction(() -> {
+                boundingBox = new BoundingBox(location).expand(0, 0.01, 0);
 
-            bonkingBoundingBox = new BoundingBox(location).expandSpecific(0, 0, -1.81, 0.01, 0, 0);
+                blockCollisions = boundingBox.getBlocks(data.getPlayer());
 
-            bonkingCollisions = bonkingBoundingBox.getBlocks(data.getPlayer());
+                bonkingBoundingBox = new BoundingBox(location).expandSpecific(0, 0, -1.81, 0.01, 0, 0);
 
-            fenceBoundingBox = new BoundingBox(location).expandSpecific(0, 0, 0.61, -2.41, 0, 0);
+                bonkingCollisions = bonkingBoundingBox.getBlocks(data.getPlayer());
 
-            fenceCollisions = fenceBoundingBox.getBlocks(data.getPlayer());
+                fenceBoundingBox = new BoundingBox(location).expandSpecific(0, 0, 0.61, -2.41, 0, 0);
+
+                fenceCollisions = fenceBoundingBox.getBlocks(data.getPlayer());
+            });
 
             updateLastVariables();
 

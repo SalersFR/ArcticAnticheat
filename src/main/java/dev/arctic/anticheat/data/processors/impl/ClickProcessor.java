@@ -51,10 +51,6 @@ public class ClickProcessor extends Processor {
             }
 
 
-
-
-
-
             this.samples.add(ticks);
 
             ticks = 0;

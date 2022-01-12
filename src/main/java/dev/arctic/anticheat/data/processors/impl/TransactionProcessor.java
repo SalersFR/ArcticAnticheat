@@ -8,19 +8,24 @@ import dev.arctic.anticheat.Arctic;
 import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.data.processors.Processor;
 import dev.arctic.anticheat.packet.event.PacketEvent;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@Getter
 public class TransactionProcessor extends Processor {
 
 
     private short transactionID;
     private final Map<Short, Long> transactionTimes = new HashMap<>();
-    private HashMap<Short, Runnable> todo = new HashMap<>();
+    private HashMap<Short, List<Runnable>> todo = new HashMap<>();
+    private boolean invalidTransactionReply;
 
     public TransactionProcessor(PlayerData data) {
         super(data);
@@ -32,7 +37,12 @@ public class TransactionProcessor extends Processor {
             transactionID = Short.MIN_VALUE;
 
         transactionTimes.put(transactionID, -5L);
-        todo.put(transactionID, runnable);
+
+
+        if (!this.todo.containsKey(transactionID)) {
+            this.todo.put(transactionID, new ArrayList<>());
+        }
+        this.todo.get(transactionID).add(runnable);
 
         PacketContainer packet = new PacketContainer(PacketType.Play.Server.TRANSACTION);
         packet.getBooleans().write(0, false);
@@ -59,15 +69,11 @@ public class TransactionProcessor extends Processor {
 
             if (transactionTimes.containsKey(id)) {
                 if (transactionTimes.get(id) == -5L) {
-                    todo.get(id).run();
+                    todo.get(id).forEach(Runnable::run);
+                    invalidTransactionReply = false;
                 }
             } else {
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        data.getPlayer().kickPlayer("Invalid Transaction");
-                    }
-                }.runTask(Arctic.getInstance().getPlugin());
+               invalidTransactionReply = true;
             }
         }
 
