@@ -15,7 +15,7 @@ import java.util.List;
 public class ClickProcessor extends Processor {
 
     private int ticks, outliers, sames, placeTicks;
-    private double kurtosis, deviation, variance, skewness, cps, entropy;
+    private double kurtosis, deviation, variance, skewness, cps, entropy, diggingBuffer;
     private final EvictingList<Integer> samples = new EvictingList<>(20, true);
 
     public ClickProcessor(PlayerData data) {
@@ -37,7 +37,20 @@ public class ClickProcessor extends Processor {
                 this.entropy = MathUtils.getEntropy(samples);
 
                 this.sames = MathUtils.getSames(samples);
+
+
+
+                //another dig handling
+                if(cps >= 20.0 && cps % 10.0 == 0) {
+                    if(++diggingBuffer > 10) {
+                        samples.clear();
+                        diggingBuffer = 2;
+                    }
+
+                } else if(diggingBuffer > 0) diggingBuffer -= 0.5D;
             }
+
+
 
 
 
@@ -46,12 +59,18 @@ public class ClickProcessor extends Processor {
 
             ticks = 0;
 
+
         } else if(event.getPacket().isFlying()) {
             ticks++;
             placeTicks++;
 
         } else if(event.getPacket().isBlockDig()) {
-            samples.clear();
+            if(cps >= 15) {
+                if(++diggingBuffer > 10) {
+                    samples.clear();
+                    diggingBuffer = 2;
+                }
+            }
         } else if(event.getPacket().isBlockPlace()) {
             placeTicks = 0;
         }
@@ -66,4 +85,7 @@ public class ClickProcessor extends Processor {
     public boolean isNotAbleToCheck() {
         return samples.size() != 20;
     }
+
+
+
 }
