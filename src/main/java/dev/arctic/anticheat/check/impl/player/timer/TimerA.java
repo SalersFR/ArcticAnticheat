@@ -2,6 +2,7 @@ package dev.arctic.anticheat.check.impl.player.timer;
 
 import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.data.PlayerData;
+import dev.arctic.anticheat.data.processors.impl.CollisionProcessor;
 import dev.arctic.anticheat.packet.Packet;
 
 public class TimerA extends Check {
@@ -17,10 +18,14 @@ public class TimerA extends Check {
     public void handle(Packet packet, long time) {
 
         if(packet.isFlying()) {
-            long diff = time - lastFlying;
+
+            final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
+
+            final long diff = time - lastFlying;
             balance += 50 - diff;
 
-            if (data.getCollisionProcessor().isTeleporting()) balance -= 50.0D;
+            if (collisionProcessor.isTeleporting() || collisionProcessor.isNearPiston() ||
+                    collisionProcessor.isLastNearPiston()) balance -= 50.0D;
 
             debug("balance=" + balance);
 

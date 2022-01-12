@@ -16,7 +16,7 @@ public class NoFallA1 extends Check {
         if (packet.isFlying()) {
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
 
-            if (!collisionProcessor.isCollisionOnGround() && !collisionProcessor.isLastCollisionOnGround()
+            if (!collisionProcessor.isClientOnGround() && !collisionProcessor.isLastClientOnGround()
                     && collisionProcessor.isMathOnGround() && collisionProcessor.isLastMathOnGround() &&
                     !collisionProcessor.isOnClimbable()) {
                 if (++buffer > 1)

@@ -23,7 +23,7 @@ public class FlightB extends Check {
             final double lastDeltaY = movementProcessor.getLastDeltaY();
 
             final double accel = Math.abs(deltaY - lastDeltaY);
-            final boolean inAir = collisionProcessor.getCollisionAirTicks() >= 8;
+            final boolean inAir = collisionProcessor.getMathAirTicks() >= 8;
 
             final boolean exempt = collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead()
                     || collisionProcessor.isOnClimbable() || collisionProcessor.isLastOnClimbable() || collisionProcessor

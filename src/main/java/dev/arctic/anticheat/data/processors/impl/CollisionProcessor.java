@@ -20,7 +20,7 @@ import java.util.List;
 @Getter
 public class CollisionProcessor extends Processor {
 
-    private BoundingBox boundingBox, bonkingBoundingBox, fenceBoundingBox;
+    private BoundingBox boundingBox,closeCollsBB, bonkingBoundingBox, fenceBoundingBox;
 
     private List<Entity> entityCollisions;
 
@@ -58,9 +58,14 @@ public class CollisionProcessor extends Processor {
 
 
             data.getTransactionProcessor().todoTransaction(() -> {
-                boundingBox = new BoundingBox(location).expand(0, 0.01, 0);
+
+                closeCollsBB = new BoundingBox(location).expand(0,1.0E-20, 0);
+                boundingBox = closeCollsBB.expand(0, 0.01, 0);
 
                 blockCollisions = boundingBox.getBlocks(data.getPlayer());
+
+                closeCollsBB.getBlocks(data.getPlayer()).stream().filter(wrappedBlock -> !blockCollisions.
+                        contains(wrappedBlock)).forEach(block -> blockCollisions.add(block));
 
                 bonkingBoundingBox = new BoundingBox(location).expandSpecific(0, 0, -1.81, 0.01, 0, 0);
 
