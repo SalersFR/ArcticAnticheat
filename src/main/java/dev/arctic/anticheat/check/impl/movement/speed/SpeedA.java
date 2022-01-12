@@ -48,6 +48,7 @@ public class SpeedA extends Check {
 
             float landMovementFactor = (float) d;
 
+
             // the check itself
             double prediction;
             if (ground > 2) {
@@ -67,6 +68,10 @@ public class SpeedA extends Check {
                 this.lastFriction = this.friction;
                 this.friction = getBlockFriction(data) * 0.91f;
             }
+
+            //jump handling
+            if(movementProcessor.getDeltaY() > 0 && collisionProcessor.isLastClientOnGround() && !collisionProcessor.isClientOnGround())
+                prediction += 0.19825;
 
             if (friction < lastFriction)
                 prediction += landMovementFactor * 1.25;

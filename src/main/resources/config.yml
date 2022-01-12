@@ -107,6 +107,11 @@ checks:
         enabled: true
         punish: true
         setback: false
+      g:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: false
   combat:
     autoclicker:
       a:

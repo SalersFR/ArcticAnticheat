@@ -57,6 +57,7 @@ public class CheckManager {
                 new MotionD(playerData),
                 new MotionE(playerData),
                 new MotionF(playerData),
+                new MotionG(playerData),
                 new StepA(playerData),
                 new StepA1(playerData),
 
