@@ -7,11 +7,12 @@ import dev.arctic.anticheat.packet.event.PacketEvent;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 
 @Getter
 public class CombatProcessor extends Processor {
 
-    private Entity target, lastTarget;
+    private LivingEntity target, lastTarget;
     private int hitTicks;
 
     public CombatProcessor(PlayerData data) {
@@ -23,7 +24,7 @@ public class CombatProcessor extends Processor {
         if(event.getPacket().isAttack()) {
             final WrapperPlayClientUseEntity packet = new WrapperPlayClientUseEntity(event.getPacket());
             lastTarget = target;
-            this.target = packet.getTarget(data.getPlayer().getWorld());
+            this.target = (LivingEntity) packet.getTarget(data.getPlayer().getWorld());
             this.hitTicks = 0;
         } else if(event.getPacket().isFlying()) {
             hitTicks++;

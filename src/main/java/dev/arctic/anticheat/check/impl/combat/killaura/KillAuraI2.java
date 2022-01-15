@@ -67,7 +67,7 @@ public class KillAuraI2 extends Check {
 
         try {
             for (int i = 0; i < 2; i++) {
-                toReturn.add(data.getTargetLocations().get(i + (ping / 50)).getFirst().toVector());
+                toReturn.add(data.getTargetLocations().get(i + (ping / 50)).getFirst());
             }
         } catch (IndexOutOfBoundsException e) {
 

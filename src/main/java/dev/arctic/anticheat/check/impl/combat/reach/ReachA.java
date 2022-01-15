@@ -33,8 +33,8 @@ public class ReachA extends Check {
                         .filter(pair -> Math.abs(totalTicks - pair.getSecond() - ticksMS) < 4)
                         .mapToDouble(pair -> {
 
-                            final Vector victimVec = pair.getFirst().toVector();
-                            final AxisAlignedBB targetBox = pair.getFirst();
+                            final Vector victimVec = pair.getFirst();
+                            final AxisAlignedBB targetBox = new AxisAlignedBB(victimVec);
 
                             Vec3 origin = getPositionEyes(originLoc.getX(),
                                     originLoc.getY(), originLoc.getZ(), data.getPlayer().getEyeHeight());

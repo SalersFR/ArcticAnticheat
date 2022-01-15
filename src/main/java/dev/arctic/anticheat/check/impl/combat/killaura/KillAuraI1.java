@@ -49,7 +49,7 @@ public class KillAuraI1 extends Check {
             final double distance = data.getTargetLocations().stream()
                     .filter(pair -> Math.abs(totalTicks - pair.getSecond() - ticksMS) < 3)
                     .mapToDouble(pair -> {
-                        final Vector victimVec = pair.getFirst().toVector().setY(0);
+                        final Vector victimVec = pair.getFirst().setY(0);
                         return victimVec.distance(origin.clone().setY(0)) - 0.3F;
                     }).min().orElse(0);
 
