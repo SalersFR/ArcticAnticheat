@@ -30,6 +30,10 @@ public class AxisAlignedBB
         this.maxZ = vector.getZ() + 0.3;
     }
 
+    public Vector toVector() {
+        return new Vector(minX + 0.3, minY, minZ - 0.3);
+    }
+
     public AxisAlignedBB(BlockPos pos1, BlockPos pos2)
     {
         this.minX = (double)pos1.getX();

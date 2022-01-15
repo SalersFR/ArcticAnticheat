@@ -30,11 +30,11 @@ public class ReachA extends Check {
 
                 //credits to medusa xD
                 double distance = data.getTargetLocations().stream()
-                        .filter(pair -> Math.abs(totalTicks - pair.getSecond() - ticksMS) < 3)
+                        .filter(pair -> Math.abs(totalTicks - pair.getSecond() - ticksMS) < 4)
                         .mapToDouble(pair -> {
 
                             final Vector victimVec = pair.getFirst().toVector();
-                            final AxisAlignedBB targetBox = new AxisAlignedBB(victimVec);
+                            final AxisAlignedBB targetBox = pair.getFirst();
 
                             Vec3 origin = getPositionEyes(originLoc.getX(),
                                     originLoc.getY(), originLoc.getZ(), data.getPlayer().getEyeHeight());
@@ -47,18 +47,18 @@ public class ReachA extends Check {
                             MovingObjectPosition collision = targetBox.calculateIntercept(origin, look);
 
                             return (collision == null || collision.hitVec == null || look == null) ? victimVec.clone().setY(0).
-                                    distance(originLoc.clone().setY(0)) - 0.5f : collision.hitVec.distanceTo(origin) - 0.1175f;
+                                    distance(originLoc.clone().setY(0)) - 0.5f : collision.hitVec.distanceTo(origin) - 0.15f;
 
                         }).min().orElse(0);
 
                 debug("reach=" + (distance > 3.05 ? "&c" : "") + (float) distance + " buffer=" + buffer);
 
                 //don't ask
-                if(data.getMovementProcessor().getDeltaXZ() <= 0.125)
-                    distance -= 0.125f;
+                if(data.getMovementProcessor().getDeltaXZ() <= 0.0313f)
+                    distance -= 0.03125f;
 
 
-                if (distance > 3.05) {
+                if (distance > 3.025) {
                     if (++buffer > 3.5) {
                         fail("reach=" + (float) distance);
                     }

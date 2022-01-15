@@ -83,7 +83,7 @@ public class WrapperPlayServerRelEntityMove extends AbstractPacket {
      * @return The current DX
      */
     public double getDx() {
-        return handle.getBytes().read(0);
+        return handle.getBytes().read(0) / 32D;
     }
 
     /**
@@ -101,7 +101,7 @@ public class WrapperPlayServerRelEntityMove extends AbstractPacket {
      * @return The current DY
      */
     public double getDy() {
-        return handle.getBytes().read(1);
+        return handle.getBytes().read(1) / 32D;
     }
 
     /**
@@ -119,7 +119,7 @@ public class WrapperPlayServerRelEntityMove extends AbstractPacket {
      * @return The current DZ
      */
     public double getDz() {
-        return handle.getBytes().read(2);
+        return handle.getBytes().read(2) / 32D;
     }
 
     /**

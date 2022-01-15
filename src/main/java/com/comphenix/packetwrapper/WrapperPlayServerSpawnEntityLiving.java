@@ -25,6 +25,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.injector.PacketConstructor;
 import com.comphenix.protocol.wrappers.WrappedDataWatcher;
+import net.minecraft.server.v1_8_R3.PacketPlayOutSpawnEntityLiving;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -133,55 +134,29 @@ public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
      * @return The current X
      */
 
+
+
+
     public double getX() {
-        return handle.getIntegers().read(0);
+        return handle.getIntegers().read(1) / 32;
     }
 
-    /**
-     * Set the x position of the object.
-     *
-     * @param value - new value.
-     */
     public void setX(double value) {
         handle.getDoubles().write(0, value);
     }
 
-    /**
-     * Retrieve the y position of the object.
-     * <p>
-     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
-     *
-     * @return The current y
-     */
     public double getY() {
-        return handle.getIntegers().read(1);
+        return handle.getIntegers().read(2) / 32;
     }
 
-    /**
-     * Set the y position of the object.
-     *
-     * @param value - new value.
-     */
     public void setY(double value) {
         handle.getDoubles().write(1, value);
     }
 
-    /**
-     * Retrieve the z position of the object.
-     * <p>
-     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
-     *
-     * @return The current z
-     */
     public double getZ() {
-        return handle.getIntegers().read(2);
+        return handle.getIntegers().read(3) / 32;
     }
 
-    /**
-     * Set the z position of the object.
-     *
-     * @param value - new value.
-     */
     public void setZ(double value) {
         handle.getDoubles().write(2, value);
     }
