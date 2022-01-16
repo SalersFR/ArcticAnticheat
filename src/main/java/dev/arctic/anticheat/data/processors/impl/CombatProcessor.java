@@ -1,6 +1,7 @@
 package dev.arctic.anticheat.data.processors.impl;
 
 import com.comphenix.packetwrapper.WrapperPlayClientUseEntity;
+import com.comphenix.protocol.wrappers.EnumWrappers;
 import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.data.processors.Processor;
 import dev.arctic.anticheat.packet.event.PacketEvent;
@@ -26,6 +27,10 @@ public class CombatProcessor extends Processor {
             lastTarget = target;
             this.target = (LivingEntity) packet.getTarget(data.getPlayer().getWorld());
             this.hitTicks = 0;
+            if (packet.getType().equals(EnumWrappers.EntityUseAction.ATTACK)) {
+                data.getMovementProcessor().setSlowDown(true);
+                data.getMovementProcessor().setLastAttackSlowDown(System.currentTimeMillis());
+            }
         } else if(event.getPacket().isFlying()) {
             hitTicks++;
         }
