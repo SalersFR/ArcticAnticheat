@@ -24,7 +24,7 @@ public class AimF1 extends Check {
             final float gcd = (float) rotationProcessor.getGcdPitch();
 
             final boolean check = (Math.abs(deltaPitch) > 0.45 || Math.abs(deltaYaw) > 0.45)
-                    && rotationProcessor.getTicksSinceCinematic() <= 5 && deltaPitch < 15 && deltaYaw < 16;
+                    && rotationProcessor.getTicksSinceCinematic() >= 5 && deltaPitch < 15 && deltaYaw < 16;
 
             final double resYaw = deltaYaw % gcd;
             final double resPitch = deltaPitch % gcd;

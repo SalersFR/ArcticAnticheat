@@ -47,7 +47,7 @@ public class ReachA extends Check {
                             MovingObjectPosition collision = targetBox.calculateIntercept(origin, look);
 
                             return (collision == null || collision.hitVec == null || look == null) ? victimVec.clone().setY(0).
-                                    distance(originLoc.clone().setY(0)) - 0.5f : collision.hitVec.distanceTo(origin) - 0.15f;
+                                    distance(originLoc.clone().setY(0)) - 0.5f : collision.hitVec.distanceTo(origin) - 0.225f;
 
                         }).min().orElse(0);
 

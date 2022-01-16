@@ -71,6 +71,7 @@ public class TransactionProcessor extends Processor {
                 if (transactionTimes.get(id) == -5L) {
                     todo.get(id).forEach(Runnable::run);
                     invalidTransactionReply = false;
+                    transactionTimes.remove(id);
                 }
             } else {
                invalidTransactionReply = true;

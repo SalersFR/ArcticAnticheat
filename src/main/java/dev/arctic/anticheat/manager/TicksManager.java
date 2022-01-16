@@ -26,7 +26,7 @@ public class TicksManager extends BukkitRunnable {
             if (target != null && lastTarget != null) {
                 if (target != lastTarget) playerDatas.getTargetLocations().clear();
 
-                final Vector location = target.getEyeLocation().toVector();
+                final Vector location = target.getLocation().toVector();
                 playerDatas.getTransactionProcessor().todoTransaction(()
                         -> playerDatas.getTargetLocations().add(new Pair<>(location, totalTicks)));
 

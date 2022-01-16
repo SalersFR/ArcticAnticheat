@@ -11,7 +11,7 @@ import org.bukkit.Bukkit;
 public class VelocityProcessor extends Processor {
 
     private double originalY, originalX, originalZ, velocityY;
-    private int velTicks;
+    private int velTicks = 1;
 
     public VelocityProcessor(PlayerData data) {
         super(data);
@@ -33,8 +33,10 @@ public class VelocityProcessor extends Processor {
                     velocityY = 0;
                 }
 
-                velTicks++;
+
             }
+
+            velTicks++;
         }
     }
 
@@ -53,9 +55,9 @@ public class VelocityProcessor extends Processor {
                     originalY = y;
                     velocityY = originalY;
                     velTicks = 0;
+
                 });
 
-                velTicks = 0;
             }
 
         }
