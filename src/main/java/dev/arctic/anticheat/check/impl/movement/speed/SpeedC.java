@@ -49,6 +49,7 @@ public class SpeedC extends Check {
 
             double diff = motion.distance(lastMotion);
 
+            /**  I should recode everything below this **/
             Location loc = movementProcessor.getLocation().toLoc(data.getPlayer().getWorld());
             Location lastLoc = null;
             if (lastPos != null) {
