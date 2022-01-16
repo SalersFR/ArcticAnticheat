@@ -48,6 +48,9 @@ public abstract class Check {
     protected void fail(String info) {
         vl++;
 
+        if (canSetback())
+            data.getCancelProcessor().setMovementCancel(true);
+
 
         final String prefix = ChatColor.translateAlternateColorCodes('&', Arctic.getInstance().getPlugin().getConfig().getString("prefix"));
 
@@ -177,6 +180,10 @@ public abstract class Check {
 
     public boolean isSetback() {
         return Arctic.getInstance().getPlugin().getConfig().getBoolean("checks." + this.getConfigName() + ".setback");
+    }
+
+    public boolean canSetback() {
+        return !data.getCancelProcessor().isMovementCancel() && configName.contains("movement") && !configName.contains("nofall");
     }
 
 

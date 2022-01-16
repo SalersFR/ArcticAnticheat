@@ -30,6 +30,9 @@ public class PlayerData {
     private final RotationProcessor rotationProcessor;
     private final MovementProcessor movementProcessor;
     private final VelocityProcessor velocityProcessor;
+    private final CancelProcessor cancelProcessor;
+
+
     private final EvictingList<Pair<Vector, Integer>> targetLocations
             = new EvictingList<>(40, false);
     private long joined;
@@ -54,6 +57,7 @@ public class PlayerData {
         this.actionProcessor = new ActionProcessor(this);
         this.combatProcessor = new CombatProcessor(this);
         this.velocityProcessor = new VelocityProcessor(this);
+        this.cancelProcessor = new CancelProcessor(this);
 
     }
 
@@ -70,6 +74,7 @@ public class PlayerData {
             combatProcessor.handleReceive(event);
             velocityProcessor.handleReceive(event);
             transactionProcessor.handleReceive(event);
+            cancelProcessor.handleReceive(event);
         } else if(event.getPacket().isSending()) {
             collisionProcessor.handleSending(event);
             connectionProcessor.handleSending(event);

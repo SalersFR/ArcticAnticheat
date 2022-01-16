@@ -71,6 +71,11 @@ public class MotionG extends Check {
 
             } else if (buffer > 0) buffer -= 0.125D;
 
+            if(offset > 0.5) {
+                if(++buffer > 3)
+                    fail("offset=" + offset);
+            }
+
             debug((offset > 0.00375 ? "&c" : "&a") + "offset=" + offset + " buffer=" + buffer);
             debug("ticks=" + data.getVelocityProcessor().getVelTicks());
 

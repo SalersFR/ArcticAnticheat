@@ -11,5 +11,4 @@ public class PacketEvent {
     private final Packet packet;
     private final long time;
 
-
 }
