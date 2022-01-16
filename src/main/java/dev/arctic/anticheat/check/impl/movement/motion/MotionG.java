@@ -23,14 +23,7 @@ public class MotionG extends Check {
             final MovementProcessor movementProcessor = data.getMovementProcessor();
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
 
-            final boolean exempt = collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead()
-                    || collisionProcessor.isOnClimbable() || collisionProcessor.isLastOnClimbable() || collisionProcessor
-                    .isInVehicle() || collisionProcessor.isNearPiston() || collisionProcessor.isLastNearPiston()
-                    || collisionProcessor.isInWater() || collisionProcessor.isInLava() || collisionProcessor.isInWeb()
-                    || collisionProcessor.isLastInWeb() || collisionProcessor.getPlacingTicks() <= 15 ||
-                    collisionProcessor.isTeleporting() || data.getVelocityProcessor().getVelTicks() <= 8;
 
-            if (exempt) return;
 
             final double deltaY = movementProcessor.getDeltaY();
 
@@ -49,7 +42,7 @@ public class MotionG extends Check {
             }
 
             if (collisionProcessor.getMathAirTicks() >= 2) {
-                if(collisionProcessor.getMathAirTicks() < 11) {
+                if (collisionProcessor.getMathAirTicks() < 11) {
                     motionY -= 0.08D;
                     motionY *= 0.98F;
                 } else {
@@ -57,17 +50,29 @@ public class MotionG extends Check {
                 }
             }
 
+            final boolean exempt = collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead()
+                    || collisionProcessor.isOnClimbable() || collisionProcessor.isLastOnClimbable() || collisionProcessor
+                    .isInVehicle() || collisionProcessor.isNearPiston() || collisionProcessor.isLastNearPiston()
+                    || collisionProcessor.isInWater() || collisionProcessor.isInLava() || collisionProcessor.isInWeb()
+                    || collisionProcessor.isLastInWeb() || collisionProcessor.getPlacingTicks() <= 15 ||
+                    collisionProcessor.isTeleporting() || data.getVelocityProcessor().getVelTicks() <= 8;
+
+
+
             final double offset = new Vector(0, motionY, 0).distance(new Vector(0, deltaY, 0));
 
-            if(offset > 0.00375) {
+            if (offset > 0.00375 && !exempt) {
                 buffer += 0.5;
-                if(buffer > 1.65)  {
+                if (buffer > 1.65) {
                     fail("offset=" + offset);
                     buffer = 1.15;
                 }
 
 
-            } else if(buffer > 0) buffer -= 0.125D;
+            } else if (buffer > 0) buffer -= 0.125D;
+
+            debug((offset > 0.00375 ? "&c" : "&a") + "offset=" + offset + " buffer=" + buffer);
+            debug("ticks=" + data.getVelocityProcessor().getVelTicks());
 
 
         }
