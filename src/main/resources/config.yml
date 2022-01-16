@@ -3,7 +3,10 @@ prefix: '&7[&3&lArctic&7]'
 flag-message: '&b%player% &7has failed &b%check% &7(&bType %type%&7) &7[&3%vl%&7/&3%maxvl%&7]'
 flag-message-verbose: '%prefix%  &b%player% &7[&e%ping%ms&7] &7flagged &3%check% &7(%type%&7)
   &fx%vl% &7[TPS=%tps%]'
-ban-command: kick %player% %prefix%  &bDetected for cheating
+ban-command: kick %player% %prefix% &bDetected for cheating
+ban-animation:
+  lightning: false
+  blood: false
 bypass-enabled: false
 bypass-permission: arctic.bypass
 checks:

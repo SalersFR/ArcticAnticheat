@@ -55,7 +55,7 @@ public abstract class Check {
         final String prefix = ChatColor.translateAlternateColorCodes('&', Arctic.getInstance().getPlugin().getConfig().getString("prefix"));
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.hasPermission("alerts.see")  /** && player.hasMetadata("ALERTS_ON_NORMAL") **/) {
+            if (player.hasPermission("alerts.see") && player.hasMetadata("ALERTS_ON_NORMAL")) {
                 final String fromConfig = ChatColor.translateAlternateColorCodes('&',
                         Arctic.getInstance().getPlugin().getConfig().getString("flag-message").
                                 replace("%player%", data.getPlayer().getName()).
@@ -107,17 +107,24 @@ public abstract class Check {
 
 
                     Bukkit.getScheduler().runTask(Arctic.getInstance().getPlugin(), () -> {
-                        data.getPlayer().getWorld().strikeLightningEffect(data.getPlayer().getLocation());
-                        // Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', toDispatch));
-                        Bukkit.broadcastMessage(CustomUtils.translate("&m&l-----------------------------------------"));
-                        Bukkit.broadcastMessage(CustomUtils.translate("&b&lArctic &r&bremoved &c" + data.getPlayer()
-                                .getName() + " &bfor &cUnfair Advantage."));
-                        Bukkit.broadcastMessage(CustomUtils.translate("&m&l-----------------------------------------"));
-                        blood(data.getPlayer());
-                        for (Check checks : data.getCheckManager().getChecks()) {
-                            checks.vl = 0;
-                        }
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', toDispatch));
                     });
+
+                    Bukkit.broadcastMessage(CustomUtils.translate("&m&l-----------------------------------------"));
+                    Bukkit.broadcastMessage(CustomUtils.translate("&b&lArctic &r&bremoved &c" + data.getPlayer()
+                            .getName() + " &bfor &cUnfair Advantage."));
+                    Bukkit.broadcastMessage(CustomUtils.translate("&m&l-----------------------------------------"));
+
+                    if (Arctic.getInstance().getPlugin().getConfig().getBoolean("ban-animation.blood"))
+                        blood(data.getPlayer());
+
+                    if(Arctic.getInstance().getPlugin().getConfig().getBoolean("ban-animation.lightning"))
+                        data.getPlayer().getWorld().strikeLightningEffect(data.getPlayer().getLocation());
+
+
+                    for (Check checks : data.getCheckManager().getChecks()) {
+                        checks.vl = 0;
+                    }
                 }
             }
         }
