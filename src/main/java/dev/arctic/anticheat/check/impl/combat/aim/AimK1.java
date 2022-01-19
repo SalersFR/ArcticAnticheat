@@ -18,7 +18,7 @@ public class AimK1 extends Check {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
             final double deltaPitch = rotationProcessor.getDeltaPitch();
             if(deltaPitch <= 1.0E-6 && rotationProcessor.getTicksSinceCinematic() > 3 && deltaPitch > 0) {
-                if(++buffer > 1)
+                if(++buffer > 3)
                     fail("delta=" + rotationProcessor.getDeltaPitch());
 
             } else if(buffer > 0) buffer -= 0.0025D;

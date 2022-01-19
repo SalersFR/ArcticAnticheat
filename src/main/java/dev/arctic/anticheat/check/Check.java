@@ -190,7 +190,8 @@ public abstract class Check {
     }
 
     public boolean canSetback() {
-        return !data.getCancelProcessor().isMovementCancel() && configName.contains("movement") && !configName.contains("nofall");
+        return !data.getCancelProcessor().isMovementCancel() && configName.contains("movement") &&
+                !configName.contains("nofall") && isSetback();
     }
 
 
