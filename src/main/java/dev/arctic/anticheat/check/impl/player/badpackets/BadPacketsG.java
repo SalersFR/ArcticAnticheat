@@ -14,8 +14,9 @@ public class BadPacketsG extends Check {
     public void handle(Packet packet, long time) {
         if (packet.isInTransaction()) {
             if(data.getTransactionProcessor().isInvalidTransactionReply()) {
+                if(++buffer > 3.6)
                 fail();
-            }
+            } else if(buffer > 0) buffer -= 0.2D;
         }
     }
 }

@@ -50,7 +50,7 @@ checks:
         setback: false
       d:
         enabled: false
-      x: { }
+
     step:
       a:
         ban-vl: 10
@@ -78,7 +78,6 @@ checks:
         enabled: true
         punish: true
         setback: false
-      c: { }
     motion:
       a:
         ban-vl: 10
@@ -118,38 +117,38 @@ checks:
   combat:
     autoclicker:
       a:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       a1:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       b:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       c:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       d:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       e:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: false
       f:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: false
       g:
-        ban-vl: 50
+        ban-vl: 
         enabled: true
         punish: false
-      h: { }
+
     killaura:
       a:
         ban-vl: 10
@@ -176,137 +175,127 @@ checks:
         enabled: true
         punish: true
       g:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       i:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       i1:
-        ban-vl: 50
+        ban-vl: 25
         enabled: true
         punish: true
       i2:
-        ban-vl: 50
+        ban-vl: 10
         enabled: true
         punish: true
       j:
-        ban-vl: 50
+        ban-vl: 30
         enabled: true
         punish: true
     reach:
       a:
         ban-vl: 10
         enabled: false
-        punish: true
-      b:
-        ban-vl: 10
-        enabled: true
-        punish: true
+        punish: truee
     aim:
       a:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       a1:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       a2:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       b:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       c:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       c1:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       d:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       e:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       e1:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       f:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       f1:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       g:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       g1:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       h:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       i:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       j:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       j1:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       k:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       k1:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       l:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       m:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       n:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
-      o: { }
-      p: { }
-      q: { }
-      r: { }
-      s: { }
-      t: { }
-      u: { }
+
     velocity:
       a:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       b:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       c:
@@ -326,30 +315,30 @@ checks:
         enabled: true
         punish: true
       d:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       e:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       f:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
       g:
-        ban-vl: 50
+        ban-vl: 20
         enabled: true
         punish: true
 
     scaffold:
       a:
-        ban-vl: 120
+        ban-vl: 15
         enabled: true
         punish: true
     timer:
       a:
-        ban-vl: 500
+        ban-vl: 20
         enabled: true
         punish: true
       b: { }
