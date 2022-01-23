@@ -25,7 +25,7 @@ public class KillAuraE extends Check {
 
             if (!swung && attacked)
                 fail();
-            
+
         } else if (packet.isFlying()) {
             attacked = swung = false;
 

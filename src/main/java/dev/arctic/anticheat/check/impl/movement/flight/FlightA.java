@@ -28,15 +28,16 @@ public class FlightA extends Check {
             final double fixedPrediction = Math.abs(prediction) <= 0.005 ? 0 : prediction;
 
 
-            final boolean inAir = collisionProcessor.getClientAirTicks() >= 6;
+            final boolean inAir = collisionProcessor.getClientAirTicks() >= 4;
 
             final boolean exempt = collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead()
                     || collisionProcessor.isOnClimbable() || collisionProcessor.isLastOnClimbable() || collisionProcessor
                     .isInVehicle() || collisionProcessor.isNearPiston() || collisionProcessor.isLastNearPiston()
                     || collisionProcessor.isInWater() || collisionProcessor.isInLava() || collisionProcessor.isInWeb()
-                    || collisionProcessor.isLastInWeb() || collisionProcessor.getPlacingTicks() <= 15 || collisionProcessor.isTeleporting();
+                    || collisionProcessor.isLastInWeb() || collisionProcessor.getPlacingTicks() <= 15 ||
+                    collisionProcessor.isTeleporting() || data.getVelocityProcessor().getVelocityTicks() <= 10;
 
-            //TODO EXEMPT FROM VELOCITY
+
 
 
             final double difference = Math.abs(fixedPrediction - deltaY);

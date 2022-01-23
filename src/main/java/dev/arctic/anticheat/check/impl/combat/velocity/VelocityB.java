@@ -6,10 +6,11 @@ import dev.arctic.anticheat.data.processors.impl.CollisionProcessor;
 import dev.arctic.anticheat.data.processors.impl.VelocityProcessor;
 import dev.arctic.anticheat.packet.Packet;
 
-public class VelocityA extends Check {
+public class VelocityB extends Check {
 
-    public VelocityA(PlayerData data) {
-        super(data, "Velocity", "A", "combat.velocity.a", "Checks for vertical knockback modifications", true);
+    public VelocityB(PlayerData data) {
+        super(data, "Velocity", "B", "combat.velocity.b",
+                "Checks for horizontal knockback modifications.", true);
     }
 
 
@@ -23,21 +24,21 @@ public class VelocityA extends Check {
             final boolean exempt = collisionProcessor.isBonkingHead() || collisionProcessor.isOnClimbable()
                     || collisionProcessor.isInWater() || collisionProcessor.isInLava() || collisionProcessor.isInWeb();
 
-            final double deltaY = data.getMovementProcessor().getDeltaY();
+            final double deltaXZ = data.getMovementProcessor().getDeltaXZ();
 
-            if (velocityProcessor.getVelocityTicks() < 5 && !exempt) {
-                double predictedVelocity = velocityProcessor.getPredictedVelocityY();
+            if (velocityProcessor.getVelocityTicks() == 1 && !exempt) {
+                double predictedVelocity = velocityProcessor.getVelocityH();
 
-                double ratio = deltaY / predictedVelocity;
+                double ratio = deltaXZ / predictedVelocity;
 
                 if (ratio > 0 && ratio < 0.9999) {
-                    if (buffer++ > 0) {
-                        fail("percentage=" + (float) ratio + " deltaY=" + (float) deltaY + " predicted=" + (float) predictedVelocity);
+                    if (buffer++ > 1) {
+                        fail("percentage=" + (float) ratio + " deltaXZ=" + (float) deltaXZ + " predicted=" + (float) predictedVelocity);
                         buffer = 0;
                     }
                 } else buffer = Math.max(0, buffer - 0.1);
 
-                debug("percentage=" + (float) (ratio * 100.0) + ", deltaY=" + (float) deltaY + ", predicted=" + (float) predictedVelocity);
+                debug("percentage=" + (float) (ratio * 100.0) + ", deltaXZ=" + (float) deltaXZ + ", predicted=" + (float) predictedVelocity);
 
             }
         }

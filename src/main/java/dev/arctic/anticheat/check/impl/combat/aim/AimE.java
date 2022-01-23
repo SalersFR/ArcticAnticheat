@@ -20,9 +20,9 @@ public class AimE extends Check {
             final boolean isRound = deltaYaw % 0.5 == 0 || deltaYaw % 1 == 0 || deltaYaw % 1.5 == 0;
 
             if(deltaYaw > 0.1 && isRound) {
-                if(++buffer > 1)
+                if(++buffer > 4)
                     fail("delta=" + deltaYaw);
-            } else if(buffer > 0) buffer -= 0.02D;
+            } else if(buffer > 0) buffer -= 0.25D;
         }
 
     }

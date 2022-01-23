@@ -19,7 +19,7 @@ public class NoFallA extends Check {
             final boolean exempt = collisionProcessor.isNearCarpet() || collisionProcessor.isLastNearCarpet() ||
                     collisionProcessor.isNearPiston() || collisionProcessor.isLastNearPiston() ||
                     data.getClickProcessor().getPlaceTicks() <= 15 || collisionProcessor.isOnClimbable()
-                    || data.getVelocityProcessor().getVelTicks() <= 10;
+                    || data.getVelocityProcessor().getVelocityTicks() <= 10;
 
             if (!collisionProcessor.isCollisionOnGround() && !collisionProcessor.isLastCollisionOnGround()
                     && collisionProcessor.isClientOnGround() && collisionProcessor.isLastClientOnGround()

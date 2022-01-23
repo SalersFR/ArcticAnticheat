@@ -17,7 +17,7 @@ public class NoFallA2 extends Check {
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
 
             final boolean exempt = collisionProcessor.isNearPiston() || collisionProcessor.isLastNearPiston() || collisionProcessor.isBonkingHead()
-                    || data.getVelocityProcessor().getVelTicks() <= 10;
+                    || data.getVelocityProcessor().getVelocityTicks() <= 10;
 
             if (collisionProcessor.isCollisionOnGround() && collisionProcessor.isLastCollisionOnGround()
                     && !collisionProcessor.isMathOnGround() && collisionProcessor.isLastMathOnGround() && !exempt) {

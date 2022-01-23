@@ -33,7 +33,7 @@ public class FlightB extends Check {
 
 
             if (accel <= 0.00325 && !exempt && inAir) {
-                if(accel == 0.0D) buffer *= 0.55;
+                if(accel == 0.0D) buffer *= 0.25;
                 if (++buffer > 2)
                     fail("accel=" + accel);
             } else if(buffer > 0) buffer -= 0.1D;

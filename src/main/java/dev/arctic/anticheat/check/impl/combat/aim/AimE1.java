@@ -21,9 +21,9 @@ public class AimE1 extends Check {
 
             if(deltaPitch > 0.1 && isRound) {
                 if(deltaPitch == 180.0) buffer -= 0.75D;
-                if(++buffer > 1)
+                if(++buffer > 4)
                     fail("delta=" + deltaPitch);
-            } else if(buffer > 0) buffer -= 0.02D;
+            } else if(buffer > 0) buffer -= 0.25D;
         }
 
     }

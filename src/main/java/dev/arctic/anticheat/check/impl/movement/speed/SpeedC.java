@@ -70,7 +70,7 @@ public class SpeedC extends Check {
             diff/=1000;
 
             //debug
-            if (!onGround && !lastOnGround && !lastLastOnGround && !inBlocks && data.getVelocityProcessor().getVelTicks() > 2 && !data.getMovementProcessor().isSlowDown()) {
+            if (!onGround && !lastOnGround && !lastLastOnGround && !inBlocks && data.getVelocityProcessor().getVelocityTicks() > 2 && !data.getMovementProcessor().isSlowDown()) {
                 if (diff > 26) {
                     buffer++;
                     if (buffer > 8) {

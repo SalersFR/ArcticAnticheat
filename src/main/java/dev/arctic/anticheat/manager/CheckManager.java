@@ -6,6 +6,7 @@ import dev.arctic.anticheat.check.impl.combat.autoclicker.*;
 import dev.arctic.anticheat.check.impl.combat.killaura.*;
 import dev.arctic.anticheat.check.impl.combat.reach.ReachA;
 import dev.arctic.anticheat.check.impl.combat.velocity.VelocityA;
+import dev.arctic.anticheat.check.impl.combat.velocity.VelocityB;
 import dev.arctic.anticheat.check.impl.movement.flight.FlightA;
 import dev.arctic.anticheat.check.impl.movement.flight.FlightB;
 import dev.arctic.anticheat.check.impl.movement.flight.FlightC;
@@ -67,6 +68,7 @@ public class CheckManager {
 
 
                 new VelocityA(playerData),
+                new VelocityB(playerData),
                 new KillAuraA(playerData),
                 new KillAuraB(playerData),
                 new KillAuraC(playerData),

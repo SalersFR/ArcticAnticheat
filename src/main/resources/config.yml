@@ -298,8 +298,6 @@ checks:
         ban-vl: 20
         enabled: true
         punish: true
-      c:
-        enabled: false
   player:
     badpackets:
       a:
