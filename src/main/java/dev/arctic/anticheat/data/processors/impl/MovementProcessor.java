@@ -21,6 +21,7 @@ public class MovementProcessor extends Processor {
     private double x = 0, y = 0, z = 0;
     private boolean pos, lastPos;
     private ArcticLocation location = new ArcticLocation(x,y,z);
+    private ArcticLocation lastLocation = new ArcticLocation(x,y,z);
     private boolean slowDown;
     private long lastAttackSlowDown;
 
@@ -110,6 +111,8 @@ public class MovementProcessor extends Processor {
             this.y = wrapper.getY();
             this.z = wrapper.getZ();
         }
+
+        this.lastLocation = this.location;
 
         this.location.setX(x);
         this.location.setY(y);

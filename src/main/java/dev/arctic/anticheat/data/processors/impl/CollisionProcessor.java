@@ -30,7 +30,7 @@ public class CollisionProcessor extends Processor {
             onIce, onSlime, onSoulSand, onClimbable,
             inWeb, inWater, inLava, inVehicle,
             nearVehicle, nearBoat, nearPiston, nearCarpet, bonkingHead, teleporting, placing,
-            lastClientOnGround, lastMathOnGround, lastCollisionOnGround,
+            lastClientOnGround, lastLastClientOnGround, lastMathOnGround, lastCollisionOnGround,
             lastOnIce, lastOnSlime, lastOnSoulSand, lastOnClimbable, lastNearPiston,
             lastNearCarpet, lastInWeb, lastInWater, lastInLava, lastInVehicle, nearSlab, nearStairs,
             lastNearVehicle, lastNearBoat, lastBonkingHead, lastTeleporting,
@@ -191,6 +191,7 @@ public class CollisionProcessor extends Processor {
     }
 
     private void updateLastVariables() {
+        lastLastClientOnGround = lastClientOnGround;
         lastClientOnGround = clientOnGround;
         lastMathOnGround = mathOnGround;
         lastCollisionOnGround = collisionOnGround;

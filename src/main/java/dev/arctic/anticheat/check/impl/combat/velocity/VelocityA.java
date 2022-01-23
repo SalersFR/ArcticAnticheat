@@ -25,7 +25,7 @@ public class VelocityA extends Check {
 
             final double deltaY = data.getMovementProcessor().getDeltaY();
 
-            if (velocityProcessor.getVelTicks() < 5 && !exempt) {
+            if (velocityProcessor.getVelocityTicks() < 5 && !exempt) {
                 double predictedVelocity = velocityProcessor.getVelocityY();
 
                 double ratio = deltaY / predictedVelocity;
