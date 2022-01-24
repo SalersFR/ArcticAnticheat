@@ -26,12 +26,15 @@ public class VelocityB extends Check {
 
             final double deltaXZ = data.getMovementProcessor().getDeltaXZ();
 
-            if (velocityProcessor.getVelocityTicks() == 1 && !exempt) {
+            if (velocityProcessor.getVelocityTicks() == 1
+                    && !data.getCollisionProcessor().isClientOnGround()
+                    && data.getCollisionProcessor().isLastClientOnGround()
+                    && !exempt) {
                 double predictedVelocity = velocityProcessor.getVelocityH();
 
                 double ratio = deltaXZ / predictedVelocity;
 
-                if (ratio > 0 && ratio < 0.9999) {
+                if (ratio > 0 && ratio < 0.995) {
                     if (buffer++ > 1) {
                         fail("percentage=" + (float) ratio + " deltaXZ=" + (float) deltaXZ + " predicted=" + (float) predictedVelocity);
                         buffer = 0;
