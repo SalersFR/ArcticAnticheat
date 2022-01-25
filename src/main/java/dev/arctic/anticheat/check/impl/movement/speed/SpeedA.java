@@ -81,7 +81,7 @@ public class SpeedA extends Check {
             final boolean exempt = collisionProcessor.getFenceCollisions()
                     .stream().anyMatch(block -> block.isFence() || block.isFenceGate() || block.isWall() || block.isDoor()) ||
                     collisionProcessor.isNearSlab() || collisionProcessor.isNearStairs()
-                    || collisionProcessor.isLastTeleporting() || collisionProcessor.isTeleporting();
+                    || collisionProcessor.isLastTeleporting() || collisionProcessor.isTeleporting() || data.getVelocityProcessor().getVelocityTicks() <= 11;
 
             debug("limit=" + prediction + "\ndelta=" + deltaXZ + "\nexempt=" + exempt + "\nbuffer=" + buffer);
 

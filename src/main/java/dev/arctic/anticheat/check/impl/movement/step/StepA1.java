@@ -18,7 +18,7 @@ public class StepA1 extends Check {
             final MovementProcessor movementProcessor = data.getMovementProcessor();
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
 
-            final boolean check = !collisionProcessor.isTeleporting() && !collisionProcessor.isLastTeleporting()
+            final boolean check = collisionProcessor.getTpTicks() >= 10
                     && collisionProcessor.isClientOnGround() && !collisionProcessor.isInVehicle() &&
                     !collisionProcessor.isOnSlime() && !collisionProcessor.isLastOnSlime();
 

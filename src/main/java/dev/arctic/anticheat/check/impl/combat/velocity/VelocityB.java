@@ -27,10 +27,8 @@ public class VelocityB extends Check {
             final double deltaXZ = data.getMovementProcessor().getDeltaXZ();
 
             if (velocityProcessor.getVelocityTicks() == 1
-                    && !data.getCollisionProcessor().isClientOnGround()
-                    && data.getCollisionProcessor().isLastClientOnGround()
                     && !exempt) {
-                double predictedVelocity = velocityProcessor.getVelocityH();
+                double predictedVelocity = velocityProcessor.getPredictedVelocityH();
 
                 double ratio = deltaXZ / predictedVelocity;
 

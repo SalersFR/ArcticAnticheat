@@ -39,7 +39,7 @@ public class CollisionProcessor extends Processor {
     private ArcticLocation teleportLocation;
     private boolean sentTeleport;
 
-    private int collisionAirTicks, clientAirTicks, mathAirTicks, collisionGroundTicks, clientGroundTicks, mathGroundTicks, placingTicks, waterTicks;
+    private int collisionAirTicks, clientAirTicks, mathAirTicks, collisionGroundTicks, clientGroundTicks, mathGroundTicks, placingTicks, waterTicks, tpTicks;
 
 
 
@@ -177,6 +177,7 @@ public class CollisionProcessor extends Processor {
                 placingTicks = 0;
 
             placingTicks++;
+            tpTicks++;
 
             if(isInWater()) waterTicks++;
             else waterTicks = 0;
@@ -231,5 +232,6 @@ public class CollisionProcessor extends Processor {
     private void updateTeleport() {
         teleporting = true;
         sentTeleport = false;
+        tpTicks = 0;
     }
 }

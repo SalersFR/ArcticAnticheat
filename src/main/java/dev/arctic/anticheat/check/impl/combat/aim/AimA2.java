@@ -21,8 +21,10 @@ public class AimA2 extends Check {
             debug("sens=" + sensitivity + " buffer=" + buffer);
             if (rotationProcessor.getTicksSinceCinematic() >= 5 && rotationProcessor.getDeltaPitch() != 0.0f &&
                     sensitivity == -1 && rotationProcessor.getYawAccel() <= 30) {
-                if (++buffer > 5)
+                if (++buffer > 5) {
+                    buffer = 3.5D;
                     fail("sens=" + sensitivity + " buffer=" + buffer);
+                }
             } else if (buffer > 0) buffer -= 0.01;
 
         }
