@@ -33,7 +33,7 @@ public class MotionA extends Check {
             final boolean exempt = slime || collisionProcessor.isInWater() || collisionProcessor.isInLava() ||
                     collisionProcessor.isBonkingHead()  ||collisionProcessor.isNearPiston() ||
                     collisionProcessor.isLastNearPiston() || Math.abs(0.0125 - deltaY) <= 0.001
-                    || data.getVelocityProcessor().getVelocityTicks() <= 10;
+                    || data.getVelocityProcessor().getVelocityTicks() <= 12;
 
             if(!exempt && jumped && deltaY != fixedPrediction) {
                 if(++buffer > 2.25)

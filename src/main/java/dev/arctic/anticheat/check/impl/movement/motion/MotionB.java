@@ -28,11 +28,12 @@ public class MotionB extends Check {
             final boolean exempt = collisionProcessor.isBonkingHead() || Math.abs(0.01250003768371582 - movementProcessor.
                     getDeltaY()) < 0.000001 || slime || collisionProcessor.isOnClimbable() ||
                     collisionProcessor.isOnIce() || collisionProcessor.isLastOnIce() || collisionProcessor.getFenceCollisions()
-                    .stream().anyMatch(block -> block.isFence() || block.isFenceGate() || block.isWall() || block.isDoor());;
+                    .stream().anyMatch(block -> block.isFence() || block.isFenceGate() || block.isWall() || block.isDoor()) ||
+                    data.getVelocityProcessor().getVelocityTicks() <= 20;;
 
             final Player player = data.getPlayer();
 
-            //FIXME : EXEMPT FROM VELOCITY
+
 
             final double limit = 0.6239;
             final double fixedLimit = player.hasPotionEffect(PotionEffectType.SPEED) ? limit +

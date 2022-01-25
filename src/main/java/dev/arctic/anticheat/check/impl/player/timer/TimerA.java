@@ -25,7 +25,7 @@ public class TimerA extends Check {
             balance += 50 - diff;
 
             if (collisionProcessor.isTeleporting() || collisionProcessor.isNearPiston() ||
-                    collisionProcessor.isLastNearPiston()) balance -= 50.0D;
+                    collisionProcessor.isLastNearPiston()) balance -= 60.0D;
 
             debug("balance=" + balance);
 

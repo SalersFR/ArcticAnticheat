@@ -24,9 +24,9 @@ public class MotionD extends Check {
             final boolean exempt = collisionProcessor.isInWater() || collisionProcessor.isInLava()
                     || collisionProcessor.isNearBoat() ||
                     collisionProcessor.isBonkingHead()|| collisionProcessor.isOnIce() ||
-                    collisionProcessor.isLastOnIce() || collisionProcessor.isInWeb();
+                    collisionProcessor.isLastOnIce() || collisionProcessor.isInWeb() ||
+                    data.getVelocityProcessor().getVelocityTicks() <= 12;
 
-            //FIXME : EXEMPT FROM VELOCITY
 
             if (deltaY < 0 && Math.abs(deltaY) == lastDeltaY && lastDeltaY > 0.2F
                     && collisionProcessor.getClientGroundTicks() >= 1 && !exempt) {

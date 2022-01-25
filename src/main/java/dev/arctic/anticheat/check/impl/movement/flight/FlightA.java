@@ -35,7 +35,8 @@ public class FlightA extends Check {
                     .isInVehicle() || collisionProcessor.isNearPiston() || collisionProcessor.isLastNearPiston()
                     || collisionProcessor.isInWater() || collisionProcessor.isInLava() || collisionProcessor.isInWeb()
                     || collisionProcessor.isLastInWeb() || collisionProcessor.getPlacingTicks() <= 15 ||
-                    collisionProcessor.isTeleporting() || data.getVelocityProcessor().getVelocityTicks() <= 10;
+                    collisionProcessor.isTeleporting() ||
+                    data.getVelocityProcessor().getVelocityTicks() <= 20;
 
 
 

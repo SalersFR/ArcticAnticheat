@@ -25,14 +25,13 @@ public class MotionC extends Check {
 
             final int airTicks = collisionProcessor.getClientAirTicks();
 
-            //FIXME EXEMPT FROM VELOCITY
-
             if (jumped)
                 jumpTicks = 0;
 
             final boolean exempt = collisionProcessor.getFenceCollisions().stream().anyMatch(block ->
                     block.isFence() || block.isFenceGate() || block.isWall() || block.isDoor()) ||
-                    collisionProcessor.isInWater() || collisionProcessor.isInLava() || collisionProcessor.isOnClimbable();
+                    collisionProcessor.isInWater() || collisionProcessor.isInLava() || collisionProcessor.isOnClimbable() ||
+                    data.getVelocityProcessor().getVelocityTicks() <= 14;
 
             debug("deltaY=" + deltaY + " jumpTicks=" + jumpTicks + " airTicks=" + airTicks);
 

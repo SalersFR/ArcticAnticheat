@@ -74,6 +74,20 @@ public class CollisionProcessor extends Processor {
                 fenceBoundingBox = new BoundingBox(location).expandSpecific(0, 0, 0.61, -2.41, 0, 0);
 
                 fenceCollisions = fenceBoundingBox.getBlocks(data.getPlayer());
+
+                if (event.getPacket().isPosition()) {
+                    final WrapperPlayClientPosition packet = new WrapperPlayClientPosition(event.getPacket());
+                    clientOnGround = packet.getOnGround();
+                } else if (event.getPacket().isPosLook()) {
+                    final WrapperPlayClientPositionLook packet = new WrapperPlayClientPositionLook(event.getPacket());
+                    clientOnGround = packet.getOnGround();
+                } else if (event.getPacket().isLook()) {
+                    final WrapperPlayClientLook packet = new WrapperPlayClientLook(event.getPacket());
+                    clientOnGround = packet.getOnGround();
+                } else {
+                    final WrapperPlayClientFlying packet = new WrapperPlayClientFlying(event.getPacket());
+                    clientOnGround = packet.getOnGround();
+                }
             });
 
             updateLastVariables();
@@ -82,19 +96,7 @@ public class CollisionProcessor extends Processor {
             double y = data.getMovementProcessor().getY();
             double z = data.getMovementProcessor().getZ();
 
-            if (event.getPacket().isPosition()) {
-                final WrapperPlayClientPosition packet = new WrapperPlayClientPosition(event.getPacket());
-                clientOnGround = packet.getOnGround();
-            } else if (event.getPacket().isPosLook()) {
-                final WrapperPlayClientPositionLook packet = new WrapperPlayClientPositionLook(event.getPacket());
-                clientOnGround = packet.getOnGround();
-            } else if (event.getPacket().isLook()) {
-                final WrapperPlayClientLook packet = new WrapperPlayClientLook(event.getPacket());
-                clientOnGround = packet.getOnGround();
-            } else {
-                final WrapperPlayClientFlying packet = new WrapperPlayClientFlying(event.getPacket());
-                clientOnGround = packet.getOnGround();
-            }
+
             // All blocks in minecraft have a y divisible by 1/64
             mathOnGround = data.getMovementProcessor().getY() % 0.015625 == 0;
             // Not sure if I have to do <= instead of just < but it doesn't really matter
