@@ -2,9 +2,13 @@ package dev.arctic.anticheat.utilities;
 
 import com.comphenix.protocol.wrappers.Pair;
 import com.google.common.collect.Lists;
+import dev.arctic.anticheat.utilities.mc.MathHelper;
 import lombok.experimental.UtilityClass;
+import net.jitse.npclib.utilities.MathUtil;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @UtilityClass
 public class MathUtils {
@@ -26,6 +30,27 @@ public class MathUtils {
             return (remainder - a);
 
         return (div + remainder - a);
+    }
+
+    public double getMode(ArrayList<Double> list) {
+        double maxNumber = -1;
+        double maxAppearances = -1;
+
+        for (int i = 0; i < list.size(); i++) {
+            int count = 0;
+
+            for (int j = 0; j < list.size(); j++) {
+                if (list.get(i) == list.get(j))
+                    count++;
+            }
+
+            if (count > maxAppearances) {
+                maxNumber = list.get(i);
+                maxAppearances = count;
+            }
+        }
+
+        return maxNumber;
     }
 
     public static double getEntropy(EvictingList<Integer> values) {

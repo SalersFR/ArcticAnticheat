@@ -233,6 +233,10 @@ checks:
         ban-vl: 20
         enabled: true
         punish: true
+      f2:
+        ban-vl: 50
+        enabled: true
+        punish: false
       g:
         ban-vl: 20
         enabled: true
