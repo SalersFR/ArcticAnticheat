@@ -22,7 +22,7 @@ public class NoFallA extends Check {
                     || data.getVelocityProcessor().getVelocityTicks() <= 10 || collisionProcessor.isInWeb();
 
             if (!collisionProcessor.isCollisionOnGround() && !collisionProcessor.isLastCollisionOnGround()
-                    && collisionProcessor.isClientOnGround() && collisionProcessor.isLastClientOnGround()
+                    && collisionProcessor.getClientGroundTicks() >= 4
                     &&  !exempt) {
                 if (++buffer > 1)
                     fail("flying ground spoofed");
