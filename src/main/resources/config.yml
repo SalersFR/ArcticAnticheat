@@ -334,6 +334,18 @@ checks:
         ban-vl: 15
         enabled: true
         punish: true
+      a1:
+        ban-vl: 15
+        enabled: true
+        punish: true
+      b:
+        ban-vl: 15
+        enabled: true
+        punish: true
+      c:
+        ban-vl: 15
+        enabled: true
+        punish: true
     timer:
       a:
         ban-vl: 20

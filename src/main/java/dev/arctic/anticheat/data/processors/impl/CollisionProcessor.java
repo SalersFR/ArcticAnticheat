@@ -15,6 +15,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.util.NumberConversions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -24,7 +25,7 @@ public class CollisionProcessor extends Processor {
 
     private List<Entity> entityCollisions;
 
-    private List<WrappedBlock> blockCollisions, bonkingCollisions, fenceCollisions;
+    private List<WrappedBlock> blockCollisions, bonkingCollisions, fenceCollisions = new ArrayList<>();
 
     private boolean clientOnGround, mathOnGround, collisionOnGround,
             onIce, onSlime, onSoulSand, onClimbable,
@@ -63,6 +64,10 @@ public class CollisionProcessor extends Processor {
                 boundingBox = closeCollsBB.expand(0, 0.01, 0);
 
                 blockCollisions = boundingBox.getBlocks(data.getPlayer());
+
+                if(blockCollisions == null) {
+                    return;
+                }
 
                 closeCollsBB.getBlocks(data.getPlayer()).stream().filter(wrappedBlock -> !blockCollisions.
                         contains(wrappedBlock)).forEach(block -> blockCollisions.add(block));

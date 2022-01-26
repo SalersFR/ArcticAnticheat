@@ -36,6 +36,9 @@ public class SpeedC extends Check {
 
             Vector motion = new Vector(movementProcessor.getDeltaX(),0,movementProcessor.getDeltaZ());
 
+            if(lastMotion == null) {
+                lastMotion = motion;
+            }
             Vector lastMotion = this.lastMotion;
             this.lastMotion = motion;
 

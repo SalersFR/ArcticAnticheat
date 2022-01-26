@@ -21,6 +21,9 @@ public class ReachA extends Check {
     public void handle(Packet packet, long time) {
         if (packet.isFlying()) {
             final CombatProcessor combatProcessor = data.getCombatProcessor();
+            if(combatProcessor.getTarget() == null || combatProcessor.getLastTarget() == null) {
+                return;
+            }
             if (combatProcessor.getHitTicks() == 1 && combatProcessor.getTarget().getEntityId() == combatProcessor.getLastTarget().getEntityId()) {
                 final int totalTicks = Arctic.getInstance().getTicksManager().getTotalTicks();
                 final int ticksMS = data.getConnectionProcessor().getKeepAlivePing() / 50;
