@@ -13,7 +13,7 @@ public class SettingsGUI {
     Inventory inventory;
 
     public SettingsGUI createNewGUI() {
-        Inventory inv = Bukkit.createInventory(null, 36, ChatColor.translateAlternateColorCodes('&',
+        Inventory inv = Bukkit.createInventory(null, 45, ChatColor.translateAlternateColorCodes('&',
                 "&b&lArctic"));
 
         this.inventory = inv;
@@ -22,7 +22,7 @@ public class SettingsGUI {
     }
 
     public void setItems() {
-        inventory.setItem(11, CustomUtils.createItem(Material.COMPASS, "&bChecks", "&r ", "&7 - &7&oEnabled/Disable checks"));
+        inventory.setItem(22, CustomUtils.createItem(Material.COMPASS, "&bChecks", "&r ", "&7 - &7&oEnabled/Disable checks"));
     }
 
     public void display(Player p) {

@@ -7,6 +7,7 @@ import dev.arctic.anticheat.data.processors.Processor;
 import dev.arctic.anticheat.packet.event.PacketEvent;
 import dev.arctic.anticheat.utilities.*;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -65,10 +66,6 @@ public class CollisionProcessor extends Processor {
 
                 blockCollisions = boundingBox.getBlocks(data.getPlayer());
 
-                if(blockCollisions == null) {
-                    return;
-                }
-
                 closeCollsBB.getBlocks(data.getPlayer()).stream().filter(wrappedBlock -> !blockCollisions.
                         contains(wrappedBlock)).forEach(block -> blockCollisions.add(block));
 
@@ -80,9 +77,6 @@ public class CollisionProcessor extends Processor {
 
                 fenceCollisions = fenceBoundingBox.getBlocks(data.getPlayer());
 
-                if(fenceCollisions == null) {
-                    return;
-                }
                 if (event.getPacket().isPosition()) {
                     final WrapperPlayClientPosition packet = new WrapperPlayClientPosition(event.getPacket());
                     clientOnGround = packet.getOnGround();
@@ -105,6 +99,9 @@ public class CollisionProcessor extends Processor {
             double z = data.getMovementProcessor().getZ();
 
 
+            if(blockCollisions == null || fenceCollisions == null) {
+                return;
+            }
             // All blocks in minecraft have a y divisible by 1/64
             mathOnGround = data.getMovementProcessor().getY() % 0.015625 == 0;
             // Not sure if I have to do <= instead of just < but it doesn't really matter

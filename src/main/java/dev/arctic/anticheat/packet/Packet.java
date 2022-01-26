@@ -25,6 +25,11 @@ public class Packet extends PacketContainer {
                 || getType() == PacketType.Play.Client.POSITION_LOOK);
     }
 
+    public boolean isFlyingFR() {
+        return isReceiving()
+                && (getType() == PacketType.Play.Client.FLYING);
+    }
+
     public boolean isUseEntity() {
         return isReceiving() && getType() == PacketType.Play.Client.USE_ENTITY;
     }

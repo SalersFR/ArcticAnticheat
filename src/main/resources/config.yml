@@ -62,22 +62,6 @@ checks:
         enabled: true
         punish: true
         setback: false
-    nofall:
-      a:
-        ban-vl: 10
-        enabled: true
-        punish: true
-        setback: false
-      a1:
-        ban-vl: 10
-        enabled: true
-        punish: true
-        setback: false
-      a2:
-        ban-vl: 10
-        enabled: true
-        punish: true
-        setback: false
     motion:
       a:
         ban-vl: 10
@@ -328,7 +312,15 @@ checks:
         ban-vl: 20
         enabled: true
         punish: true
-
+    ground:
+      a:
+        ban-vl: 15
+        enabled: true
+        punish: true
+      b:
+        ban-vl: 15
+        enabled: true
+        punish: true
     scaffold:
       a:
         ban-vl: 15

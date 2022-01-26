@@ -8,6 +8,7 @@ import dev.arctic.anticheat.gui.movement.MovementGUI;
 import dev.arctic.anticheat.gui.movement.impl.*;
 import dev.arctic.anticheat.gui.player.PlayerGUI;
 import dev.arctic.anticheat.gui.player.impl.BadPacketsGUI;
+import dev.arctic.anticheat.gui.player.impl.GroundGUI;
 import dev.arctic.anticheat.gui.player.impl.ScaffoldGUI;
 import dev.arctic.anticheat.gui.player.impl.TimerGUI;
 import dev.arctic.anticheat.utilities.CustomUtils;
@@ -50,7 +51,7 @@ public class InventoryClickSettings implements Listener {
         final VelocityGUI velocityGUI = new VelocityGUI().createNewGUI();
         final FlyGUI flyGUI = new FlyGUI().createNewGUI();
         final MotionGUI motionGUI = new MotionGUI().createNewGUI();
-        final NoFallGUI nofallGUI = new NoFallGUI().createNewGUI();
+        final GroundGUI groundGUI = new GroundGUI().createNewGUI();
         final SpeedGUI speedGUI = new SpeedGUI().createNewGUI();
         final StepGUI stepGUI = new StepGUI().createNewGUI();
         final BadPacketsGUI badPacketsGUI = new BadPacketsGUI().createNewGUI();
@@ -61,7 +62,7 @@ public class InventoryClickSettings implements Listener {
         if (invName.equalsIgnoreCase(settingsName)) {
             event.setCancelled(true);
 
-            if (event.getSlot() == 11) {
+            if (event.getSlot() == 22) {
                 player.closeInventory();
 
                 ChecksGUI gui = new ChecksGUI().createNewGUI();
@@ -139,10 +140,6 @@ public class InventoryClickSettings implements Listener {
                     motionGUI.setItems(player);
                     motionGUI.display(player);
                     break;
-                case "§bNoFall Checks":
-                    nofallGUI.setItems(player);
-                    nofallGUI.display(player);
-                    break;
                 case "§bSpeed Checks":
                     speedGUI.setItems(player);
                     speedGUI.display(player);
@@ -170,6 +167,10 @@ public class InventoryClickSettings implements Listener {
                 case "§bScaffold Checks":
                     scaffoldGUI.setItems(player);
                     scaffoldGUI.display(player);
+                    break;
+                case "§bGround Checks":
+                    groundGUI.setItems(player);
+                    groundGUI.display(player);
                     break;
 
             }
@@ -285,9 +286,9 @@ public class InventoryClickSettings implements Listener {
                 motionGUI.setItems(player);
                 motionGUI.display(player);
                 break;
-            case "NoFall Checks":
-                nofallGUI.setItems(player);
-                nofallGUI.display(player);
+            case "Ground Checks":
+                groundGUI.setItems(player);
+                groundGUI.display(player);
                 break;
             case "Speed Checks":
                 speedGUI.setItems(player);

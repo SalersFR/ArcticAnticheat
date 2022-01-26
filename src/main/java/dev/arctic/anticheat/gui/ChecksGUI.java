@@ -32,7 +32,7 @@ public class ChecksGUI {
 
         mainChecksGUI.setItem(15, CustomUtils.createItem(Material.SKULL_ITEM, CustomUtils.translate("" +
                         "&bPlayer"), CustomUtils.translate("&r "), CustomUtils.translate("&7&oChecks include (not limited to):"),
-                CustomUtils.translate("&7&o - Scaffold - Timer - BadPackets")));
+                CustomUtils.translate("&7&o - Scaffold - Timer - BadPackets - Ground")));
 
     }
 

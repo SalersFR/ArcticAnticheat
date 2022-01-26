@@ -1,4 +1,4 @@
-package dev.arctic.anticheat.gui.movement.impl;
+package dev.arctic.anticheat.gui.player.impl;
 
 import dev.arctic.anticheat.Arctic;
 import dev.arctic.anticheat.check.Check;
@@ -12,12 +12,12 @@ import org.bukkit.inventory.Inventory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoFallGUI {
+public class GroundGUI {
 
     private Inventory inventory;
 
-    public NoFallGUI createNewGUI() {
-        Inventory inv = Bukkit.createInventory(null, 36, "§b§lNoFall Checks");
+    public GroundGUI createNewGUI() {
+        Inventory inv = Bukkit.createInventory(null, 36, "§b§lGround Checks");
 
 
         this.inventory = inv;
@@ -36,7 +36,7 @@ public class NoFallGUI {
             return;
         }
 
-        String name = "nofall";
+        String name = "ground";
 
         List<Check> checks = data.getCheckManager().getChecks();
         List<Check> aims = new ArrayList<>();
@@ -51,8 +51,8 @@ public class NoFallGUI {
         for (Check c : aims) {
 
 
-            boolean enabled = Arctic.getInstance().getPlugin().getConfig().getBoolean("checks.movement." + name + "." + c.getType().toLowerCase() + ".enabled");
-            boolean punishable = Arctic.getInstance().getPlugin().getConfig().getBoolean("checks.movement." + name + "." + c.getType().toLowerCase() + ".punish");
+            boolean enabled = Arctic.getInstance().getPlugin().getConfig().getBoolean("checks.player." + name + "." + c.getType().toLowerCase() + ".enabled");
+            boolean punishable = Arctic.getInstance().getPlugin().getConfig().getBoolean("checks.player." + name + "." + c.getType().toLowerCase() + ".punish");
 
             inventory.setItem(aims.indexOf(c), CustomUtils.createItem((enabled ? Material.MAP : Material.EMPTY_MAP),
                     "&b" + c.getName() + c.getType(),

@@ -25,22 +25,27 @@ public class PlayerGUI {
         final ItemStack badItem = new ItemStack(Material.ENDER_PORTAL_FRAME);
         final ItemStack timerItem = new ItemStack(Material.WATCH);
         final ItemStack scaffoldItem = new ItemStack(Material.SANDSTONE);
+        final ItemStack groundItem = new ItemStack(Material.SLIME_BLOCK);
 
         final ItemMeta badMeta = badItem.getItemMeta();
         final ItemMeta timerMeta = timerItem.getItemMeta();
         final ItemMeta scaffoldMeta = scaffoldItem.getItemMeta();
+        final ItemMeta groundMeta = groundItem.getItemMeta();
 
         badMeta.setDisplayName("§bBadPackets Checks");
         timerMeta.setDisplayName("§bTimer Checks");
         scaffoldMeta.setDisplayName("§bScaffold Checks");
+        groundMeta.setDisplayName("§bGround Checks");
 
         badItem.setItemMeta(badMeta);
         timerItem.setItemMeta(timerMeta);
         scaffoldItem.setItemMeta(scaffoldMeta);
+        groundItem.setItemMeta(groundMeta);
 
-        inventory.setItem(11, badItem);
-        inventory.setItem(13, timerItem);
-        inventory.setItem(15, scaffoldItem);
+        inventory.setItem(10, badItem);
+        inventory.setItem(12, timerItem);
+        inventory.setItem(14, scaffoldItem);
+        inventory.setItem(16, groundItem);
 
 
     }

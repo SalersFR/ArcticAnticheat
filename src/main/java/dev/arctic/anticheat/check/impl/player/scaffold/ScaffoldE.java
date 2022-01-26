@@ -27,6 +27,9 @@ public class ScaffoldE extends Check {
     public void handle(Packet packet, long time) {
         if(packet.isBlockPlace()) {
             WrapperPlayClientBlockPlace wrapperPlayClientBlockPlace = new WrapperPlayClientBlockPlace(packet);
+            if(wrapperPlayClientBlockPlace.getFace() == 255) {
+                return;
+            }
             EnumWrappers.Direction dir = wrapperPlayClientBlockPlace.getDirection();
             if(dir == EnumWrappers.Direction.DOWN || dir == EnumWrappers.Direction.UP) {
                 return;

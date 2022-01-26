@@ -23,32 +23,27 @@ public class MovementGUI {
     public void setItems() {
         final ItemStack fly = new ItemStack(Material.FEATHER);
         final ItemStack motion = new ItemStack(Material.GOLD_PLATE);
-        final ItemStack nofall = new ItemStack(Material.SLIME_BLOCK);
         final ItemStack speed = new ItemStack(Material.DIAMOND_BOOTS);
         final ItemStack step = new ItemStack(Material.SMOOTH_STAIRS);
 
         final ItemMeta flyMeta = fly.getItemMeta();
         final ItemMeta motionMeta = motion.getItemMeta();
-        final ItemMeta noFallMeta = nofall.getItemMeta();
         final ItemMeta speedMeta = speed.getItemMeta();
         final ItemMeta stepMeta = step.getItemMeta();
 
         flyMeta.setDisplayName("§bFlight Checks");
         motionMeta.setDisplayName("§bMotion Checks");
-        noFallMeta.setDisplayName("§bNoFall Checks");
         speedMeta.setDisplayName("§bSpeed Checks");
         stepMeta.setDisplayName("§bStep Checks");
 
         fly.setItemMeta(flyMeta);
         motion.setItemMeta(motionMeta);
-        nofall.setItemMeta(noFallMeta);
         speed.setItemMeta(speedMeta);
         step.setItemMeta(stepMeta);
 
         this.inventory.setItem(10, fly);
-        this.inventory.setItem(11, motion);
-        this.inventory.setItem(13, nofall);
-        this.inventory.setItem(15, speed);
+        this.inventory.setItem(12, motion);
+        this.inventory.setItem(14, speed);
         this.inventory.setItem(16, step);
     }
 
