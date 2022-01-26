@@ -3,7 +3,6 @@ package dev.arctic.anticheat.check.impl.combat.killaura;
 import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.packet.Packet;
-import org.bukkit.Bukkit;
 
 public class KillAuraA extends Check {
 

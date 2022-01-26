@@ -1,9 +1,6 @@
 package dev.arctic.anticheat.utilities;
 
-import dev.arctic.anticheat.utilities.ArcticLocation;
 import lombok.Getter;
-
-import net.minecraft.server.v1_8_R3.MathHelper;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;

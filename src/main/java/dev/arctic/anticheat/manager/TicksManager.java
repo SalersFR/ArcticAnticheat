@@ -4,8 +4,6 @@ import com.comphenix.protocol.wrappers.Pair;
 import dev.arctic.anticheat.Arctic;
 import dev.arctic.anticheat.data.PlayerData;
 import lombok.Getter;
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;

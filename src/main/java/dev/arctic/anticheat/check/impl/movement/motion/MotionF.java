@@ -5,8 +5,6 @@ import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.data.processors.impl.CollisionProcessor;
 import dev.arctic.anticheat.data.processors.impl.MovementProcessor;
 import dev.arctic.anticheat.packet.Packet;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.util.Vector;
 
 public class MotionF extends Check {

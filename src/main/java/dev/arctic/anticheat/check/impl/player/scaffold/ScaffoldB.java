@@ -6,7 +6,6 @@ import dev.arctic.anticheat.packet.Packet;
 import dev.arctic.anticheat.utilities.MathUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author xWand

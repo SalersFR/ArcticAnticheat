@@ -1,14 +1,8 @@
 package dev.arctic.anticheat.check.impl.combat.killaura;
 
-import dev.arctic.anticheat.Arctic;
 import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.data.PlayerData;
-import dev.arctic.anticheat.data.processors.impl.CombatProcessor;
 import dev.arctic.anticheat.packet.Packet;
-import dev.arctic.anticheat.utilities.ArcticLocation;
-import dev.arctic.anticheat.utilities.MathUtils;
-import org.bukkit.Location;
-import org.bukkit.util.Vector;
 
 public class KillAuraH extends Check {
 

@@ -6,8 +6,6 @@ import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.data.processors.Processor;
 import dev.arctic.anticheat.packet.event.PacketEvent;
 import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
 @Getter

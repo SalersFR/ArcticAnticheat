@@ -4,13 +4,10 @@ import com.comphenix.packetwrapper.WrapperPlayClientTransaction;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
-import dev.arctic.anticheat.Arctic;
 import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.data.processors.Processor;
 import dev.arctic.anticheat.packet.event.PacketEvent;
 import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

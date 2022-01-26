@@ -4,13 +4,6 @@ import com.comphenix.packetwrapper.WrapperPlayClientEntityAction;
 import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.packet.Packet;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author xWand

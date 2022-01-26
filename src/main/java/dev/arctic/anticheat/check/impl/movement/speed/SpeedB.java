@@ -6,7 +6,6 @@ import dev.arctic.anticheat.data.processors.impl.CollisionProcessor;
 import dev.arctic.anticheat.data.processors.impl.MovementProcessor;
 import dev.arctic.anticheat.data.processors.impl.RotationProcessor;
 import dev.arctic.anticheat.packet.Packet;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

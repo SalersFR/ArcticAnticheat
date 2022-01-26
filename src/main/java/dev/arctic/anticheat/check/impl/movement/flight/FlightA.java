@@ -1,12 +1,10 @@
 package dev.arctic.anticheat.check.impl.movement.flight;
 
-import com.comphenix.packetwrapper.WrapperPlayClientFlying;
 import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.data.processors.impl.CollisionProcessor;
 import dev.arctic.anticheat.data.processors.impl.MovementProcessor;
 import dev.arctic.anticheat.packet.Packet;
-import org.bukkit.Bukkit;
 
 public class FlightA extends Check {
 
