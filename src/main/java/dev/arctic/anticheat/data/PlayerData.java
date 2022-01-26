@@ -4,13 +4,11 @@ import com.comphenix.protocol.wrappers.Pair;
 import dev.arctic.anticheat.Arctic;
 import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.data.processors.impl.*;
-import dev.arctic.anticheat.packet.event.PacketEvent;
 import dev.arctic.anticheat.manager.CheckManager;
+import dev.arctic.anticheat.packet.event.PacketEvent;
 import dev.arctic.anticheat.utilities.EvictingList;
-import dev.arctic.anticheat.utilities.mc.AxisAlignedBB;
 import lombok.Data;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 

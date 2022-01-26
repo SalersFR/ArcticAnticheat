@@ -1,9 +1,7 @@
 package dev.arctic.anticheat.check.impl.combat.killaura;
 
-import com.comphenix.packetwrapper.WrapperPlayClientUseEntity;
 import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.data.PlayerData;
-import dev.arctic.anticheat.data.processors.impl.ActionProcessor;
 import dev.arctic.anticheat.data.processors.impl.CombatProcessor;
 import dev.arctic.anticheat.data.processors.impl.MovementProcessor;
 import dev.arctic.anticheat.packet.Packet;

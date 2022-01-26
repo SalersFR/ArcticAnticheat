@@ -7,7 +7,6 @@ import dev.arctic.anticheat.packet.event.PacketEvent;
 import dev.arctic.anticheat.utilities.ArcticLocation;
 import dev.arctic.anticheat.utilities.PlayerUtils;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 

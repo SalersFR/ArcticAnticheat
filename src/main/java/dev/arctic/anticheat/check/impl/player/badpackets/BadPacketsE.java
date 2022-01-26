@@ -1,6 +1,5 @@
 package dev.arctic.anticheat.check.impl.player.badpackets;
 
-import com.comphenix.packetwrapper.WrapperPlayClientUseEntity;
 import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.data.PlayerData;
 import dev.arctic.anticheat.data.processors.impl.CombatProcessor;

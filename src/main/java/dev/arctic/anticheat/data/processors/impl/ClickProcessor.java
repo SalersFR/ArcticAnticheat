@@ -7,7 +7,6 @@ import dev.arctic.anticheat.packet.event.PacketEvent;
 import dev.arctic.anticheat.utilities.EvictingList;
 import dev.arctic.anticheat.utilities.MathUtils;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 
 import java.util.List;
 
