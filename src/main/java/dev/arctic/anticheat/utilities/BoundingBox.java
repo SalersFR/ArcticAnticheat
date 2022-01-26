@@ -38,16 +38,125 @@ public class BoundingBox {
             this.maxZ = minZ;
         }
     }
+    // from hawk
+    public Vector[] getVertices() {
+        return new Vector[]{new Vector(minX, minY, minZ),
+                new Vector(minX, minY, maxZ),
+                new Vector(minX, maxY, minZ),
+                new Vector(minX, maxY, maxZ),
+                new Vector(maxX, minY, minZ),
+                new Vector(maxX, minY, maxZ),
+                new Vector(maxX, maxY, minZ),
+                new Vector(maxX, maxY, maxZ)};
+    }
+    
+    // From hawk
+    public boolean betweenRays(Vector pos, Vector dir1, Vector dir2) {
+        if(dir1.dot(dir2) > 0.999) {
+            return this.intersectsRay(new RayTrace(pos, dir2), 0, Float.MAX_VALUE) != null;
+        }
+        else {
+            Vector planeNormal = dir2.clone().crossProduct(dir1);
+            Vector[] vertices = this.getVertices();
+            boolean hitPlane = false;
+            boolean above = false;
+            boolean below = false;
+            for(Vector vertex : vertices) {
+                vertex.subtract(pos);
+
+                if(!hitPlane) {
+                    if (vertex.dot(planeNormal) > 0) {
+                        above = true;
+                    } else {
+                        below = true;
+                    }
+                    if (above && below) {
+                        hitPlane = true;
+                    }
+                }
+            }
+            if(!hitPlane) {
+                return false;
+            }
+
+            Vector extraDirToDirNormal = planeNormal.clone().crossProduct(dir2);
+            Vector dirToExtraDirNormal = dir1.clone().crossProduct(planeNormal);
+            boolean betweenVectors = false;
+            boolean frontOfExtraDirToDir = false;
+            boolean frontOfDirToExtraDir = false;
+            for(Vector vertex : vertices) {
+                if(!frontOfExtraDirToDir && vertex.dot(extraDirToDirNormal) >= 0) {
+                    frontOfExtraDirToDir = true;
+                }
+                if(!frontOfDirToExtraDir && vertex.dot(dirToExtraDirNormal) >= 0) {
+                    frontOfDirToExtraDir = true;
+                }
+
+                if(frontOfExtraDirToDir && frontOfDirToExtraDir) {
+                    betweenVectors = true;
+                    break;
+                }
+            }
+            return betweenVectors;
+        }
+    }
+
+    // from hawk
+    public Vector intersectsRay(RayTrace ray, float minDist, float maxDist) {
+        Vector invDir = new Vector(1f / ray.direction.getX(), 1f / ray.direction.getY(), 1f / ray.direction.getZ());
+
+        boolean signDirX = invDir.getX() < 0;
+        boolean signDirY = invDir.getY() < 0;
+        boolean signDirZ = invDir.getZ() < 0;
+
+        Vector bbox = signDirX ? new Vector(maxX, maxY, maxZ) : new Vector(minX, maxY, maxZ);
+        double tmin = (bbox.getX() - ray.origin.getX()) * invDir.getX();
+        bbox = signDirX ? new Vector(minX, maxY, maxZ) : new Vector(maxX, maxY, maxZ);
+        double tmax = (bbox.getX() - ray.origin.getX()) * invDir.getX();
+        bbox = signDirY ? new Vector(maxX, maxY, maxZ) : new Vector(minX, maxY, maxZ);
+        double tymin = (bbox.getY() - ray.origin.getY()) * invDir.getY();
+        bbox = signDirY ? new Vector(minX, maxY, maxZ) : new Vector(maxX, maxY, maxZ);
+        double tymax = (bbox.getY() - ray.origin.getY()) * invDir.getY();
+
+        if ((tmin > tymax) || (tymin > tmax)) {
+            return null;
+        }
+        if (tymin > tmin) {
+            tmin = tymin;
+        }
+        if (tymax < tmax) {
+            tmax = tymax;
+        }
+
+        bbox = signDirZ ? new Vector(maxX, maxY, maxZ) : new Vector(minX, maxY, maxZ);
+        double tzmin = (bbox.getZ() - ray.origin.getZ()) * invDir.getZ();
+        bbox = signDirZ ? new Vector(minX, maxY, maxZ) : new Vector(maxX, maxY, maxZ);
+        double tzmax = (bbox.getZ() - ray.origin.getZ()) * invDir.getZ();
+
+        if ((tmin > tzmax) || (tzmin > tmax)) {
+            return null;
+        }
+        if (tzmin > tmin) {
+            tmin = tzmin;
+        }
+        if (tzmax < tmax) {
+            tmax = tzmax;
+        }
+        if ((tmin < maxDist) && (tmax > minDist)) {
+            return ray.getPointAtDistance(tmin);
+        }
+        return null;
+    }
 
     public BoundingBox(final Vector min, final Vector max) {
 
-        this.minX = min.getX();
-        this.minY = min.getY();
-        this.minZ = min.getZ();
+        this.minX = minX;
+        this.minY = minY;
+        this.minZ = minZ;
 
-        this.maxX = max.getX();
-        this.maxY = max.getY();
-        this.maxZ = max.getZ();
+        this.maxX = maxX;
+        this.maxY = maxY;
+        this.maxZ = maxZ;
     }
 
     public BoundingBox(final Vector location) {

@@ -80,6 +80,9 @@ public class CollisionProcessor extends Processor {
 
                 fenceCollisions = fenceBoundingBox.getBlocks(data.getPlayer());
 
+                if(fenceCollisions == null) {
+                    return;
+                }
                 if (event.getPacket().isPosition()) {
                     final WrapperPlayClientPosition packet = new WrapperPlayClientPosition(event.getPacket());
                     clientOnGround = packet.getOnGround();
