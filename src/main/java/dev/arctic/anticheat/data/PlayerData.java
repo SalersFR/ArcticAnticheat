@@ -6,6 +6,7 @@ import dev.arctic.anticheat.check.Check;
 import dev.arctic.anticheat.data.processors.impl.*;
 import dev.arctic.anticheat.packet.event.PacketEvent;
 import dev.arctic.anticheat.manager.CheckManager;
+import dev.arctic.anticheat.threading.ArcticThread;
 import dev.arctic.anticheat.utilities.EvictingList;
 import dev.arctic.anticheat.utilities.mc.AxisAlignedBB;
 import lombok.Data;
@@ -31,6 +32,8 @@ public class PlayerData {
     private final MovementProcessor movementProcessor;
     private final VelocityProcessor velocityProcessor;
     private final CancelProcessor cancelProcessor;
+
+    private ArcticThread thread;
 
 
     private final EvictingList<Pair<Vector, Integer>> targetLocations

@@ -47,7 +47,7 @@ public class PacketListener {
         if (data == null)
             return;
 
-        Arctic.getInstance().getDataService().execute(() ->
+        data.getThread().run(() ->
                 data.handle(new PacketReceiveEvent(player, new Packet(packet), System.currentTimeMillis())));
 
 
@@ -58,7 +58,7 @@ public class PacketListener {
         if (data == null)
             return;
 
-        Arctic.getInstance().getDataService().execute(() ->
+        data.getThread().run(() ->
                 data.handle(new PacketSendEvent(player, new Packet(packet), System.currentTimeMillis())));
     }
 

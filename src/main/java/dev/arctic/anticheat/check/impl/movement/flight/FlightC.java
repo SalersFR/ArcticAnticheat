@@ -22,7 +22,7 @@ public class FlightC extends Check {
             final double deltaY = movementProcessor.getDeltaY();
             final double lastDeltaY = movementProcessor.getLastDeltaY();
 
-            final boolean inAir = collisionProcessor.getClientAirTicks() >= 9;
+            final boolean inAir = collisionProcessor.getClientAirTicks() > 12;
 
             final boolean exempt = collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead()
                     || collisionProcessor.isOnClimbable() || collisionProcessor.isLastOnClimbable() || collisionProcessor

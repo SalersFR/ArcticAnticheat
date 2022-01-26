@@ -21,9 +21,10 @@ public class StepA extends Check {
             final boolean check = collisionProcessor.getTpTicks() >= 10
                     && collisionProcessor.getClientGroundTicks() >= 2 && !collisionProcessor.isInVehicle();
 
-            if(check && Math.abs(movementProcessor.getDeltaY()) > 0.6D) {
-                fail("delta=" + Math.abs(movementProcessor.getDeltaY()));
-            }
+            if (check && Math.abs(movementProcessor.getDeltaY()) > 0.6D) {
+                if (++buffer > 1)
+                    fail("delta=" + Math.abs(movementProcessor.getDeltaY()));
+            } else if(buffer > 0) buffer -= 0.005D;
         }
     }
 }

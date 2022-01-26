@@ -36,7 +36,7 @@ public class MotionD extends Check {
 
             } else if (buffer > 0) buffer -= 0.0025D;
 
-            if (deltaY <= 0.42f && lastDeltaY >= 0.42f && collisionProcessor.getClientGroundTicks() >= 1 && !exempt) {
+            if (deltaY <= 0.15 && lastDeltaY >= 0.42f && collisionProcessor.getClientGroundTicks() >= 1 && !exempt) {
                 if(deltaY == 0.5 || lastDeltaY == 0.5) buffer = 0;
                 if(deltaY == 0) buffer /= 2;
                 if (++buffer > 2.25)

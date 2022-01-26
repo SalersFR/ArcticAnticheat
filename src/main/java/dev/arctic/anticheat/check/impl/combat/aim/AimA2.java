@@ -19,13 +19,13 @@ public class AimA2 extends Check {
             final RotationProcessor rotationProcessor = data.getRotationProcessor();
             final int sensitivity = rotationProcessor.getSensitivity();
             debug("sens=" + sensitivity + " buffer=" + buffer);
-            if (rotationProcessor.getTicksSinceCinematic() >= 5 && rotationProcessor.getDeltaPitch() != 0.0f &&
-                    sensitivity == -1 && rotationProcessor.getYawAccel() <= 30) {
-                if (++buffer > 5) {
+            if (rotationProcessor.getTicksSinceCinematic() >= 15 && rotationProcessor.getDeltaPitch() != 0.0f &&
+                    sensitivity == -1 && rotationProcessor.getYawAccel() <= 30 && rotationProcessor.getDeltaYaw() > 2.f) {
+                if (++buffer > 6) {
                     buffer = 3.5D;
                     fail("sens=" + sensitivity + " buffer=" + buffer);
                 }
-            } else if (buffer > 0) buffer -= 0.01;
+            } else if (buffer > 0) buffer -= 0.02;
 
         }
 

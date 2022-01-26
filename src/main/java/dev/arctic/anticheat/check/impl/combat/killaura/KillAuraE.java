@@ -23,8 +23,10 @@ public class KillAuraE extends Check {
             if (data.getCombatProcessor().getHitTicks() <= 1)
                 attacked = true;
 
-            if (!swung && attacked)
-                fail();
+            if (!swung && attacked) {
+                if (++buffer > 1.25)
+                    fail();
+            } else if(buffer > 0) buffer -= 0.025D;
 
         } else if (packet.isFlying()) {
             attacked = swung = false;

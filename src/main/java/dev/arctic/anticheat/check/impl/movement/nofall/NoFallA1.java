@@ -17,8 +17,8 @@ public class NoFallA1 extends Check {
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
 
             if (!collisionProcessor.isClientOnGround() && !collisionProcessor.isLastClientOnGround()
-                    && collisionProcessor.isMathOnGround() && collisionProcessor.isLastMathOnGround() &&
-                    !collisionProcessor.isOnClimbable() && data.getVelocityProcessor().getVelocityTicks() > 10 &&
+                    && collisionProcessor.getMathGroundTicks() >= 12 &&
+                    !collisionProcessor.isOnClimbable() && data.getVelocityProcessor().getVelocityTicks() > 20 &&
                     collisionProcessor.getTpTicks() >= 4) {
                 if (++buffer > 1)
                     fail("math ground spoofed");

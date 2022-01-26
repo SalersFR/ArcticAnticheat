@@ -23,7 +23,7 @@ public class AimI extends Check {
             final long diff = time - before;
 
             debug("diff=" + diff + " delta=" + delta + " buffer=" + buffer);
-            if (diff > 250 && diff < 400) {
+            if (diff > 250 && diff < 400 && data.getConnectionProcessor().getKeepAlivePing() < 250) {
                 if (delta > 3) {
                     buffer++;
                     if (buffer > 3.75) {

@@ -22,9 +22,10 @@ public class StepA1 extends Check {
                     && collisionProcessor.isClientOnGround() && !collisionProcessor.isInVehicle() &&
                     !collisionProcessor.isOnSlime() && !collisionProcessor.isLastOnSlime();
 
-            if(check && Math.abs(movementProcessor.getDeltaY()) >= 1.125D) {
-                fail("delta=" + Math.abs(movementProcessor.getDeltaY()));
-            }
+            if (check && Math.abs(movementProcessor.getDeltaY()) >= 1.125D) {
+                if (++buffer > 1)
+                    fail("delta=" + Math.abs(movementProcessor.getDeltaY()));
+            } else if (buffer > 0) buffer -= 0.005D;
         }
     }
 }

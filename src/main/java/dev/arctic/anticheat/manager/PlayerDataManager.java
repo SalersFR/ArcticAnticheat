@@ -1,5 +1,6 @@
 package dev.arctic.anticheat.manager;
 
+import dev.arctic.anticheat.Arctic;
 import dev.arctic.anticheat.data.PlayerData;
 import org.bukkit.entity.Player;
 
@@ -16,6 +17,7 @@ public class PlayerDataManager {
 
     public void add(final Player player) {
         final PlayerData data = new PlayerData(player);
+        Arctic.getInstance().getThreadingManager().addPlayer(data);
         data.setJoined(System.currentTimeMillis());
         playerDataMap.put(player, data);
     }
@@ -25,6 +27,7 @@ public class PlayerDataManager {
     }
 
     public void remove(final Player player) {
+        Arctic.getInstance().getThreadingManager().remove(getPlayerData(player));
         playerDataMap.remove(player);
     }
 
