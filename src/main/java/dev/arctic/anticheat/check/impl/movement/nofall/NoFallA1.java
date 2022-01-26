@@ -20,9 +20,9 @@ public class NoFallA1 extends Check {
                     && collisionProcessor.getMathGroundTicks() >= 12 &&
                     !collisionProcessor.isOnClimbable() && data.getVelocityProcessor().getVelocityTicks() > 20 &&
                     collisionProcessor.getTpTicks() >= 4) {
-                if (++buffer > 1)
+                if (++buffer > 2)
                     fail("math ground spoofed");
-            } else if (buffer > 0) buffer -= 0.1D;
+            } else if (buffer > 0) buffer -= 0.15D;
         }
 
     }
