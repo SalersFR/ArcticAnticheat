@@ -28,7 +28,9 @@ public class FlightC extends Check {
                     || collisionProcessor.isOnClimbable() || collisionProcessor.isLastOnClimbable() || collisionProcessor
                     .isInVehicle() || collisionProcessor.isNearPiston() || collisionProcessor.isLastNearPiston()
                     || collisionProcessor.isInWater() || collisionProcessor.isInLava() || collisionProcessor.isInWeb()
-                    || collisionProcessor.isLastInWeb() || collisionProcessor.getPlacingTicks() <= 15;
+                    || collisionProcessor.isLastInWeb() || collisionProcessor.getPlacingTicks() <= 15
+                    || data.getVelocityProcessor().getVelocityTicks() <= 7;
+
 
             if (deltaY > lastDeltaY && !exempt && inAir) {
                 if (++buffer > 2)
