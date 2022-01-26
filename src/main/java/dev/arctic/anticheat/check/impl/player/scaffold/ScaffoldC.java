@@ -19,6 +19,9 @@ public class ScaffoldC extends Check {
             final Location eyeLocation = data.getPlayer().getEyeLocation();
             final BlockPosition pos = packet.getBlockPositionModifier().read(0);
             WrapperPlayClientBlockPlace wrapped = new WrapperPlayClientBlockPlace(packet);
+            if(wrapped.getFace() == 255) {
+                return;
+            }
             final Location blockAgainstLocation = getBlockAgainst(wrapped.getDirection(), new Location(null, pos.getX(), pos.getY(), pos.getZ()));
             final boolean validInteraction = interactedCorrectly(blockAgainstLocation, eyeLocation, wrapped.getDirection());
             if (!validInteraction) {

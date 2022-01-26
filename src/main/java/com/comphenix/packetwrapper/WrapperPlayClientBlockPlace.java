@@ -30,9 +30,15 @@ import java.util.Optional;
 public class WrapperPlayClientBlockPlace extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Client.BLOCK_PLACE;
 
+    private int face = handle.getIntegers().read(0);
+
     public WrapperPlayClientBlockPlace() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
+    }
+
+    public int getFace() {
+        return face;
     }
 
     public WrapperPlayClientBlockPlace(PacketContainer packet) {
@@ -44,12 +50,9 @@ public class WrapperPlayClientBlockPlace extends AbstractPacket {
     }
 
     public EnumWrappers.Direction getDirection() {
-        return getDirection(handle.getIntegers().read(0));
-    }
-
-    public EnumWrappers.Direction getDirection(int face) {
         return EnumWrappers.Direction.values()[face];
     }
+
 
     public void setHand(Hand value) {
         handle.getHands().write(0, value);

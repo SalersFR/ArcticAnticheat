@@ -38,6 +38,7 @@ public class CheckManager {
                 new ScaffoldB(playerData),
                 new ScaffoldC(playerData),
                 new ScaffoldD(playerData),
+                new ScaffoldE(playerData),
                 new BadPacketsA(playerData),
                 new BadPacketsB(playerData),
                 new BadPacketsC(playerData),
