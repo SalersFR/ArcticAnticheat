@@ -17,6 +17,11 @@ checks:
         enabled: true
         punish: true
         setback: false
+      a1:
+        ban-vl: 10
+        enabled: true
+        punish: true
+        setback: false
       b:
         ban-vl: 10
         enabled: true

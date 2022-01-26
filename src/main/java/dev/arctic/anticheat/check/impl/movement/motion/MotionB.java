@@ -17,7 +17,7 @@ public class MotionB extends Check {
 
     @Override
     public void handle(Packet packet, long time) {
-        if(packet.isFlying()) {
+        if (packet.isFlying()) {
             final MovementProcessor movementProcessor = data.getMovementProcessor();
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
 
@@ -29,11 +29,10 @@ public class MotionB extends Check {
                     getDeltaY()) < 0.000001 || slime || collisionProcessor.isOnClimbable() ||
                     collisionProcessor.isOnIce() || collisionProcessor.isLastOnIce() || collisionProcessor.getFenceCollisions()
                     .stream().anyMatch(block -> block.isFence() || block.isFenceGate() || block.isWall() || block.isDoor()) ||
-                    data.getVelocityProcessor().getVelocityTicks() <= 20;;
+                    data.getVelocityProcessor().getVelocityTicks() <= 20;
+            ;
 
             final Player player = data.getPlayer();
-
-
 
             final double limit = 0.6239;
             final double fixedLimit = player.hasPotionEffect(PotionEffectType.SPEED) ? limit +
@@ -47,6 +46,15 @@ public class MotionB extends Check {
 
 
             } else if (buffer > 0) buffer -= 0.0125D;
+
+            if (deltaXZ > (fixedLimit - 0.175D) && collisionProcessor.getClientAirTicks() == 0 && !exempt) {
+                if (++buffer > 3.25)
+                    fail("moved too fast without jumping=" + deltaXZ);
+
+
+            } else if (buffer > 0) buffer -= 0.125D;
+
+
         }
     }
 }

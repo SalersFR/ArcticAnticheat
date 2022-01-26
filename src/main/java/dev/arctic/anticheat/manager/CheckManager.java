@@ -8,6 +8,7 @@ import dev.arctic.anticheat.check.impl.combat.reach.ReachA;
 import dev.arctic.anticheat.check.impl.combat.velocity.VelocityA;
 import dev.arctic.anticheat.check.impl.combat.velocity.VelocityB;
 import dev.arctic.anticheat.check.impl.movement.flight.FlightA;
+import dev.arctic.anticheat.check.impl.movement.flight.FlightA1;
 import dev.arctic.anticheat.check.impl.movement.flight.FlightB;
 import dev.arctic.anticheat.check.impl.movement.flight.FlightC;
 import dev.arctic.anticheat.check.impl.movement.motion.*;
@@ -50,6 +51,7 @@ public class CheckManager {
 
                 new FlightA(playerData),
                 new FlightB(playerData),
+                new FlightA1(playerData),
                 new FlightC(playerData),
                 new SpeedA(playerData),
                 new SpeedB(playerData),
