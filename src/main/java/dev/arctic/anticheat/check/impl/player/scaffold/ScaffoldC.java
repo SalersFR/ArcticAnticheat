@@ -18,10 +18,11 @@ public class ScaffoldC extends Check {
         if(packet.isBlockPlace()) {
             final Location eyeLocation = data.getPlayer().getEyeLocation();
             final BlockPosition pos = packet.getBlockPositionModifier().read(0);
-            final Location blockAgainstLocation = getBlockAgainst(packet.getDirections().read(0), new Location(null, pos.getX(), pos.getY(), pos.getZ()));
-            final boolean validInteraction = interactedCorrectly(blockAgainstLocation, eyeLocation, packet.getDirections().read(0));
+            WrapperPlayClientBlockPlace wrapped = new WrapperPlayClientBlockPlace(packet);
+            final Location blockAgainstLocation = getBlockAgainst(wrapped.getDirection(), new Location(null, pos.getX(), pos.getY(), pos.getZ()));
+            final boolean validInteraction = interactedCorrectly(blockAgainstLocation, eyeLocation, wrapped.getDirection());
             if (!validInteraction) {
-                EnumWrappers.Direction dir = packet.getDirections().read(0);
+                EnumWrappers.Direction dir = wrapped.getDirection();
                 fail("Invalid interact, Direction: " + dir.name());
             }
         }
