@@ -28,7 +28,7 @@ public class ChecksGUI {
 
         mainChecksGUI.setItem(13, CustomUtils.createItem(Material.FEATHER, CustomUtils.translate("" +
                         "&bMovement"), CustomUtils.translate("&r "), CustomUtils.translate("&7&oChecks include (not limited to):"),
-                CustomUtils.translate("&7&o - Fly - Motion - Speed")));
+                CustomUtils.translate("&7&o - Flight - Motion - Speed")));
 
         mainChecksGUI.setItem(15, CustomUtils.createItem(Material.SKULL_ITEM, CustomUtils.translate("" +
                         "&bPlayer"), CustomUtils.translate("&r "), CustomUtils.translate("&7&oChecks include (not limited to):"),

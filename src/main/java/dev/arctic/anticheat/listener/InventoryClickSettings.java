@@ -132,7 +132,7 @@ public class InventoryClickSettings implements Listener {
             player.updateInventory();
 
             switch (meta.getDisplayName()) {
-                case "§bFly Checks":
+                case "§bFlight Checks":
                     flyGUI.setItems(player);
                     flyGUI.display(player);
                     break;
