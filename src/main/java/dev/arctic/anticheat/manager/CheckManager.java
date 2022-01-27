@@ -101,6 +101,7 @@ public class CheckManager {
                 new AimF(playerData),
                 new AimF1(playerData),
                 new AimF2(playerData),
+                new AimF3(playerData),
                 new AimG(playerData),
                 new AimG1(playerData),
                 new AimH(playerData),
