@@ -17,8 +17,13 @@ public class AimF2 extends Check {
 
     private ArrayList<Double> samples = new ArrayList<>();
 
+    /*
+    TODO
+    fix this check innit
+     */
+
     public AimF2(PlayerData data) {
-        super(data, "Aim", "F2", "combat.aim.f2", "Checks for odd rotation differences using GCD.", true);
+        super(data, "Aim", "F2", "combat.aim.f2", "Checks for gcd-fix modules.", true);
     }
 
     @Override
@@ -29,9 +34,9 @@ public class AimF2 extends Check {
             double deltaPitch = rot.getDeltaPitch();
 
             double smaller = Math.min(deltaYaw, deltaPitch);
-            double toBeDevided = Math.max(deltaYaw, deltaPitch);
-            double divisor = Math.round(toBeDevided / smaller);
-            double euclidean = toBeDevided % divisor;
+            double toBeDivided = Math.max(deltaYaw, deltaPitch);
+            double divisor = Math.round(toBeDivided / smaller);
+            double euclidean = toBeDivided % divisor;
 
             double length = String.valueOf(euclidean).length();
             if (deltaYaw > 2.25f)
@@ -48,7 +53,7 @@ public class AimF2 extends Check {
                 debug("mode=" + mode + " last=" + lastMode + " lastLast=" + lastLastMode);
 
                 if (mode == lastMode && lastMode == lastLastMode) {
-                    fail("Consistent mode of rotations. ∆M=" + mode);
+                   // fail("Consistent mode of rotations. ∆M=" + mode);
                 }
 
                 samples.clear();
