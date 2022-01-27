@@ -34,7 +34,9 @@ public class AimF2 extends Check {
             double euclidean = toBeDevided % divisor;
 
             double length = String.valueOf(euclidean).length();
-            samples.add(length);
+            if (deltaYaw > 2.25f)
+                samples.add(length);
+
 
             if (samples.size() >= 20) {
                 double mode = MathUtils.getMode(samples);
@@ -42,6 +44,8 @@ public class AimF2 extends Check {
                 this.lastMode = mode;
                 double lastLastMode = this.lastLastMode;
                 this.lastLastMode = lastMode;
+
+                debug("mode=" + mode + " last=" + lastMode + " lastLast=" + lastLastMode);
 
                 if (mode == lastMode && lastMode == lastLastMode) {
                     fail("Consistent mode of rotations. ∆M=" + mode);
