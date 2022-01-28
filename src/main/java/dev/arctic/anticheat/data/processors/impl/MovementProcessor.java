@@ -75,6 +75,9 @@ public class MovementProcessor extends Processor {
             this.deltaY = (this.y - this.lastY);
             this.deltaZ = (this.z - this.lastZ);
 
+            //to prevent some issues
+            handleOtherFlying(event.getPacket());
+
             // DeltaXZ
 
             this.deltaXZ = MathUtils.hypot(deltaX, deltaZ);
@@ -114,5 +117,13 @@ public class MovementProcessor extends Processor {
         this.location.setX(x);
         this.location.setY(y);
         this.location.setZ(z);
+    }
+
+    public void handleOtherFlying(final Packet packet) {
+        if(packet.getType() == PacketType.Play.Client.FLYING || packet.isLook()) {
+            deltaX = 0;
+            deltaY = 0;
+            deltaZ = 0;
+        }
     }
 }
