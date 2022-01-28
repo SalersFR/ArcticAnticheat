@@ -54,18 +54,20 @@ public class ReachA extends Check {
 
                         }).min().orElse(0);
 
-                debug("reach=" + (distance > 3.05 ? "&c" : "") + (float) distance + " buffer=" + buffer);
+                debug("reach=" + (distance > 3.0 ? "&c" : "") + (float) distance + " buffer=" + buffer);
 
                 //don't ask
-                if(data.getMovementProcessor().getDeltaXZ() <= 0.0313f)
+                if(data.getMovementProcessor().getDeltaXZ() <= 0.01f)
                     distance -= 0.03125f;
 
+                final double bufferIncrease = distance <= 3.05 ? 1 : 1.75;
 
-                if (distance > 3.025) {
-                    if (++buffer > 3.5) {
+                if (distance > 3.0) {
+                    buffer += bufferIncrease;
+                    if (buffer > 3.6) {
                         fail("reach=" + (float) distance);
                     }
-                } else if (buffer > 0 && distance >= 0.185) buffer -= (distance * 0.0094);
+                } else if (buffer > 0 && distance >= 0.185) buffer -= (distance * 0.005);
 
             }
         }
