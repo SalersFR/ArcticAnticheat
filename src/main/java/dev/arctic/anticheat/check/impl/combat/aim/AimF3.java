@@ -28,23 +28,23 @@ public class AimF3 extends Check {
         if (packet.isRotation()) {
             RotationProcessor rot = data.getRotationProcessor();
 
-            double deltaYaw = rot.getDeltaYaw();
-            double deltaPitch = rot.getDeltaYaw();
-            double lastDeltaYaw = rot.getLastDeltaYaw();
-            double lastDeltaPitch = rot.getLastDeltaPitch();
+            final double deltaYaw = rot.getDeltaYaw();
+            final double deltaPitch = rot.getDeltaYaw();
+            final double lastDeltaYaw = rot.getLastDeltaYaw();
+            final double lastDeltaPitch = rot.getLastDeltaPitch();
 
-            double gcdYaw = MathUtils.getGcd(deltaYaw, lastDeltaYaw);
-            double gcdPitch = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
+            final double gcdYaw = MathUtils.getGcd(deltaYaw, lastDeltaYaw);
+            final double gcdPitch = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
 
             if (gcdYaw == gcdPitch) {
                 lastGood = System.currentTimeMillis();
             }
 
-            boolean exempt = (gcdYaw == 0.054290771484375
+            final boolean exempt = (gcdYaw == 0.054290771484375
                     && gcdPitch == 0.054290771484375)
                     || gcdYaw < 0.04;
 
-            long diff = System.currentTimeMillis() - lastGood;
+            final long diff = System.currentTimeMillis() - lastGood;
 
             //     lol memez 69
             if (diff > 6990 && !exempt && rot.getYawAccel() <= 5 && rot.getDeltaPitch() <= 6.75F) {
