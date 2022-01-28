@@ -5,6 +5,7 @@ import dev.arctic.anticheat.data.processors.Processor;
 import dev.arctic.anticheat.packet.event.PacketEvent;
 import dev.arctic.anticheat.utilities.PlayerUtils;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -39,12 +40,13 @@ public class GhostBlockProcessor extends Processor {
 
             final boolean isBridingUp = data.getActionProcessor().isPlacementUnder() && data.getMovementProcessor().getDeltaY() > 0.0;
 
-            final boolean onGhostBlock = data.getCollisionProcessor().isClientOnGround() && data.getMovementProcessor().getY() % 0.015625 < 0.03 && data.getCollisionProcessor().getClientAirTicks() > 0;
+            final boolean onGhostBlock = data.getCollisionProcessor().isCollisionOnGround() && data.getMovementProcessor().getY() % 0.015625 < 0.03 && data.getCollisionProcessor().getMathAirTicks() > 0;
 
             final double deltaY = data.getMovementProcessor().getDeltaY();
             final double lastDeltaY = data.getMovementProcessor().getLastDeltaY();
 
-            final int airTicks = data.getCollisionProcessor().getClientAirTicks();
+            final int airTicks = data.getCollisionProcessor().getMathAirTicks();
+
 
             double predictedY = (lastDeltaY - 0.08) * 0.98F;
             if (Math.abs(predictedY) < 0.005) predictedY = 0.0;

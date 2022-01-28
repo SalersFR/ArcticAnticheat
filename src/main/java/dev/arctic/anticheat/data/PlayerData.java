@@ -30,6 +30,7 @@ public class PlayerData {
     private final MovementProcessor movementProcessor;
     private final VelocityProcessor velocityProcessor;
     private final CancelProcessor cancelProcessor;
+    private final GhostBlockProcessor ghostblockProcessor;
 
     private ArcticThread thread;
 
@@ -59,6 +60,7 @@ public class PlayerData {
         this.combatProcessor = new CombatProcessor(this);
         this.velocityProcessor = new VelocityProcessor(this);
         this.cancelProcessor = new CancelProcessor(this);
+        this.ghostblockProcessor = new GhostBlockProcessor(this);
 
     }
 
@@ -69,6 +71,7 @@ public class PlayerData {
             movementProcessor.handleReceive(event);
             rotationProcessor.handleReceive(event);
             collisionProcessor.handleReceive(event);
+            ghostblockProcessor.handleReceive(event);
             connectionProcessor.handleSending(event);
             clickProcessor.handleReceive(event);
             actionProcessor.handleReceive(event);

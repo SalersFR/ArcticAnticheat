@@ -21,7 +21,7 @@ public class GroundB extends Check {
             final boolean step = deltaY % 0.015625 == 0.0 && lastY % 0.015625 == 0.0;
 
             boolean exempt = data.getCollisionProcessor().isTeleporting() || data.getCollisionProcessor().isInWeb() || data.getCollisionProcessor().isInWater() || data.getCollisionProcessor().isInLava();
-            final boolean invalid = groundTicks > 5 && deltaY != 0.0 && !step;
+            final boolean invalid = groundTicks > 3 && deltaY != 0.0 && !step;
 
             if (invalid && !exempt) {
 //                fail();

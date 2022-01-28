@@ -34,7 +34,7 @@ public class FlightA extends Check {
 
 
             final double expected = (lastDeltaY - 0.08) * 0.98F;
-            final double threshold = movementProcessor.isLastPos() ? 0.001 : 0.0313;
+            final double threshold = 0.0313;
 
             final double accuracy = Math.abs(expected - deltaY);
 

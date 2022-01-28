@@ -19,7 +19,7 @@ public class ScaffoldD extends Check {
     public void handle(Packet packet, long time) {
         if(packet.isBlockPlace()) {
             this.packet = packet;
-        } else if(packet.isFlying()) {
+        } else if(packet.isFlying() && !packet.isFlyingFR()) {
             if(this.packet != null) {
                 final Vector eyeLocation = data.getPlayer().getEyeLocation().toVector();
                 final BlockPosition pos = this.packet.getBlockPositionModifier().read(0);

@@ -20,7 +20,7 @@ public class PacketListener {
         for (PacketType packetType : PacketType.values()) {
             if (packetType.isSupported()) {
 
-                ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(plugin, ListenerPriority.HIGH, packetType) {
+                ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(plugin, ListenerPriority.HIGHEST, packetType) {
                     @Override
                     public void onPacketReceiving(PacketEvent event) {
                         onPacketReceive(event.getPlayer(), event.getPacket());
