@@ -26,28 +26,24 @@ public class AimF3 extends Check {
     @Override
     public void handle(Packet packet, long time) {
         if (packet.isRotation()) {
-            RotationProcessor rot = data.getRotationProcessor();
 
-            double deltaYaw = rot.getDeltaYaw();
-            double deltaPitch = rot.getDeltaYaw();
-            double lastDeltaYaw = rot.getLastDeltaYaw();
-            double lastDeltaPitch = rot.getLastDeltaPitch();
+            final RotationProcessor rot = data.getRotationProcessor();
 
-            double gcdYaw = MathUtils.getGcd(deltaYaw, lastDeltaYaw);
-            double gcdPitch = MathUtils.getGcd(deltaPitch, lastDeltaPitch);
+            final double gcdYaw = rot.getGcdYaw();
+            final double gcdPitch = rot.getGcdPitch();
 
             if (gcdYaw == gcdPitch) {
                 lastGood = System.currentTimeMillis();
             }
 
-            boolean exempt = (gcdYaw == 0.054290771484375
+            final boolean exempt = (gcdYaw == 0.054290771484375
                     && gcdPitch == 0.054290771484375)
                     || gcdYaw < 0.04;
 
-            long diff = System.currentTimeMillis() - lastGood;
+            final long diff = System.currentTimeMillis() - lastGood;
 
             //       lol memez 69
-            if (diff > 6990 && !exempt && rot.getYawAccel() <= 5 && rot.getDeltaPitch() <= 6.75F) {
+            if (diff > 6990 && !exempt && rot.getYawAccel() <= 5 && rot.getDeltaPitch() <= 6.75F && rot.getDeltaYaw() > 9.5f && rot.getDeltaPitch() != 0.f) {
                 if (++buffer > 4.0) {
                     fail("diff=" + diff + ", " + gcdYaw);
                 }

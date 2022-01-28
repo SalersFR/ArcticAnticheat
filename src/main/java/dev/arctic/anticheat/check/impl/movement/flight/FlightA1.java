@@ -33,11 +33,11 @@ public class FlightA1 extends Check {
 
 
             final double expected = (lastDeltaY - 0.08) * 0.98F;
-            final double threshold = 0.0313;
+            final double threshold = movementProcessor.isLastPos() ? 0.001 : 0.0313;
 
             final double accuracy = Math.abs(expected - deltaY);
 
-            if (expected >= 0.005 && !exempt && inAir) {
+            if (Math.abs(expected) >= 0.005 && !exempt && inAir) {
                 if (accuracy > threshold) {
                     if (buffer < 6.25)
                         buffer++;
