@@ -6,20 +6,22 @@ import dev.arctic.anticheat.data.processors.impl.CollisionProcessor;
 import dev.arctic.anticheat.data.processors.impl.MovementProcessor;
 import dev.arctic.anticheat.packet.Packet;
 import dev.arctic.anticheat.utilities.PlayerUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.potion.PotionEffectType;
 
 public class SpeedA extends Check {
 
-    private int air, ground;
+    private int air, ground, tsJ;
     private double friction, lastFriction;
 
+
     public SpeedA(PlayerData data) {
-        super(data, "Speed", "A", "movement.speed.a", "Checks if player is not applying friction.",  false);
+        super(data, "Speed", "A", "movement.speed.a", "Checks if player is not applying friction.", false);
     }
 
     @Override
     public void handle(Packet packet, long time) {
-        if(packet.isFlying()) {
+        if (packet.isFlying()) {
 
             final CollisionProcessor collisionProcessor = data.getCollisionProcessor();
             final MovementProcessor movementProcessor = data.getMovementProcessor();
@@ -69,12 +71,22 @@ public class SpeedA extends Check {
                 this.friction = getBlockFriction(data) * 0.91f;
             }
 
+
             //jump handling
-            if(movementProcessor.getDeltaY() > 0 && collisionProcessor.isLastClientOnGround() && !collisionProcessor.isClientOnGround())
-                prediction += 0.19825;
+            final boolean jumped = movementProcessor.getDeltaY() > 0 && deltaXZ >= 0.326 && !collisionProcessor.isClientOnGround();
+
 
             if (friction < lastFriction)
                 prediction += landMovementFactor * 1.25;
+
+
+            if (jumped)
+                tsJ = 0;
+            else tsJ++;
+
+            if(tsJ == 8)
+                prediction += 0.3125;
+            
 
 
             final boolean exempt = collisionProcessor.getFenceCollisions()
@@ -84,33 +96,36 @@ public class SpeedA extends Check {
 
             debug("limit=" + prediction + "\ndelta=" + deltaXZ + "\nexempt=" + exempt + "\nbuffer=" + buffer);
 
-            if(collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead())
+            if (collisionProcessor.isBonkingHead() || collisionProcessor.isLastBonkingHead())
                 prediction += 0.4D;
 
-            if(collisionProcessor.isOnIce() || collisionProcessor.isLastOnIce()) {
+            if (collisionProcessor.isOnIce() || collisionProcessor.isLastOnIce()) {
                 prediction += 0.525D;
             }
 
             //stairs & slab accounting:
-            if(movementProcessor.getDeltaY() == 0.5D)
+            if (movementProcessor.getDeltaY() == 0.5D)
                 prediction += 0.25D;
 
-            if(movementProcessor.getDeltaY() == 0.0D) {
+            if (movementProcessor.getDeltaY() == 0.0D) {
                 //random accounting idfk
-                if(deltaXZ > prediction)
+                if (deltaXZ > prediction)
                     prediction += 0.05;
             }
 
             //join fix
-            if(deltaXZ >= 15)
+            if (deltaXZ >= 15)
                 return;
 
             // flag
             if (deltaXZ > prediction && !exempt) {
-                if(movementProcessor.getDeltaY() == 0) buffer -= 0.2D;
+                if (movementProcessor.getDeltaY() == 0) buffer -= 0.2D;
+                if(movementProcessor.getDeltaY() != 0.0 && tsJ > 60) buffer -= 0.85;
                 if (++buffer >= 5)
                     fail("limit=" + prediction + " delta=" + deltaXZ);
             } else if (this.buffer > 0) buffer -= 0.05D;
+
+
         }
     }
 
