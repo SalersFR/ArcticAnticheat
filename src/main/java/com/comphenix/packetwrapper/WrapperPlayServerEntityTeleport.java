@@ -23,6 +23,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 public class WrapperPlayServerEntityTeleport extends AbstractPacket {
     public static final PacketType TYPE =
@@ -100,6 +101,10 @@ public class WrapperPlayServerEntityTeleport extends AbstractPacket {
 
     public void setZ(double value) {
         handle.getDoubles().write(2, value);
+    }
+
+    public Vector getPos() {
+        return new Vector(getX(), getY(), getZ());
     }
 
     /**

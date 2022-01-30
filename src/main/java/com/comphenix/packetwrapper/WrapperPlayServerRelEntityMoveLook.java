@@ -23,6 +23,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 public class WrapperPlayServerRelEntityMoveLook extends AbstractPacket {
     public static final PacketType TYPE =
@@ -130,6 +131,10 @@ public class WrapperPlayServerRelEntityMoveLook extends AbstractPacket {
      */
     public void setDz(double value) {
         handle.getShorts().write(2, (short) (value * 4096));
+    }
+
+    public Vector getMove() {
+        return new Vector(getDx(), getDy(), getDz());
     }
 
     /**

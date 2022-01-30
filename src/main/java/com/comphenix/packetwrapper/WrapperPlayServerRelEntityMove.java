@@ -23,6 +23,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 public class WrapperPlayServerRelEntityMove extends AbstractPacket {
     public static final PacketType TYPE =
@@ -120,6 +121,10 @@ public class WrapperPlayServerRelEntityMove extends AbstractPacket {
      */
     public double getDz() {
         return handle.getBytes().read(2) / 32D;
+    }
+
+    public Vector getMove() {
+        return new Vector(getDx(), getDy(), getDz());
     }
 
     /**

@@ -32,6 +32,10 @@ public class TicksManager extends BukkitRunnable {
 
             }
         }
+
+        if(totalTicks % 5000 == 0) {
+            Arctic.getInstance().getThreadingManager().update();
+        }
     }
 
 }

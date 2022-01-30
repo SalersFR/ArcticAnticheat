@@ -29,6 +29,10 @@ public class ThreadingManager {
         }
     }
 
+    public void update() {
+        threads.stream().filter(ArcticThread::isEmpty).forEach(this.threads::remove);
+    }
+
 
 
     public ThreadingManager() {

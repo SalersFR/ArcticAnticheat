@@ -34,7 +34,12 @@ public class ArcticThread {
         return this.playersInThread.contains(data);
     }
 
+    public boolean isEmpty() {
+        return this.playersInThread.isEmpty();
+    }
+
     public void run(final Runnable runnable) {
         this.executorService.execute(runnable);
     }
+
 }

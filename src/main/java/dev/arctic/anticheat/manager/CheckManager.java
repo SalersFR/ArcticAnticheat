@@ -110,6 +110,7 @@ public class CheckManager {
                 new AimJ1(playerData),
                 new AimK(playerData),
                 new AimK1(playerData),
+                new AimL(playerData),
                 new ReachA(playerData)
 
         );

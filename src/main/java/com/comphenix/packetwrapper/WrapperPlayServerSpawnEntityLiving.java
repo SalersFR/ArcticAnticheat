@@ -28,6 +28,7 @@ import com.comphenix.protocol.wrappers.WrappedDataWatcher;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.util.Vector;
 
 import java.util.UUID;
 
@@ -158,6 +159,10 @@ public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
 
     public void setZ(double value) {
         handle.getDoubles().write(2, value);
+    }
+
+    public Vector getPos() {
+        return new Vector(getX(), getY(), getZ());
     }
 
     /**

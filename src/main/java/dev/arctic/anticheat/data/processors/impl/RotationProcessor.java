@@ -19,6 +19,7 @@ import java.util.function.Consumer;
 
 public class RotationProcessor extends Processor {
 
+    private final Set<Integer> candidates = new HashSet<>();
     private float yaw, pitch,
             deltaYaw, deltaPitch,
             lastYaw, lastPitch,
@@ -28,7 +29,6 @@ public class RotationProcessor extends Processor {
     private double gcdYaw, gcdPitch, absGcdPitch, absGcdYaw, sensVerbose;
     private long expandedGcdYaw, expandedGcdPitch;
     private int sensitivity, calcSensitivity, ticksSinceCinematic;
-    private final Set<Integer> candidates = new HashSet<>();
 
     public RotationProcessor(PlayerData data) {
         super(data);
