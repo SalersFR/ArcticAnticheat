@@ -72,13 +72,14 @@ public class SpeedA extends Check {
             }
 
 
-            //jump handling
-            final boolean jumped = movementProcessor.getDeltaY() > 0 && deltaXZ >= 0.326 && !collisionProcessor.isClientOnGround();
+           
 
 
             if (friction < lastFriction)
                 prediction += landMovementFactor * 1.25;
 
+             //jump handling
+            final boolean jumped = movementProcessor.getDeltaY() > 0 && deltaXZ >= 0.326 && !collisionProcessor.isClientOnGround();
 
             if (jumped)
                 tsJ = 0;
